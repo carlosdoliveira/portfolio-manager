@@ -16,15 +16,25 @@ def init_db():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS operations (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            trade_date TEXT NOT NULL,
+
+            asset_class TEXT NOT NULL,
+            asset_type TEXT NOT NULL,
+            product_name TEXT NOT NULL,
+            ticker TEXT,
+
             movement_type TEXT NOT NULL,
-            market TEXT NOT NULL,
-            institution TEXT NOT NULL,
-            ticker TEXT NOT NULL,
             quantity INTEGER NOT NULL,
             price REAL NOT NULL,
             value REAL NOT NULL,
+
+            trade_date TEXT NOT NULL,
             created_at TEXT NOT NULL,
+
+            source TEXT NOT NULL,
+
+            market TEXT,
+            institution TEXT,
+
             UNIQUE (
                 trade_date,
                 movement_type,
@@ -32,7 +42,8 @@ def init_db():
                 institution,
                 ticker,
                 quantity,
-                price
+                price,
+                source
             )
         )
     """)
