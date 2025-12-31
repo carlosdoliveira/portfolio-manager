@@ -6,10 +6,9 @@ import "../styles/import.css";
 type ImportState = "idle" | "ready" | "uploading" | "success" | "error";
 
 type ImportSummary = {
-  total_operations: number;
-  total_volume: number;
-  total_compras: number;
-  total_vendas: number;
+  total_rows: number;
+  inserted: number;
+  duplicated: number;
   unique_assets: number;
   imported_at: string;
 };
@@ -37,7 +36,7 @@ export function ImportB3Card() {
       <div className="import-card">
         <h2>Importar relatório da B3</h2>
         <p className="import-hint">
-          Arraste o arquivo ou clique na área abaixo para selecionar.
+          Arraste o arquivo ou clique para selecionar.
         </p>
 
         {state !== "success" && (
@@ -60,7 +59,7 @@ export function ImportB3Card() {
 
         {state === "uploading" && (
           <p className="import-status">
-            Processando arquivo, aguarde…
+            Processando arquivo…
           </p>
         )}
 
@@ -68,17 +67,10 @@ export function ImportB3Card() {
           <div className="import-summary">
             <h3>Resumo da importação</h3>
             <ul>
-              <li>Total de operações: {summary.total_operations}</li>
-              <li>
-                Volume financeiro: R$ {summary.total_volume.toFixed(2)}
-              </li>
-              <li>
-                Total comprado: R$ {summary.total_compras.toFixed(2)}
-              </li>
-              <li>
-                Total vendido: R$ {summary.total_vendas.toFixed(2)}
-              </li>
-              <li>Ativos únicos: {summary.unique_assets}</li>
+              <li>Total de linhas: {summary.total_rows}</li>
+              <li>Novas operações inseridas: {summary.inserted}</li>
+              <li>Operações duplicadas ignoradas: {summary.duplicated}</li>
+              <li>Ativos únicos no arquivo: {summary.unique_assets}</li>
             </ul>
           </div>
         )}
