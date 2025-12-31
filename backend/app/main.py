@@ -1,9 +1,19 @@
-
 from fastapi import FastAPI, UploadFile, File
+from fastapi.middleware.cors import CORSMiddleware
+
 from app.services.importer import import_b3_excel
 from app.db.database import init_db
 
-app = FastAPI(title="B3 Portfolio MVP")
+app = FastAPI(title="Portfolio Manager")
+
+# 🔐 CORS CONFIG (DEV)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173/"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.on_event("startup")
 def startup():
@@ -15,5 +25,8 @@ def health():
 
 @app.post("/import/b3")
 async def import_b3(file: UploadFile = File(...)):
-    result = import_b3_excel(file)
-    return {"status": "ok", "imported": result}
+    summary = import_b3_excel(file)
+    return {
+        "status": "success",
+        "summary": summary
+    }
