@@ -110,6 +110,41 @@ def init_db():
     except sqlite3.OperationalError:
         logger.debug("Coluna 'asset_id' já existe na tabela operations")
 
+    # Tabela de ativos de Renda Fixa
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS fixed_income_assets (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            asset_id INTEGER NOT NULL,
+            issuer TEXT NOT NULL,
+            product_type TEXT NOT NULL,
+            indexer TEXT NOT NULL,
+            rate REAL NOT NULL,
+            maturity_date TEXT NOT NULL,
+            custody_fee REAL DEFAULT 0,
+            issue_date TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            status TEXT NOT NULL DEFAULT 'ACTIVE',
+            FOREIGN KEY (asset_id) REFERENCES assets(id),
+            UNIQUE (asset_id)
+        )
+    """)
+
+    # Tabela de operações de Renda Fixa
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS fixed_income_operations (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            asset_id INTEGER NOT NULL,
+            operation_type TEXT NOT NULL,
+            amount REAL NOT NULL,
+            net_amount REAL,
+            ir_amount REAL DEFAULT 0,
+            trade_date TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            status TEXT NOT NULL DEFAULT 'ACTIVE',
+            FOREIGN KEY (asset_id) REFERENCES assets(id)
+        )
+    """)
+
     conn.commit()
     conn.close()
     logger.info("Banco de dados inicializado com sucesso")

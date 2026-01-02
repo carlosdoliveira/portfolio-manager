@@ -33,6 +33,15 @@ from app.repositories.assets_repository import (
     update_asset,
     delete_asset
 )
+from app.repositories.fixed_income_repository import (
+    create_fixed_income_asset,
+    list_fixed_income_assets,
+    get_fixed_income_by_asset_id,
+    create_fixed_income_operation,
+    list_fixed_income_operations,
+    calculate_fixed_income_projection,
+    delete_fixed_income_asset
+)
 
 
 app = FastAPI(title="Portfolio Manager")
@@ -70,6 +79,25 @@ class OperationCreate(BaseModel):
     trade_date: date = Field(description="Data da operação")
     market: str | None = Field(default=None, description="Mercado")
     institution: str | None = Field(default=None, description="Instituição")
+
+# Modelos Pydantic para Renda Fixa
+class FixedIncomeAssetCreate(BaseModel):
+    asset_id: int = Field(gt=0, description="ID do ativo base")
+    issuer: str = Field(min_length=1, description="Emissor (Banco, Tesouro Nacional)")
+    product_type: str = Field(min_length=1, description="Tipo (CDB, LCI, LCA, TESOURO_SELIC, etc.)")
+    indexer: str = Field(min_length=1, description="Indexador (CDI, IPCA, PRE, SELIC)")
+    rate: float = Field(gt=0, description="Taxa contratada (%)")
+    maturity_date: date = Field(description="Data de vencimento")
+    issue_date: date = Field(description="Data de emissão")
+    custody_fee: float = Field(default=0.0, ge=0, description="Taxa de custódia anual (%)")
+
+class FixedIncomeOperationCreate(BaseModel):
+    asset_id: int = Field(gt=0, description="ID do ativo")
+    operation_type: str = Field(pattern="^(APLICACAO|RESGATE|VENCIMENTO)$", description="Tipo de operação")
+    amount: float = Field(gt=0, description="Valor bruto")
+    trade_date: date = Field(description="Data da operação")
+    net_amount: float | None = Field(default=None, description="Valor líquido após IR")
+    ir_amount: float = Field(default=0.0, ge=0, description="Valor do IR retido")
 
 @app.on_event("startup")
 def startup():
@@ -285,3 +313,116 @@ def delete_operation_endpoint(operation_id: int):
     except Exception as e:
         logger.error(f"Erro ao deletar operação: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+# ========== ENDPOINTS DE RENDA FIXA ==========
+
+@app.post("/fixed-income/assets")
+def create_fixed_income_asset_endpoint(fi_asset: FixedIncomeAssetCreate):
+    logger.info(f"Recebida requisição de criação de Renda Fixa para asset {fi_asset.asset_id}")
+    try:
+        # Verificar se o ativo existe
+        asset = get_asset_by_id(fi_asset.asset_id)
+        if not asset:
+            raise HTTPException(status_code=404, detail=f"Ativo {fi_asset.asset_id} não encontrado")
+        
+        fi_id = create_fixed_income_asset(
+            asset_id=fi_asset.asset_id,
+            issuer=fi_asset.issuer,
+            product_type=fi_asset.product_type,
+            indexer=fi_asset.indexer,
+            rate=fi_asset.rate,
+            maturity_date=fi_asset.maturity_date.isoformat(),
+            issue_date=fi_asset.issue_date.isoformat(),
+            custody_fee=fi_asset.custody_fee
+        )
+        logger.info(f"Renda Fixa criada com ID {fi_id}")
+        return {"status": "success", "fixed_income_id": fi_id}
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Erro ao criar Renda Fixa: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
+
+@app.get("/fixed-income/assets")
+def get_fixed_income_assets():
+    logger.debug("Recebida requisição de listagem de Renda Fixa")
+    try:
+        assets = list_fixed_income_assets()
+        return assets
+    except Exception as e:
+        logger.error(f"Erro ao listar Renda Fixa: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/fixed-income/assets/{asset_id}")
+def get_fixed_income_asset(asset_id: int):
+    logger.debug(f"Recebida requisição para buscar Renda Fixa do asset ID: {asset_id}")
+    try:
+        fi_asset = get_fixed_income_by_asset_id(asset_id)
+        if not fi_asset:
+            raise HTTPException(status_code=404, detail=f"Renda Fixa não encontrada para asset {asset_id}")
+        return fi_asset
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Erro ao buscar Renda Fixa: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.delete("/fixed-income/assets/{asset_id}")
+def delete_fixed_income_asset_endpoint(asset_id: int):
+    logger.info(f"Recebida requisição de exclusão de Renda Fixa para asset {asset_id}")
+    try:
+        delete_fixed_income_asset(asset_id)
+        logger.info(f"Renda Fixa do asset {asset_id} deletada")
+        return {"status": "success", "message": "Renda Fixa deletada com sucesso"}
+    except ValueError as e:
+        logger.warning(f"Erro de validação ao deletar Renda Fixa: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.error(f"Erro ao deletar Renda Fixa: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/fixed-income/operations")
+def create_fixed_income_operation_endpoint(operation: FixedIncomeOperationCreate):
+    logger.info(f"Recebida requisição de operação de Renda Fixa: {operation.operation_type} para asset {operation.asset_id}")
+    try:
+        op_id = create_fixed_income_operation(
+            asset_id=operation.asset_id,
+            operation_type=operation.operation_type,
+            amount=operation.amount,
+            trade_date=operation.trade_date.isoformat(),
+            net_amount=operation.net_amount,
+            ir_amount=operation.ir_amount
+        )
+        logger.info(f"Operação de Renda Fixa criada com ID {op_id}")
+        return {"status": "success", "operation_id": op_id}
+    except Exception as e:
+        logger.error(f"Erro ao criar operação de Renda Fixa: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
+
+@app.get("/fixed-income/operations/{asset_id}")
+def get_fixed_income_operations_endpoint(asset_id: int):
+    logger.debug(f"Recebida requisição de operações de Renda Fixa para asset {asset_id}")
+    try:
+        operations = list_fixed_income_operations(asset_id)
+        return operations
+    except Exception as e:
+        logger.error(f"Erro ao listar operações de Renda Fixa: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/fixed-income/projection/{asset_id}")
+def get_fixed_income_projection_endpoint(
+    asset_id: int,
+    cdi_rate: float = 13.75,
+    ipca_rate: float = 4.5
+):
+    logger.debug(f"Recebida requisição de projeção para asset {asset_id}")
+    try:
+        projection = calculate_fixed_income_projection(
+            asset_id=asset_id,
+            current_cdi_rate=cdi_rate,
+            current_ipca_rate=ipca_rate
+        )
+        return projection
+    except Exception as e:
+        logger.error(f"Erro ao calcular projeção: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
