@@ -14,6 +14,29 @@ Aplicação MVP para gerenciar operações financeiras importadas a partir de re
 - **Import idempotente**: reimportar o mesmo arquivo não cria duplicatas; a deduplicação é aplicada via UNIQUE constraint na base.
 - **Derivações são calculadas**: posições/LP/P&L devem ser calculadas a partir das operações (não armazenadas como estado final).
 
+## Segurança e Validação 🔒
+
+O projeto implementa as seguintes medidas de segurança:
+
+### CORS Configurável
+- Origens permitidas via variável de ambiente `CORS_ORIGINS`
+- Padrão: `http://localhost:5173` (desenvolvimento)
+- Múltiplas origens: use vírgula como separador (ex: `CORS_ORIGINS="http://localhost:5173,http://localhost:3000"`)
+- Métodos HTTP explícitos: apenas `GET` e `POST`
+
+### Validação de Entrada
+- Endpoint `/operations` usa validação Pydantic com:
+  - Tipos de dados estritamente tipados
+  - Validação de formato (ex: `movement_type` só aceita "COMPRA" ou "VENDA")
+  - Validação de valores (quantidade e preço devem ser > 0)
+  - Campos obrigatórios e opcionais claramente definidos
+
+### Tratamento de Erros
+- Importação diferencia duplicatas de erros reais
+- Captura específica de `sqlite3.IntegrityError` para duplicatas
+- Erros inesperados causam rollback e propagam mensagem detalhada
+- Responses HTTP apropriados (400 para validação, 503 para problemas de infraestrutura)
+
 ## Quickstart (Docker) 🐳
 Recomendado para desenvolvimento rápido:
 
@@ -26,6 +49,20 @@ Serviços expostos por padrão:
 - Frontend: http://localhost:5173
 
 O banco de dados SQLite é persistido em `./backend/data/portfolio.db` via volume do Docker.
+
+### Variáveis de Ambiente
+
+Para configurar origens CORS em produção, defina a variável de ambiente:
+
+```bash
+CORS_ORIGINS="https://seu-dominio.com,https://app.seu-dominio.com" docker-compose up
+```
+
+Ou adicione no arquivo `.env` na raiz do projeto:
+
+```env
+CORS_ORIGINS=https://seu-dominio.com,https://app.seu-dominio.com
+```
 
 ## Executando localmente (sem Docker)
 

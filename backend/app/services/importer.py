@@ -1,4 +1,5 @@
 import pandas as pd
+import sqlite3
 from datetime import datetime
 from app.db.database import get_connection
 
@@ -32,7 +33,7 @@ def import_b3_excel(file):
     inserted = 0
     duplicated = 0
 
-    for _, row in df.iterrows():
+    for idx, row in df.iterrows():
         try:
             cursor.execute("""
                 INSERT INTO operations (
@@ -60,9 +61,14 @@ def import_b3_excel(file):
 
             inserted += 1
 
-        except Exception:
-            # Violação de UNIQUE → duplicata
+        except sqlite3.IntegrityError:
+            # Violação de UNIQUE → duplicata identificada
             duplicated += 1
+        except Exception as e:
+            # Erro inesperado: rollback e propaga
+            conn.rollback()
+            conn.close()
+            raise ValueError(f"Erro ao processar linha {idx}: {str(e)}")
 
     conn.commit()
     conn.close()
