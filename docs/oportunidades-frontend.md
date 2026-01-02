@@ -665,16 +665,19 @@ export default defineConfig({
 
 ## 📋 Checklist de Prioridades
 
+**✅ Concluído:**
+- [x] Mover URL da API para variável de ambiente (item 1) — Implementado 2026-01-02
+- [x] Implementar tratamento de erro detalhado (item 2) — Implementado 2026-01-02
+
 **Fazer primeiro:**
-- [ ] Mover URL da API para variável de ambiente (item 1)
-- [ ] Implementar tratamento de erro detalhado (item 2)
 - [ ] Implementar Dashboard com dados reais (item 3)
 - [ ] Adicionar validação de arquivo (item 8)
+- [ ] Implementar Portfolio (lista de operações) (item 3)
 
 **Fazer em seguida:**
 - [ ] Adicionar gerenciamento de estado (item 5)
 - [ ] Criar tipos e validação de API (item 6)
-- [ ] Implementar Portfolio (lista de operações) (item 3)
+- [ ] Adicionar loading state global (item 4)
 - [ ] Tornar layout responsivo (item 11)
 
 **Nice to have:**
@@ -686,5 +689,9 @@ export default defineConfig({
 
 ---
 
+## 📊 Estatísticas de Progresso
+
 **Total de melhorias identificadas:** 19  
-**Estimativa de esforço:** 3-4 sprints (assumindo 1 sprint = 2 semanas)
+**Concluídas:** 2 (10.5%)  
+**Críticas pendentes:** 2 (Dashboard/Portfolio + validação)  
+**Estimativa de esforço restante:** 2-3 sprints (assumindo 1 sprint = 2 semanas)
