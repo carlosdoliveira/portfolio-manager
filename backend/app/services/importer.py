@@ -47,45 +47,45 @@ def import_b3_excel(file):
     with get_db() as conn:
         cursor = conn.cursor()
 
-    for idx, row in df.iterrows():
-        try:
-            cursor.execute("""
-                INSERT INTO operations (
-                    trade_date,
-                    movement_type,
-                    market,
-                    institution,
-                    ticker,
-                    quantity,
-                    price,
-                    value,
-                    created_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """, (
-                row["Data do Negócio"],
-                row["Tipo de Movimentação"],
-                row["Mercado"],
-                row["Instituição"],
-                row["Código de Negociação"],
-                int(row["Quantidade"]),
-                float(row["Preço"]),
-                float(row["Valor"]),
-                datetime.utcnow().isoformat()
-            ))
+        for idx, row in df.iterrows():
+            try:
+                cursor.execute("""
+                    INSERT INTO operations (
+                        trade_date,
+                        movement_type,
+                        market,
+                        institution,
+                        ticker,
+                        quantity,
+                        price,
+                        value,
+                        created_at
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    row["Data do Negócio"],
+                    row["Tipo de Movimentação"],
+                    row["Mercado"],
+                    row["Instituição"],
+                    row["Código de Negociação"],
+                    int(row["Quantidade"]),
+                    float(row["Preço"]),
+                    float(row["Valor"]),
+                    datetime.utcnow().isoformat()
+                ))
 
-            inserted += 1
+                inserted += 1
 
-        except sqlite3.IntegrityError:
-            # Violação de UNIQUE → duplicata identificada
-            duplicated += 1
-            logger.debug(f"Duplicata detectada na linha {idx}")
-        except Exception as e:
-            # Erro inesperado: rollback automático pelo context manager
-            logger.error(f"Erro ao processar linha {idx}: {str(e)}")
-            raise ValueError(f"Erro ao processar linha {idx}: {str(e)}")
-    
-    # Context manager faz commit automático aqui
-    logger.info(f"Importação concluída: {inserted} inseridas, {duplicated} duplicadas")
+            except sqlite3.IntegrityError:
+                # Violação de UNIQUE → duplicata identificada
+                duplicated += 1
+                logger.debug(f"Duplicata detectada na linha {idx}")
+            except Exception as e:
+                # Erro inesperado: rollback automático pelo context manager
+                logger.error(f"Erro ao processar linha {idx}: {str(e)}")
+                raise ValueError(f"Erro ao processar linha {idx}: {str(e)}")
+        
+        # Context manager faz commit automático aqui
+        logger.info(f"Importação concluída: {inserted} inseridas, {duplicated} duplicadas")
 
     # 3. Resumo honesto
     return {
