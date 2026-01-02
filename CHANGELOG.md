@@ -4,6 +4,32 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
 ## [Unreleased]
 
+### ✨ Funcionalidades
+
+#### CLI de Gerenciamento ([2026-01-02])
+**Objetivo:** Facilitar o gerenciamento de todo o ciclo de vida da aplicação.
+
+**Solução:**
+- Script bash `portfolio` na raiz do projeto
+- Comandos disponíveis:
+  - `start` - Inicia todos os serviços com build automático
+  - `stop` - Para todos os serviços de forma limpa
+  - `restart` - Reinicia todos os serviços
+  - `status` - Mostra status atual dos containers
+  - `logs [serviço]` - Exibe logs em tempo real (api, frontend ou ambos)
+  - `clean` - Remove containers, imagens e volumes Docker
+  - `clean-all` - Remoção completa incluindo banco de dados
+  - `help` - Documentação completa dos comandos
+
+**Benefícios:**
+- Interface amigável com cores e emojis
+- Validações de segurança (confirmações para operações destrutivas)
+- Mensagens claras de sucesso/erro
+- Verificação automática de dependências (Docker, docker-compose)
+- Links diretos para serviços após inicialização
+
+**Localização:** `portfolio` (raiz do projeto)
+
 ### 🔒 Segurança
 
 #### CORS Configurável ([2026-01-02])

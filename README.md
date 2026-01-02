@@ -37,8 +37,42 @@ O projeto implementa as seguintes medidas de segurança:
 - Erros inesperados causam rollback e propagam mensagem detalhada
 - Responses HTTP apropriados (400 para validação, 503 para problemas de infraestrutura)
 
-## Quickstart (Docker) 🐳
-Recomendado para desenvolvimento rápido:
+## Quickstart (Recomendado) 🚀
+
+### Usando o CLI (Mais Fácil)
+
+O projeto inclui um script CLI que facilita o gerenciamento de todos os serviços:
+
+```bash
+# Iniciar a aplicação
+./portfolio start
+
+# Ver status dos serviços
+./portfolio status
+
+# Ver logs em tempo real
+./portfolio logs
+
+# Parar a aplicação
+./portfolio stop
+
+# Remover tudo (incluindo banco de dados)
+./portfolio clean-all
+```
+
+**Comandos disponíveis:**
+- `start` - Inicia todos os serviços (backend + frontend)
+- `stop` - Para todos os serviços
+- `restart` - Reinicia todos os serviços
+- `status` - Mostra o status atual
+- `logs [serviço]` - Exibe logs (api, frontend ou ambos)
+- `clean` - Remove containers e imagens Docker
+- `clean-all` - Remove tudo, incluindo dados persistidos
+- `help` - Exibe ajuda completa
+
+### Usando Docker Compose Diretamente
+
+Alternativa ao CLI para usuários avançados:
 
 ```bash
 docker-compose up --build
@@ -47,6 +81,7 @@ docker-compose up --build
 Serviços expostos por padrão:
 - Backend: http://localhost:8000
 - Frontend: http://localhost:5173
+- API Docs: http://localhost:8000/docs
 
 O banco de dados SQLite é persistido em `./backend/data/portfolio.db` via volume do Docker.
 
@@ -66,7 +101,7 @@ CORS_ORIGINS=https://seu-dominio.com,https://app.seu-dominio.com
 
 ## Executando localmente (sem Docker)
 
-Backend
+### Backend
 
 ```bash
 cd backend
@@ -76,13 +111,49 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-Frontend
+### Frontend
 
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
+
+## Gerenciamento do Projeto 🛠️
+
+### Estrutura de Diretórios
+- `backend/` — API FastAPI, parsing de Excel, persistência
+- `frontend/` — UI em React + Vite
+- `docker-compose.yml` — orquestra backend e frontend
+- `portfolio` — CLI para gerenciamento simplificado
+
+### Fluxo de Desenvolvimento Recomendado
+
+1. **Primeira vez:**
+   ```bash
+   ./portfolio start
+   ```
+
+2. **Durante desenvolvimento:**
+   ```bash
+   # Ver logs em tempo real
+   ./portfolio logs
+   
+   # Ver logs apenas do backend
+   ./portfolio logs api
+   
+   # Reiniciar após mudanças
+   ./portfolio restart
+   ```
+
+3. **Limpeza:**
+   ```bash
+   # Remove containers e volumes Docker
+   ./portfolio clean
+   
+   # Remove tudo incluindo dados
+   ./portfolio clean-all
+   ```
 
 ## Endpoints principais (API) 📡
 - `GET /health` — status de saúde
@@ -126,22 +197,75 @@ Ao encontrar linhas com os mesmos valores para os campos da chave de deduplicaç
 	(trade_date, movement_type, market, institution, ticker, quantity, price, source)
 
 ## Testes 🧪
-Existe um teste placeholder em `backend/tests`. Para rodar os testes localmente instale `pytest` e execute:
+
+Existe um teste placeholder em `backend/tests`. Para rodar os testes localmente:
 
 ```bash
+# Com Docker (recomendado)
+docker compose exec api pytest tests/
+
+# Sem Docker
+cd backend
 pip install pytest
-pytest backend/tests
+pytest tests/
+```
+
+## Solução de Problemas 🔧
+
+### Containers não iniciam
+```bash
+./portfolio clean
+./portfolio start
+```
+
+### Porta já em uso
+Se as portas 8000 ou 5173 estiverem em uso, ajuste no `docker-compose.yml`:
+```yaml
+ports:
+  - "8001:8000"  # Usar porta 8001 ao invés de 8000
+```
+
+### Banco de dados corrompido
+```bash
+./portfolio clean-all  # Remove tudo
+./portfolio start      # Recria o banco
+```
+
+### Ver logs detalhados
+```bash
+./portfolio logs api       # Logs do backend
+./portfolio logs frontend  # Logs do frontend
 ```
 
 ## Estrutura do projeto 🗂️
-- `backend/` — API FastAPI, parsing de Excel, persistência
-- `frontend/` — UI em React + Vite
-- `docker-compose.yml` — orquestra backend e frontend para desenvolvimento
+```
+portfolio-manager-v2/
+├── portfolio              # CLI de gerenciamento
+├── docker-compose.yml     # Orquestração de serviços
+├── backend/              # API FastAPI
+│   ├── app/
+│   │   ├── main.py       # Endpoints e configuração
+│   │   ├── db/           # Conexão e schema
+│   │   ├── repositories/ # Camada de dados
+│   │   └── services/     # Lógica de negócio
+│   └── data/             # SQLite (persistido)
+└── frontend/             # UI React + Vite
+    └── src/
+        ├── pages/        # Páginas da aplicação
+        ├── components/   # Componentes reutilizáveis
+        └── api/          # Cliente HTTP
+```
 
 ## Contribuindo 🤝
 - Siga os princípios do projeto (eventos imutáveis, import idempotente)
+- Use o CLI `./portfolio` para desenvolvimento
 - Abra PRs pequenas e documente mudanças de esquema do banco de dados
+- Execute testes antes de submeter: `docker compose exec api pytest`
+
+## Licença 📄
+
+Este projeto é de uso pessoal e educacional.
 
 ---
 
-Se quiser, posso também adicionar exemplos de curl para os endpoints ou tarefas de CI para testes e linting. Quero que eu inclua isso agora? ✨
+**Dúvidas?** Execute `./portfolio help` para ver todos os comandos disponíveis.

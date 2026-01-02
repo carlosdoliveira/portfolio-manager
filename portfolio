@@ -1,0 +1,309 @@
+#!/usr/bin/env bash
+
+# Portfolio Manager v2 - CLI de Gerenciamento
+# Script para facilitar o gerenciamento dos serviços da aplicação
+
+set -e
+
+# Cores para output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+# Funções auxiliares
+print_success() {
+    echo -e "${GREEN}✓${NC} $1"
+}
+
+print_error() {
+    echo -e "${RED}✗${NC} $1"
+}
+
+print_info() {
+    echo -e "${BLUE}ℹ${NC} $1"
+}
+
+print_warning() {
+    echo -e "${YELLOW}⚠${NC} $1"
+}
+
+print_header() {
+    echo -e "\n${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${BLUE}  Portfolio Manager v2${NC}"
+    echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}\n"
+}
+
+# Verifica se Docker está instalado
+check_docker() {
+    if ! command -v docker &> /dev/null; then
+        print_error "Docker não está instalado!"
+        echo "  Instale em: https://docs.docker.com/get-docker/"
+        exit 1
+    fi
+
+    if ! command -v docker-compose &> /dev/null && ! docker compose version &> /dev/null; then
+        print_error "Docker Compose não está instalado!"
+        echo "  Instale em: https://docs.docker.com/compose/install/"
+        exit 1
+    fi
+}
+
+# Verifica se está no diretório correto
+check_directory() {
+    if [[ ! -f "docker-compose.yml" ]]; then
+        print_error "Execute este script a partir da raiz do projeto Portfolio Manager v2"
+        exit 1
+    fi
+}
+
+# Comando: start
+cmd_start() {
+    print_header
+    print_info "Iniciando Portfolio Manager v2..."
+    
+    check_docker
+    check_directory
+    
+    echo ""
+    
+    # Verifica se há containers rodando
+    if docker compose ps | grep -q "Up"; then
+        print_warning "Serviços já estão rodando!"
+        echo ""
+        docker compose ps
+        echo ""
+        read -p "Deseja reiniciar? (s/N): " -n 1 -r
+        echo ""
+        if [[ ! $REPLY =~ ^[Ss]$ ]]; then
+            print_info "Operação cancelada"
+            exit 0
+        fi
+        echo ""
+        cmd_stop
+        echo ""
+    fi
+    
+    # Build e start
+    print_info "Construindo e iniciando containers..."
+    docker compose up --build -d
+    
+    echo ""
+    print_success "Serviços iniciados com sucesso!"
+    echo ""
+    echo "  📊 Backend:  ${GREEN}http://localhost:8000${NC}"
+    echo "  🎨 Frontend: ${GREEN}http://localhost:5173${NC}"
+    echo "  📖 API Docs: ${GREEN}http://localhost:8000/docs${NC}"
+    echo ""
+    print_info "Use './portfolio logs' para ver os logs em tempo real"
+    print_info "Use './portfolio stop' para parar os serviços"
+    echo ""
+}
+
+# Comando: stop
+cmd_stop() {
+    print_header
+    print_info "Parando Portfolio Manager v2..."
+    
+    check_docker
+    check_directory
+    
+    docker compose stop
+    
+    echo ""
+    print_success "Serviços parados com sucesso!"
+    echo ""
+    print_info "Use './portfolio start' para reiniciar"
+    print_info "Use './portfolio clean' para remover completamente"
+    echo ""
+}
+
+# Comando: restart
+cmd_restart() {
+    print_header
+    print_info "Reiniciando Portfolio Manager v2..."
+    
+    cmd_stop
+    sleep 2
+    cmd_start
+}
+
+# Comando: logs
+cmd_logs() {
+    check_docker
+    check_directory
+    
+    print_info "Exibindo logs (Ctrl+C para sair)..."
+    echo ""
+    
+    if [[ -n "$1" ]]; then
+        docker compose logs -f "$1"
+    else
+        docker compose logs -f
+    fi
+}
+
+# Comando: clean
+cmd_clean() {
+    print_header
+    print_warning "ATENÇÃO: Esta operação irá remover:"
+    echo "  • Todos os containers"
+    echo "  • Todas as imagens Docker do projeto"
+    echo "  • Volumes Docker (dados persistidos)"
+    echo "  • Redes Docker"
+    echo ""
+    print_warning "O banco de dados local (./backend/data) será preservado"
+    echo ""
+    
+    read -p "Tem certeza que deseja continuar? (s/N): " -n 1 -r
+    echo ""
+    
+    if [[ ! $REPLY =~ ^[Ss]$ ]]; then
+        print_info "Operação cancelada"
+        exit 0
+    fi
+    
+    check_docker
+    check_directory
+    
+    echo ""
+    print_info "Parando containers..."
+    docker compose down
+    
+    print_info "Removendo imagens..."
+    docker compose down --rmi all
+    
+    print_info "Removendo volumes..."
+    docker compose down -v
+    
+    echo ""
+    print_success "Limpeza concluída!"
+    echo ""
+    print_info "Use './portfolio start' para reconstruir e iniciar"
+    echo ""
+}
+
+# Comando: clean-all
+cmd_clean_all() {
+    print_header
+    print_warning "ATENÇÃO: Esta operação irá remover TUDO:"
+    echo "  • Todos os containers"
+    echo "  • Todas as imagens Docker do projeto"
+    echo "  • Volumes Docker"
+    echo "  • Redes Docker"
+    echo "  • Banco de dados local (./backend/data/)"
+    echo ""
+    print_error "Esta ação é IRREVERSÍVEL!"
+    echo ""
+    
+    read -p "Digite 'CONFIRMAR' para prosseguir: " confirm
+    
+    if [[ "$confirm" != "CONFIRMAR" ]]; then
+        print_info "Operação cancelada"
+        exit 0
+    fi
+    
+    check_docker
+    check_directory
+    
+    echo ""
+    cmd_clean
+    
+    if [[ -d "./backend/data" ]]; then
+        print_info "Removendo banco de dados local..."
+        rm -rf ./backend/data
+        print_success "Banco de dados removido"
+    fi
+    
+    echo ""
+    print_success "Remoção completa concluída!"
+    echo ""
+}
+
+# Comando: status
+cmd_status() {
+    print_header
+    check_docker
+    check_directory
+    
+    print_info "Status dos serviços:"
+    echo ""
+    docker compose ps
+    echo ""
+    
+    # Verifica se há containers rodando
+    if docker compose ps | grep -q "Up"; then
+        print_success "Serviços estão rodando"
+        echo ""
+        echo "  📊 Backend:  ${GREEN}http://localhost:8000${NC}"
+        echo "  🎨 Frontend: ${GREEN}http://localhost:5173${NC}"
+        echo "  📖 API Docs: ${GREEN}http://localhost:8000/docs${NC}"
+    else
+        print_warning "Nenhum serviço rodando"
+        echo ""
+        print_info "Use './portfolio start' para iniciar"
+    fi
+    echo ""
+}
+
+# Comando: help
+cmd_help() {
+    print_header
+    echo "Uso: ./portfolio <comando> [opções]"
+    echo ""
+    echo "Comandos disponíveis:"
+    echo ""
+    echo "  ${GREEN}start${NC}           Inicia todos os serviços (backend + frontend)"
+    echo "  ${GREEN}stop${NC}            Para todos os serviços"
+    echo "  ${GREEN}restart${NC}         Reinicia todos os serviços"
+    echo "  ${GREEN}status${NC}          Exibe o status dos serviços"
+    echo "  ${GREEN}logs${NC} [serviço]  Exibe logs em tempo real (api, frontend ou ambos)"
+    echo "  ${GREEN}clean${NC}           Remove containers, imagens e volumes Docker"
+    echo "  ${GREEN}clean-all${NC}       Remove tudo, incluindo banco de dados local"
+    echo "  ${GREEN}help${NC}            Exibe esta mensagem de ajuda"
+    echo ""
+    echo "Exemplos:"
+    echo ""
+    echo "  ./portfolio start              # Inicia a aplicação"
+    echo "  ./portfolio logs api           # Ver logs apenas do backend"
+    echo "  ./portfolio stop               # Para a aplicação"
+    echo "  ./portfolio clean              # Remove containers e volumes"
+    echo ""
+    echo "Mais informações: README.md"
+    echo ""
+}
+
+# Router de comandos
+case "${1:-help}" in
+    start)
+        cmd_start
+        ;;
+    stop)
+        cmd_stop
+        ;;
+    restart)
+        cmd_restart
+        ;;
+    logs)
+        cmd_logs "$2"
+        ;;
+    clean)
+        cmd_clean
+        ;;
+    clean-all)
+        cmd_clean_all
+        ;;
+    status)
+        cmd_status
+        ;;
+    help|--help|-h)
+        cmd_help
+        ;;
+    *)
+        print_error "Comando desconhecido: $1"
+        echo ""
+        cmd_help
+        exit 1
+        ;;
+esac
