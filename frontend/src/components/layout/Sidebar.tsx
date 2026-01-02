@@ -16,6 +16,10 @@ export function Sidebar() {
           Carteira
         </NavLink>
 
+        <NavLink to="/fixed-income" className="nav-item">
+          Renda Fixa
+        </NavLink>
+
         <NavLink to="/analysis" className="nav-item">
           Análises
         </NavLink>

@@ -237,3 +237,175 @@ export async function deleteOperation(id: number): Promise<{ status: string; mes
 
   return response.json();
 }
+
+// ========== INTERFACES DE RENDA FIXA ==========
+
+export interface FixedIncomeAsset {
+  id: number;
+  asset_id: number;
+  ticker: string;
+  product_name: string;
+  issuer: string;
+  product_type: string;
+  indexer: string;
+  rate: number;
+  maturity_date: string;
+  custody_fee: number;
+  issue_date: string;
+  created_at: string;
+  status: string;
+  total_invested: number;
+  total_redeemed: number;
+  current_balance: number;
+  operations_count: number;
+}
+
+export interface FixedIncomeAssetCreate {
+  asset_id: number;
+  issuer: string;
+  product_type: string;
+  indexer: string;
+  rate: number;
+  maturity_date: string;
+  issue_date: string;
+  custody_fee?: number;
+}
+
+export interface FixedIncomeOperation {
+  id: number;
+  asset_id: number;
+  operation_type: "APLICACAO" | "RESGATE" | "VENCIMENTO";
+  amount: number;
+  net_amount: number | null;
+  ir_amount: number;
+  trade_date: string;
+  created_at: string;
+  status: string;
+}
+
+export interface FixedIncomeOperationCreate {
+  asset_id: number;
+  operation_type: "APLICACAO" | "RESGATE" | "VENCIMENTO";
+  amount: number;
+  trade_date: string;
+  net_amount?: number | null;
+  ir_amount?: number;
+}
+
+export interface FixedIncomeProjection {
+  asset_id: number;
+  ticker: string;
+  product_type: string;
+  indexer: string;
+  rate_contracted: number;
+  maturity_date: string;
+  days_to_maturity: number;
+  current_balance: number;
+  gross_projection: number;
+  gross_gain: number;
+  ir_rate: number;
+  ir_amount: number;
+  custody_fee_amount: number;
+  net_projection: number;
+  net_gain: number;
+  annual_rate_used: number;
+}
+
+// ========== FUNÇÕES DE RENDA FIXA ==========
+
+export async function createFixedIncomeAsset(data: FixedIncomeAssetCreate): Promise<{ status: string; fixed_income_id: number }> {
+  const response = await fetch(`${API_URL}/fixed-income/assets`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ detail: "Erro ao criar ativo de Renda Fixa" }));
+    throw new Error(error.detail || "Erro ao criar ativo de Renda Fixa");
+  }
+
+  return response.json();
+}
+
+export async function listFixedIncomeAssets(): Promise<FixedIncomeAsset[]> {
+  const response = await fetch(`${API_URL}/fixed-income/assets`);
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ detail: "Erro ao listar ativos de Renda Fixa" }));
+    throw new Error(error.detail || "Erro ao listar ativos de Renda Fixa");
+  }
+
+  return response.json();
+}
+
+export async function getFixedIncomeAsset(assetId: number): Promise<FixedIncomeAsset> {
+  const response = await fetch(`${API_URL}/fixed-income/assets/${assetId}`);
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ detail: "Erro ao buscar ativo de Renda Fixa" }));
+    throw new Error(error.detail || "Erro ao buscar ativo de Renda Fixa");
+  }
+
+  return response.json();
+}
+
+export async function deleteFixedIncomeAsset(assetId: number): Promise<{ status: string; message: string }> {
+  const response = await fetch(`${API_URL}/fixed-income/assets/${assetId}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ detail: "Erro ao deletar ativo de Renda Fixa" }));
+    throw new Error(error.detail || "Erro ao deletar ativo de Renda Fixa");
+  }
+
+  return response.json();
+}
+
+export async function createFixedIncomeOperation(data: FixedIncomeOperationCreate): Promise<{ status: string; operation_id: number }> {
+  const response = await fetch(`${API_URL}/fixed-income/operations`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ detail: "Erro ao criar operação de Renda Fixa" }));
+    throw new Error(error.detail || "Erro ao criar operação de Renda Fixa");
+  }
+
+  return response.json();
+}
+
+export async function listFixedIncomeOperations(assetId: number): Promise<FixedIncomeOperation[]> {
+  const response = await fetch(`${API_URL}/fixed-income/operations/${assetId}`);
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ detail: "Erro ao listar operações de Renda Fixa" }));
+    throw new Error(error.detail || "Erro ao listar operações de Renda Fixa");
+  }
+
+  return response.json();
+}
+
+export async function getFixedIncomeProjection(
+  assetId: number,
+  cdiRate: number = 13.75,
+  ipcaRate: number = 4.5
+): Promise<FixedIncomeProjection> {
+  const response = await fetch(
+    `${API_URL}/fixed-income/projection/${assetId}?cdi_rate=${cdiRate}&ipca_rate=${ipcaRate}`
+  );
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ detail: "Erro ao calcular projeção" }));
+    throw new Error(error.detail || "Erro ao calcular projeção");
+  }
+
+  return response.json();
+}
