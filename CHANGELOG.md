@@ -4,7 +4,51 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
 ## [Unreleased]
 
-### 🏗️ Infraestrutura e Qualidade
+### � Frontend
+
+#### URL da API Configurável via Variável de Ambiente ([2026-01-02])
+**Objetivo:** Permitir deploy em diferentes ambientes sem modificar código.
+
+**Solução:**
+- Migração de URL hardcoded para `import.meta.env.VITE_API_URL`
+- Valor padrão: `http://localhost:8000` (desenvolvimento)
+- Criação de `frontend/.env` e `frontend/.env.example`
+- Função auxiliar `fetchOperations()` adicionada
+
+**Benefícios:**
+- Funciona em desenvolvimento, staging e produção
+- Configuração simples via arquivo `.env`
+- Segue padrão Vite de variáveis de ambiente
+- Facilita CI/CD e deploys
+
+**Localização:** `frontend/src/api/client.ts`, `frontend/.env`, `frontend/.env.example`
+
+#### Tratamento de Erro Detalhado na Importação ([2026-01-02])
+**Objetivo:** Fornecer feedback claro quando importação falha.
+
+**Solução:**
+- Estado `errorMessage` para capturar mensagem específica do backend
+- Extração de `error.detail` da resposta HTTP
+- Componente visual destacado com:
+  - Mensagem de erro detalhada
+  - Botão "Tentar novamente" para recuperação
+  - Estilo com background vermelho claro e borda
+- Tratamento específico de `Error` instances
+
+**Exemplos de feedback:**
+- "Colunas obrigatórias ausentes: ['Data do Negócio']"
+- "Erro ao processar linha 5: Invalid date format"
+- "Erro desconhecido" (fallback)
+
+**Benefícios:**
+- Usuário sabe exatamente o que deu errado
+- Reduz frustração e tentativas às cegas
+- Facilita debug e suporte
+- UX profissional
+
+**Localização:** `frontend/src/components/ImportB3Card.tsx`, `frontend/src/styles/import.css`
+
+### �🏗️ Infraestrutura e Qualidade
 
 #### Context Manager para Gerenciamento de Conexões DB ([2026-01-02])
 **Objetivo:** Eliminar leaks de recursos e garantir transações seguras.

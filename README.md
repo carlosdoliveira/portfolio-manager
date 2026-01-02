@@ -119,6 +119,8 @@ O banco de dados SQLite é persistido em `./backend/data/portfolio.db` via volum
 
 ### Variáveis de Ambiente
 
+**Backend (CORS):**
+
 Para configurar origens CORS em produção, defina a variável de ambiente:
 
 ```bash
@@ -130,6 +132,22 @@ Ou adicione no arquivo `.env` na raiz do projeto:
 ```env
 CORS_ORIGINS=https://seu-dominio.com,https://app.seu-dominio.com
 ```
+
+**Frontend (API URL):**
+
+Para configurar a URL da API, edite `frontend/.env`:
+
+```env
+VITE_API_URL=http://localhost:8000
+```
+
+Em produção:
+
+```env
+VITE_API_URL=https://api.seu-dominio.com
+```
+
+**Nota:** O arquivo `frontend/.env.example` contém o template de configuração.
 
 ## Executando localmente (sem Docker)
 

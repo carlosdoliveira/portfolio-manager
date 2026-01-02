@@ -17,17 +17,25 @@ export function ImportB3Card() {
   const [file, setFile] = useState<File | null>(null);
   const [state, setState] = useState<ImportState>("idle");
   const [summary, setSummary] = useState<ImportSummary | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   async function handleImport() {
     if (!file) return;
 
     setState("uploading");
+    setErrorMessage(null);
+    
     try {
       const result = await uploadB3File(file);
       setSummary(result.summary);
       setState("success");
-    } catch {
+    } catch (error) {
       setState("error");
+      setErrorMessage(
+        error instanceof Error 
+          ? error.message 
+          : "Erro desconhecido ao importar arquivo"
+      );
     }
   }
 
@@ -76,9 +84,19 @@ export function ImportB3Card() {
         )}
 
         {state === "error" && (
-          <p className="import-status error">
-            Erro ao importar o arquivo. Verifique o formato.
-          </p>
+          <div className="import-status error">
+            <strong>❌ Erro ao importar:</strong>
+            <p>{errorMessage}</p>
+            <button 
+              onClick={() => {
+                setState("idle");
+                setFile(null);
+                setErrorMessage(null);
+              }}
+            >
+              Tentar novamente
+            </button>
+          </div>
         )}
       </div>
     </div>

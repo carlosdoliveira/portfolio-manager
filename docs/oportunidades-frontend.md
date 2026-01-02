@@ -4,21 +4,25 @@ Este documento descreve as principais oportunidades de melhoria identificadas no
 
 ---
 
+## 🎯 Status Atual (2026-01-02)
+
+**✅ Críticas Concluídas:**
+- URL da API configurável via variável de ambiente ✓
+- Tratamento de erro detalhado com feedback claro ✓
+
+**⚠️ Próximas Prioridades:**
+- Implementar Dashboard, Portfolio e Analysis (item 3)
+- Adicionar validação de arquivo no cliente (item 8)
+
+---
+
 ## 🔴 Críticas (Funcionalidade e UX)
 
-### 1. **URL da API está hardcoded**
-**Localização:** `frontend/src/api/client.ts`
+### 1. ✅ **URL da API está hardcoded** — RESOLVIDO
+**Localização:** `frontend/src/api/client.ts`  
+**Status:** ✅ Implementado em 2026-01-02
 
-```typescript
-const response = await fetch("http://localhost:8000/import/b3", {
-```
-
-**Problema:**  
-Não funciona em produção ou ambientes diferentes. Quebra ao fazer deploy.
-
-**Solução:**  
-Usar variáveis de ambiente do Vite:
-
+**Solução aplicada:**
 ```typescript
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
@@ -32,37 +36,27 @@ export async function uploadB3File(file: File) {
   });
 
   if (!response.ok) {
-    const error = await response.json().catch(() => ({}));
-    throw new Error(error.message || "Erro ao importar arquivo");
+    const error = await response.json().catch(() => ({ detail: "Erro desconhecido" }));
+    throw new Error(error.detail || "Erro ao importar arquivo");
   }
 
   return response.json();
 }
 ```
 
-Criar `.env` e `.env.example`:
+**Arquivos criados:**
+- `.env` - Configuração local (git ignored)
+- `.env.example` - Template de configuração para outros desenvolvedores
 
-```bash
-# .env.example
-VITE_API_URL=http://localhost:8000
-```
+✅ **Resultado:** Funciona em qualquer ambiente, fácil configurar para produção.
 
 ---
 
-### 2. **Falta de tratamento de erro detalhado**
-**Localização:** `frontend/src/components/ImportB3Card.tsx`
+### 2. ✅ **Falta de tratamento de erro detalhado** — RESOLVIDO
+**Localização:** `frontend/src/components/ImportB3Card.tsx`  
+**Status:** ✅ Implementado em 2026-01-02
 
-```typescript
-} catch {
-  setState("error");  // ❌ Erro genérico sem detalhes
-}
-```
-
-**Problema:**  
-Usuário não sabe o que causou o erro (arquivo inválido, servidor fora do ar, formato incorreto).
-
-**Solução:**  
-
+**Solução aplicada:**
 ```typescript
 const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -82,10 +76,22 @@ try {
 // No JSX:
 {state === "error" && (
   <div className="import-status error">
-    <strong>Erro ao importar:</strong> {errorMessage}
+    <strong>❌ Erro ao importar:</strong>
+    <p>{errorMessage}</p>
+    <button onClick={() => { /* retry logic */ }}>
+      Tentar novamente
+    </button>
   </div>
 )}
 ```
+
+**Melhorias implementadas:**
+- Mensagem de erro específica do backend
+- Botão "Tentar novamente" para recuperação
+- Estilo visual destacado (background vermelho claro, borda)
+- Feedback claro sobre o que deu errado
+
+✅ **Resultado:** Usuário sabe exatamente qual o problema e pode tentar novamente.
 
 ---
 

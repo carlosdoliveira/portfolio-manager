@@ -37,6 +37,35 @@
 
 .import-status.error {
   color: #c62828;
+  padding: var(--space-md);
+  background-color: #ffebee;
+  border-radius: var(--radius-sm);
+  border-left: 4px solid #c62828;
+}
+
+.import-status.error strong {
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.import-status.error p {
+  margin: var(--space-xs) 0;
+  font-size: 0.9rem;
+}
+
+.import-status.error button {
+  margin-top: var(--space-sm);
+  background-color: #c62828;
+  color: white;
+  border: none;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.import-status.error button:hover {
+  background-color: #b71c1c;
 }
 
 .import-summary {
