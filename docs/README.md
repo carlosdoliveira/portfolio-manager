@@ -4,7 +4,33 @@ Bem-vindo à documentação técnica do projeto Portfolio Manager v2.
 
 ---
 
-## � Estrutura da Documentação (Wiki)
+## 📊 Status do Projeto
+
+### [STATUS-PROJETO.md](./STATUS-PROJETO.md) ⭐ Novo!
+Visão completa do estado atual do projeto:
+- Arquitetura e stack tecnológica
+- Funcionalidades implementadas (Backend e Frontend)
+- Problemas conhecidos e gaps
+- Modelagem de dados atual
+- Otimizações para dashboards
+- Roadmap sugerido
+
+**Recomendado para:** Todos os desenvolvedores e stakeholders
+
+### [REFERENCIA-TECNICA.md](./REFERENCIA-TECNICA.md) ⭐ Novo!
+Documentação técnica detalhada:
+- API Endpoints completos (request/response)
+- Classificação de ativos
+- Cálculo de IR regressivo
+- Projeções de rendimento
+- Interfaces TypeScript
+- Configuração de banco de dados
+
+**Recomendado para:** Desenvolvedores Backend e Frontend
+
+---
+
+## 📁 Estrutura da Documentação (Wiki)
 
 Esta documentação está organizada em formato wiki com as seguintes seções:
 
