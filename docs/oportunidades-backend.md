@@ -4,100 +4,91 @@ Este documento descreve as principais oportunidades de melhoria identificadas no
 
 ---
 
+## 🎯 Status Atual (2026-01-02)
+
+**✅ Segurança Crítica:** Resolvida  
+- CORS configurável ✓
+- Validação de entrada ✓
+- Tratamento de exceções específico ✓
+
+**⚠️ Próximas Prioridades Críticas:**
+1. **Context Manager para DB** — Evitar leaks de conexão em cenários de erro
+2. **Logging Estruturado** — Auditoria e debugging de produção
+
+**💡 Aplicação está funcional e segura para uso básico!**
+
+---
+
 ## 🔴 Críticas (Segurança e Confiabilidade)
 
-### 1. **CORS está aberto para qualquer origem**
-**Localização:** `backend/app/main.py`
+### 1. ✅ **CORS está aberto para qualquer origem** — RESOLVIDO
+**Localização:** `backend/app/main.py`  
+**Status:** ✅ Implementado em 2026-01-02
 
+**Solução aplicada:**
 ```python
+allowed_origins = os.getenv("CORS_ORIGINS", "http://localhost:5173").split(",")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # ❌ Qualquer origem permitida
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-```
-
-**Problema:**  
-Qualquer site pode fazer requisições ao backend, expondo a aplicação a ataques CSRF e acesso não autorizado.
-
-**Solução:**  
-Configurar origens explícitas ou usar variável de ambiente:
-
-```python
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=os.getenv("CORS_ORIGINS", "http://localhost:5173").split(","),
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["GET", "POST"],
     allow_headers=["Content-Type"],
 )
 ```
 
+✅ **Resultado:** CORS agora é configurável via variável de ambiente com valor padrão seguro.
+
 ---
 
-### 2. **Tratamento de exceções genérico na importação**
-**Localização:** `backend/app/services/importer.py`
+### 2. ✅ **Tratamento de exceções genérico na importação** — RESOLVIDO
+**Localização:** `backend/app/services/importer.py`  
+**Status:** ✅ Implementado em 2026-01-02
 
-```python
-except Exception:
-    # Violação de UNIQUE → duplicata
-    duplicated += 1
-```
-
-**Problema:**  
-Captura qualquer exceção como duplicata, ocultando erros reais (tipo de dados incorretos, problemas de conexão, etc.).
-
-**Solução:**  
-Capturar especificamente `sqlite3.IntegrityError`:
-
+**Solução aplicada:**
 ```python
 except sqlite3.IntegrityError:
+    # Violação de UNIQUE → duplicata identificada
     duplicated += 1
 except Exception as e:
+    # Erro inesperado: rollback e propaga
     conn.rollback()
     conn.close()
-    raise ValueError(f"Erro ao processar linha: {e}")
+    raise ValueError(f"Erro ao processar linha {idx}: {str(e)}")
 ```
+
+✅ **Resultado:** Duplicatas identificadas corretamente, erros reais propagados com contexto.
 
 ---
 
-### 3. **Ausência de validação de entrada no endpoint `/operations`**
-**Localização:** `backend/app/main.py`
+### 3. ✅ **Ausência de validação de entrada no endpoint `/operations`** — RESOLVIDO
+**Localização:** `backend/app/main.py`  
+**Status:** ✅ Implementado em 2026-01-02
 
+**Solução aplicada:**
 ```python
-@app.post("/operations")
-def create_manual_operation(payload: dict):  # ❌ dict sem validação
-```
-
-**Problema:**  
-Aceita qualquer estrutura JSON, permitindo dados inválidos ou maliciosos.
-
-**Solução:**  
-Criar um modelo Pydantic:
-
-```python
-from pydantic import BaseModel, Field
-from datetime import date
-
 class OperationCreate(BaseModel):
-    asset_class: str = Field(min_length=1)
-    asset_type: str = Field(min_length=1)
-    product_name: str = Field(min_length=1)
-    ticker: str | None = None
-    movement_type: str = Field(pattern="^(COMPRA|VENDA)$")
-    quantity: int = Field(gt=0)
-    price: float = Field(gt=0)
-    trade_date: date
+    asset_class: str = Field(min_length=1, description="Classe do ativo")
+    asset_type: str = Field(min_length=1, description="Tipo do ativo")
+    product_name: str = Field(min_length=1, description="Nome do produto")
+    ticker: str | None = Field(default=None, description="Código de negociação")
+    movement_type: str = Field(pattern="^(COMPRA|VENDA)$", description="Tipo de movimentação")
+    quantity: int = Field(gt=0, description="Quantidade negociada")
+    price: float = Field(gt=0, description="Preço unitário")
+    trade_date: date = Field(description="Data da operação")
+    market: str | None = Field(default=None, description="Mercado")
+    institution: str | None = Field(default=None, description="Instituição")
 
 @app.post("/operations")
 def create_manual_operation(operation: OperationCreate):
     payload = operation.model_dump()
+    payload["trade_date"] = payload["trade_date"].isoformat()
     payload["source"] = "MANUAL"
     create_operation(payload)
     return {"status": "success"}
 ```
+
+✅ **Resultado:** Validação completa com tipos, formatos e valores numéricos.
 
 ---
 
@@ -114,8 +105,19 @@ Adotar uma camada de abstração como SQLAlchemy Core ou Tortoise ORM para reduz
 ## 🟠 Importantes (Manutenibilidade e Qualidade)
 
 ### 5. **Falta de logging estruturado**
+**Prioridade:** 🔴 Alta
+
 **Problema:**  
-Não há registros de operações críticas (importações, erros, criação manual de operações).
+Não há registros de operações críticas (importações, erros, criação manual de operações). Isso dificulta:
+- Debugging em produção
+- Auditoria de operações
+- Monitoramento de performance
+- Detecção de comportamentos anômalos
+
+**Impacto:**
+- Impossível rastrear quando/quem/o que foi importado
+- Dificuldade para diagnosticar problemas reportados por usuários
+- Falta de visibilidade sobre uso do sistema
 
 **Solução:**  
 Adicionar `logging` com níveis apropriados:
@@ -123,21 +125,39 @@ Adicionar `logging` com níveis apropriados:
 ```python
 import logging
 
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
 logger = logging.getLogger(__name__)
 
 def import_b3_excel(file):
-    logger.info("Iniciando importação de arquivo B3")
+    logger.info(f"Iniciando importação de arquivo B3: {file.filename}")
     # ...
     logger.info(f"Importação concluída: {inserted} inseridas, {duplicated} duplicadas")
+    
+def create_manual_operation(operation):
+    logger.info(f"Criando operação manual: {operation.ticker} - {operation.movement_type}")
+    # ...
 ```
+
+**Recomendação:** Implementar antes de uso em produção para auditoria.
 
 ---
 
 ### 6. **Conexões de banco não estão sendo gerenciadas adequadamente**
-**Localização:** Múltiplos arquivos (`database.py`, `operations_repository.py`, `importer.py`)
+**Localização:** Múltiplos arquivos (`database.py`, `operations_repository.py`, `importer.py`)  
+**Prioridade:** 🔴 Alta
 
 **Problema:**  
-Cada função abre e fecha uma conexão manualmente. Em caso de exceção, a conexão pode não ser fechada.
+Cada função abre e fecha uma conexão manualmente. Em caso de exceção, a conexão pode não ser fechada, causando leaks de recursos.
+
+**Status atual:** ⚠️ Parcialmente mitigado no importer (item 2), mas ainda é um problema em `operations_repository.py`.
+
+**Impacto:**
+- Em produção, múltiplas requisições simultâneas podem esgotar conexões disponíveis
+- Memória não liberada adequadamente
+- Dificulta testes unitários (mocking complicado)
 
 **Solução:**  
 Usar context manager:
@@ -162,6 +182,8 @@ with get_db() as conn:
     cursor = conn.cursor()
     cursor.execute(...)
 ```
+
+**Recomendação:** Implementar antes de ir para produção ou com múltiplos usuários simultâneos.
 
 ---
 
@@ -383,19 +405,21 @@ async def import_b3(file: UploadFile = File(...)):
 
 ## 📋 Checklist de Prioridades
 
-**Fazer primeiro:**
-- [ ] Corrigir CORS (item 1)
-- [ ] Adicionar validação Pydantic (item 3)
-- [ ] Melhorar tratamento de exceções (item 2)
-- [ ] Implementar context manager para DB (item 6)
-- [ ] Adicionar logging (item 5)
+**✅ Concluído (2026-01-02):**
+- [x] Corrigir CORS (item 1) — ✅ Implementado
+- [x] Adicionar validação Pydantic (item 3) — ✅ Implementado
+- [x] Melhorar tratamento de exceções (item 2) — ✅ Implementado
 
-**Fazer em seguida:**
+**🔴 Crítico - Fazer primeiro:**
+- [ ] Implementar context manager para DB (item 6) — **Alta prioridade**
+- [ ] Adicionar logging estruturado (item 5) — **Alta prioridade**
+
+**🟠 Importante - Fazer em seguida:**
 - [ ] Criar testes unitários (item 7)
 - [ ] Melhorar healthcheck (item 9)
 - [ ] Ajustar schema para campos não usados (item 10)
 
-**Nice to have:**
+**🟡 Nice to have:**
 - [ ] Rate limiting (item 11)
 - [ ] Paginação (item 12)
 - [ ] Endpoint de estatísticas (item 13)
@@ -403,5 +427,16 @@ async def import_b3(file: UploadFile = File(...)):
 
 ---
 
+## 📊 Resumo de Progresso
+
 **Total de melhorias identificadas:** 17  
-**Estimativa de esforço:** 2-3 sprints (assumindo 1 sprint = 2 semanas)
+**Concluídas:** 3 críticas (segurança) ✅  
+**Pendentes críticas/importantes:** 5  
+**Pendentes nice-to-have:** 9  
+
+**Próxima prioridade:** Context manager para gerenciamento de conexões DB (item 6)
+
+---
+
+**Última atualização:** 2026-01-02  
+**Estimativa de esforço restante:** 2 sprints (assumindo 1 sprint = 2 semanas)

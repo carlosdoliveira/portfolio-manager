@@ -18,24 +18,40 @@ Aplicação MVP para gerenciar operações financeiras importadas a partir de re
 
 O projeto implementa as seguintes medidas de segurança:
 
-### CORS Configurável
+### ✅ Implementado
+
+**CORS Configurável**
 - Origens permitidas via variável de ambiente `CORS_ORIGINS`
 - Padrão: `http://localhost:5173` (desenvolvimento)
 - Múltiplas origens: use vírgula como separador (ex: `CORS_ORIGINS="http://localhost:5173,http://localhost:3000"`)
 - Métodos HTTP explícitos: apenas `GET` e `POST`
 
-### Validação de Entrada
+**Validação de Entrada**
 - Endpoint `/operations` usa validação Pydantic com:
   - Tipos de dados estritamente tipados
   - Validação de formato (ex: `movement_type` só aceita "COMPRA" ou "VENDA")
   - Validação de valores (quantidade e preço devem ser > 0)
   - Campos obrigatórios e opcionais claramente definidos
 
-### Tratamento de Erros
+**Tratamento de Erros**
 - Importação diferencia duplicatas de erros reais
 - Captura específica de `sqlite3.IntegrityError` para duplicatas
 - Erros inesperados causam rollback e propagam mensagem detalhada
 - Responses HTTP apropriados (400 para validação, 503 para problemas de infraestrutura)
+
+**Proteção SQL Injection**
+- Todos os queries usam placeholders parametrizados (`?`)
+- Zero concatenação de strings em SQL
+
+### ⚠️ Recomendado para Produção
+
+**Antes de usar em produção, considere implementar:**
+- Context manager para gerenciamento de conexões DB (evita leaks)
+- Logging estruturado para auditoria e debugging
+- Testes unitários e de integração
+- Healthcheck que verifica conectividade do banco
+
+**Documentação completa:** [docs/oportunidades-backend.md](docs/oportunidades-backend.md)
 
 ## Quickstart (Recomendado) 🚀
 
