@@ -4,8 +4,10 @@ import {
   createFixedIncomeAsset,
   createFixedIncomeOperation,
   deleteFixedIncomeAsset,
+  updateFixedIncomeAsset,
   getFixedIncomeProjection,
   createAsset,
+  updateAsset,
   type FixedIncomeAsset,
   type FixedIncomeAssetCreate,
   type FixedIncomeOperationCreate,
@@ -20,6 +22,7 @@ export default function FixedIncome() {
   const [success, setSuccess] = useState<string | null>(null);
   
   const [showNewAssetModal, setShowNewAssetModal] = useState(false);
+  const [showEditAssetModal, setShowEditAssetModal] = useState(false);
   const [showOperationModal, setShowOperationModal] = useState(false);
   const [showProjectionModal, setShowProjectionModal] = useState(false);
   const [selectedAsset, setSelectedAsset] = useState<FixedIncomeAsset | null>(null);
@@ -109,6 +112,60 @@ export default function FixedIncome() {
       fetchAssets();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erro ao criar ativo');
+    }
+  };
+
+  const handleOpenEditModal = (asset: FixedIncomeAsset) => {
+    setSelectedAsset(asset);
+    setFormData({
+      ticker: asset.ticker,
+      product_name: asset.product_name,
+      issuer: asset.issuer,
+      product_type: asset.product_type,
+      indexer: asset.indexer,
+      rate: asset.rate.toString(),
+      maturity_date: asset.maturity_date,
+      issue_date: asset.issue_date,
+      custody_fee: asset.custody_fee.toString()
+    });
+    setShowEditAssetModal(true);
+  };
+
+  const handleCloseEditModal = () => {
+    setShowEditAssetModal(false);
+    setSelectedAsset(null);
+    resetForm();
+  };
+
+  const handleUpdateAsset = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!selectedAsset) return;
+
+    try {
+      await updateAsset(selectedAsset.asset_id, {
+        ticker: selectedAsset.ticker,
+        asset_class: 'RENDA FIXA',
+        asset_type: formData.product_type,
+        product_name: formData.product_name
+      });
+
+      await updateFixedIncomeAsset(selectedAsset.asset_id, {
+        asset_id: selectedAsset.asset_id,
+        issuer: formData.issuer,
+        product_type: formData.product_type,
+        indexer: formData.indexer,
+        rate: parseFloat(formData.rate),
+        maturity_date: formData.maturity_date,
+        issue_date: formData.issue_date,
+        custody_fee: parseFloat(formData.custody_fee)
+      });
+
+      setSuccess('Ativo de Renda Fixa atualizado com sucesso!');
+      handleCloseEditModal();
+      fetchAssets();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Erro ao atualizar ativo');
     }
   };
 
@@ -317,6 +374,13 @@ export default function FixedIncome() {
                         </button>
                         <button
                           className="btn-icon btn-edit"
+                          title="Editar Investimento"
+                          onClick={() => handleOpenEditModal(asset)}
+                        >
+                          ✏️
+                        </button>
+                        <button
+                          className="btn-icon btn-edit"
                           title="Nova Operação"
                           onClick={() => {
                             setSelectedAsset(asset);
@@ -471,6 +535,142 @@ export default function FixedIncome() {
                 </button>
                 <button type="submit" className="btn-primary">
                   Criar Investimento
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Modal: Editar Ativo */}
+      {showEditAssetModal && selectedAsset && (
+        <div className="modal-overlay" onClick={handleCloseEditModal}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>Editar Investimento - {selectedAsset.ticker}</h2>
+              <button className="modal-close" onClick={handleCloseEditModal}>×</button>
+            </div>
+            <form className="asset-form" onSubmit={handleUpdateAsset}>
+              <div className="form-group">
+                <label>Código/Identificador</label>
+                <input
+                  type="text"
+                  value={formData.ticker}
+                  disabled
+                />
+                <small>O código é definido na criação do ativo.</small>
+              </div>
+
+              <div className="form-group">
+                <label>Nome do Produto</label>
+                <input
+                  type="text"
+                  value={formData.product_name}
+                  onChange={e => setFormData({...formData, product_name: e.target.value})}
+                  placeholder="Ex: CDB Banco XYZ 110% CDI"
+                  required
+                />
+              </div>
+
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Emissor</label>
+                  <input
+                    type="text"
+                    value={formData.issuer}
+                    onChange={e => setFormData({...formData, issuer: e.target.value})}
+                    placeholder="Ex: Banco XYZ"
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Tipo de Produto</label>
+                  <select
+                    value={formData.product_type}
+                    onChange={e => setFormData({...formData, product_type: e.target.value})}
+                    required
+                  >
+                    <option value="CDB">CDB</option>
+                    <option value="LCI">LCI (Isento de IR)</option>
+                    <option value="LCA">LCA (Isento de IR)</option>
+                    <option value="TESOURO_SELIC">Tesouro Selic</option>
+                    <option value="TESOURO_IPCA">Tesouro IPCA+</option>
+                    <option value="TESOURO_PREFIXADO">Tesouro Prefixado</option>
+                    <option value="OUTROS">Outros</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Indexador</label>
+                  <select
+                    value={formData.indexer}
+                    onChange={e => setFormData({...formData, indexer: e.target.value})}
+                    required
+                  >
+                    <option value="CDI">CDI</option>
+                    <option value="IPCA">IPCA</option>
+                    <option value="PRE">Pré-fixado</option>
+                    <option value="SELIC">Selic</option>
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label>Taxa Contratada (%)</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value={formData.rate}
+                    onChange={e => setFormData({...formData, rate: e.target.value})}
+                    placeholder="Ex: 110.00"
+                    required
+                  />
+                  <small>Para CDI: 110 = 110% do CDI. Para IPCA+: taxa fixa acima da inflação.</small>
+                </div>
+              </div>
+
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Data de Emissão</label>
+                  <input
+                    type="date"
+                    value={formData.issue_date}
+                    onChange={e => setFormData({...formData, issue_date: e.target.value})}
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Data de Vencimento</label>
+                  <input
+                    type="date"
+                    value={formData.maturity_date}
+                    onChange={e => setFormData({...formData, maturity_date: e.target.value})}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label>Taxa de Custódia Anual (%)</label>
+                <input
+                  type="number"
+                  step="0.01"
+                  value={formData.custody_fee}
+                  onChange={e => setFormData({...formData, custody_fee: e.target.value})}
+                  placeholder="0.20"
+                />
+                <small>Aplicável principalmente a Tesouro Direto.</small>
+              </div>
+
+              <div className="form-actions">
+                <button type="button" className="btn-secondary" onClick={handleCloseEditModal}>
+                  Cancelar
+                </button>
+                <button type="submit" className="btn-primary">
+                  Salvar Alterações
                 </button>
               </div>
             </form>

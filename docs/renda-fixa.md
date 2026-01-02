@@ -80,7 +80,21 @@ Clicando no botão **"+ Novo Investimento"**, abre-se um modal com formulário c
    - Apenas para Tesouro Direto: 0.20% (exceto Selic até R$ 10.000)
    - Para outros produtos: 0%
 
-### 4. Registrar Operações
+### 4. Editar Investimento Existente
+
+Cada linha da tabela possui o ícone ✏️. Ao clicar, abre-se um modal para revisar e ajustar as informações principais do ativo sem precisar removê-lo:
+
+- **Nome do Produto**: Atualize a descrição exibida na carteira
+- **Emissor**: Ajuste o banco ou instituição emissora
+- **Tipo de Produto**: Converta entre CDB, LCI, LCA, Tesouro, etc.
+- **Indexador**: Alterne entre CDI, IPCA, Pré ou Selic
+- **Taxa Contratada**: Informe a nova taxa/tabela válida
+- **Datas**: Corrija emissão ou vencimento em caso de erro
+- **Taxa de Custódia**: Atualize o percentual anual
+
+Toda alteração atualiza tanto a tabela de Renda Fixa quanto o cadastro base do ativo, mantendo relatórios e projeções consistentes.
+
+### 5. Registrar Operações
 
 Clicando no botão 💰 de operações, abre-se um modal para registrar:
 
@@ -98,7 +112,7 @@ Clicando no botão 💰 de operações, abre-se um modal para registrar:
    - Liquidação do investimento no vencimento
    - Campos adicionais: Valor Líquido (após IR), IR Retido
 
-### 5. Projeção de Rendimento
+### 6. Projeção de Rendimento
 
 Clicando no botão 📊 de projeção, o sistema calcula:
 

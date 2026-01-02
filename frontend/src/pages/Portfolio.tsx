@@ -133,9 +133,19 @@ export default function Portfolio() {
     navigate(`/portfolio/${assetId}`);
   }
 
+  // Função para formatar moeda brasileira
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(value);
+  };
+
   // Calcular totalizadores
   const totalAssets = assets.length;
-  const totalPosition = assets.reduce((sum, asset) => sum + asset.current_position, 0);
+  const totalBoughtValue = assets.reduce((sum, asset) => sum + (asset.total_bought_value || 0), 0);
+  const totalSoldValue = assets.reduce((sum, asset) => sum + (asset.total_sold_value || 0), 0);
+  const currentValue = totalBoughtValue - totalSoldValue;
 
   if (loading && assets.length === 0) {
     return (
@@ -175,8 +185,16 @@ export default function Portfolio() {
           <div className="stat-value">{totalAssets}</div>
         </div>
         <div className="stat-card">
-          <div className="stat-label">Posição Total</div>
-          <div className="stat-value">{totalPosition.toLocaleString('pt-BR')}</div>
+          <div className="stat-label">Valor Atual da Carteira</div>
+          <div className="stat-value">{formatCurrency(currentValue)}</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">Total Investido</div>
+          <div className="stat-value">{formatCurrency(totalBoughtValue)}</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">Total Resgatado</div>
+          <div className="stat-value">{formatCurrency(totalSoldValue)}</div>
         </div>
         <div className="stat-card">
           <div className="stat-label">Total de Operações</div>
@@ -203,9 +221,9 @@ export default function Portfolio() {
                 <th>Nome do Produto</th>
                 <th>Classe</th>
                 <th>Tipo</th>
-                <th className="text-right">Posição Atual</th>
-                <th className="text-right">Total Comprado</th>
-                <th className="text-right">Total Vendido</th>
+                <th className="text-right">Posição Atual (qtd)</th>
+                <th className="text-right">Total Comprado (R$)</th>
+                <th className="text-right">Total Vendido (R$)</th>
                 <th className="text-right">Operações</th>
                 <th className="text-center">Ações</th>
               </tr>
@@ -222,8 +240,8 @@ export default function Portfolio() {
                   <td>{asset.asset_class}</td>
                   <td>{asset.asset_type}</td>
                   <td className="text-right">{asset.current_position.toLocaleString('pt-BR')}</td>
-                  <td className="text-right">{asset.total_bought.toLocaleString('pt-BR')}</td>
-                  <td className="text-right">{asset.total_sold.toLocaleString('pt-BR')}</td>
+                  <td className="text-right">{formatCurrency(asset.total_bought_value || 0)}</td>
+                  <td className="text-right">{formatCurrency(asset.total_sold_value || 0)}</td>
                   <td className="text-right">{asset.total_operations}</td>
                   <td className="text-center">
                     <div className="action-buttons">

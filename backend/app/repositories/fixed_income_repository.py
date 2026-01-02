@@ -171,6 +171,84 @@ def get_fixed_income_by_asset_id(asset_id: int) -> Optional[Dict[str, Any]]:
         return None
 
 
+def update_fixed_income_asset(
+    asset_id: int,
+    issuer: str = None,
+    product_type: str = None,
+    indexer: str = None,
+    rate: float = None,
+    maturity_date: str = None,
+    issue_date: str = None,
+    custody_fee: float = None
+) -> bool:
+    """
+    Atualiza informações de um ativo de Renda Fixa.
+    Apenas os campos fornecidos serão atualizados.
+    
+    Args:
+        asset_id: ID do ativo na tabela assets
+        issuer: Novo emissor (opcional)
+        product_type: Novo tipo de produto (opcional)
+        indexer: Novo indexador (opcional)
+        rate: Nova taxa (opcional)
+        maturity_date: Nova data de vencimento (opcional)
+        issue_date: Nova data de emissão (opcional)
+        custody_fee: Nova taxa de custódia (opcional)
+    
+    Returns:
+        True se atualizado com sucesso
+    """
+    logger.info(f"Atualizando ativo de Renda Fixa para asset_id {asset_id}")
+    
+    # Montar query dinâmica apenas com campos fornecidos
+    fields = []
+    values = []
+    
+    if issuer is not None:
+        fields.append("issuer = ?")
+        values.append(issuer)
+    if product_type is not None:
+        fields.append("product_type = ?")
+        values.append(product_type)
+    if indexer is not None:
+        fields.append("indexer = ?")
+        values.append(indexer)
+    if rate is not None:
+        fields.append("rate = ?")
+        values.append(rate)
+    if maturity_date is not None:
+        fields.append("maturity_date = ?")
+        values.append(maturity_date)
+    if issue_date is not None:
+        fields.append("issue_date = ?")
+        values.append(issue_date)
+    if custody_fee is not None:
+        fields.append("custody_fee = ?")
+        values.append(custody_fee)
+    
+    if not fields:
+        logger.warning("Nenhum campo fornecido para atualização")
+        return False
+    
+    values.append(asset_id)
+    
+    with get_db() as conn:
+        cursor = conn.cursor()
+        query = f"""
+            UPDATE fixed_income_assets 
+            SET {', '.join(fields)}
+            WHERE asset_id = ? AND status = 'ACTIVE'
+        """
+        cursor.execute(query, values)
+        
+        if cursor.rowcount == 0:
+            logger.warning(f"Nenhum ativo de Renda Fixa encontrado para asset_id {asset_id}")
+            return False
+        
+        logger.info(f"Ativo de Renda Fixa atualizado com sucesso")
+        return True
+
+
 def create_fixed_income_operation(
     asset_id: int,
     operation_type: str,

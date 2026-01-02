@@ -15,6 +15,8 @@ export interface Asset {
   total_bought: number;
   total_sold: number;
   current_position: number;
+  total_bought_value: number;
+  total_sold_value: number;
 }
 
 export interface AssetCreate {
@@ -347,6 +349,23 @@ export async function getFixedIncomeAsset(assetId: number): Promise<FixedIncomeA
   if (!response.ok) {
     const error = await response.json().catch(() => ({ detail: "Erro ao buscar ativo de Renda Fixa" }));
     throw new Error(error.detail || "Erro ao buscar ativo de Renda Fixa");
+  }
+
+  return response.json();
+}
+
+export async function updateFixedIncomeAsset(assetId: number, data: FixedIncomeAssetCreate): Promise<{ status: string; message: string }> {
+  const response = await fetch(`${API_URL}/fixed-income/assets/${assetId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ detail: "Erro ao atualizar ativo de Renda Fixa" }));
+    throw new Error(error.detail || "Erro ao atualizar ativo de Renda Fixa");
   }
 
   return response.json();

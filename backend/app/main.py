@@ -37,6 +37,7 @@ from app.repositories.fixed_income_repository import (
     create_fixed_income_asset,
     list_fixed_income_assets,
     get_fixed_income_by_asset_id,
+    update_fixed_income_asset,
     create_fixed_income_operation,
     list_fixed_income_operations,
     calculate_fixed_income_projection,
@@ -379,6 +380,35 @@ def delete_fixed_income_asset_endpoint(asset_id: int):
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         logger.error(f"Erro ao deletar Renda Fixa: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.put("/fixed-income/assets/{asset_id}")
+def update_fixed_income_asset_endpoint(asset_id: int, updates: FixedIncomeAssetCreate):
+    logger.info(f"Recebida requisição de atualização de Renda Fixa para asset {asset_id}")
+    try:
+        success = update_fixed_income_asset(
+            asset_id=asset_id,
+            issuer=updates.issuer,
+            product_type=updates.product_type,
+            indexer=updates.indexer,
+            rate=updates.rate,
+            maturity_date=updates.maturity_date.isoformat(),
+            issue_date=updates.issue_date.isoformat(),
+            custody_fee=updates.custody_fee
+        )
+        
+        if not success:
+            raise HTTPException(status_code=404, detail=f"Renda Fixa não encontrada para asset {asset_id}")
+        
+        logger.info(f"Renda Fixa do asset {asset_id} atualizada com sucesso")
+        return {"status": "success", "message": "Renda Fixa atualizada com sucesso"}
+    except HTTPException:
+        raise
+    except ValueError as e:
+        logger.warning(f"Erro de validação ao atualizar Renda Fixa: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.error(f"Erro ao atualizar Renda Fixa: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/fixed-income/operations")

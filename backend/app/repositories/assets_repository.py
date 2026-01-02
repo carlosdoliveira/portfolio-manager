@@ -121,10 +121,15 @@ def get_asset_by_id(asset_id: int) -> dict | None:
 
 def list_assets() -> list[dict]:
     """
-    Lista todos os ativos ativos.
+    Lista todos os ativos ativos com estatísticas de operações.
     
     Returns:
-        Lista de dicionários com dados dos ativos
+        Lista de dicionários com dados dos ativos incluindo:
+        - total_bought: soma das quantidades compradas
+        - total_sold: soma das quantidades vendidas
+        - current_position: diferença (comprado - vendido)
+        - total_bought_value: valor total gasto em compras (R$)
+        - total_sold_value: valor total recebido em vendas (R$)
     """
     with get_db() as conn:
         cursor = conn.cursor()
@@ -141,7 +146,10 @@ def list_assets() -> list[dict]:
                 COUNT(DISTINCT o.id) as total_operations,
                 SUM(CASE WHEN o.movement_type = 'COMPRA' THEN o.quantity ELSE 0 END) as total_bought,
                 SUM(CASE WHEN o.movement_type = 'VENDA' THEN o.quantity ELSE 0 END) as total_sold,
-                SUM(CASE WHEN o.movement_type = 'COMPRA' THEN o.quantity ELSE -o.quantity END) as current_position
+                (SUM(CASE WHEN o.movement_type = 'COMPRA' THEN o.quantity ELSE 0 END) - 
+                 SUM(CASE WHEN o.movement_type = 'VENDA' THEN o.quantity ELSE 0 END)) as current_position,
+                SUM(CASE WHEN o.movement_type = 'COMPRA' THEN o.value ELSE 0 END) as total_bought_value,
+                SUM(CASE WHEN o.movement_type = 'VENDA' THEN o.value ELSE 0 END) as total_sold_value
             FROM assets a
             LEFT JOIN operations o ON a.id = o.asset_id AND o.status = 'ACTIVE'
             WHERE a.status = 'ACTIVE'
@@ -163,7 +171,9 @@ def list_assets() -> list[dict]:
                 "total_operations": row[7] or 0,
                 "total_bought": row[8] or 0,
                 "total_sold": row[9] or 0,
-                "current_position": row[10] or 0
+                "current_position": row[10] or 0,
+                "total_bought_value": row[11] or 0.0,
+                "total_sold_value": row[12] or 0.0
             }
             for row in rows
         ]
