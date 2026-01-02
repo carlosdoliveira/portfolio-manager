@@ -69,3 +69,4 @@ docker-compose.override.yml
 # Allow README, LICENSE, etc
 !README.md
 !LICENSE
+samples/**
