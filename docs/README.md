@@ -4,7 +4,48 @@ Bem-vindo à documentação técnica do projeto Portfolio Manager v2.
 
 ---
 
-## 📚 Documentos Disponíveis
+## � Estrutura da Documentação (Wiki)
+
+Esta documentação está organizada em formato wiki com as seguintes seções:
+
+### 📐 [architecture/](./architecture/)
+Decisões de arquitetura e design do sistema:
+- Princípios arquiteturais (event-based, immutability)
+- Escolhas tecnológicas e justificativas
+- Diagramas de sistema e fluxos de dados
+
+### 🔌 [api/](./api/)
+Documentação completa das APIs:
+- Endpoints do backend (FastAPI)
+- Schemas de request/response
+- Exemplos de uso e códigos de erro
+- Guia de autenticação (quando implementado)
+
+### 📖 [guides/](./guides/)
+Guias práticos e tutoriais:
+- Como importar arquivo B3
+- Como criar operações manuais
+- Como consultar portfólio
+- Troubleshooting comum
+
+### 🛠️ [development/](./development/)
+Workflows de desenvolvimento:
+- Setup do ambiente local
+- Convenções de código
+- Como usar a CLI (`./portfolio`)
+- Como executar testes
+- Como contribuir
+
+### 🚀 [deployment/](./deployment/)
+Instruções de deploy e operação:
+- Docker e docker-compose
+- Configuração de variáveis de ambiente
+- Monitoramento e logs
+- Backup e recuperação
+
+---
+
+## 📚 Documentos de Análise
 
 ### 1. [Análise de Código — Resumo Executivo](./analise-resumo.md)
 Visão consolidada de todas as oportunidades de melhoria identificadas, com:
@@ -19,9 +60,9 @@ Visão consolidada de todas as oportunidades de melhoria identificadas, com:
 
 ### 2. [Oportunidades de Melhoria — Backend](./oportunidades-backend.md)
 Análise detalhada do backend (FastAPI + SQLite) com 17 oportunidades identificadas:
-- 🔴 **4 críticas:** CORS, validação, tratamento de exceções, schema
-- 🟠 **6 importantes:** logging, conexões, testes, healthcheck
-- 🟡 **7 nice to have:** rate limiting, paginação, estatísticas, migrations
+- 🔴 **Críticas:** CORS, validação, tratamento de exceções, schema
+- 🟠 **Importantes:** logging, conexões, testes, healthcheck
+- 🟡 **Nice to have:** rate limiting, paginação, estatísticas, migrations
 
 **Recomendado para:** Backend Developers, DevOps
 
@@ -29,9 +70,9 @@ Análise detalhada do backend (FastAPI + SQLite) com 17 oportunidades identifica
 
 ### 3. [Oportunidades de Melhoria — Frontend](./oportunidades-frontend.md)
 Análise detalhada do frontend (React + TypeScript + Vite) com 19 oportunidades identificadas:
-- 🔴 **4 críticas:** URL hardcoded, erros genéricos, páginas vazias, validação
-- 🟠 **7 importantes:** estado global, tipagem, testes, responsividade
-- 🟡 **8 nice to have:** React Query, dark mode, PWA, a11y
+- 🔴 **Críticas:** URL hardcoded, erros genéricos, páginas vazias, validação
+- 🟠 **Importantes:** estado global, tipagem, testes, responsividade
+- 🟡 **Nice to have:** React Query, dark mode, PWA, a11y
 
 **Recomendado para:** Frontend Developers, UX/UI Designers
 
@@ -41,8 +82,10 @@ Análise detalhada do frontend (React + TypeScript + Vite) com 19 oportunidades 
 
 ### Se você é desenvolvedor:
 1. Leia o [Resumo Executivo](./analise-resumo.md) para entender o contexto geral
-2. Consulte o documento específico da sua área ([Backend](./oportunidades-backend.md) ou [Frontend](./oportunidades-frontend.md))
-3. Priorize os itens marcados como 🔴 **Críticos**
+2. Configure o ambiente seguindo [development/setup.md](./development/) (quando disponível)
+3. Consulte a [documentação de API](./api/) para entender os endpoints
+4. Consulte o documento específico da sua área ([Backend](./oportunidades-backend.md) ou [Frontend](./oportunidades-frontend.md))
+5. Priorize os itens marcados como 🔴 **Críticos**
 
 ### Se você é gestor/PO:
 1. Revise o [Resumo Executivo](./analise-resumo.md)
