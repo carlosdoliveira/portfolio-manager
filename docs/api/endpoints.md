@@ -180,7 +180,61 @@ console.log(operations);
 
 ---
 
-### 4. Criar Operação Manual
+### 4. Buscar Operação por ID
+
+**GET** `/operations/{operation_id}`
+
+Retorna uma operação específica por ID.
+
+#### Path Parameters
+
+- `operation_id` (integer, required): ID da operação
+
+#### Response
+
+```json
+{
+  "id": 1,
+  "trade_date": "2025-12-31",
+  "movement_type": "COMPRA",
+  "market": "MERCADO A VISTA",
+  "institution": "CORRETORA XP",
+  "ticker": "PETR4",
+  "quantity": 100,
+  "price": 30.50,
+  "total_value": 3050.00,
+  "status": "ACTIVE",
+  "asset_class": "Renda Variável",
+  "asset_type": "Ações",
+  "product_name": "Petrobras PN",
+  "source": "MANUAL",
+  "created_at": "2026-01-02T15:00:00"
+}
+```
+
+#### Status Codes
+
+- `200 OK` — Operação encontrada
+- `404 Not Found` — Operação não encontrada
+- `500 Internal Server Error` — Erro ao buscar operação
+
+#### Exemplo
+
+```bash
+curl http://localhost:8000/operations/1
+```
+
+**JavaScript:**
+
+```javascript
+const response = await fetch("http://localhost:8000/operations/1");
+const operation = await response.json();
+console.log(operation);
+```
+
+---
+
+### 5. Criar Operação Manual
 
 **POST** `/operations`
 
@@ -298,6 +352,173 @@ console.log(result);
 
 ---
 
+### 6. Atualizar Operação
+
+**PUT** `/operations/{operation_id}`
+
+Atualiza uma operação existente seguindo o princípio de imutabilidade:
+1. Marca a operação antiga como `CANCELLED`
+2. Cria uma nova operação com os dados atualizados
+
+**Importante:** Esta abordagem preserva o histórico completo e a auditoria.
+
+#### Path Parameters
+
+- `operation_id` (integer, required): ID da operação a ser atualizada
+
+#### Request
+
+**Content-Type:** `application/json`
+
+**Body:**
+
+```json
+{
+  "trade_date": "2026-01-10",
+  "movement_type": "COMPRA",
+  "market": "MERCADO A VISTA",
+  "institution": "CORRETORA EXEMPLO",
+  "ticker": "VALE3",
+  "quantity": 250,
+  "price": 62.00
+}
+```
+
+#### Response
+
+```json
+{
+  "status": "success",
+  "message": "Operação atualizada com sucesso",
+  "old_id": 1,
+  "new_id": 2
+}
+```
+
+#### Status Codes
+
+- `200 OK` — Operação atualizada com sucesso
+- `400 Bad Request` — Dados inválidos ou operação não está ativa
+- `404 Not Found` — Operação não encontrada
+- `500 Internal Server Error` — Erro ao atualizar operação
+
+#### Erros Possíveis
+
+```json
+{
+  "detail": "Operação 1 não encontrada"
+}
+```
+
+```json
+{
+  "detail": "Operação 1 não está ativa (status: CANCELLED)"
+}
+```
+
+#### Exemplo
+
+```bash
+curl -X PUT http://localhost:8000/operations/1 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "trade_date":"2026-01-10",
+    "movement_type":"COMPRA",
+    "market":"MERCADO A VISTA",
+    "institution":"TESTE",
+    "ticker":"VALE3",
+    "quantity":250,
+    "price":62.00
+  }'
+```
+
+**JavaScript:**
+
+```javascript
+const updatedOperation = {
+  trade_date: "2026-01-10",
+  movement_type: "COMPRA",
+  market: "MERCADO A VISTA",
+  institution: "TESTE",
+  ticker: "VALE3",
+  quantity: 250,
+  price: 62.00,
+};
+
+const response = await fetch("http://localhost:8000/operations/1", {
+  method: "PUT",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(updatedOperation),
+});
+
+const result = await response.json();
+console.log(result); // { old_id: 1, new_id: 2, ... }
+```
+
+---
+
+### 7. Deletar Operação
+
+**DELETE** `/operations/{operation_id}`
+
+Realiza soft delete de uma operação, marcando-a como `DELETED` ao invés de removê-la do banco.
+
+**Importante:** A operação não é removida fisicamente, preservando auditoria.
+
+#### Path Parameters
+
+- `operation_id` (integer, required): ID da operação a ser deletada
+
+#### Response
+
+```json
+{
+  "status": "success",
+  "message": "Operação deletada com sucesso",
+  "deleted_id": 1
+}
+```
+
+#### Status Codes
+
+- `200 OK` — Operação deletada com sucesso
+- `400 Bad Request` — Operação não está ativa
+- `404 Not Found` — Operação não encontrada
+- `500 Internal Server Error` — Erro ao deletar operação
+
+#### Erros Possíveis
+
+```json
+{
+  "detail": "Operação 1 não encontrada"
+}
+```
+
+```json
+{
+  "detail": "Operação 1 não está ativa (status: DELETED)"
+}
+```
+
+#### Exemplo
+
+```bash
+curl -X DELETE http://localhost:8000/operations/1
+```
+
+**JavaScript:**
+
+```javascript
+const response = await fetch("http://localhost:8000/operations/1", {
+  method: "DELETE",
+});
+
+const result = await response.json();
+console.log(result); // { status: "success", deleted_id: 1, ... }
+```
+
+---
+
 ## 🔒 Autenticação
 
 **Status:** Não implementada ainda.
@@ -316,11 +537,19 @@ A API está configurada para aceitar requisições de:
 http://localhost:5173
 ```
 
+**Métodos HTTP permitidos:**
+- GET
+- POST
+- PUT
+- DELETE
+
 Para produção, configure a variável de ambiente `CORS_ORIGINS`:
 
 ```bash
-CORS_ORIGINS=https://seu-dominio.com
+CORS_ORIGINS=https://seu-dominio.com,https://app.seu-dominio.com
 ```
+
+**Nota:** Múltiplas origens devem ser separadas por vírgula.
 
 ---
 
@@ -392,13 +621,16 @@ print(response.json())
 
 ```typescript
 interface OperationCreate {
+  asset_class: string;       // "Renda Variável", "Renda Fixa", etc.
+  asset_type: string;        // "Ações", "Debêntures", etc.
+  product_name: string;      // Nome completo do produto
+  ticker?: string | null;    // Código de negociação (opcional)
   trade_date: string;        // "YYYY-MM-DD"
   movement_type: string;     // "COMPRA" | "VENDA"
-  market: string;
-  institution: string;
-  ticker: string;
   quantity: number;          // integer > 0
   price: number;             // float > 0
+  market?: string | null;    // "MERCADO A VISTA", etc. (opcional)
+  institution?: string | null; // Nome da corretora (opcional)
 }
 ```
 
@@ -407,14 +639,20 @@ interface OperationCreate {
 ```typescript
 interface Operation {
   id: number;
+  asset_class: string;
+  asset_type: string;
+  product_name: string;
+  ticker: string | null;
   trade_date: string;
   movement_type: string;
-  market: string;
-  institution: string;
-  ticker: string;
   quantity: number;
   price: number;
-  total_value: number;       // quantity * price
+  value: number;             // quantity * price (calculado)
+  status: string;            // "ACTIVE" | "CANCELLED" | "DELETED"
+  source: string;            // "MANUAL" | "B3_IMPORT"
+  created_at: string;        // ISO 8601 timestamp
+  market: string | null;
+  institution: string | null;
 }
 ```
 

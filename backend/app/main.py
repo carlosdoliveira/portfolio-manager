@@ -17,7 +17,13 @@ logger = logging.getLogger(__name__)
 
 from app.services.importer import import_b3_excel
 from app.db.database import init_db
-from app.repositories.operations_repository import create_operation, list_operations
+from app.repositories.operations_repository import (
+    create_operation,
+    list_operations,
+    get_operation_by_id,
+    update_operation,
+    delete_operation
+)
 
 
 app = FastAPI(title="Portfolio Manager")
@@ -29,7 +35,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST"],
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["Content-Type"],
 )
 
@@ -93,4 +99,61 @@ def get_operations():
         return operations
     except Exception as e:
         logger.error(f"Erro ao listar operações: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/operations/{operation_id}")
+def get_operation(operation_id: int):
+    logger.debug(f"Recebida requisição para buscar operação ID: {operation_id}")
+    try:
+        operation = get_operation_by_id(operation_id)
+        if not operation:
+            raise HTTPException(status_code=404, detail=f"Operação {operation_id} não encontrada")
+        return operation
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Erro ao buscar operação: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.put("/operations/{operation_id}")
+def update_operation_endpoint(operation_id: int, operation: OperationCreate):
+    logger.info(f"Recebida requisição de atualização para operação ID: {operation_id}")
+    try:
+        payload = operation.model_dump()
+        # Converter date para string ISO
+        payload["trade_date"] = payload["trade_date"].isoformat()
+        payload["source"] = "MANUAL"
+        
+        new_id = update_operation(operation_id, payload)
+        
+        logger.info(f"Operação {operation_id} atualizada (nova operação ID: {new_id})")
+        return {
+            "status": "success",
+            "message": "Operação atualizada com sucesso",
+            "old_id": operation_id,
+            "new_id": new_id
+        }
+    except ValueError as e:
+        logger.warning(f"Erro de validação ao atualizar operação: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.error(f"Erro ao atualizar operação: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.delete("/operations/{operation_id}")
+def delete_operation_endpoint(operation_id: int):
+    logger.info(f"Recebida requisição de exclusão para operação ID: {operation_id}")
+    try:
+        delete_operation(operation_id)
+        logger.info(f"Operação {operation_id} deletada com sucesso")
+        return {
+            "status": "success",
+            "message": "Operação deletada com sucesso",
+            "deleted_id": operation_id
+        }
+    except ValueError as e:
+        logger.warning(f"Erro de validação ao deletar operação: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.error(f"Erro ao deletar operação: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))

@@ -64,6 +64,7 @@ def init_db():
             created_at TEXT NOT NULL,
 
             source TEXT NOT NULL,
+            status TEXT NOT NULL DEFAULT 'ACTIVE',
 
             market TEXT,
             institution TEXT,
@@ -80,6 +81,13 @@ def init_db():
             )
         )
     """)
+    
+    # Adicionar coluna status caso a tabela já exista (migration)
+    try:
+        cursor.execute("ALTER TABLE operations ADD COLUMN status TEXT NOT NULL DEFAULT 'ACTIVE'")
+        logger.info("Coluna 'status' adicionada à tabela operations")
+    except sqlite3.OperationalError:
+        logger.debug("Coluna 'status' já existe na tabela operations")
 
     conn.commit()
     conn.close()
