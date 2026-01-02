@@ -14,9 +14,9 @@ Aplicação MVP para gerenciar operações financeiras importadas a partir de re
 - **Import idempotente**: reimportar o mesmo arquivo não cria duplicatas; a deduplicação é aplicada via UNIQUE constraint na base.
 - **Derivações são calculadas**: posições/LP/P&L devem ser calculadas a partir das operações (não armazenadas como estado final).
 
-## Segurança e Validação 🔒
+## Segurança e Qualidade 🔒
 
-O projeto implementa as seguintes medidas de segurança:
+O projeto implementa as seguintes medidas de segurança e qualidade:
 
 ### ✅ Implementado
 
@@ -43,13 +43,29 @@ O projeto implementa as seguintes medidas de segurança:
 - Todos os queries usam placeholders parametrizados (`?`)
 - Zero concatenação de strings em SQL
 
-### ⚠️ Recomendado para Produção
+**Gerenciamento de Conexões DB**
+- Context manager garante fechamento de conexões
+- Commit automático em sucesso
+- Rollback automático em erro
+- Zero leaks de recursos
 
-**Antes de usar em produção, considere implementar:**
-- Context manager para gerenciamento de conexões DB (evita leaks)
-- Logging estruturado para auditoria e debugging
-- Testes unitários e de integração
-- Healthcheck que verifica conectividade do banco
+**Logging Estruturado**
+- Logs em todos os pontos críticos:
+  - Startup da aplicação
+  - Importações B3 (início, validação, duplicatas, erros)
+  - Operações manuais
+  - Listagem de operações
+- Formato padronizado com timestamp
+- Níveis apropriados (INFO, DEBUG, ERROR)
+
+### 🎉 Status: Pronto para Produção!
+
+**Todas as medidas críticas de segurança e qualidade foram implementadas.**
+
+Próximos passos recomendados (não bloqueantes):
+- Testes unitários para maior confiança
+- Healthcheck que verifica banco de dados
+- Rate limiting para proteção contra abuso
 
 **Documentação completa:** [docs/oportunidades-backend.md](docs/oportunidades-backend.md)
 

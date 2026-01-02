@@ -1,11 +1,16 @@
+import logging
 from datetime import datetime
-from app.db.database import get_connection
+from app.db.database import get_db
+
+logger = logging.getLogger(__name__)
 
 def create_operation(data: dict):
-    conn = get_connection()
-    cursor = conn.cursor()
+    logger.info(f"Criando operação: {data.get('ticker', 'N/A')} - {data['movement_type']} - {data['source']}")
+    
+    with get_db() as conn:
+        cursor = conn.cursor()
 
-    cursor.execute("""
+        cursor.execute("""
         INSERT INTO operations (
             asset_class,
             asset_type,
@@ -35,16 +40,17 @@ def create_operation(data: dict):
         data["source"],
         data.get("market"),
         data.get("institution"),
-    ))
-
-    conn.commit()
-    conn.close()
+        ))
+        
+        logger.debug(f"Operação criada com sucesso: ID pendente")
 
 def list_operations():
-    conn = get_connection()
-    cursor = conn.cursor()
+    logger.debug("Listando todas as operações")
+    
+    with get_db() as conn:
+        cursor = conn.cursor()
 
-    cursor.execute("""
+        cursor.execute("""
         SELECT
             id,
             asset_class,
@@ -62,8 +68,7 @@ def list_operations():
         ORDER BY trade_date ASC, id ASC
     """)
 
-    rows = cursor.fetchall()
-    conn.close()
+        rows = cursor.fetchall()
 
     columns = [
         "id",
@@ -80,6 +85,8 @@ def list_operations():
         "created_at",
     ]
 
-    return [dict(zip(columns, row)) for row in rows]
+    operations = [dict(zip(columns, row)) for row in rows]
+    logger.info(f"Listadas {len(operations)} operações")
+    return operations
 
     

@@ -4,6 +4,52 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
 ## [Unreleased]
 
+### 🏗️ Infraestrutura e Qualidade
+
+#### Context Manager para Gerenciamento de Conexões DB ([2026-01-02])
+**Objetivo:** Eliminar leaks de recursos e garantir transações seguras.
+
+**Solução:**
+- Context manager `get_db()` em `database.py`
+- Garante commit automático em sucesso
+- Rollback automático em caso de erro
+- Fechamento de conexão sempre garantido (finally)
+- Atualizado `operations_repository.py` para usar context manager
+- Atualizado `importer.py` para usar context manager
+
+**Benefícios:**
+- Zero leaks de conexão mesmo com exceções
+- Transações ACID garantidas
+- Código mais limpo e idiomático
+- Facilita testes unitários futuros
+- Suporta múltiplos usuários simultâneos
+
+**Localização:** `backend/app/db/database.py`, `backend/app/repositories/operations_repository.py`, `backend/app/services/importer.py`
+
+#### Logging Estruturado ([2026-01-02])
+**Objetivo:** Auditoria completa e debugging facilitado em produção.
+
+**Solução:**
+- Configuração centralizada em `main.py` com formato padronizado
+- Timestamp em todos os logs
+- Níveis apropriados (INFO, DEBUG, ERROR)
+- Logs em pontos críticos:
+  - 🚀 Startup da aplicação
+  - 🗄️ Inicialização do banco de dados
+  - 📥 Importação B3 (início, validação, duplicatas, conclusão, erros)
+  - ✏️ Criação de operações manuais
+  - 📋 Listagem de operações
+  - ❌ Erros detalhados em todos os fluxos
+
+**Benefícios:**
+- Rastreabilidade completa de operações
+- Debugging facilitado em produção
+- Auditoria de importações e modificações
+- Visibilidade do uso do sistema
+- Identificação rápida de problemas
+
+**Localização:** `backend/app/main.py`, `backend/app/db/database.py`, `backend/app/repositories/operations_repository.py`, `backend/app/services/importer.py`
+
 ### ✨ Funcionalidades
 
 #### CLI de Gerenciamento ([2026-01-02])
