@@ -3,7 +3,6 @@ import sqlite3
 import logging
 from datetime import datetime
 from app.db.database import get_db
-from app.repositories.assets_repository import create_asset
 
 logger = logging.getLogger(__name__)
 
@@ -52,25 +51,41 @@ def import_b3_excel(file):
     with get_db() as conn:
         cursor = conn.cursor()
 
+        # Primeiro passo: criar todos os ativos únicos necessários
+        unique_tickers = df["Código de Negociação"].unique()
+        for ticker in unique_tickers:
+            try:
+                # Verificar se ativo já existe
+                cursor.execute("SELECT id FROM assets WHERE ticker = ?", (ticker,))
+                result = cursor.fetchone()
+                
+                if result:
+                    asset_cache[ticker] = result[0]
+                else:
+                    # Criar novo ativo
+                    cursor.execute("""
+                        INSERT INTO assets (ticker, asset_class, asset_type, product_name, created_at, status)
+                        VALUES (?, ?, ?, ?, ?, ?)
+                    """, (ticker, "AÇÕES", "ON/PN", ticker, datetime.utcnow().isoformat(), "ACTIVE"))
+                    asset_cache[ticker] = cursor.lastrowid
+                    assets_created.add(ticker)
+            except Exception as e:
+                logger.error(f"Erro ao criar/buscar ativo {ticker}: {e}")
+                # Se já existe, buscar ID
+                cursor.execute("SELECT id FROM assets WHERE ticker = ?", (ticker,))
+                result = cursor.fetchone()
+                if result:
+                    asset_cache[ticker] = result[0]
+
+        # Segundo passo: inserir operações
         for idx, row in df.iterrows():
             try:
                 ticker = row["Código de Negociação"]
+                asset_id = asset_cache.get(ticker)
                 
-                # Criar ativo se não existir (usando cache para performance)
-                if ticker not in asset_cache:
-                    # Buscar ou criar ativo
-                    # Assumindo que a planilha B3 tem "Ações" como padrão
-                    asset_id = create_asset(
-                        ticker=ticker,
-                        asset_class="AÇÕES",  # Padrão para B3
-                        asset_type="ON/PN",   # Genérico
-                        product_name=ticker   # Usar ticker como nome por padrão
-                    )
-                    asset_cache[ticker] = asset_id
-                    if asset_id:
-                        assets_created.add(ticker)
-                
-                asset_id = asset_cache[ticker]
+                if not asset_id:
+                    logger.warning(f"Asset ID não encontrado para ticker {ticker}, pulando linha {idx}")
+                    continue
                 
                 cursor.execute("""
                     INSERT INTO operations (

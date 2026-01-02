@@ -11,7 +11,9 @@ DB_PATH = DATA_DIR / "portfolio.db"
 
 def get_connection():
     DATA_DIR.mkdir(parents=True, exist_ok=True)
-    return sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, timeout=30.0)
+    conn.execute("PRAGMA journal_mode=WAL")  # Write-Ahead Logging para melhor concorrência
+    return conn
 
 @contextmanager
 def get_db():
