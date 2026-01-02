@@ -46,14 +46,24 @@ def init_db():
     conn = get_connection()
     cursor = conn.cursor()
 
+    # Tabela de ativos
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS operations (
+        CREATE TABLE IF NOT EXISTS assets (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-
+            ticker TEXT NOT NULL UNIQUE,
             asset_class TEXT NOT NULL,
             asset_type TEXT NOT NULL,
             product_name TEXT NOT NULL,
-            ticker TEXT,
+            created_at TEXT NOT NULL,
+            status TEXT NOT NULL DEFAULT 'ACTIVE'
+        )
+    """)
+
+    # Tabela de operações
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS operations (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            asset_id INTEGER NOT NULL,
 
             movement_type TEXT NOT NULL,
             quantity INTEGER NOT NULL,
@@ -69,12 +79,14 @@ def init_db():
             market TEXT,
             institution TEXT,
 
+            FOREIGN KEY (asset_id) REFERENCES assets(id),
+
             UNIQUE (
                 trade_date,
                 movement_type,
                 market,
                 institution,
-                ticker,
+                asset_id,
                 quantity,
                 price,
                 source
@@ -82,12 +94,19 @@ def init_db():
         )
     """)
     
-    # Adicionar coluna status caso a tabela já exista (migration)
+    # Migration: Adicionar coluna status se não existir
     try:
         cursor.execute("ALTER TABLE operations ADD COLUMN status TEXT NOT NULL DEFAULT 'ACTIVE'")
         logger.info("Coluna 'status' adicionada à tabela operations")
     except sqlite3.OperationalError:
         logger.debug("Coluna 'status' já existe na tabela operations")
+
+    # Migration: Adicionar coluna asset_id se não existir
+    try:
+        cursor.execute("ALTER TABLE operations ADD COLUMN asset_id INTEGER")
+        logger.info("Coluna 'asset_id' adicionada à tabela operations")
+    except sqlite3.OperationalError:
+        logger.debug("Coluna 'asset_id' já existe na tabela operations")
 
     conn.commit()
     conn.close()

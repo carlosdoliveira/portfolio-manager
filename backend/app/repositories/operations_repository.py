@@ -5,17 +5,20 @@ from app.db.database import get_db
 logger = logging.getLogger(__name__)
 
 def create_operation(data: dict):
-    logger.info(f"Criando operação: {data.get('ticker', 'N/A')} - {data['movement_type']} - {data['source']}")
+    """
+    Cria uma nova operação vinculada a um ativo.
+    
+    Args:
+        data: Dicionário com dados da operação (deve conter asset_id)
+    """
+    logger.info(f"Criando operação: Asset ID {data.get('asset_id')} - {data['movement_type']} - {data['source']}")
     
     with get_db() as conn:
         cursor = conn.cursor()
 
         cursor.execute("""
         INSERT INTO operations (
-            asset_class,
-            asset_type,
-            product_name,
-            ticker,
+            asset_id,
             movement_type,
             quantity,
             price,
@@ -25,12 +28,9 @@ def create_operation(data: dict):
             source,
             market,
             institution
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
-        data["asset_class"],
-        data["asset_type"],
-        data["product_name"],
-        data.get("ticker"),
+        data["asset_id"],
         data["movement_type"],
         data["quantity"],
         data["price"],
@@ -42,9 +42,11 @@ def create_operation(data: dict):
         data.get("institution"),
         ))
         
-        logger.debug(f"Operação criada com sucesso: ID pendente")
+        operation_id = cursor.lastrowid
+        logger.debug(f"Operação criada com sucesso: ID {operation_id}")
 
 def list_operations():
+    """Lista todas as operações ativas com dados do ativo."""
     logger.debug("Listando todas as operações ativas")
     
     with get_db() as conn:
@@ -52,32 +54,37 @@ def list_operations():
 
         cursor.execute("""
         SELECT
-            id,
-            asset_class,
-            asset_type,
-            product_name,
-            ticker,
-            movement_type,
-            quantity,
-            price,
-            value,
-            trade_date,
-            source,
-            created_at,
-            status
-        FROM operations
-        WHERE status = 'ACTIVE'
-        ORDER BY trade_date DESC, id DESC
+            o.id,
+            o.asset_id,
+            a.ticker,
+            a.asset_class,
+            a.asset_type,
+            a.product_name,
+            o.movement_type,
+            o.quantity,
+            o.price,
+            o.value,
+            o.trade_date,
+            o.source,
+            o.created_at,
+            o.status,
+            o.market,
+            o.institution
+        FROM operations o
+        INNER JOIN assets a ON o.asset_id = a.id
+        WHERE o.status = 'ACTIVE'
+        ORDER BY o.trade_date DESC, o.id DESC
     """)
 
         rows = cursor.fetchall()
 
     columns = [
         "id",
+        "asset_id",
+        "ticker",
         "asset_class",
         "asset_type",
         "product_name",
-        "ticker",
         "movement_type",
         "quantity",
         "price",
@@ -86,10 +93,69 @@ def list_operations():
         "source",
         "created_at",
         "status",
+        "market",
+        "institution"
     ]
 
     operations = [dict(zip(columns, row)) for row in rows]
     logger.info(f"Listadas {len(operations)} operações ativas")
+    return operations
+
+
+def list_operations_by_asset(asset_id: int):
+    """Lista todas as operações ativas de um ativo específico."""
+    logger.debug(f"Listando operações do ativo ID: {asset_id}")
+    
+    with get_db() as conn:
+        cursor = conn.cursor()
+
+        cursor.execute("""
+        SELECT
+            o.id,
+            o.asset_id,
+            a.ticker,
+            a.asset_class,
+            a.asset_type,
+            a.product_name,
+            o.movement_type,
+            o.quantity,
+            o.price,
+            o.value,
+            o.trade_date,
+            o.source,
+            o.created_at,
+            o.status,
+            o.market,
+            o.institution
+        FROM operations o
+        INNER JOIN assets a ON o.asset_id = a.id
+        WHERE o.asset_id = ? AND o.status = 'ACTIVE'
+        ORDER BY o.trade_date DESC, o.id DESC
+    """, (asset_id,))
+
+        rows = cursor.fetchall()
+
+    columns = [
+        "id",
+        "asset_id",
+        "ticker",
+        "asset_class",
+        "asset_type",
+        "product_name",
+        "movement_type",
+        "quantity",
+        "price",
+        "value",
+        "trade_date",
+        "source",
+        "created_at",
+        "status",
+        "market",
+        "institution"
+    ]
+
+    operations = [dict(zip(columns, row)) for row in rows]
+    logger.info(f"Listadas {len(operations)} operações do ativo {asset_id}")
     return operations
 
 def get_operation_by_id(operation_id: int):
@@ -101,23 +167,25 @@ def get_operation_by_id(operation_id: int):
         
         cursor.execute("""
             SELECT
-                id,
-                asset_class,
-                asset_type,
-                product_name,
-                ticker,
-                movement_type,
-                quantity,
-                price,
-                value,
-                trade_date,
-                source,
-                created_at,
-                status,
-                market,
-                institution
-            FROM operations
-            WHERE id = ?
+                o.id,
+                o.asset_id,
+                a.ticker,
+                a.asset_class,
+                a.asset_type,
+                a.product_name,
+                o.movement_type,
+                o.quantity,
+                o.price,
+                o.value,
+                o.trade_date,
+                o.source,
+                o.created_at,
+                o.status,
+                o.market,
+                o.institution
+            FROM operations o
+            INNER JOIN assets a ON o.asset_id = a.id
+            WHERE o.id = ?
         """, (operation_id,))
         
         row = cursor.fetchone()
@@ -127,7 +195,7 @@ def get_operation_by_id(operation_id: int):
         return None
     
     columns = [
-        "id", "asset_class", "asset_type", "product_name", "ticker",
+        "id", "asset_id", "ticker", "asset_class", "asset_type", "product_name",
         "movement_type", "quantity", "price", "value", "trade_date",
         "source", "created_at", "status", "market", "institution"
     ]
@@ -169,10 +237,7 @@ def update_operation(operation_id: int, data: dict):
         # 2. Criar nova operação com dados atualizados
         cursor.execute("""
             INSERT INTO operations (
-                asset_class,
-                asset_type,
-                product_name,
-                ticker,
+                asset_id,
                 movement_type,
                 quantity,
                 price,
@@ -183,12 +248,9 @@ def update_operation(operation_id: int, data: dict):
                 status,
                 market,
                 institution
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'ACTIVE', ?, ?)
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'ACTIVE', ?, ?)
         """, (
-            data["asset_class"],
-            data["asset_type"],
-            data["product_name"],
-            data.get("ticker"),
+            data["asset_id"],
             data["movement_type"],
             data["quantity"],
             data["price"],

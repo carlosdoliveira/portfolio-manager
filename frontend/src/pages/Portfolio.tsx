@@ -1,111 +1,146 @@
 import { useState, useEffect } from "react";
-import {
-  fetchOperations,
-  createOperation,
-  updateOperation,
-  deleteOperation,
-  type Operation,
-  type OperationCreate,
-} from "../api/client";
-import { OperationForm } from "../components/OperationForm";
+import { useNavigate } from "react-router-dom";
+import { fetchAssets, createAsset, updateAsset, deleteAsset, Asset, AssetCreate } from "../api/client";
 import "./Portfolio.css";
 
-type ViewMode = "list" | "create" | "edit";
-
 export default function Portfolio() {
-  const [operations, setOperations] = useState<Operation[]>([]);
-  const [viewMode, setViewMode] = useState<ViewMode>("list");
-  const [selectedOperation, setSelectedOperation] = useState<Operation | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [assets, setAssets] = useState<Asset[]>([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
-  const [deleteConfirm, setDeleteConfirm] = useState<number | null>(null);
+  
+  // Estados para modal
+  const [showModal, setShowModal] = useState(false);
+  const [modalMode, setModalMode] = useState<"create" | "edit">("create");
+  const [editingAsset, setEditingAsset] = useState<Asset | null>(null);
+  
+  // Estados para confirmação de delete
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [assetToDelete, setAssetToDelete] = useState<Asset | null>(null);
+  
+  // Estados do formulário
+  const [formData, setFormData] = useState<AssetCreate>({
+    ticker: "",
+    asset_class: "AÇÕES",
+    asset_type: "ON",
+    product_name: "",
+  });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-    loadOperations();
+    loadAssets();
   }, []);
 
-  const loadOperations = async () => {
-    setIsLoading(true);
-    setError(null);
+  async function loadAssets() {
     try {
-      const data = await fetchOperations();
-      setOperations(data);
+      setLoading(true);
+      setError(null);
+      const data = await fetchAssets();
+      setAssets(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Erro ao carregar operações");
+      setError(err instanceof Error ? err.message : "Erro ao carregar ativos");
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
-  };
+  }
 
-  const handleCreate = async (operation: OperationCreate) => {
-    try {
-      await createOperation(operation);
-      setSuccessMessage("Operação criada com sucesso!");
-      setViewMode("list");
-      await loadOperations();
-      setTimeout(() => setSuccessMessage(null), 3000);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Erro ao criar operação");
-    }
-  };
+  function handleOpenCreateModal() {
+    setModalMode("create");
+    setEditingAsset(null);
+    setFormData({
+      ticker: "",
+      asset_class: "AÇÕES",
+      asset_type: "ON",
+      product_name: "",
+    });
+    setShowModal(true);
+  }
 
-  const handleUpdate = async (operation: OperationCreate) => {
-    if (!selectedOperation) return;
+  function handleOpenEditModal(asset: Asset) {
+    setModalMode("edit");
+    setEditingAsset(asset);
+    setFormData({
+      ticker: asset.ticker,
+      asset_class: asset.asset_class,
+      asset_type: asset.asset_type,
+      product_name: asset.product_name,
+    });
+    setShowModal(true);
+  }
+
+  function handleCloseModal() {
+    setShowModal(false);
+    setEditingAsset(null);
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
     
     try {
-      await updateOperation(selectedOperation.id, operation);
-      setSuccessMessage("Operação atualizada com sucesso!");
-      setViewMode("list");
-      setSelectedOperation(null);
-      await loadOperations();
+      setLoading(true);
+      
+      if (modalMode === "create") {
+        await createAsset(formData);
+        setSuccessMessage("Ativo criado com sucesso!");
+      } else if (editingAsset) {
+        await updateAsset(editingAsset.id, formData);
+        setSuccessMessage("Ativo atualizado com sucesso!");
+      }
+      
+      handleCloseModal();
+      await loadAssets();
+      
+      // Limpar mensagem de sucesso após 3 segundos
       setTimeout(() => setSuccessMessage(null), 3000);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Erro ao atualizar operação");
+      setError(err instanceof Error ? err.message : "Erro ao salvar ativo");
+    } finally {
+      setLoading(false);
     }
-  };
+  }
 
-  const handleDelete = async (id: number) => {
+  function handleOpenDeleteConfirm(asset: Asset) {
+    setAssetToDelete(asset);
+    setShowDeleteConfirm(true);
+  }
+
+  function handleCloseDeleteConfirm() {
+    setShowDeleteConfirm(false);
+    setAssetToDelete(null);
+  }
+
+  async function handleConfirmDelete() {
+    if (!assetToDelete) return;
+    
     try {
-      await deleteOperation(id);
-      setSuccessMessage("Operação deletada com sucesso!");
-      setDeleteConfirm(null);
-      await loadOperations();
+      setLoading(true);
+      await deleteAsset(assetToDelete.id);
+      setSuccessMessage("Ativo deletado com sucesso!");
+      handleCloseDeleteConfirm();
+      await loadAssets();
+      
       setTimeout(() => setSuccessMessage(null), 3000);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Erro ao deletar operação");
+      setError(err instanceof Error ? err.message : "Erro ao deletar ativo");
+      handleCloseDeleteConfirm();
+    } finally {
+      setLoading(false);
     }
-  };
+  }
 
-  const handleEdit = (operation: Operation) => {
-    setSelectedOperation(operation);
-    setViewMode("edit");
-  };
+  function handleViewAsset(assetId: number) {
+    navigate(`/portfolio/${assetId}`);
+  }
 
-  const handleCancel = () => {
-    setViewMode("list");
-    setSelectedOperation(null);
-    setError(null);
-  };
+  // Calcular totalizadores
+  const totalAssets = assets.length;
+  const totalPosition = assets.reduce((sum, asset) => sum + asset.current_position, 0);
 
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    }).format(value);
-  };
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("pt-BR");
-  };
-
-  if (isLoading) {
+  if (loading && assets.length === 0) {
     return (
       <div className="portfolio-container">
-        <div className="loading-state">
-          <div className="spinner"></div>
-          <p>Carregando operações...</p>
-        </div>
+        <div className="loading-spinner">Carregando ativos...</div>
       </div>
     );
   }
@@ -113,194 +148,215 @@ export default function Portfolio() {
   return (
     <div className="portfolio-container">
       <div className="portfolio-header">
-        <div>
-          <h1>Carteira de Investimentos</h1>
-          <p className="portfolio-subtitle">
-            Gerencie suas operações de compra e venda
-          </p>
-        </div>
-        {viewMode === "list" && (
-          <button
-            className="btn-primary"
-            onClick={() => setViewMode("create")}
-          >
-            + Nova Operação
-          </button>
-        )}
+        <h1>Carteira de Investimentos</h1>
+        <button className="btn-primary" onClick={handleOpenCreateModal}>
+          + Novo Ativo
+        </button>
       </div>
-
-      {successMessage && (
-        <div className="alert alert-success">
-          <span>✓</span> {successMessage}
-        </div>
-      )}
 
       {error && (
         <div className="alert alert-error">
-          <span>✗</span> {error}
-          <button onClick={() => setError(null)} className="alert-close">
-            ×
-          </button>
+          <span>⚠️ {error}</span>
+          <button onClick={() => setError(null)}>✕</button>
         </div>
       )}
 
-      {viewMode === "create" && (
-        <div className="form-section">
-          <h2>Nova Operação</h2>
-          <OperationForm
-            onSubmit={handleCreate}
-            onCancel={handleCancel}
-            submitLabel="Criar Operação"
-          />
+      {successMessage && (
+        <div className="alert alert-success">
+          <span>✓ {successMessage}</span>
+          <button onClick={() => setSuccessMessage(null)}>✕</button>
         </div>
       )}
 
-      {viewMode === "edit" && selectedOperation && (
-        <div className="form-section">
-          <h2>Editar Operação</h2>
-          <div className="edit-notice">
-            <strong>Atenção:</strong> Editar uma operação criará uma nova entrada
-            e marcará a antiga como cancelada, preservando o histórico.
+      {/* Cards de estatísticas */}
+      <div className="stats-grid">
+        <div className="stat-card">
+          <div className="stat-label">Total de Ativos</div>
+          <div className="stat-value">{totalAssets}</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">Posição Total</div>
+          <div className="stat-value">{totalPosition.toLocaleString('pt-BR')}</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">Total de Operações</div>
+          <div className="stat-value">
+            {assets.reduce((sum, asset) => sum + asset.total_operations, 0)}
           </div>
-          <OperationForm
-            initialData={{
-              asset_class: selectedOperation.asset_class,
-              asset_type: selectedOperation.asset_type,
-              product_name: selectedOperation.product_name,
-              ticker: selectedOperation.ticker,
-              movement_type: selectedOperation.movement_type,
-              quantity: selectedOperation.quantity,
-              price: selectedOperation.price,
-              trade_date: selectedOperation.trade_date,
-              market: selectedOperation.market,
-              institution: selectedOperation.institution,
-            }}
-            onSubmit={handleUpdate}
-            onCancel={handleCancel}
-            submitLabel="Atualizar Operação"
-          />
+        </div>
+      </div>
+
+      {/* Tabela de ativos */}
+      <div className="portfolio-table-container">
+        {assets.length === 0 ? (
+          <div className="empty-state">
+            <p>Nenhum ativo na carteira</p>
+            <button className="btn-primary" onClick={handleOpenCreateModal}>
+              Adicionar Primeiro Ativo
+            </button>
+          </div>
+        ) : (
+          <table className="portfolio-table">
+            <thead>
+              <tr>
+                <th>Ticker</th>
+                <th>Nome do Produto</th>
+                <th>Classe</th>
+                <th>Tipo</th>
+                <th className="text-right">Posição Atual</th>
+                <th className="text-right">Total Comprado</th>
+                <th className="text-right">Total Vendido</th>
+                <th className="text-right">Operações</th>
+                <th className="text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {assets.map((asset) => (
+                <tr key={asset.id} className="asset-row">
+                  <td>
+                    <strong className="ticker-link" onClick={() => handleViewAsset(asset.id)}>
+                      {asset.ticker}
+                    </strong>
+                  </td>
+                  <td>{asset.product_name}</td>
+                  <td>{asset.asset_class}</td>
+                  <td>{asset.asset_type}</td>
+                  <td className="text-right">{asset.current_position.toLocaleString('pt-BR')}</td>
+                  <td className="text-right">{asset.total_bought.toLocaleString('pt-BR')}</td>
+                  <td className="text-right">{asset.total_sold.toLocaleString('pt-BR')}</td>
+                  <td className="text-right">{asset.total_operations}</td>
+                  <td className="text-center">
+                    <div className="action-buttons">
+                      <button
+                        className="btn-icon btn-view"
+                        onClick={() => handleViewAsset(asset.id)}
+                        title="Ver detalhes"
+                      >
+                        👁️
+                      </button>
+                      <button
+                        className="btn-icon btn-edit"
+                        onClick={() => handleOpenEditModal(asset)}
+                        title="Editar"
+                      >
+                        ✏️
+                      </button>
+                      <button
+                        className="btn-icon btn-delete"
+                        onClick={() => handleOpenDeleteConfirm(asset)}
+                        title="Deletar"
+                      >
+                        🗑️
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+
+      {/* Modal de criação/edição */}
+      {showModal && (
+        <div className="modal-overlay" onClick={handleCloseModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>{modalMode === "create" ? "Novo Ativo" : "Editar Ativo"}</h2>
+              <button className="modal-close" onClick={handleCloseModal}>✕</button>
+            </div>
+            
+            <form onSubmit={handleSubmit} className="asset-form">
+              <div className="form-group">
+                <label htmlFor="ticker">Ticker *</label>
+                <input
+                  id="ticker"
+                  type="text"
+                  value={formData.ticker}
+                  onChange={(e) => setFormData({ ...formData, ticker: e.target.value.toUpperCase() })}
+                  placeholder="Ex: PETR4"
+                  required
+                  maxLength={10}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="product_name">Nome do Produto *</label>
+                <input
+                  id="product_name"
+                  type="text"
+                  value={formData.product_name}
+                  onChange={(e) => setFormData({ ...formData, product_name: e.target.value })}
+                  placeholder="Ex: Petrobras PN"
+                  required
+                />
+              </div>
+
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="asset_class">Classe *</label>
+                  <select
+                    id="asset_class"
+                    value={formData.asset_class}
+                    onChange={(e) => setFormData({ ...formData, asset_class: e.target.value })}
+                    required
+                  >
+                    <option value="AÇÕES">Ações</option>
+                    <option value="FII">Fundos Imobiliários</option>
+                    <option value="ETF">ETFs</option>
+                    <option value="BDR">BDRs</option>
+                    <option value="RENDA_FIXA">Renda Fixa</option>
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="asset_type">Tipo *</label>
+                  <input
+                    id="asset_type"
+                    type="text"
+                    value={formData.asset_type}
+                    onChange={(e) => setFormData({ ...formData, asset_type: e.target.value.toUpperCase() })}
+                    placeholder="Ex: ON, PN"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="form-actions">
+                <button type="button" className="btn-secondary" onClick={handleCloseModal}>
+                  Cancelar
+                </button>
+                <button type="submit" className="btn-primary" disabled={loading}>
+                  {loading ? "Salvando..." : modalMode === "create" ? "Criar Ativo" : "Salvar Alterações"}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       )}
 
-      {viewMode === "list" && (
-        <>
-          <div className="portfolio-stats">
-            <div className="stat-card">
-              <span className="stat-label">Total de Operações</span>
-              <span className="stat-value">{operations.length}</span>
+      {/* Modal de confirmação de delete */}
+      {showDeleteConfirm && assetToDelete && (
+        <div className="modal-overlay" onClick={handleCloseDeleteConfirm}>
+          <div className="modal-content modal-small" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>Confirmar Exclusão</h2>
+              <button className="modal-close" onClick={handleCloseDeleteConfirm}>✕</button>
             </div>
-            <div className="stat-card">
-              <span className="stat-label">Total Investido</span>
-              <span className="stat-value">
-                {formatCurrency(
-                  operations
-                    .filter((op) => op.movement_type === "COMPRA")
-                    .reduce((sum, op) => sum + op.value, 0)
-                )}
-              </span>
+            
+            <div className="modal-body">
+              <p>Tem certeza que deseja excluir o ativo <strong>{assetToDelete.ticker}</strong>?</p>
+              <p className="warning-text">
+                ⚠️ Esta ação só será permitida se o ativo não tiver operações ativas.
+              </p>
             </div>
-            <div className="stat-card">
-              <span className="stat-label">Ativos Únicos</span>
-              <span className="stat-value">
-                {new Set(operations.map((op) => op.ticker)).size}
-              </span>
-            </div>
-          </div>
 
-          {operations.length === 0 ? (
-            <div className="empty-state">
-              <p>Nenhuma operação registrada ainda.</p>
-              <button
-                className="btn-primary"
-                onClick={() => setViewMode("create")}
-              >
-                Criar primeira operação
-              </button>
-            </div>
-          ) : (
-            <div className="operations-table-container">
-              <table className="operations-table">
-                <thead>
-                  <tr>
-                    <th>Data</th>
-                    <th>Tipo</th>
-                    <th>Ticker</th>
-                    <th>Produto</th>
-                    <th>Quantidade</th>
-                    <th>Preço</th>
-                    <th>Valor Total</th>
-                    <th>Ações</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {operations.map((operation) => (
-                    <tr key={operation.id}>
-                      <td>{formatDate(operation.trade_date)}</td>
-                      <td>
-                        <span
-                          className={`badge ${
-                            operation.movement_type === "COMPRA"
-                              ? "badge-buy"
-                              : "badge-sell"
-                          }`}
-                        >
-                          {operation.movement_type}
-                        </span>
-                      </td>
-                      <td className="ticker-cell">{operation.ticker || "-"}</td>
-                      <td>{operation.product_name}</td>
-                      <td className="number-cell">{operation.quantity}</td>
-                      <td className="number-cell">
-                        {formatCurrency(operation.price)}
-                      </td>
-                      <td className="number-cell">
-                        {formatCurrency(operation.value)}
-                      </td>
-                      <td className="actions-cell">
-                        <button
-                          className="btn-icon"
-                          onClick={() => handleEdit(operation)}
-                          title="Editar"
-                        >
-                          ✏️
-                        </button>
-                        <button
-                          className="btn-icon btn-delete"
-                          onClick={() => setDeleteConfirm(operation.id)}
-                          title="Deletar"
-                        >
-                          🗑️
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </>
-      )}
-
-      {deleteConfirm !== null && (
-        <div className="modal-overlay" onClick={() => setDeleteConfirm(null)}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <h3>Confirmar Exclusão</h3>
-            <p>
-              Tem certeza que deseja deletar esta operação? Esta ação não pode
-              ser desfeita.
-            </p>
-            <div className="modal-actions">
-              <button
-                className="btn-secondary"
-                onClick={() => setDeleteConfirm(null)}
-              >
+            <div className="form-actions">
+              <button className="btn-secondary" onClick={handleCloseDeleteConfirm}>
                 Cancelar
               </button>
-              <button
-                className="btn-danger"
-                onClick={() => handleDelete(deleteConfirm)}
-              >
-                Deletar
+              <button className="btn-danger" onClick={handleConfirmDelete} disabled={loading}>
+                {loading ? "Deletando..." : "Confirmar Exclusão"}
               </button>
             </div>
           </div>

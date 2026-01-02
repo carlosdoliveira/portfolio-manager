@@ -3,6 +3,7 @@ import sqlite3
 import logging
 from datetime import datetime
 from app.db.database import get_db
+from app.repositories.assets_repository import create_asset
 
 logger = logging.getLogger(__name__)
 
@@ -43,30 +44,53 @@ def import_b3_excel(file):
 
     inserted = 0
     duplicated = 0
+    assets_created = set()
+    
+    # Cache de ativos para evitar múltiplas consultas
+    asset_cache = {}
     
     with get_db() as conn:
         cursor = conn.cursor()
 
         for idx, row in df.iterrows():
             try:
+                ticker = row["Código de Negociação"]
+                
+                # Criar ativo se não existir (usando cache para performance)
+                if ticker not in asset_cache:
+                    # Buscar ou criar ativo
+                    # Assumindo que a planilha B3 tem "Ações" como padrão
+                    asset_id = create_asset(
+                        ticker=ticker,
+                        asset_class="AÇÕES",  # Padrão para B3
+                        asset_type="ON/PN",   # Genérico
+                        product_name=ticker   # Usar ticker como nome por padrão
+                    )
+                    asset_cache[ticker] = asset_id
+                    if asset_id:
+                        assets_created.add(ticker)
+                
+                asset_id = asset_cache[ticker]
+                
                 cursor.execute("""
                     INSERT INTO operations (
+                        asset_id,
                         trade_date,
                         movement_type,
                         market,
                         institution,
-                        ticker,
                         quantity,
                         price,
                         value,
-                        created_at
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        created_at,
+                        source
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'B3')
                 """, (
+                    asset_id,
                     row["Data do Negócio"],
                     row["Tipo de Movimentação"],
                     row["Mercado"],
                     row["Instituição"],
-                    row["Código de Negociação"],
                     int(row["Quantidade"]),
                     float(row["Preço"]),
                     float(row["Valor"]),
@@ -85,13 +109,14 @@ def import_b3_excel(file):
                 raise ValueError(f"Erro ao processar linha {idx}: {str(e)}")
         
         # Context manager faz commit automático aqui
-        logger.info(f"Importação concluída: {inserted} inseridas, {duplicated} duplicadas")
+        logger.info(f"Importação concluída: {inserted} inseridas, {duplicated} duplicadas, {len(assets_created)} ativos criados")
 
     # 3. Resumo honesto
     return {
         "total_rows": len(df),
         "inserted": inserted,
         "duplicated": duplicated,
+        "assets_created": len(assets_created),
         "unique_assets": int(df["Código de Negociação"].nunique()),
         "imported_at": datetime.utcnow().isoformat()
     }
