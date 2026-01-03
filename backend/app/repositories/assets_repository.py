@@ -123,13 +123,16 @@ def list_assets() -> list[dict]:
     """
     Lista todos os ativos ativos com estatísticas de operações.
     
+    IMPORTANTE: As operações são CONSOLIDADAS independentemente do mercado.
+    Compras em mercado à vista e fracionário são somadas em uma única posição.
+    
     Returns:
         Lista de dicionários com dados dos ativos incluindo:
-        - total_bought: soma das quantidades compradas
-        - total_sold: soma das quantidades vendidas
-        - current_position: diferença (comprado - vendido)
-        - total_bought_value: valor total gasto em compras (R$)
-        - total_sold_value: valor total recebido em vendas (R$)
+        - total_bought: soma das quantidades compradas (TODOS os mercados)
+        - total_sold: soma das quantidades vendidas (TODOS os mercados)
+        - current_position: diferença (comprado - vendido) CONSOLIDADA
+        - total_bought_value: valor total gasto em compras (R$) CONSOLIDADO
+        - total_sold_value: valor total recebido em vendas (R$) CONSOLIDADO
     """
     with get_db() as conn:
         cursor = conn.cursor()

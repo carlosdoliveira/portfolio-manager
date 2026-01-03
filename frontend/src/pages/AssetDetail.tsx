@@ -191,6 +191,21 @@ export default function AssetDetail() {
   const averagePrice =
     asset.total_bought > 0 ? totalInvested / asset.total_bought : 0;
 
+  // Calcular resumo por mercado (para informação)
+  const marketSummary = operations.reduce((acc, op) => {
+    const market = op.market || "NÃO ESPECIFICADO";
+    if (!acc[market]) {
+      acc[market] = { bought: 0, sold: 0, operations: 0 };
+    }
+    if (op.movement_type === "COMPRA") {
+      acc[market].bought += op.quantity;
+    } else {
+      acc[market].sold += op.quantity;
+    }
+    acc[market].operations += 1;
+    return acc;
+  }, {} as Record<string, { bought: number; sold: number; operations: number }>);
+
   return (
     <div className="asset-detail-container">
       <div className="asset-detail-header">
@@ -227,6 +242,7 @@ export default function AssetDetail() {
         <div className="stat-card">
           <div className="stat-label">Posição Atual</div>
           <div className="stat-value">{asset.current_position}</div>
+          <div className="stat-note">Consolidada (todos os mercados)</div>
         </div>
         <div className="stat-card">
           <div className="stat-label">Preço Médio</div>
@@ -241,6 +257,37 @@ export default function AssetDetail() {
           <div className="stat-value">{operations.length}</div>
         </div>
       </div>
+
+      {/* Resumo por mercado */}
+      {Object.keys(marketSummary).length > 1 && (
+        <div className="market-summary-section">
+          <h3>📊 Resumo por Mercado</h3>
+          <p className="market-summary-note">
+            ℹ️ A posição atual é <strong>consolidada</strong> automaticamente. Operações em mercado à vista e fracionário são somadas.
+          </p>
+          <div className="market-summary-grid">
+            {Object.entries(marketSummary).map(([market, data]) => (
+              <div key={market} className="market-summary-card">
+                <div className="market-name">{market}</div>
+                <div className="market-stats">
+                  <div className="market-stat">
+                    <span className="market-stat-label">Comprado:</span>
+                    <span className="market-stat-value">{data.bought}</span>
+                  </div>
+                  <div className="market-stat">
+                    <span className="market-stat-label">Vendido:</span>
+                    <span className="market-stat-value">{data.sold}</span>
+                  </div>
+                  <div className="market-stat">
+                    <span className="market-stat-label">Operações:</span>
+                    <span className="market-stat-value">{data.operations}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Tabela de operações */}
       <div className="operations-section">

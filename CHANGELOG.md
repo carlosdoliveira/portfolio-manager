@@ -4,7 +4,49 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
 ## [Unreleased]
 
-### � Frontend
+### 📊 Consolidação de Mercados
+
+#### Visualização e Documentação de Consolidação de Operações ([2026-01-02])
+**Objetivo:** Tornar explícito que operações em diferentes mercados (à vista e fracionário) são consolidadas automaticamente.
+
+**Solução:**
+- **Backend:**
+  - Documentação explícita na função `list_assets()` sobre consolidação
+  - Comentários em SQL explicando que a query soma TODAS as operações independente do mercado
+  
+- **Frontend:**
+  - Card de "Posição Atual" agora mostra nota: "Consolidada (todos os mercados)"
+  - Nova seção "Resumo por Mercado" na página de detalhes do ativo
+  - Exibe breakdown informativo quando há operações em múltiplos mercados
+  - Cards mostrando: Comprado, Vendido e Operações por mercado
+  - Nota explicativa: "A posição atual é consolidada automaticamente"
+  
+- **Documentação:**
+  - Novo guia completo: `docs/guides/consolidacao-mercados.md`
+  - Exemplos práticos de consolidação
+  - Scripts SQL de demonstração: `docs/guides/exemplo-consolidacao.sql`
+  - Atualização do README.md com referência ao novo guia
+
+**Benefícios:**
+- Transparência total sobre como o sistema agrega operações
+- Usuário entende que 100 ações no mercado à vista + 5 no fracionário = 105 ações total
+- Possibilidade de drill-down para ver operações individuais por mercado
+- Mantém auditabilidade completa (operações originais preservadas)
+- Interface educativa e profissional
+
+**Impacto Técnico:**
+- Sem mudanças na lógica de consolidação (já funcionava corretamente)
+- Apenas melhorias de UI/UX e documentação
+- Facilita compreensão para novos desenvolvedores
+
+**Localização:** 
+- Backend: `backend/app/repositories/assets_repository.py`
+- Frontend: `frontend/src/pages/AssetDetail.tsx`, `frontend/src/pages/AssetDetail.css`
+- Docs: `docs/guides/consolidacao-mercados.md`, `docs/guides/exemplo-consolidacao.sql`
+
+---
+
+### 🎨 Frontend
 
 #### URL da API Configurável via Variável de Ambiente ([2026-01-02])
 **Objetivo:** Permitir deploy em diferentes ambientes sem modificar código.

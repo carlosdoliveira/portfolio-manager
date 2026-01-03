@@ -52,6 +52,7 @@ Guias práticos e tutoriais:
 - Como importar arquivo B3
 - Como criar operações manuais
 - Como consultar portfólio
+- **[Consolidação de Operações por Mercado](./guides/consolidacao-mercados.md)** ⭐ Novo!
 - Troubleshooting comum
 
 ### 🛠️ [development/](./development/)
