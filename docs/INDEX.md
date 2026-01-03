@@ -28,6 +28,12 @@ Bem-vindo à documentação completa do Portfolio Manager v2, um sistema de gest
   - Estado atual completo do projeto
   - Funcionalidades implementadas e pendentes
   - Roadmap e próximos passos
+
+- [**CORRECAO-CALCULOS-CARTEIRA.md**](./CORRECAO-CALCULOS-CARTEIRA.md) 🔥 **CRÍTICO**
+  - Roadmap de correção de bugs de cálculos financeiros
+  - 7 problemas identificados em testes de uso real
+  - Plano de ação priorizado (P0, P1, P2)
+  - Valores zerados na carteira, totalizadores e detalhes de ativos
   
 - [**REFERENCIA-TECNICA.md**](./REFERENCIA-TECNICA.md)
   - Documentação técnica detalhada

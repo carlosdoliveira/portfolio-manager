@@ -11,23 +11,30 @@
 
 O Portfolio Manager v2 é um **sistema funcional** para gestão de carteira de investimentos com:
 
+### 🔴 Problemas Críticos Identificados (3 Jan 2026)
+**⚠️ ATENÇÃO**: Foram identificados **7 problemas críticos** em testes de uso real que impedem o funcionamento correto dos cálculos financeiros. Valores de carteira, posição e investimentos aparecem **zerados** em todas as telas.
+
+👉 **Veja**: [CORRECAO-CALCULOS-CARTEIRA.md](./CORRECAO-CALCULOS-CARTEIRA.md) para roadmap detalhado de correção.
+
 ### ✅ Implementado
 - Import B3 com deduplicação automática
 - CRUD completo de ativos e operações
 - Renda Fixa com projeções e cálculo de IR
-- Consolidação de operações por mercado
+- Consolidação de operações por mercado (backend)
 - Interface responsiva e profissional
 
 ### ⚠️ Em Progresso
 - Dashboard principal (placeholder)
 - Página de análises (placeholder)
 - Testes automatizados (cobertura mínima)
+- **Correção de cálculos financeiros (CRÍTICO)**
 
 ### ❌ Não Implementado
 - Cotações de mercado (APIs externas)
 - Proventos e dividendos
 - Eventos corporativos
 - Relatórios de IR
+- Consolidação fracionário/vista no frontend
 
 ---
 
@@ -104,24 +111,31 @@ O Portfolio Manager v2 é um **sistema funcional** para gestão de carteira de i
 
 ## Problemas Conhecidos
 
-### 🔴 Críticos
+> 🔥 **ATENÇÃO**: Problemas críticos de cálculos financeiros foram identificados em 3 Jan 2026.  
+> **Roadmap detalhado**: [CORRECAO-CALCULOS-CARTEIRA.md](./CORRECAO-CALCULOS-CARTEIRA.md)
 
-| ID | Problema | Impacto | Localização |
-|----|----------|---------|-------------|
-| **C01** | Dashboard vazio | UX incompleta — landing page sem valor | `frontend/src/pages/Dashboard.tsx` |
-| **C02** | Análises vazias | Feature prometida não entregue | `frontend/src/pages/Analysis.tsx` |
-| **C03** | Sem testes automatizados | Risco de regressão alto | `backend/tests/`, `frontend/` |
-| **C04** | Sem cotações de mercado | Posição não reflete valor real | N/A |
+### 🔴 Críticos (Bloqueadores)
+
+| ID | Problema | Impacto | Localização | Prioridade |
+|----|----------|---------|-------------|------------|
+| **C01** | **Totalizadores zerados** | Valor da carteira, Total Investido e Resgatado mostram R$ 0,00 | `Portfolio.tsx` + `assets_repository.py` | **P0** |
+| **C02** | **Valores por ativo zerados** | Posição Atual, Total Comprado/Vendido mostram 0 | `Portfolio.tsx` | **P0** |
+| **C03** | **Preço médio zerado** | Detalhe do ativo não mostra preço médio calculado | `AssetDetail.tsx` | **P1** |
+| **C04** | Dashboard vazio | UX incompleta — landing page sem valor | `frontend/src/pages/Dashboard.tsx` | P2 |
+| **C05** | Análises vazias | Feature prometida não entregue | `frontend/src/pages/Analysis.tsx` | P2 |
+| **C06** | Sem testes automatizados | Risco de regressão alto | `backend/tests/`, `frontend/` | P3 |
+| **C07** | Sem cotações de mercado | Posição não reflete valor real | N/A | P3 |
 
 ### 🟡 Importantes
 
-| ID | Problema | Impacto | Sugestão |
-|----|----------|---------|----------|
-| **I01** | Sem paginação | Performance com muitos registros | Adicionar `limit/offset` em listagens |
-| **I02** | Logs inconsistentes | Dificulta debug | Padronizar idioma (português) |
-| **I03** | Sem cache de consultas | Queries repetidas | Redis ou in-memory cache |
-| **I04** | SQLite em produção | Limitação de concorrência | Migrar para PostgreSQL |
-| **I05** | Configurações estáticas | Deploy manual | Variáveis de ambiente |
+| ID | Problema | Impacto | Sugestão | Prioridade |
+|----|----------|---------|----------|------------|
+| **I01** | **Falta consolidação fracionário/vista** | `ABEV3F` e `ABEV3` aparecem separados | Normalizar ticker no import | **P1** |
+| **I02** | Sem paginação | Performance com muitos registros | Adicionar `limit/offset` em listagens | P2 |
+| **I03** | Logs inconsistentes | Dificulta debug | Padronizar idioma (português) | P2 |
+| **I04** | Sem cache de consultas | Queries repetidas | Redis ou in-memory cache | P3 |
+| **I05** | SQLite em produção | Limitação de concorrência | Migrar para PostgreSQL | P3 |
+| **I06** | Configurações estáticas | Deploy manual | Variáveis de ambiente | P3 |
 
 ### ℹ️ Nice to Have
 
