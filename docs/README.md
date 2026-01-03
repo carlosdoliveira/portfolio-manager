@@ -1,213 +1,180 @@
-# Documentação do Portfolio Manager v2
+# 📚 Documentação do Portfolio Manager v2
 
-Bem-vindo à documentação técnica do projeto Portfolio Manager v2.
+**Última atualização:** 03 de Janeiro de 2026  
+**Versão:** v2.0.1
 
----
-
-## 📊 Status do Projeto
-
-### [STATUS-PROJETO.md](./STATUS-PROJETO.md) ⭐ Novo!
-Visão completa do estado atual do projeto:
-- Arquitetura e stack tecnológica
-- Funcionalidades implementadas (Backend e Frontend)
-- Problemas conhecidos e gaps
-- Modelagem de dados atual
-- Otimizações para dashboards
-- Roadmap sugerido
-
-**Recomendado para:** Todos os desenvolvedores e stakeholders
-
-### [REFERENCIA-TECNICA.md](./REFERENCIA-TECNICA.md) ⭐ Novo!
-Documentação técnica detalhada:
-- API Endpoints completos (request/response)
-- Classificação de ativos
-- Cálculo de IR regressivo
-- Projeções de rendimento
-- Interfaces TypeScript
-- Configuração de banco de dados
-
-**Recomendado para:** Desenvolvedores Backend e Frontend
+> 🚀 **Início Rápido:** Leia o [INDEX.md](./INDEX.md) para visão completa do sistema
 
 ---
 
-## 📁 Estrutura da Documentação (Wiki)
+## 📖 Navegação Principal
 
-Esta documentação está organizada em formato wiki com as seguintes seções:
+### Para Todos
+- 🏠 **[INDEX.md](./INDEX.md)** — Página inicial completa com visão geral
+- 📊 **[STATUS-PROJETO.md](./STATUS-PROJETO.md)** — Estado atual e roadmap
+- 📖 **[REFERENCIA-TECNICA.md](./REFERENCIA-TECNICA.md)** — Especificações técnicas
 
-### 📐 [architecture/](./architecture/)
-Decisões de arquitetura e design do sistema:
-- Princípios arquiteturais (event-based, immutability)
-- Escolhas tecnológicas e justificativas
-- Diagramas de sistema e fluxos de dados
+### Para Desenvolvedores
 
-### 🔌 [api/](./api/)
-Documentação completa das APIs:
-- Endpoints do backend (FastAPI)
-- Schemas de request/response
-- Exemplos de uso e códigos de erro
-- Guia de autenticação (quando implementado)
+#### 🏗️ Arquitetura
+- [Princípios Core](./architecture/principios-core.md) — Event-based, immutability
 
-### 📖 [guides/](./guides/)
-Guias práticos e tutoriais:
-- Como importar arquivo B3
-- Como criar operações manuais
-- Como consultar portfólio
-- **[Consolidação de Operações por Mercado](./guides/consolidacao-mercados.md)** ⭐ Novo!
-- Troubleshooting comum
+#### 🔌 API
+- [Endpoints](./api/endpoints.md) — Ativos, Operações, Renda Fixa
 
-### 🛠️ [development/](./development/)
-Workflows de desenvolvimento:
-- Setup do ambiente local
-- Convenções de código
-- Como usar a CLI (`./portfolio`)
-- Como executar testes
-- Como contribuir
+#### 📖 Guias
+- [Consolidação de Mercados](./guides/consolidacao-mercados.md) ⭐ **Recomendado**
+- [Implementação CRUD](./guides/crud-implementation.md)
+- [Fluxo Visual de Consolidação](./guides/fluxo-consolidacao-visual.md)
 
-### 🚀 [deployment/](./deployment/)
-Instruções de deploy e operação:
-- Docker e docker-compose
-- Configuração de variáveis de ambiente
-- Monitoramento e logs
-- Backup e recuperação
+#### 🛠️ Desenvolvimento
+- [Setup Local](./development/setup.md) — Docker, ambiente
+
+### Documentação Especializada
+- 💰 [Renda Fixa](./renda-fixa.md) — Guia completo de RF
+- 📋 [IMPLEMENTACAO-CONSOLIDACAO.md](./IMPLEMENTACAO-CONSOLIDACAO.md) — Detalhes técnicos
 
 ---
 
-## 📚 Documentos de Análise
+## 🗂️ Estrutura de Pastas
 
-### 1. [Análise de Código — Resumo Executivo](./analise-resumo.md)
-Visão consolidada de todas as oportunidades de melhoria identificadas, com:
-- Métricas gerais (36 melhorias identificadas)
-- Roadmap sugerido (4 sprints)
-- Quick wins (alto impacto, baixo esforço)
-- Estimativas de esforço e métricas de sucesso
-
-**Recomendado para:** Product Owners, Tech Leads, Stakeholders
-
----
-
-### 2. [Oportunidades de Melhoria — Backend](./oportunidades-backend.md)
-Análise detalhada do backend (FastAPI + SQLite) com 17 oportunidades identificadas:
-- 🔴 **Críticas:** CORS, validação, tratamento de exceções, schema
-- 🟠 **Importantes:** logging, conexões, testes, healthcheck
-- 🟡 **Nice to have:** rate limiting, paginação, estatísticas, migrations
-
-**Recomendado para:** Backend Developers, DevOps
-
----
-
-### 3. [Oportunidades de Melhoria — Frontend](./oportunidades-frontend.md)
-Análise detalhada do frontend (React + TypeScript + Vite) com 19 oportunidades identificadas:
-- 🔴 **Críticas:** URL hardcoded, erros genéricos, páginas vazias, validação
-- 🟠 **Importantes:** estado global, tipagem, testes, responsividade
-- 🟡 **Nice to have:** React Query, dark mode, PWA, a11y
-
-**Recomendado para:** Frontend Developers, UX/UI Designers
-
----
-
-## 🚀 Por Onde Começar?
-
-### Se você é desenvolvedor:
-1. Leia o [Resumo Executivo](./analise-resumo.md) para entender o contexto geral
-2. Configure o ambiente seguindo [development/setup.md](./development/) (quando disponível)
-3. Consulte a [documentação de API](./api/) para entender os endpoints
-4. Consulte o documento específico da sua área ([Backend](./oportunidades-backend.md) ou [Frontend](./oportunidades-frontend.md))
-5. Priorize os itens marcados como 🔴 **Críticos**
-
-### Se você é gestor/PO:
-1. Revise o [Resumo Executivo](./analise-resumo.md)
-2. Avalie o roadmap sugerido e ajuste conforme prioridades de negócio
-3. Considere implementar os "Quick Wins" primeiro (4h de esforço, alto impacto)
+```
+docs/
+├── INDEX.md                    # 🏠 PÁGINA INICIAL — comece aqui
+├── STATUS-PROJETO.md           # 📊 Estado atual e roadmap
+├── REFERENCIA-TECNICA.md       # 📖 Especificações técnicas
+├── renda-fixa.md              # 💰 Guia de Renda Fixa
+├── IMPLEMENTACAO-CONSOLIDACAO.md  # Detalhes de consolidação
+│
+├── architecture/               # 🏗️ Decisões arquiteturais
+│   └── principios-core.md
+│
+├── api/                       # 🔌 Documentação de API
+│   └── endpoints.md
+│
+├── guides/                    # 📖 Guias práticos
+│   ├── consolidacao-mercados.md
+│   ├── crud-implementation.md
+│   ├── exemplo-consolidacao.sql
+│   └── fluxo-consolidacao-visual.md
+│
+├── development/               # 🛠️ Setup e workflows
+│   └── setup.md
+│
+├── deployment/                # 🚀 Deploy (futuro)
+│
+└── archive/                   # 📦 Documentos históricos
+    └── README.md
+```
 
 ---
 
-## 📋 Checklist de Implementação
+## 🎯 Fluxo de Leitura Recomendado
 
-### Sprint 1 — Segurança e Estabilidade (2 semanas)
-**Backend:**
-- [ ] Configurar CORS com origens específicas
-- [ ] Adicionar validação Pydantic
-- [ ] Melhorar tratamento de exceções
-- [ ] Ajustar schema do banco
+### 👨‍💼 Gestores / Product Owners
+1. [INDEX.md](./INDEX.md) — Visão geral
+2. [STATUS-PROJETO.md](./STATUS-PROJETO.md) — O que está pronto
+3. Próximos passos em [STATUS-PROJETO.md#próximos-passos](./STATUS-PROJETO.md#próximos-passos)
 
-**Frontend:**
-- [ ] URL da API em variável de ambiente
-- [ ] Tratamento de erro detalhado
-- [ ] Validação de arquivo
-- [ ] Implementar página Portfolio
+### 👨‍💻 Desenvolvedores Backend
+1. [development/setup.md](./development/setup.md) — Configure ambiente
+2. [architecture/principios-core.md](./architecture/principios-core.md) — Entenda arquitetura
+3. [api/endpoints.md](./api/endpoints.md) — Veja endpoints disponíveis
+4. [REFERENCIA-TECNICA.md](./REFERENCIA-TECNICA.md) — Detalhes técnicos
 
-### Sprint 2 — Qualidade (2 semanas)
-**Backend:**
-- [ ] Context manager para DB
-- [ ] Logging estruturado
-- [ ] Testes unitários
-- [ ] Healthcheck melhorado
+### 👨‍💻 Desenvolvedores Frontend
+1. [development/setup.md](./development/setup.md) — Configure ambiente
+2. [api/endpoints.md](./api/endpoints.md) — APIs disponíveis
+3. [guides/crud-implementation.md](./guides/crud-implementation.md) — Padrões de CRUD
 
-**Frontend:**
-- [ ] Gerenciamento de estado
-- [ ] Tipagem com Zod
-- [ ] Componente de tabela
-- [ ] Layout responsivo
-
-### Sprint 3 — Features (2 semanas)
-**Backend:**
-- [ ] Paginação
-- [ ] Endpoint de estatísticas
-- [ ] Migrations
-- [ ] Variáveis de ambiente
-
-**Frontend:**
-- [ ] Dashboard com métricas
-- [ ] Página Analysis
-- [ ] React Query
-- [ ] Toast notifications
+### 👨‍🔬 QA / Testadores
+1. [STATUS-PROJETO.md](./STATUS-PROJETO.md) — Funcionalidades implementadas
+2. [guides/consolidacao-mercados.md](./guides/consolidacao-mercados.md) — Como testar consolidação
+3. `tests/test_consolidacao_mercados.py` — Scripts de teste
 
 ---
 
-## 🎯 Princípios de Melhoria
+## 🔍 Busca Rápida
 
-Ao implementar as melhorias sugeridas, sempre considere:
+### Como fazer...
 
-1. **Preservar arquitetura** — Eventos imutáveis, import idempotente
-2. **Incremental sobre reescrita** — Melhorias graduais, não big bang
-3. **Testes primeiro** — Garantir que mudanças não quebrem funcionalidades
-4. **Documentar decisões** — Atualizar esta documentação conforme evolui
-5. **Impacto sobre esforço** — Priorizar quick wins
-
----
-
-## 📊 Status de Implementação
-
-| Categoria | Status | Progresso |
-|-----------|--------|-----------|
-| Críticas (Backend) | ⏳ Pendente | 0/4 |
-| Críticas (Frontend) | ⏳ Pendente | 0/4 |
-| Importantes (Backend) | ⏳ Pendente | 0/6 |
-| Importantes (Frontend) | ⏳ Pendente | 0/7 |
-| Nice to Have | ⏳ Não iniciado | 0/15 |
-
-**Última atualização:** 31/12/2025
+| Tarefa | Documento |
+|--------|-----------|
+| **Configurar ambiente local** | [development/setup.md](./development/setup.md) |
+| **Entender consolidação de mercados** | [guides/consolidacao-mercados.md](./guides/consolidacao-mercados.md) |
+| **Ver endpoints da API** | [api/endpoints.md](./api/endpoints.md) |
+| **Calcular projeção de RF** | [REFERENCIA-TECNICA.md](./REFERENCIA-TECNICA.md#cálculo-de-projeção) |
+| **Criar novo CRUD** | [guides/crud-implementation.md](./guides/crud-implementation.md) |
+| **Saber o que está implementado** | [STATUS-PROJETO.md](./STATUS-PROJETO.md#funcionalidades-implementadas) |
+| **Ver próximos passos** | [STATUS-PROJETO.md](./STATUS-PROJETO.md#próximos-passos) |
 
 ---
 
-## 🤝 Como Contribuir
+## 📦 Documentação Arquivada
 
-1. Escolha um item da checklist
-2. Crie uma branch: `git checkout -b feature/nome-da-melhoria`
-3. Implemente seguindo os princípios do projeto
-4. Adicione testes
-5. Atualize esta documentação
-6. Abra um Pull Request
+Análises antigas e documentos obsoletos foram movidos para [`archive/`](./archive/):
 
----
+- Análises de código de Dezembro/2025
+- Oportunidades de melhoria (já consolidadas)
+- Versões antigas de documentos
 
-## 📞 Contato
-
-Dúvidas sobre esta análise ou sugestões de melhorias adicionais?  
-Entre em contato com o time de desenvolvimento ou abra uma issue no GitHub.
+**Motivo:** Informações já consolidadas em STATUS-PROJETO.md e INDEX.md
 
 ---
 
-**Documentos gerados por:** GitHub Copilot  
-**Data de geração:** 31/12/2025  
-**Versão do projeto:** v2.0 (MVP)
+## 🆕 Novidades
+
+### Janeiro 2026
+- ✅ Consolidação de mercados documentada e implementada
+- ✅ Renda Fixa com projeções completas
+- ✅ Documentação reorganizada e atualizada
+- ✅ INDEX.md criado como página inicial
+
+### Próximas Adições
+- 🔜 Dashboard principal (Sprint 1)
+- 🔜 Página de análises (Sprint 1)
+- 🔜 Testes automatizados (Sprint 1-2)
+
+---
+
+## 🤝 Como Contribuir com a Documentação
+
+### Adicionar Novo Documento
+1. Escolha a pasta apropriada (`guides/`, `architecture/`, etc.)
+2. Use formato Markdown (.md)
+3. Adicione link no INDEX.md
+4. Mantenha linguagem clara e exemplos práticos
+
+### Atualizar Documento Existente
+1. Edite o arquivo
+2. Atualize "Última atualização" no topo
+3. Se mudança significativa, adicione em "Novidades"
+
+### Arquivar Documento Obsoleto
+1. Mova para `archive/`
+2. Atualize `archive/README.md`
+3. Remova links do INDEX.md e README.md
+4. Adicione nota de redirecionamento (se necessário)
+
+---
+
+## 📞 Suporte
+
+- **Bugs:** Abra issue no GitHub
+- **Dúvidas:** Consulte INDEX.md primeiro
+- **Sugestões:** Pull requests são bem-vindos!
+
+---
+
+## 🏆 Princípios de Documentação
+
+✅ **Clareza** — Prefira exemplos a explicações longas  
+✅ **Atualidade** — Documente enquanto desenvolve  
+✅ **Organização** — Cada documento tem um propósito claro  
+✅ **Navegabilidade** — Links internos facilitam navegação  
+✅ **Acessibilidade** — Comece sempre pelo INDEX.md  
+
+---
+
+**Mantido por:** Equipe Portfolio Manager v2  
+**Próxima Revisão:** 10/01/2026 (Sprint Planning)
