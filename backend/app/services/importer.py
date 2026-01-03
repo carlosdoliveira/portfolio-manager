@@ -17,6 +17,44 @@ REQUIRED_COLUMNS = [
     "Valor",
 ]
 
+def normalize_ticker(ticker: str, market: str) -> str:
+    """
+    Normaliza ticker para consolidar mercado fracionário e à vista.
+    
+    No mercado brasileiro:
+    - Mercado à Vista: ABEV3, PETR4, VALE3
+    - Mercado Fracionário: ABEV3F, PETR4F, VALE3F
+    
+    Esta função remove o sufixo 'F' de tickers fracionários para que
+    ambos os mercados sejam consolidados em um único ativo.
+    
+    Args:
+        ticker: Código de negociação (ex: ABEV3F)
+        market: Tipo de mercado (ex: MERCADO FRACIONARIO)
+    
+    Returns:
+        Ticker normalizado (ex: ABEV3)
+    
+    Examples:
+        >>> normalize_ticker("ABEV3F", "MERCADO FRACIONARIO")
+        "ABEV3"
+        >>> normalize_ticker("ABEV3", "MERCADO A VISTA")
+        "ABEV3"
+        >>> normalize_ticker("HGLG11", "MERCADO A VISTA")
+        "HGLG11"
+    """
+    ticker = ticker.strip().upper()
+    market = (market or "").strip().upper()
+    
+    # Apenas normalizar se for mercado fracionário e terminar com F
+    if "FRACIONARIO" in market and ticker.endswith("F"):
+        # Remover apenas o último caractere 'F'
+        normalized = ticker[:-1]
+        logger.debug(f"Ticker normalizado: {ticker} -> {normalized} (mercado: {market})")
+        return normalized
+    
+    return ticker
+
 def classify_asset(ticker: str, product_name: str = None) -> tuple[str, str]:
     """
     Classifica um ativo com base no ticker.
@@ -114,8 +152,23 @@ def import_b3_excel(file):
         cursor = conn.cursor()
 
         # Primeiro passo: criar todos os ativos únicos necessários
-        unique_tickers = df["Código de Negociação"].unique()
-        for ticker in unique_tickers:
+        # IMPORTANTE: normalizar tickers antes de processar
+        unique_tickers_raw = df["Código de Negociação"].unique()
+        unique_tickers_normalized = set()
+        
+        # Criar mapeamento ticker_original -> ticker_normalizado
+        ticker_normalization_map = {}
+        for idx, row in df.iterrows():
+            ticker_raw = row["Código de Negociação"]
+            market = row["Mercado"]
+            ticker_normalized = normalize_ticker(ticker_raw, market)
+            ticker_normalization_map[ticker_raw] = ticker_normalized
+            unique_tickers_normalized.add(ticker_normalized)
+        
+        logger.info(f"Tickers únicos (antes normalização): {len(unique_tickers_raw)}")
+        logger.info(f"Tickers únicos (após normalização): {len(unique_tickers_normalized)}")
+        
+        for ticker in unique_tickers_normalized:
             try:
                 # Verificar se ativo já existe
                 cursor.execute("SELECT id FROM assets WHERE ticker = ?", (ticker,))
@@ -146,11 +199,12 @@ def import_b3_excel(file):
         # Segundo passo: inserir operações
         for idx, row in df.iterrows():
             try:
-                ticker = row["Código de Negociação"]
-                asset_id = asset_cache.get(ticker)
+                ticker_raw = row["Código de Negociação"]
+                ticker_normalized = ticker_normalization_map.get(ticker_raw, ticker_raw)
+                asset_id = asset_cache.get(ticker_normalized)
                 
                 if not asset_id:
-                    logger.warning(f"Asset ID não encontrado para ticker {ticker}, pulando linha {idx}")
+                    logger.warning(f"Asset ID não encontrado para ticker {ticker_normalized} (original: {ticker_raw}), pulando linha {idx}")
                     continue
                 
                 cursor.execute("""

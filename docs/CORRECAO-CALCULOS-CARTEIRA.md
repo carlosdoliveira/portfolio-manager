@@ -32,32 +32,50 @@ Durante testes de uso real do sistema de Portfolio Manager v2, foram identificad
 
 ---
 
-### 2. ❌ Falta Consolidação Fracionário/Vista
-**Status**: 🔴 **CRÍTICO - NÃO IMPLEMENTADO**  
-**Prioridade**: P1
+### 2. ✅ Consolidação Fracionário/Vista IMPLEMENTADA
+**Status**: ✅ **IMPLEMENTADO**  
+**Prioridade**: P1  
+**Data de Implementação**: 3 de janeiro de 2026
 
-#### Descrição do Problema
-Ações fracionárias (ex: `ABEV3F`) e ações do mercado à vista (ex: `ABEV3`) são tratadas como ativos separados. Não há lógica de consolidação automática.
+#### Descrição da Solução
+Implementada normalização de ticker no importador B3 para consolidar automaticamente ações fracionárias (ex: `ABEV3F`) com ações do mercado à vista (ex: `ABEV3`).
 
-#### Comportamento Atual
-- `ABEV3F` → Ativo separado
-- `ABEV3` → Ativo separado
-- Total: 2 linhas na carteira, posições não somadas
+#### O que foi implementado
 
-#### Comportamento Esperado
-- `ABEV3` (consolidado) → Único ativo na interface
-- Posição total = soma de `ABEV3F` + `ABEV3`
-- Histórico deve mostrar ambos os mercados
+1. **Função `normalize_ticker()`** em `services/importer.py`
+   - Remove sufixo 'F' de tickers fracionários
+   - Preserva tickers do mercado à vista inalterados
+   - Não afeta FIIs e ETFs
 
-#### Análise Técnica
-- **Backend**: Não há normalização de ticker na importação
-- **Database**: Cada ticker é um registro separado na tabela `assets`
-- **Frontend**: Exibe os ativos como recebidos do backend
+2. **Ajuste no fluxo de importação**
+   - Normalização ocorre antes de criar/buscar ativos
+   - Campo `market` preservado em operações para rastreabilidade
+   - Logging mostra tickers antes e depois da normalização
 
-#### Impacto
-- ❌ Usuário não consegue ver posição real consolidada
-- ❌ Cálculo de preço médio incorreto
-- ❌ Múltiplas linhas para o mesmo ativo confundem a interface
+3. **Script de migração** (`scripts/migrate_consolidate_tickers.py`)
+   - Consolida dados existentes no banco
+   - Modo `--dry-run` para simulação segura
+   - Backup automático recomendado antes de executar
+
+4. **Testes unitários** (`tests/test_ticker_normalization.py`)
+   - 15 casos de teste cobrindo cenários diversos
+   - Edge cases (espaços, maiúsculas, mercado None/vazio)
+   - Tickers comuns do mercado brasileiro
+
+5. **Documentação completa** ([guia consolidacao-mercados.md](./guides/consolidacao-mercados.md))
+   - Como funciona em detalhes
+   - Exemplos práticos
+   - FAQ completo
+   - Instruções de migração
+
+#### Comportamento Atual ✅
+- `ABEV3F` → Normalizado para `ABEV3` (único ativo na interface)
+- Posição total = soma de operações de ambos mercados
+- Histórico mostra origem (vista ou fracionário) de cada operação
+
+#### Próximos Passos
+- Adicionar badges visuais no histórico (Item #7, P2)
+- Implementar filtro por mercado (opcional, P3)
 
 ---
 
@@ -501,10 +519,12 @@ def test_total_bought_value_calculation():
 - [ ] Adicionar cálculo de preço médio no detalhe
 - [ ] Testar com dados reais
 
-### Fase 3: Consolidação (⏳ A Fazer)
-- [ ] Implementar normalização de ticker no importer
-- [ ] Criar script de migração para dados existentes
-- [ ] Testar consolidação end-to-end
+### Fase 3: Consolidação (✅ Completo - 3 Jan 2026)
+- [x] Implementar normalização de ticker no importer
+- [x] Criar script de migração para dados existentes
+- [x] Criar testes unitários (15 casos de teste)
+- [x] Documentar guia completo de uso
+- [ ] Testar consolidação end-to-end com dados reais (próximo passo)
 - [ ] Validar histórico mantém distinção de mercado
 
 ### Fase 4: Melhorias UX (⏳ A Fazer)
