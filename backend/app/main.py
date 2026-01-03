@@ -15,7 +15,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-from app.services.importer import import_b3_excel
+from app.services.importer import import_b3_excel, normalize_ticker
 from app.db.database import init_db
 from app.repositories.operations_repository import (
     create_operation,
@@ -116,14 +116,22 @@ def health():
 def create_asset_endpoint(asset: AssetCreate):
     logger.info(f"Recebida requisição de criação de ativo: {asset.ticker}")
     try:
+        # Normalizar ticker para consolidar fracionário/vista
+        # Assumir mercado fracionário se terminar com F
+        market_hint = "MERCADO FRACIONARIO" if asset.ticker.upper().endswith("F") else "MERCADO A VISTA"
+        ticker_normalized = normalize_ticker(asset.ticker, market_hint)
+        
+        if ticker_normalized != asset.ticker:
+            logger.info(f"Ticker normalizado: {asset.ticker} -> {ticker_normalized}")
+        
         asset_id = create_asset(
-            ticker=asset.ticker,
+            ticker=ticker_normalized,
             asset_class=asset.asset_class,
             asset_type=asset.asset_type,
             product_name=asset.product_name
         )
-        logger.info(f"Ativo {asset.ticker} criado com ID {asset_id}")
-        return {"status": "success", "asset_id": asset_id}
+        logger.info(f"Ativo {ticker_normalized} criado com ID {asset_id}")
+        return {"status": "success", "asset_id": asset_id, "ticker": ticker_normalized}
     except Exception as e:
         logger.error(f"Erro ao criar ativo: {str(e)}")
         raise HTTPException(status_code=400, detail=str(e))
@@ -156,15 +164,22 @@ def get_asset(asset_id: int):
 def update_asset_endpoint(asset_id: int, asset: AssetUpdate):
     logger.info(f"Recebida requisição de atualização para ativo ID: {asset_id}")
     try:
+        # Normalizar ticker para consolidar fracionário/vista
+        market_hint = "MERCADO FRACIONARIO" if asset.ticker.upper().endswith("F") else "MERCADO A VISTA"
+        ticker_normalized = normalize_ticker(asset.ticker, market_hint)
+        
+        if ticker_normalized != asset.ticker:
+            logger.info(f"Ticker normalizado na atualização: {asset.ticker} -> {ticker_normalized}")
+        
         update_asset(
             asset_id=asset_id,
-            ticker=asset.ticker,
+            ticker=ticker_normalized,
             asset_class=asset.asset_class,
             asset_type=asset.asset_type,
             product_name=asset.product_name
         )
-        logger.info(f"Ativo {asset_id} atualizado")
-        return {"status": "success", "message": "Ativo atualizado com sucesso"}
+        logger.info(f"Ativo {asset_id} atualizado com ticker {ticker_normalized}")
+        return {"status": "success", "message": "Ativo atualizado com sucesso", "ticker": ticker_normalized}
     except ValueError as e:
         logger.warning(f"Erro de validação ao atualizar ativo: {str(e)}")
         raise HTTPException(status_code=400, detail=str(e))

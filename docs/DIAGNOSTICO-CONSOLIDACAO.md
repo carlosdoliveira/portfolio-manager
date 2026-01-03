@@ -1,12 +1,21 @@
 # 🔍 Diagnóstico: Consolidação Não Funcionando
 
 **Data**: 3 de janeiro de 2026  
+**Atualizado**: 3 de janeiro de 2026 (17h)  
 **Problema**: Ativos fracionários (ABEV3F) e à vista (ABEV3) aparecem separados na carteira  
-**Causa Raiz**: Dados importados **antes** da implementação da normalização
+**Causa Raiz 1**: Dados importados **antes** da implementação da normalização  
+**Causa Raiz 2**: ⚠️ **CRUD manual não aplicava normalização** (CORRIGIDO)
 
 ---
 
-## 📊 Situação Identificada
+## 🎯 Causa Raiz Identificada
+
+### Problema 1: Dados Antigos (Resolvido com Reset)
+Operações importadas antes da implementação da normalização.
+
+### Problema 2: CRUD Manual Sem Normalização ⚠️ **PRINCIPAL**
+
+**Descoberta**: A normalização de ticker estava implementada APENAS no **import B3**, mas NÃO nos endpoints de CRUD manual!
 
 ### Ativos no Banco Atual
 
