@@ -46,8 +46,12 @@ def normalize_ticker(ticker: str, market: str) -> str:
     ticker = ticker.strip().upper()
     market = (market or "").strip().upper()
     
+    # Normalizar mercado fracionário (aceita com ou sem acento)
+    # B3 usa "Mercado Fracionário" com acento
+    market_normalized = market.replace("Á", "A").replace("É", "E").replace("Í", "I").replace("Ó", "O").replace("Ú", "U")
+    
     # Apenas normalizar se for mercado fracionário e terminar com F
-    if "FRACIONARIO" in market and ticker.endswith("F"):
+    if "FRACIONARIO" in market_normalized and ticker.endswith("F"):
         # Remover apenas o último caractere 'F'
         normalized = ticker[:-1]
         logger.debug(f"Ticker normalizado: {ticker} -> {normalized} (mercado: {market})")
