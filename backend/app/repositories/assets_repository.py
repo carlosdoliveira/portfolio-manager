@@ -147,12 +147,12 @@ def list_assets() -> list[dict]:
                 a.created_at,
                 a.status,
                 COUNT(DISTINCT o.id) as total_operations,
-                SUM(CASE WHEN o.movement_type = 'COMPRA' THEN o.quantity ELSE 0 END) as total_bought,
-                SUM(CASE WHEN o.movement_type = 'VENDA' THEN o.quantity ELSE 0 END) as total_sold,
-                (SUM(CASE WHEN o.movement_type = 'COMPRA' THEN o.quantity ELSE 0 END) - 
-                 SUM(CASE WHEN o.movement_type = 'VENDA' THEN o.quantity ELSE 0 END)) as current_position,
-                SUM(CASE WHEN o.movement_type = 'COMPRA' THEN o.value ELSE 0 END) as total_bought_value,
-                SUM(CASE WHEN o.movement_type = 'VENDA' THEN o.value ELSE 0 END) as total_sold_value
+                SUM(CASE WHEN UPPER(o.movement_type) = 'COMPRA' THEN o.quantity ELSE 0 END) as total_bought,
+                SUM(CASE WHEN UPPER(o.movement_type) = 'VENDA' THEN o.quantity ELSE 0 END) as total_sold,
+                (SUM(CASE WHEN UPPER(o.movement_type) = 'COMPRA' THEN o.quantity ELSE 0 END) - 
+                 SUM(CASE WHEN UPPER(o.movement_type) = 'VENDA' THEN o.quantity ELSE 0 END)) as current_position,
+                SUM(CASE WHEN UPPER(o.movement_type) = 'COMPRA' THEN o.value ELSE 0 END) as total_bought_value,
+                SUM(CASE WHEN UPPER(o.movement_type) = 'VENDA' THEN o.value ELSE 0 END) as total_sold_value
             FROM assets a
             LEFT JOIN operations o ON a.id = o.asset_id AND o.status = 'ACTIVE'
             WHERE a.status = 'ACTIVE'

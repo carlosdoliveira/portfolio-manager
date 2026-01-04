@@ -227,7 +227,7 @@ def import_b3_excel(file):
                 """, (
                     asset_id,
                     row["Data do Negócio"],
-                    row["Tipo de Movimentação"],
+                    row["Tipo de Movimentação"].upper(),  # Normalizar para COMPRA/VENDA
                     row["Mercado"],
                     row["Instituição"],
                     int(row["Quantidade"]),
