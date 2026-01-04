@@ -145,7 +145,13 @@ export default function Portfolio() {
   const totalAssets = assets.length;
   const totalBoughtValue = assets.reduce((sum, asset) => sum + (asset.total_bought_value || 0), 0);
   const totalSoldValue = assets.reduce((sum, asset) => sum + (asset.total_sold_value || 0), 0);
-  const currentValue = totalBoughtValue - totalSoldValue;
+  
+  // Total Investido = Compras - Vendas (quanto ainda está aplicado)
+  const totalInvested = totalBoughtValue - totalSoldValue;
+  
+  // Valor Atual da Carteira = Preço de mercado D-1 * Posição atual (FUTURO)
+  // Por enquanto é um placeholder até implementarmos integração com cotações
+  const portfolioMarketValue = null; // Será: sum(preco_atual * posicao_atual)
 
   if (loading && assets.length === 0) {
     return (
@@ -186,11 +192,22 @@ export default function Portfolio() {
         </div>
         <div className="stat-card">
           <div className="stat-label">Valor Atual da Carteira</div>
-          <div className="stat-value">{formatCurrency(currentValue)}</div>
+          <div className="stat-value">
+            {portfolioMarketValue !== null 
+              ? formatCurrency(portfolioMarketValue)
+              : '---'
+            }
+          </div>
+          <div className="stat-sublabel" style={{ fontSize: '0.75rem', color: '#888', marginTop: '4px' }}>
+            Aguardando integração com cotações
+          </div>
         </div>
         <div className="stat-card">
           <div className="stat-label">Total Investido</div>
-          <div className="stat-value">{formatCurrency(totalBoughtValue)}</div>
+          <div className="stat-value">{formatCurrency(totalInvested)}</div>
+          <div className="stat-sublabel" style={{ fontSize: '0.75rem', color: '#888', marginTop: '4px' }}>
+            Compras - Vendas
+          </div>
         </div>
         <div className="stat-card">
           <div className="stat-label">Total Resgatado</div>
