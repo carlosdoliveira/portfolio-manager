@@ -183,13 +183,9 @@ export default function AssetDetail() {
     );
   }
 
-  // Calcular métricas
-  const totalInvested = operations
-    .filter((op) => op.movement_type === "COMPRA")
-    .reduce((sum, op) => sum + op.value, 0);
-
-  const averagePrice =
-    asset.total_bought > 0 ? totalInvested / asset.total_bought : 0;
+  // Usar métricas calculadas pelo backend (mais eficiente e consistente)
+  const totalInvested = asset.total_invested || 0;
+  const averagePrice = asset.average_price || 0;
 
   // Calcular resumo por mercado (para informação)
   const marketSummary = operations.reduce((acc, op) => {

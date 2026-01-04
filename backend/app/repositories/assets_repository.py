@@ -119,6 +119,82 @@ def get_asset_by_id(asset_id: int) -> dict | None:
         return None
 
 
+def get_asset_with_stats(asset_id: int) -> dict | None:
+    """
+    Busca um ativo pelo ID com estatísticas calculadas de operações.
+    
+    Args:
+        asset_id: ID do ativo
+        
+    Returns:
+        Dicionário com dados do ativo incluindo:
+        - average_price: preço médio de compra (total_bought_value / total_bought_qty)
+        - total_invested: valor total gasto em compras
+        - total_bought: quantidade total comprada
+        - total_sold: quantidade total vendida
+        - current_position: posição atual (bought - sold)
+        - total_bought_value: valor total de compras
+        - total_sold_value: valor total de vendas
+        - total_operations: número total de operações
+    """
+    with get_db() as conn:
+        cursor = conn.cursor()
+        cursor.execute(
+            """
+            SELECT 
+                a.id,
+                a.ticker,
+                a.asset_class,
+                a.asset_type,
+                a.product_name,
+                a.created_at,
+                a.status,
+                COUNT(DISTINCT o.id) as total_operations,
+                SUM(CASE WHEN UPPER(o.movement_type) = 'COMPRA' THEN o.quantity ELSE 0 END) as total_bought,
+                SUM(CASE WHEN UPPER(o.movement_type) = 'VENDA' THEN o.quantity ELSE 0 END) as total_sold,
+                (SUM(CASE WHEN UPPER(o.movement_type) = 'COMPRA' THEN o.quantity ELSE 0 END) - 
+                 SUM(CASE WHEN UPPER(o.movement_type) = 'VENDA' THEN o.quantity ELSE 0 END)) as current_position,
+                SUM(CASE WHEN UPPER(o.movement_type) = 'COMPRA' THEN o.value ELSE 0 END) as total_bought_value,
+                SUM(CASE WHEN UPPER(o.movement_type) = 'VENDA' THEN o.value ELSE 0 END) as total_sold_value
+            FROM assets a
+            LEFT JOIN operations o ON a.id = o.asset_id AND o.status = 'ACTIVE'
+            WHERE a.id = ? AND a.status = 'ACTIVE'
+            GROUP BY a.id
+            """,
+            (asset_id,)
+        )
+        row = cursor.fetchone()
+        
+        if not row:
+            return None
+        
+        total_bought_qty = row[8] or 0
+        total_bought_value = row[11] or 0.0
+        
+        # Calcular preço médio: total_bought_value / total_bought_qty
+        average_price = 0.0
+        if total_bought_qty > 0:
+            average_price = total_bought_value / total_bought_qty
+        
+        return {
+            "id": row[0],
+            "ticker": row[1],
+            "asset_class": row[2],
+            "asset_type": row[3],
+            "product_name": row[4],
+            "created_at": row[5],
+            "status": row[6],
+            "total_operations": row[7] or 0,
+            "total_bought": total_bought_qty,
+            "total_sold": row[9] or 0,
+            "current_position": row[10] or 0,
+            "total_bought_value": total_bought_value,
+            "total_sold_value": row[12] or 0.0,
+            "average_price": average_price,
+            "total_invested": total_bought_value  # Alias para compatibilidade
+        }
+
+
 def list_assets() -> list[dict]:
     """
     Lista todos os ativos ativos com estatísticas de operações.

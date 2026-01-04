@@ -28,6 +28,7 @@ from app.repositories.operations_repository import (
 from app.repositories.assets_repository import (
     create_asset,
     get_asset_by_id,
+    get_asset_with_stats,
     get_asset_by_ticker,
     list_assets,
     update_asset,
@@ -150,7 +151,7 @@ def get_assets():
 def get_asset(asset_id: int):
     logger.debug(f"Recebida requisição para buscar ativo ID: {asset_id}")
     try:
-        asset = get_asset_by_id(asset_id)
+        asset = get_asset_with_stats(asset_id)
         if not asset:
             raise HTTPException(status_code=404, detail=f"Ativo {asset_id} não encontrado")
         return asset

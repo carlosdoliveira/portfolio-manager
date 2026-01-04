@@ -17,6 +17,8 @@ export interface Asset {
   current_position: number;
   total_bought_value: number;
   total_sold_value: number;
+  average_price?: number;  // Preço médio de compra (backend calcula)
+  total_invested?: number; // Total investido em compras (alias de total_bought_value)
 }
 
 export interface AssetCreate {
