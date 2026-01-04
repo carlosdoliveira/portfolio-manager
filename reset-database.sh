@@ -31,10 +31,13 @@ echo "🔄 Parando containers..."
 docker compose down
 
 echo "🗑️  Removendo banco de dados antigo..."
-if [ -f "backend/app/data/portfolio.db" ]; then
-    rm -f backend/app/data/portfolio.db*
+if [ -d "backend/data" ]; then
+    # Usar sudo porque arquivo pode ter sido criado pelo container (root)
+    sudo rm -rf backend/data
+    mkdir -p backend/data
     echo "✅ Banco deletado"
 else
+    mkdir -p backend/data
     echo "ℹ️  Nenhum banco encontrado"
 fi
 
