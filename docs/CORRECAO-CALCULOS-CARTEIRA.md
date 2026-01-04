@@ -88,9 +88,10 @@ Implementada normalização de ticker no importador B3 para consolidar automatic
 
 ---
 
-### 4. ❌ Totalizadores da Carteira Zerados
-**Status**: 🔴 **CRÍTICO - BUG**  
-**Prioridade**: P0 (Mais Alta)
+### 4. ✅ Totalizadores da Carteira Zerados - RESOLVIDO
+**Status**: ✅ **RESOLVIDO**  
+**Prioridade**: P0 (Mais Alta)  
+**Data de Resolução**: 4 de janeiro de 2026
 
 #### Descrição do Problema
 Na área principal da página **Portfolio**, os seguintes valores aparecem zerados:
@@ -130,73 +131,63 @@ SUM(CASE WHEN o.movement_type = 'VENDA' THEN o.value ELSE 0 END) as total_sold_v
    - Verificar schema: `value REAL NOT NULL` está correto?
    - Pode estar armazenado como TEXT em vez de REAL
 
-#### Plano de Correção
+#### Solução Implementada ✅
 
-**Passo 1**: Validar dados na base (5min)
-```sql
--- Conectar ao banco
-sqlite3 /app/app/data/portfolio.db
+**Causa Raiz Identificada**: Case-sensitive em `movement_type`
+- Banco armazenava: `"Compra"` e `"Venda"` (primeira maiúscula)
+- Query SQL buscava: `"COMPRA"` e `"VENDA"` (tudo maiúsculo)
+- SQLite é case-sensitive → query retornava 0 para todos os cálculos
 
--- Verificar operações
-SELECT 
-    id, 
-    asset_id, 
-    movement_type, 
-    quantity, 
-    price, 
-    value,
-    value IS NULL as is_null,
-    typeof(value) as value_type
-FROM operations 
-WHERE status = 'ACTIVE'
-LIMIT 10;
+**Correções Aplicadas**:
 
--- Verificar se cálculo está correto
-SELECT 
-    id,
-    quantity,
-    price,
-    value,
-    (quantity * price) as calculated_value,
-    (value - (quantity * price)) as diff
-FROM operations
-WHERE status = 'ACTIVE';
+1. **Query SQL com UPPER()** (`assets_repository.py`, linhas 150-155)
+   ```sql
+   SUM(CASE WHEN UPPER(o.movement_type) = 'COMPRA' THEN o.value ELSE 0 END)
+   ```
+   - Comparação case-insensitive
+   - Funciona com dados antigos e novos
+
+2. **Normalização no Import** (`importer.py`, linha 218)
+   ```python
+   row["Tipo de Movimentação"].upper()  # COMPRA/VENDA
+   ```
+   - Novos dados sempre em maiúsculas
+   - Consistência com schema Pydantic
+
+**Validação**:
+```
+Arquivo: negociacao-2025-12-31-12-41-52.xlsx
+
+Total Comprado:  R$ 68.447,01 ✅
+Total Vendido:   R$ 13.037,88 ✅
+Saldo Carteira:  R$ 55.409,13 ✅
+
+Ativos individuais:
+- ABEV3: R$ 1.917,07 (130 unidades)
+- CIEL3: R$ 4.949 - R$ 2.483 = 700 unidades
 ```
 
-**Passo 2**: Corrigir inserção de operações (10min)
-- Arquivo: `/backend/app/repositories/operations_repository.py`
-- Garantir que `value` seja calculado e persistido como `REAL`
-- Adicionar validação de tipos
-
-**Passo 3**: Corrigir query de listagem (5min)
-- Arquivo: `/backend/app/repositories/assets_repository.py`
-- Garantir COALESCE para tratar NULL: `COALESCE(SUM(...), 0.0) as total_bought_value`
-
-**Passo 4**: Testar e validar (10min)
-- Reimportar arquivo B3 de teste
-- Verificar valores no frontend
-- Validar cálculos manualmente
-
-#### Tempo Estimado
-**30 minutos**
+**Commit**: 845cde1
 
 ---
 
-### 5. ❌ Valores por Ativo Zerados
-**Status**: 🔴 **CRÍTICO - BUG**  
-**Prioridade**: P0 (Mais Alta)
+### 5. ✅ Valores por Ativo Zerados - RESOLVIDO
+**Status**: ✅ **RESOLVIDO**  
+**Prioridade**: P0 (Mais Alta)  
+**Data de Resolução**: 4 de janeiro de 2026
 
 #### Descrição do Problema
-Em cada linha da tabela de ativos na página **Portfolio**, os seguintes valores aparecem zerados:
+Em cada linha da tabela de ativos na página **Portfolio**, os seguintes valores apareciam zerados:
 - **Posição Atual**: 0
 - **Total Comprado**: R$ 0,00
 - **Total Vendido**: R$ 0,00
 
-#### Causa Raiz
-Mesma causa do problema #4: query SQL retornando valores zerados ou NULL.
+#### Solução
+Resolvido pela mesma correção do Item #4 (case-sensitive em movement_type).
 
-#### Plano de Correção
-Mesma correção do problema #4 (consolidada).
+A query SQL com `UPPER(o.movement_type)` corrigiu tanto os totalizadores gerais quanto os valores por ativo, pois ambos dependiam da mesma agregação de dados da tabela `operations`.
+
+**Validação**: Todos os ativos agora mostram valores corretos de posição, total comprado e total vendido.
 
 #### Tempo Estimado
 **Incluído na correção do problema #4**
