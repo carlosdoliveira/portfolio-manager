@@ -194,60 +194,53 @@ A query SQL com `UPPER(o.movement_type)` corrigiu tanto os totalizadores gerais 
 
 ---
 
-### 6. ❌ Detalhe do Ativo com Valores Zerados
-**Status**: 🔴 **CRÍTICO - BUG**  
-**Prioridade**: P1
+### 6. ✅ Detalhe do Ativo com Valores Zerados - RESOLVIDO
+**Status**: ✅ **RESOLVIDO**  
+**Prioridade**: P1  
+**Data de Resolução**: 4 de janeiro de 2026
 
 #### Descrição do Problema
-Ao abrir a página de detalhe de um ativo (`/portfolio/:id`), os seguintes valores aparecem zerados:
+Na página de detalhe de um ativo (`/portfolio/:id`), os seguintes valores apareciam zerados:
 - **Preço Médio**: R$ 0,00
 - **Total Investido**: R$ 0,00
-- **Posição Atual**: 0 (esperado, sem cotação)
 
-#### Comportamento Esperado
-- **Preço Médio**: Calculado como `total_bought_value / total_bought_quantity`
-- **Total Investido**: Soma de todas as compras (`SUM(value WHERE movement_type = 'COMPRA')`)
-- **Posição Atual**: Depende de API externa (OK estar zerado por enquanto)
+#### Solução Implementada ✅
 
-#### Localização no Código
-**Frontend**: `/frontend/src/pages/AssetDetail.tsx`  
-**Backend**: Endpoint `/assets/{asset_id}` (precisa ser verificado se retorna cálculos)
+**Nova função no backend**: `get_asset_with_stats()` (`assets_repository.py`)
 
-#### Análise Técnica
-O endpoint de detalhe do ativo pode não estar calculando:
-- `average_price` (preço médio de compra)
-- `total_invested` (total gasto em compras)
-
-#### Plano de Correção
-
-**Passo 1**: Verificar endpoint atual (5min)
-```bash
-curl http://localhost:8000/assets/1 | jq
+Calcula estatísticas agregadas diretamente no banco:
+```python
+average_price = total_bought_value / total_bought_qty if total_bought_qty > 0 else 0.0
 ```
 
-**Passo 2**: Adicionar cálculos no backend (15min)
-- Arquivo: `/backend/app/main.py` ou novo endpoint em `repositories`
-- Query deve calcular:
-  - `average_price = SUM(value WHERE COMPRA) / SUM(quantity WHERE COMPRA)`
-  - `total_invested = SUM(value WHERE COMPRA)`
-  - `current_position = SUM(quantity WHERE COMPRA) - SUM(quantity WHERE VENDA)`
+**Endpoint atualizado**: `GET /assets/{id}` agora retorna:
+- `average_price`: Preço médio de compra (R$ valor / quantidade)
+- `total_invested`: Valor total gasto em compras
+- `current_position`: Posição atual consolidada
+- `total_bought_value`, `total_sold_value`: Valores financeiros
+- `total_bought`, `total_sold`: Quantidades
+- `total_operations`: Número de operações
 
-**Exemplo de Query**:
-```sql
-SELECT 
-    a.id,
-    a.ticker,
-    a.asset_class,
-    COUNT(CASE WHEN o.movement_type = 'COMPRA' THEN 1 END) as buy_count,
-    SUM(CASE WHEN o.movement_type = 'COMPRA' THEN o.quantity ELSE 0 END) as total_bought_qty,
-    SUM(CASE WHEN o.movement_type = 'COMPRA' THEN o.value ELSE 0 END) as total_invested,
-    CASE 
-        WHEN SUM(CASE WHEN o.movement_type = 'COMPRA' THEN o.quantity ELSE 0 END) > 0
-        THEN SUM(CASE WHEN o.movement_type = 'COMPRA' THEN o.value ELSE 0 END) / 
-             SUM(CASE WHEN o.movement_type = 'COMPRA' THEN o.quantity ELSE 0 END)
-        ELSE 0
-    END as average_price
-FROM assets a
+**Frontend otimizado** (`AssetDetail.tsx`):
+- Usa `asset.average_price` e `asset.total_invested` do backend
+- Remove cálculos locais duplicados
+- Melhor performance (não processa todas operações no cliente)
+
+**Validação**:
+```
+ABEV3:
+  Comprado: 130 unidades por R$ 1.917,07
+  Preço Médio: R$ 14,75 ✅
+  Total Investido: R$ 1.917,07 ✅
+
+CIEL3:
+  Comprado: 1.200 unidades por R$ 4.949,00
+  Vendido: 500 unidades
+  Preço Médio: R$ 4,12 ✅ (calculado sobre compras)
+  Total Investido: R$ 4.949,00 ✅
+```
+
+**Commit**: ac87dda
 LEFT JOIN operations o ON a.id = o.asset_id AND o.status = 'ACTIVE'
 WHERE a.id = ?
 GROUP BY a.id;
