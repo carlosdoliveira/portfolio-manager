@@ -27,6 +27,9 @@ export default function AssetDetail() {
   const [showModal, setShowModal] = useState(false);
   const [modalMode, setModalMode] = useState<"create" | "edit">("create");
   const [editingOperation, setEditingOperation] = useState<Operation | null>(null);
+  
+  // Estado para filtro de mercado
+  const [marketFilter, setMarketFilter] = useState<"all" | "spot" | "fractional">("all");
 
   // Estados para confirmação de delete
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -287,7 +290,42 @@ export default function AssetDetail() {
 
       {/* Tabela de operações */}
       <div className="operations-section">
-        <h2>Histórico de Operações</h2>
+        <div className="operations-header">
+          <h2>Histórico de Operações</h2>
+          
+          {operations.length > 0 && (
+            <div className="market-filter">
+              <label htmlFor="market-filter">Filtrar por mercado:</label>
+              <select
+                id="market-filter"
+                value={marketFilter}
+                onChange={(e) => setMarketFilter(e.target.value as "all" | "spot" | "fractional")}
+                className="filter-select"
+              >
+                {(() => {
+                  const spotCount = operations.filter(op => {
+                    const market = (op.market || "").toLowerCase();
+                    const isFractional = market.includes('fracionario') || market.includes('fracionário');
+                    return !isFractional && market !== "";
+                  }).length;
+                  
+                  const fractionalCount = operations.filter(op => {
+                    const market = (op.market || "").toLowerCase();
+                    return market.includes('fracionario') || market.includes('fracionário');
+                  }).length;
+                  
+                  return (
+                    <>
+                      <option value="all">Todos os Mercados ({operations.length})</option>
+                      <option value="spot">🟦 À Vista ({spotCount})</option>
+                      <option value="fractional">🟨 Fracionário ({fractionalCount})</option>
+                    </>
+                  );
+                })()}
+              </select>
+            </div>
+          )}
+        </div>
 
         {operations.length === 0 ? (
           <div className="empty-state">
@@ -297,6 +335,35 @@ export default function AssetDetail() {
             </button>
           </div>
         ) : (
+          <>
+            {(() => {
+              const filteredOperations = operations.filter((operation) => {
+                if (marketFilter === "all") return true;
+                
+                const market = (operation.market || "").toLowerCase();
+                const isFractional = market.includes('fracionario') || market.includes('fracionário');
+                
+                if (marketFilter === "fractional") return isFractional;
+                if (marketFilter === "spot") return !isFractional && market !== "";
+                
+                return true;
+              });
+
+              if (filteredOperations.length === 0) {
+                return (
+                  <div className="empty-state">
+                    <p>Nenhuma operação encontrada para o filtro selecionado</p>
+                    <button 
+                      className="btn-secondary" 
+                      onClick={() => setMarketFilter("all")}
+                    >
+                      Limpar Filtro
+                    </button>
+                  </div>
+                );
+              }
+
+              return (
           <table className="operations-table">
             <thead>
               <tr>
@@ -312,7 +379,7 @@ export default function AssetDetail() {
               </tr>
             </thead>
             <tbody>
-              {operations.map((operation) => (
+              {filteredOperations.map((operation) => (
                 <tr key={operation.id}>
                   <td>{formatDate(operation.trade_date)}</td>
                   <td>
@@ -374,6 +441,9 @@ export default function AssetDetail() {
               ))}
             </tbody>
           </table>
+              );
+            })()}
+          </>
         )}
       </div>
 
