@@ -329,7 +329,23 @@ export default function AssetDetail() {
                   <td className="text-right">{operation.quantity}</td>
                   <td className="text-right">{formatCurrency(operation.price)}</td>
                   <td className="text-right">{formatCurrency(operation.value)}</td>
-                  <td>{operation.market || "-"}</td>
+                  <td>
+                    {operation.market ? (
+                      <span
+                        className={`badge ${
+                          operation.market.toLowerCase().includes('fracionario') || operation.market.toLowerCase().includes('fracionário')
+                            ? 'badge-market-fractional'
+                            : 'badge-market-spot'
+                        }`}
+                      >
+                        {operation.market.toLowerCase().includes('fracionario') || operation.market.toLowerCase().includes('fracionário')
+                          ? '🟨 Fracionário'
+                          : '🟦 À Vista'}
+                      </span>
+                    ) : (
+                      '-'
+                    )}
+                  </td>
                   <td>{operation.institution || "-"}</td>
                   <td>
                     <span className={`badge badge-${operation.source.toLowerCase()}`}>

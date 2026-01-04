@@ -124,6 +124,19 @@
   color: #7b1fa2;
 }
 
+/* Badges de Mercado */
+.badge-market-spot {
+  background-color: #e3f2fd;
+  color: #1565c0;
+  font-weight: 500;
+}
+
+.badge-market-fractional {
+  background-color: #fff9c4;
+  color: #f57f17;
+  font-weight: 500;
+}
+
 /* Resumo por Mercado */
 .market-summary-section {
   margin: 2rem 0;

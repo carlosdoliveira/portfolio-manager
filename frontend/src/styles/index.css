@@ -44,3 +44,22 @@ button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
+/* Badges Base Styles */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.badge-buy {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.badge-sell {
+  background-color: #f8d7da;
+  color: #721c24;
+}
