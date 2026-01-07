@@ -1,7 +1,7 @@
 # 📊 Status do Projeto — Portfolio Manager v2
 
-**Última atualização**: 03 de Janeiro de 2026  
-**Versão**: v2.0.1
+**Última atualização**: 06 de Janeiro de 2026  
+**Versão**: v2.1.0
 
 > 📖 **Novo?** Comece pelo [INDEX.md](./INDEX.md) para uma visão geral completa.
 
@@ -11,30 +11,34 @@
 
 O Portfolio Manager v2 é um **sistema funcional** para gestão de carteira de investimentos com:
 
-### 🔴 Problemas Críticos Identificados (3 Jan 2026)
-**⚠️ ATENÇÃO**: Foram identificados **7 problemas críticos** em testes de uso real que impedem o funcionamento correto dos cálculos financeiros. Valores de carteira, posição e investimentos aparecem **zerados** em todas as telas.
+### 🟢 Últimas Atualizações (6 Jan 2026)
+**✅ NOVO**: Integração com cotações de mercado implementada e testada!
 
-👉 **Veja**: [CORRECAO-CALCULOS-CARTEIRA.md](./CORRECAO-CALCULOS-CARTEIRA.md) para roadmap detalhado de correção.
+- Cotações em tempo quase real via yfinance
+- Valor de mercado da carteira calculado automaticamente
+- Variação diária (%) e ganho/perda não realizado
+- Cache de 15 minutos para otimizar performance
+
+👉 **Veja**: [integracao-cotacoes.md](./guides/integracao-cotacoes.md) para documentação completa.
 
 ### ✅ Implementado
 - Import B3 com deduplicação automática
 - CRUD completo de ativos e operações
 - Renda Fixa com projeções e cálculo de IR
-- Consolidação de operações por mercado (backend)
+- Consolidação de operações por mercado (backend + frontend)
+- **Cotações de mercado em tempo quase real** 🔥 **NOVO**
 - Interface responsiva e profissional
 
 ### ⚠️ Em Progresso
 - Dashboard principal (placeholder)
 - Página de análises (placeholder)
 - Testes automatizados (cobertura mínima)
-- **Correção de cálculos financeiros (CRÍTICO)**
 
 ### ❌ Não Implementado
-- Cotações de mercado (APIs externas)
 - Proventos e dividendos
 - Eventos corporativos
 - Relatórios de IR
-- Consolidação fracionário/vista no frontend
+- Gráficos históricos de variação
 
 ---
 
@@ -73,11 +77,16 @@ O Portfolio Manager v2 é um **sistema funcional** para gestão de carteira de i
 | **Renda Fixa** | `POST/GET/PUT/DELETE /fixed-income/assets` | ✅ Completo | [Guia](./renda-fixa.md) |
 | | `POST /fixed-income/operations` | ✅ Completo | |
 | | `GET /fixed-income/projection/{id}` | ✅ Completo | |
+| **Cotações** | `GET /quotes/{ticker}` | ✅ Completo | [Guia](./guides/integracao-cotacoes.md) |
+| | `POST /quotes/batch` | ✅ Completo | |
+| | `GET /quotes/portfolio/current` | ✅ Completo | |
 
 **Principais Features:**
 - ✅ Classificação automática de ativos (Ações, FIIs, ETFs, RF)
 - ✅ Deduplicação de operações importadas
 - ✅ Cálculo de IR regressivo para RF
+- ✅ Cotações em tempo quase real (yfinance) 🔥 **NOVO**
+- ✅ Cache inteligente de cotações (15 min TTL)
 - ✅ Isenção automática para LCI/LCA
 - ✅ Consolidação de operações por mercado
 - ✅ Soft delete (status: ACTIVE/DELETED)

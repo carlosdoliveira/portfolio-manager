@@ -1,7 +1,7 @@
 # 📚 Portfolio Manager v2 — Documentação
 
-**Última atualização:** 03 de Janeiro de 2026  
-**Versão:** v2.0.1
+**Última atualização:** 06 de Janeiro de 2026  
+**Versão:** v2.1.0
 
 Bem-vindo à documentação completa do Portfolio Manager v2, um sistema de gestão de carteira de investimentos com foco em importação B3, renda fixa e análise de performance.
 
@@ -56,6 +56,11 @@ Bem-vindo à documentação completa do Portfolio Manager v2, um sistema de gest
 - [**Consolidação de Mercados**](./guides/consolidacao-mercados.md) ⭐ **RECOMENDADO**
   - Como operações à vista e fracionárias são consolidadas
   - Exemplos práticos e SQL
+
+- [**Integração com Cotações**](./guides/integracao-cotacoes.md) 🔥 **NOVO**
+  - Cotações em tempo quase real via yfinance
+  - API endpoints e uso no frontend
+  - Cache e performance
   
 - [**Implementação CRUD**](./guides/crud-implementation.md)
   - Padrões de criação de recursos
@@ -90,9 +95,9 @@ Sistema web para gestão de carteira de investimentos pessoais com foco em:
 | **Carteira** | ✅ Completo | CRUD de ativos, posições consolidadas, histórico |
 | **Renda Fixa** | ✅ Completo | Gestão completa: CDB, LCI, LCA, Tesouro + projeções |
 | **Consolidação de Mercados** | ✅ Completo | Operações à vista e fracionárias somadas automaticamente |
+| **Cotações de Mercado** | ✅ Completo | Integração com yfinance, preços em tempo quase real |
 | **Dashboard** | ⚠️ Placeholder | Visão geral da carteira (pendente) |
 | **Análises** | ⚠️ Placeholder | Gráficos e métricas (pendente) |
-| **Cotações de Mercado** | ❌ Não implementado | Integração com APIs externas |
 
 #### 🎯 Casos de Uso Atuais
 

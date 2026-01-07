@@ -430,3 +430,80 @@ export async function getFixedIncomeProjection(
 
   return response.json();
 }
+
+// ========== INTERFACES DE COTAÇÕES ==========
+
+export interface Quote {
+  ticker: string;
+  price: number;
+  change: number;
+  change_percent: number;
+  volume: number;
+  open: number;
+  high: number;
+  low: number;
+  previous_close: number;
+  updated_at: string;
+  source: string;
+}
+
+export interface QuotesMap {
+  [ticker: string]: Quote | null;
+}
+
+// ========== FUNÇÕES DE COTAÇÕES ==========
+
+export async function getQuote(ticker: string): Promise<Quote> {
+  const response = await fetch(`${API_URL}/quotes/${ticker}`);
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ detail: `Cotação não encontrada para ${ticker}` }));
+    throw new Error(error.detail || `Cotação não encontrada para ${ticker}`);
+  }
+
+  return response.json();
+}
+
+export async function getBatchQuotes(tickers: string[]): Promise<QuotesMap> {
+  const response = await fetch(`${API_URL}/quotes/batch`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(tickers),
+  });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ detail: "Erro ao buscar cotações" }));
+    throw new Error(error.detail || "Erro ao buscar cotações");
+  }
+
+  return response.json();
+}
+
+export async function getPortfolioQuotes(): Promise<QuotesMap> {
+  const response = await fetch(`${API_URL}/quotes/portfolio/current`);
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ detail: "Erro ao buscar cotações do portfólio" }));
+    throw new Error(error.detail || "Erro ao buscar cotações do portfólio");
+  }
+
+  return response.json();
+}
+
+export async function clearQuoteCache(ticker?: string): Promise<{ status: string; message: string }> {
+  const url = ticker ? `${API_URL}/quotes/cache/${ticker}` : `${API_URL}/quotes/cache`;
+  
+  const response = await fetch(url, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ detail: "Erro ao limpar cache" }));
+    throw new Error(error.detail || "Erro ao limpar cache");
+  }
+
+  return response.json();
+}
+

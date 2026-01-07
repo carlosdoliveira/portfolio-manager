@@ -44,6 +44,7 @@ from app.repositories.fixed_income_repository import (
     calculate_fixed_income_projection,
     delete_fixed_income_asset
 )
+from app.services.market_data_service import get_market_data_service
 
 
 app = FastAPI(title="Portfolio Manager")
@@ -472,3 +473,167 @@ def get_fixed_income_projection_endpoint(
     except Exception as e:
         logger.error(f"Erro ao calcular projeção: {str(e)}")
         raise HTTPException(status_code=400, detail=str(e))
+
+
+# ==========================================
+# 📈 ENDPOINTS DE COTAÇÕES
+# ==========================================
+
+@app.get("/quotes/{ticker}")
+def get_quote_endpoint(ticker: str):
+    """
+    Busca cotação de um ativo específico.
+    
+    Args:
+        ticker: Código do ativo (ex: PETR4, VALE3)
+    
+    Returns:
+        Dados da cotação ou 404 se não encontrado
+        
+    Exemplo:
+        GET /quotes/PETR4
+        
+        {
+            "ticker": "PETR4",
+            "price": 38.50,
+            "change": 0.85,
+            "change_percent": 2.26,
+            "volume": 25000000,
+            ...
+        }
+    """
+    logger.debug(f"Recebida requisição de cotação para {ticker}")
+    
+    try:
+        market_service = get_market_data_service()
+        quote = market_service.get_quote(ticker)
+        
+        if quote is None:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Cotação não encontrada para o ticker {ticker}"
+            )
+        
+        return quote
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Erro ao buscar cotação de {ticker}: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/quotes/batch")
+def get_batch_quotes_endpoint(tickers: list[str]):
+    """
+    Busca cotações de múltiplos ativos de uma vez.
+    
+    Args:
+        tickers: Lista de códigos de ativos
+    
+    Returns:
+        Dicionário com ticker -> dados da cotação
+        
+    Exemplo:
+        POST /quotes/batch
+        Body: ["PETR4", "VALE3", "ITUB4"]
+        
+        {
+            "PETR4": {...},
+            "VALE3": {...},
+            "ITUB4": {...}
+        }
+    """
+    logger.debug(f"Recebida requisição de cotações em lote: {tickers}")
+    
+    if not tickers:
+        raise HTTPException(status_code=400, detail="Lista de tickers não pode estar vazia")
+    
+    if len(tickers) > 50:
+        raise HTTPException(status_code=400, detail="Máximo de 50 tickers por requisição")
+    
+    try:
+        market_service = get_market_data_service()
+        quotes = market_service.get_batch_quotes(tickers)
+        return quotes
+        
+    except Exception as e:
+        logger.error(f"Erro ao buscar cotações em lote: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/quotes/portfolio/current")
+def get_portfolio_quotes_endpoint():
+    """
+    Busca cotações de todos os ativos com posição atual no portfólio.
+    
+    Returns:
+        Dicionário com ticker -> cotação para todos os ativos em carteira
+    """
+    logger.debug("Recebida requisição de cotações do portfólio")
+    
+    try:
+        # Buscar todos os ativos com posição
+        assets = list_assets()
+        
+        # Filtrar apenas ativos com posição atual > 0
+        tickers_with_position = []
+        for asset in assets:
+            if asset.get('current_position', 0) > 0:
+                tickers_with_position.append(asset['ticker'])
+        
+        if not tickers_with_position:
+            return {}
+        
+        # Buscar cotações em lote
+        market_service = get_market_data_service()
+        quotes = market_service.get_batch_quotes(tickers_with_position)
+        
+        return quotes
+        
+    except Exception as e:
+        logger.error(f"Erro ao buscar cotações do portfólio: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.delete("/quotes/cache/{ticker}")
+def clear_quote_cache_endpoint(ticker: str):
+    """
+    Limpa o cache de cotação de um ativo específico.
+    
+    Args:
+        ticker: Código do ativo
+    
+    Returns:
+        Mensagem de sucesso
+    """
+    logger.debug(f"Limpando cache de cotação para {ticker}")
+    
+    try:
+        market_service = get_market_data_service()
+        market_service.clear_cache(ticker)
+        return {"status": "success", "message": f"Cache limpo para {ticker}"}
+        
+    except Exception as e:
+        logger.error(f"Erro ao limpar cache: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.delete("/quotes/cache")
+def clear_all_quotes_cache_endpoint():
+    """
+    Limpa todo o cache de cotações.
+    
+    Returns:
+        Mensagem de sucesso
+    """
+    logger.debug("Limpando todo o cache de cotações")
+    
+    try:
+        market_service = get_market_data_service()
+        market_service.clear_cache()
+        return {"status": "success", "message": "Cache de cotações limpo"}
+        
+    except Exception as e:
+        logger.error(f"Erro ao limpar cache: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))

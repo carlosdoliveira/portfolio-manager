@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchAssets, createAsset, updateAsset, deleteAsset, Asset, AssetCreate } from "../api/client";
+import { fetchAssets, createAsset, updateAsset, deleteAsset, Asset, AssetCreate, getPortfolioQuotes, QuotesMap } from "../api/client";
 import "./Portfolio.css";
 
 export default function Portfolio() {
   const [assets, setAssets] = useState<Asset[]>([]);
+  const [quotes, setQuotes] = useState<QuotesMap>({});
+  const [loadingQuotes, setLoadingQuotes] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -32,6 +34,13 @@ export default function Portfolio() {
     loadAssets();
   }, []);
 
+  useEffect(() => {
+    // Carregar cotações após carregar assets
+    if (assets.length > 0) {
+      loadQuotes();
+    }
+  }, [assets]);
+
   async function loadAssets() {
     try {
       setLoading(true);
@@ -42,6 +51,19 @@ export default function Portfolio() {
       setError(err instanceof Error ? err.message : "Erro ao carregar ativos");
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function loadQuotes() {
+    try {
+      setLoadingQuotes(true);
+      const quotesData = await getPortfolioQuotes();
+      setQuotes(quotesData);
+    } catch (err) {
+      console.error("Erro ao carregar cotações:", err);
+      // Não mostrar erro de cotações como crítico
+    } finally {
+      setLoadingQuotes(false);
     }
   }
 
@@ -149,9 +171,23 @@ export default function Portfolio() {
   // Total Investido = Compras - Vendas (quanto ainda está aplicado)
   const totalInvested = totalBoughtValue - totalSoldValue;
   
-  // Valor Atual da Carteira = Preço de mercado D-1 * Posição atual (FUTURO)
-  // Por enquanto é um placeholder até implementarmos integração com cotações
-  const portfolioMarketValue = null; // Será: sum(preco_atual * posicao_atual)
+  // Valor Atual da Carteira = Preço de mercado * Posição atual
+  const portfolioMarketValue = assets.reduce((sum, asset) => {
+    const quote = quotes[asset.ticker];
+    const position = asset.current_position || 0;
+    
+    if (quote && quote.price && position > 0) {
+      return sum + (quote.price * position);
+    }
+    
+    return sum;
+  }, 0);
+  
+  // Variação total (ganho/perda não realizado)
+  const totalVariation = portfolioMarketValue > 0 ? portfolioMarketValue - totalInvested : null;
+  const totalVariationPercent = totalVariation && totalInvested > 0 
+    ? (totalVariation / totalInvested) * 100 
+    : null;
 
   if (loading && assets.length === 0) {
     return (
@@ -191,34 +227,37 @@ export default function Portfolio() {
           <div className="stat-value">{totalAssets}</div>
         </div>
         <div className="stat-card">
-          <div className="stat-label">Valor Atual da Carteira</div>
+          <div className="stat-label">
+            Valor Atual da Carteira
+            {loadingQuotes && <span style={{fontSize: '12px', marginLeft: '8px'}}>⏳</span>}
+          </div>
           <div className="stat-value">
-            {portfolioMarketValue !== null 
+            {portfolioMarketValue > 0 
               ? formatCurrency(portfolioMarketValue)
               : '---'
             }
           </div>
-          <div className="stat-sublabel" style={{ fontSize: '0.75rem', color: '#888', marginTop: '4px' }}>
-            Aguardando integração com cotações
-          </div>
+          <div className="stat-sublabel">Cotações em tempo quase real (delay ~15min)</div>
         </div>
         <div className="stat-card">
           <div className="stat-label">Total Investido</div>
           <div className="stat-value">{formatCurrency(totalInvested)}</div>
-          <div className="stat-sublabel" style={{ fontSize: '0.75rem', color: '#888', marginTop: '4px' }}>
-            Compras - Vendas
+          <div className="stat-sublabel">Valor líquido aplicado (Compras - Vendas)</div>
+        </div>
+        {totalVariation !== null && (
+          <div className="stat-card">
+            <div className="stat-label">Variação Total</div>
+            <div className={`stat-value ${totalVariation >= 0 ? 'positive' : 'negative'}`}>
+              {totalVariation >= 0 ? '+' : ''}{formatCurrency(totalVariation)}
+              {totalVariationPercent !== null && (
+                <span style={{fontSize: '16px', marginLeft: '8px'}}>
+                  ({totalVariationPercent >= 0 ? '+' : ''}{totalVariationPercent.toFixed(2)}%)
+                </span>
+              )}
+            </div>
+            <div className="stat-sublabel">Ganho/Perda não realizado</div>
           </div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-label">Total Resgatado</div>
-          <div className="stat-value">{formatCurrency(totalSoldValue)}</div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-label">Total de Operações</div>
-          <div className="stat-value">
-            {assets.reduce((sum, asset) => sum + asset.total_operations, 0)}
-          </div>
-        </div>
+        )}
       </div>
 
       {/* Tabela de ativos */}
@@ -238,7 +277,9 @@ export default function Portfolio() {
                 <th>Nome do Produto</th>
                 <th>Classe</th>
                 <th>Tipo</th>
+                <th className="text-right">Preço Atual</th>
                 <th className="text-right">Posição Atual (qtd)</th>
+                <th className="text-right">Valor de Mercado</th>
                 <th className="text-right">Total Comprado (R$)</th>
                 <th className="text-right">Total Vendido (R$)</th>
                 <th className="text-right">Operações</th>
@@ -246,47 +287,73 @@ export default function Portfolio() {
               </tr>
             </thead>
             <tbody>
-              {assets.map((asset) => (
-                <tr key={asset.id} className="asset-row">
-                  <td>
-                    <strong className="ticker-link" onClick={() => handleViewAsset(asset.id)}>
-                      {asset.ticker}
-                    </strong>
-                  </td>
-                  <td>{asset.product_name}</td>
-                  <td>{asset.asset_class}</td>
-                  <td>{asset.asset_type}</td>
-                  <td className="text-right">{asset.current_position.toLocaleString('pt-BR')}</td>
-                  <td className="text-right">{formatCurrency(asset.total_bought_value || 0)}</td>
-                  <td className="text-right">{formatCurrency(asset.total_sold_value || 0)}</td>
-                  <td className="text-right">{asset.total_operations}</td>
-                  <td className="text-center">
-                    <div className="action-buttons">
-                      <button
-                        className="btn-icon btn-view"
-                        onClick={() => handleViewAsset(asset.id)}
-                        title="Ver detalhes"
-                      >
-                        👁️
-                      </button>
-                      <button
-                        className="btn-icon btn-edit"
-                        onClick={() => handleOpenEditModal(asset)}
-                        title="Editar"
-                      >
-                        ✏️
-                      </button>
-                      <button
-                        className="btn-icon btn-delete"
-                        onClick={() => handleOpenDeleteConfirm(asset)}
-                        title="Deletar"
-                      >
-                        🗑️
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+              {assets.map((asset) => {
+                const quote = quotes[asset.ticker];
+                const position = asset.current_position || 0;
+                const marketValue = quote && quote.price && position > 0 ? quote.price * position : null;
+                
+                return (
+                  <tr key={asset.id} className="asset-row">
+                    <td>
+                      <strong className="ticker-link" onClick={() => handleViewAsset(asset.id)}>
+                        {asset.ticker}
+                      </strong>
+                    </td>
+                    <td>{asset.product_name}</td>
+                    <td>{asset.asset_class}</td>
+                    <td>{asset.asset_type}</td>
+                    <td className="text-right">
+                      {quote && quote.price ? (
+                        <div>
+                          <div>{formatCurrency(quote.price)}</div>
+                          {quote.change_percent !== 0 && (
+                            <div style={{
+                              fontSize: '11px',
+                              color: quote.change_percent >= 0 ? '#10b981' : '#ef4444'
+                            }}>
+                              {quote.change_percent >= 0 ? '+' : ''}{quote.change_percent.toFixed(2)}%
+                            </div>
+                          )}
+                        </div>
+                      ) : (
+                        <span style={{color: '#888'}}>---</span>
+                      )}
+                    </td>
+                    <td className="text-right">{position.toLocaleString('pt-BR')}</td>
+                    <td className="text-right">
+                      {marketValue !== null ? formatCurrency(marketValue) : <span style={{color: '#888'}}>---</span>}
+                    </td>
+                    <td className="text-right">{formatCurrency(asset.total_bought_value || 0)}</td>
+                    <td className="text-right">{formatCurrency(asset.total_sold_value || 0)}</td>
+                    <td className="text-right">{asset.total_operations}</td>
+                    <td className="text-center">
+                      <div className="action-buttons">
+                        <button
+                          className="btn-icon btn-view"
+                          onClick={() => handleViewAsset(asset.id)}
+                          title="Ver detalhes"
+                        >
+                          👁️
+                        </button>
+                        <button
+                          className="btn-icon btn-edit"
+                          onClick={() => handleOpenEditModal(asset)}
+                          title="Editar"
+                        >
+                          ✏️
+                        </button>
+                        <button
+                          className="btn-icon btn-delete"
+                          onClick={() => handleOpenDeleteConfirm(asset)}
+                          title="Deletar"
+                        >
+                          🗑️
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         )}
