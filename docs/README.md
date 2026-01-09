@@ -1,7 +1,7 @@
 # 📚 Documentação do Portfolio Manager v2
 
-**Última atualização:** 03 de Janeiro de 2026  
-**Versão:** v2.0.1
+**Última atualização:** 9 de Janeiro de 2026  
+**Versão:** v2.1.0
 
 > 🚀 **Início Rápido:** Leia o [INDEX.md](./INDEX.md) para visão completa do sistema
 
@@ -12,6 +12,7 @@
 ### Para Todos
 - 🏠 **[INDEX.md](./INDEX.md)** — Página inicial completa com visão geral
 - 📊 **[STATUS-PROJETO.md](./STATUS-PROJETO.md)** — Estado atual e roadmap
+- 📋 **[PENDENCIAS.md](./PENDENCIAS.md)** ⭐ **NOVO** — Lista detalhada de pendências
 - 📖 **[REFERENCIA-TECNICA.md](./REFERENCIA-TECNICA.md)** — Especificações técnicas
 
 ### Para Desenvolvedores
@@ -24,6 +25,7 @@
 
 #### 📖 Guias
 - [Consolidação de Mercados](./guides/consolidacao-mercados.md) ⭐ **Recomendado**
+- [Integração com Cotações](./guides/integracao-cotacoes.md) 🔥 **Implementado**
 - [Implementação CRUD](./guides/crud-implementation.md)
 - [Fluxo Visual de Consolidação](./guides/fluxo-consolidacao-visual.md)
 
@@ -32,7 +34,9 @@
 
 ### Documentação Especializada
 - 💰 [Renda Fixa](./renda-fixa.md) — Guia completo de RF
-- 📋 [IMPLEMENTACAO-CONSOLIDACAO.md](./IMPLEMENTACAO-CONSOLIDACAO.md) — Detalhes técnicos
+- � [Integração com Cotações](./guides/integracao-cotacoes.md) — API de mercado
+- ✅ [CORRECAO-CALCULOS-CARTEIRA.md](./CORRECAO-CALCULOS-CARTEIRA.md) — Histórico de correções (CONCLUÍDO)
+- 📋 [DIAGNOSTICO-CONSOLIDACAO-FINAL.md](./DIAGNOSTICO-CONSOLIDACAO-FINAL.md) — Debug da consolidação
 
 ---
 
@@ -42,9 +46,11 @@
 docs/
 ├── INDEX.md                    # 🏠 PÁGINA INICIAL — comece aqui
 ├── STATUS-PROJETO.md           # 📊 Estado atual e roadmap
+├── PENDENCIAS.md              # 📋 Lista detalhada de pendências ⭐ NOVO
 ├── REFERENCIA-TECNICA.md       # 📖 Especificações técnicas
 ├── renda-fixa.md              # 💰 Guia de Renda Fixa
-├── IMPLEMENTACAO-CONSOLIDACAO.md  # Detalhes de consolidação
+├── CORRECAO-CALCULOS-CARTEIRA.md  # ✅ Histórico de correções (CONCLUÍDO)
+├── DIAGNOSTICO-CONSOLIDACAO-FINAL.md  # Debug da consolidação
 │
 ├── architecture/               # 🏗️ Decisões arquiteturais
 │   └── principios-core.md

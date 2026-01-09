@@ -3,7 +3,7 @@
 
 Sistema web de gestão de carteira de investimentos com foco em importação B3, renda fixa e análise de performance.
 
-**Versão:** v2.0.1 | **Status:** ✅ MVP Funcional | **Última atualização:** 03/01/2026
+**Versão:** v2.1.0 | **Status:** ✅ MVP Funcional | **Última atualização:** 09/01/2026
 
 > 📚 **[Documentação Completa →](./docs/INDEX.md)**
 
@@ -31,18 +31,20 @@ Sistema web de gestão de carteira de investimentos com foco em importação B3,
 - **CRUD Completo** — Ativos e operações com interface web
 - **Renda Fixa** — CDB, LCI, LCA, Tesouro com projeções e IR
 - **Consolidação de Mercados** — Operações à vista e fracionárias unificadas
+- **Cotações de Mercado** — Integração com yfinance, preços em tempo quase real
+- **Mark-to-Market** — Valor atual da carteira com cotações reais
 - **Validação e Segurança** — Pydantic, SQL injection protection, CORS configurável
 
 ### ⚠️ Em Progresso
 - Dashboard principal (placeholder)
 - Página de análises (placeholder)
-- Testes automatizados (cobertura mínima)
+- Testes automatizados (cobertura parcial)
 
 ### 📅 Planejado
-- Cotações de mercado (APIs externas)
-- Mark-to-market
 - Proventos e dividendos
-- Eventos corporativos
+- Eventos corporativos (splits, bonificações)
+- Relatórios de IR
+- Gráficos históricos
 
 ---
 

@@ -1,6 +1,6 @@
 # 📊 Status do Projeto — Portfolio Manager v2
 
-**Última atualização**: 06 de Janeiro de 2026  
+**Última atualização**: 09 de Janeiro de 2026  
 **Versão**: v2.1.0
 
 > 📖 **Novo?** Comece pelo [INDEX.md](./INDEX.md) para uma visão geral completa.
@@ -120,31 +120,36 @@ O Portfolio Manager v2 é um **sistema funcional** para gestão de carteira de i
 
 ## Problemas Conhecidos
 
-> 🔥 **ATENÇÃO**: Problemas críticos de cálculos financeiros foram identificados em 3 Jan 2026.  
-> **Roadmap detalhado**: [CORRECAO-CALCULOS-CARTEIRA.md](./CORRECAO-CALCULOS-CARTEIRA.md)
+> ✅ **ATUALIZAÇÃO**: Problemas críticos de cálculos foram **resolvidos** em 4-6 Jan 2026.  
+> **Histórico**: [CORRECAO-CALCULOS-CARTEIRA.md](./CORRECAO-CALCULOS-CARTEIRA.md)
 
-### 🔴 Críticos (Bloqueadores)
+### 🟢 Resolvidos Recentemente
+
+| ID | Problema | Status | Data Resolução |
+|----|----------|--------|----------------|
+| ~~C01~~ | ~~Totalizadores zerados~~ | ✅ Resolvido | 4 Jan 2026 |
+| ~~C02~~ | ~~Valores por ativo zerados~~ | ✅ Resolvido | 4 Jan 2026 |
+| ~~C03~~ | ~~Preço médio zerado~~ | ✅ Resolvido | 4 Jan 2026 |
+| ~~C07~~ | ~~Sem cotações de mercado~~ | ✅ Implementado | 6 Jan 2026 |
+| ~~I01~~ | ~~Falta consolidação fracionário/vista~~ | ✅ Implementado | 3-4 Jan 2026 |
+
+### 🔴 Pendências Atuais
 
 | ID | Problema | Impacto | Localização | Prioridade |
 |----|----------|---------|-------------|------------|
-| **C01** | **Totalizadores zerados** | Valor da carteira, Total Investido e Resgatado mostram R$ 0,00 | `Portfolio.tsx` + `assets_repository.py` | **P0** |
-| **C02** | **Valores por ativo zerados** | Posição Atual, Total Comprado/Vendido mostram 0 | `Portfolio.tsx` | **P0** |
-| **C03** | **Preço médio zerado** | Detalhe do ativo não mostra preço médio calculado | `AssetDetail.tsx` | **P1** |
-| **C04** | Dashboard vazio | UX incompleta — landing page sem valor | `frontend/src/pages/Dashboard.tsx` | P2 |
-| **C05** | Análises vazias | Feature prometida não entregue | `frontend/src/pages/Analysis.tsx` | P2 |
-| **C06** | Sem testes automatizados | Risco de regressão alto | `backend/tests/`, `frontend/` | P3 |
-| **C07** | Sem cotações de mercado | Posição não reflete valor real | N/A | P3 |
+| **P01** | Dashboard vazio | UX incompleta — landing page sem valor | `frontend/src/pages/Dashboard.tsx` | P1 |
+| **P02** | Análises vazias | Feature prometida não entregue | `frontend/src/pages/Analysis.tsx` | P1 |
+| **P03** | Cobertura de testes baixa | Apenas testes de consolidação implementados | `backend/tests/`, `frontend/` | P2 |
 
-### 🟡 Importantes
+### 🟡 Melhorias Futuras
 
 | ID | Problema | Impacto | Sugestão | Prioridade |
 |----|----------|---------|----------|------------|
-| **I01** | **Falta consolidação fracionário/vista** | `ABEV3F` e `ABEV3` aparecem separados | Normalizar ticker no import | **P1** |
-| **I02** | Sem paginação | Performance com muitos registros | Adicionar `limit/offset` em listagens | P2 |
-| **I03** | Logs inconsistentes | Dificulta debug | Padronizar idioma (português) | P2 |
-| **I04** | Sem cache de consultas | Queries repetidas | Redis ou in-memory cache | P3 |
-| **I05** | SQLite em produção | Limitação de concorrência | Migrar para PostgreSQL | P3 |
-| **I06** | Configurações estáticas | Deploy manual | Variáveis de ambiente | P3 |
+| **M01** | Sem paginação | Performance com muitos registros | Adicionar `limit/offset` em listagens | P2 |
+| **M02** | Logs inconsistentes | Dificulta debug | Padronizar idioma (português) | P2 |
+| **M03** | Sem cache de consultas | Queries repetidas | Redis ou in-memory cache | P3 |
+| **M04** | SQLite em produção | Limitação de concorrência | Migrar para PostgreSQL | P3 |
+| **M05** | Configurações estáticas | Deploy manual | Variáveis de ambiente | P3 |
 
 ### ℹ️ Nice to Have
 
@@ -315,11 +320,13 @@ Campos derivados calculados via SQL, **não armazenados**:
 
 ## 📚 Documentação Relacionada
 
+- **Lista Completa de Pendências:** [PENDENCIAS.md](./PENDENCIAS.md) 🎯 **NOVO**
 - **Visão Geral Completa:** [INDEX.md](./INDEX.md)
 - **Referência Técnica:** [REFERENCIA-TECNICA.md](./REFERENCIA-TECNICA.md)
 - **Arquitetura:** [architecture/principios-core.md](./architecture/principios-core.md)
 - **API:** [api/endpoints.md](./api/endpoints.md)
 - **Consolidação de Mercados:** [guides/consolidacao-mercados.md](./guides/consolidacao-mercados.md)
+- **Integração com Cotações:** [guides/integracao-cotacoes.md](./guides/integracao-cotacoes.md)
 - **Renda Fixa:** [renda-fixa.md](./renda-fixa.md)
 
 ---

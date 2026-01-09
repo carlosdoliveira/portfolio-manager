@@ -1,6 +1,6 @@
 # 📚 Portfolio Manager v2 — Documentação
 
-**Última atualização:** 06 de Janeiro de 2026  
+**Última atualização:** 09 de Janeiro de 2026  
 **Versão:** v2.1.0
 
 Bem-vindo à documentação completa do Portfolio Manager v2, um sistema de gestão de carteira de investimentos com foco em importação B3, renda fixa e análise de performance.
@@ -29,11 +29,17 @@ Bem-vindo à documentação completa do Portfolio Manager v2, um sistema de gest
   - Funcionalidades implementadas e pendentes
   - Roadmap e próximos passos
 
-- [**CORRECAO-CALCULOS-CARTEIRA.md**](./CORRECAO-CALCULOS-CARTEIRA.md) 🔥 **CRÍTICO**
-  - Roadmap de correção de bugs de cálculos financeiros
-  - 7 problemas identificados em testes de uso real
-  - Plano de ação priorizado (P0, P1, P2)
-  - Valores zerados na carteira, totalizadores e detalhes de ativos
+- [**PENDENCIAS.md**](./PENDENCIAS.md) 🎯 **NOVO**
+  - Lista detalhada de todas as pendências
+  - Priorização clara (P1, P2, P3)
+  - Estimativas de tempo e roadmap sugerido
+  - Backlog de features futuras
+
+- [**CORRECAO-CALCULOS-CARTEIRA.md**](./CORRECAO-CALCULOS-CARTEIRA.md) ✅ **RESOLVIDO**
+  - Histórico de correções de bugs de cálculos financeiros
+  - Todos os problemas críticos resolvidos (4-6 Jan 2026)
+  - Consolidação fracionário/vista implementada
+  - Integração com cotações de mercado concluída
   
 - [**REFERENCIA-TECNICA.md**](./REFERENCIA-TECNICA.md)
   - Documentação técnica detalhada
