@@ -23,31 +23,23 @@ As pendências listadas abaixo são **melhorias futuras**, não impedem o uso do
 ## 🔴 Prioridade Alta (P1)
 
 ### 1. Dashboard Principal
-**Status:** Placeholder  
+**Status:** ✅ Implementado  
 **Arquivo:** [frontend/src/pages/Dashboard.tsx](../frontend/src/pages/Dashboard.tsx)  
-**Impacto:** Landing page sem informação útil
+**Data de Conclusão:** 9 de Janeiro de 2026
 
-**O que falta:**
-- Cards de resumo (total investido, valor atual, variação)
-- Top 5 posições
-- Operações recentes
-- Gráfico de alocação por classe de ativo
+**Implementado:**
+- ✅ Cards de resumo (total investido, valor atual, variação)
+- ✅ Top 5 posições com drill-down
+- ✅ Operações recentes (últimas 10)
+- ✅ Gráfico de alocação por classe de ativo
+- ✅ Endpoint `/dashboard/summary` no backend
+- ✅ Integração com repository layer
 
-**Estimativa:** 8 horas (4h backend + 4h frontend)
-
-**Endpoint necessário:**
-```typescript
-GET /dashboard/summary
-Response: {
-  total_assets: number,
-  total_invested: number,
-  current_value: number,
-  daily_change: number,
-  daily_change_percent: number,
-  top_positions: Asset[],
-  recent_operations: Operation[]
-}
-```
+**Detalhes técnicos:**
+- Repository: `dashboard_repository.py`
+- Endpoint: `GET /dashboard/summary`
+- Componentes: Cards estatísticos, tabela de posições, lista de operações
+- Navegação: Click para detalhes de ativo
 
 ---
 
@@ -217,26 +209,31 @@ Funcionalidades para versões futuras (não priorizadas):
 | Categoria | Implementado | Total | % |
 |-----------|--------------|-------|---|
 | **Backend Core** | 100% | 100% | ✅ 100% |
-| **Frontend Core** | 70% | 100% | 🟡 70% |
+| **Frontend Core** | 80% | 100% | 🟢 80% |
 | **Testes** | 20% | 100% | 🔴 20% |
 | **Documentação** | 95% | 100% | ✅ 95% |
 
+**Atualização (9 Jan 2026):** Frontend Core aumentou de 70% → 80% com implementação do Dashboard
+
 ---
 
-## 🎯 Roadmap Sugerido
+## ~~Sprint 3 (Concluída - 9 Jan 2026)~~
+1. ~~Dashboard principal (P1)~~ ✅ Implementado - 8h
+**Status:** ✅ Concluído
 
-### Sprint 3 (Próxima - 2 semanas)
-1. Dashboard principal (P1) - 8h
-2. Página de análises (P1) - 6h
-3. Testes básicos (P2) - 10h
-**Total:** 24 horas
+### Sprint 4 (Próxima - 2 semanas)
+1. Página de análises (P1) - 6h
+2. Testes básicos (P2) - 10h
+3. Paginação (P2) - 4h
+**Total:** 20 horas
 
-### Sprint 4 (2-4 semanas)
-1. Paginação (P2) - 4h
-2. Página de configurações (P2) - 4h
-3. Melhorias de UX (P3) - 6h
-4. Cache de consultas (P3) - 4h
-**Total:** 18 horas
+### Sprint 5 (2-4 semanas)
+1. Página de configurações (P2) - 4h
+2. Melhorias de UX (P3) - 6h
+3. Cache de consultas (P3) - 4h
+**Total:** 14 horas
+
+### Sprint 68 horas
 
 ### Sprint 5+ (Backlog)
 - Features financeiras avançadas

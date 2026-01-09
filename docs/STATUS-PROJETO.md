@@ -26,11 +26,11 @@ O Portfolio Manager v2 é um **sistema funcional** para gestão de carteira de i
 - CRUD completo de ativos e operações
 - Renda Fixa com projeções e cálculo de IR
 - Consolidação de operações por mercado (backend + frontend)
-- **Cotações de mercado em tempo quase real** 🔥 **NOVO**
+- **Cotações de mercado em tempo quase real** 🔥
+- **Dashboard principal com resumo da carteira** 🆕 **9 Jan 2026**
 - Interface responsiva e profissional
 
 ### ⚠️ Em Progresso
-- Dashboard principal (placeholder)
 - Página de análises (placeholder)
 - Testes automatizados (cobertura mínima)
 
@@ -73,6 +73,7 @@ O Portfolio Manager v2 é um **sistema funcional** para gestão de carteira de i
 | **Ativos** | `POST/GET/PUT/DELETE /assets` | ✅ Completo | [API](./api/endpoints.md#ativos) |
 | | `GET /assets/{id}/operations` | ✅ Completo | |
 | **Operações** | `POST/GET/PUT/DELETE /operations` | ✅ Completo | [API](./api/endpoints.md#operações) |
+| **Dashboard** | `GET /dashboard/summary` | ✅ Completo | 🆕 **9 Jan 2026** |
 | **Import B3** | `POST /import/b3` | ✅ Completo | [Ref](./REFERENCIA-TECNICA.md#importação-b3) |
 | **Renda Fixa** | `POST/GET/PUT/DELETE /fixed-income/assets` | ✅ Completo | [Guia](./renda-fixa.md) |
 | | `POST /fixed-income/operations` | ✅ Completo | |
@@ -101,7 +102,7 @@ O Portfolio Manager v2 é um **sistema funcional** para gestão de carteira de i
 | **Carteira** | `/portfolio` | ✅ **Completo** | CRUD ativos, tabela agregada, estatísticas, navegação |
 | **Detalhes** | `/portfolio/:id` | ✅ **Completo** | Operações por ativo, resumo por mercado, CRUD operações |
 | **Renda Fixa** | `/fixed-income` | ✅ **Completo** | CRUD RF, projeções, operações, edição inline |
-| **Dashboard** | `/` | ⚠️ **Placeholder** | Apenas título e descrição |
+| **Dashboard** | `/` | ✅ **Completo** | Cards de resumo, top 5 posições, operações recentes, alocação |
 | **Análises** | `/analysis` | ⚠️ **Placeholder** | Apenas título e descrição |
 | **Config** | `/settings` | ⚠️ **Placeholder** | Apenas título e descrição |
 
@@ -136,7 +137,7 @@ O Portfolio Manager v2 é um **sistema funcional** para gestão de carteira de i
 ### 🔴 Pendências Atuais
 
 | ID | Problema | Impacto | Localização | Prioridade |
-|----|----------|---------|-------------|------------|
+|-~~P01~~ | ~~Dashboard vazio~~ | ✅ Implementado (9 Jan 2026) | `frontend/src/pages/Dashboard.tsx` | ~~P1~~
 | **P01** | Dashboard vazio | UX incompleta — landing page sem valor | `frontend/src/pages/Dashboard.tsx` | P1 |
 | **P02** | Análises vazias | Feature prometida não entregue | `frontend/src/pages/Analysis.tsx` | P1 |
 | **P03** | Cobertura de testes baixa | Apenas testes de consolidação implementados | `backend/tests/`, `frontend/` | P2 |

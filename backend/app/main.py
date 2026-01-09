@@ -34,6 +34,9 @@ from app.repositories.assets_repository import (
     update_asset,
     delete_asset
 )
+from app.repositories.dashboard_repository import (
+    get_dashboard_summary
+)
 from app.repositories.fixed_income_repository import (
     create_fixed_income_asset,
     list_fixed_income_assets,
@@ -111,6 +114,27 @@ def startup():
 @app.get("/health")
 def health():
     return {"status": "ok"}
+
+# ========== DASHBOARD ==========
+
+@app.get("/dashboard/summary")
+def get_dashboard():
+    """
+    Retorna um resumo completo da carteira para o dashboard.
+    
+    Inclui:
+    - Totalizadores (total investido, valor atual, número de ativos)
+    - Top 5 posições
+    - Operações recentes (últimas 10)
+    - Distribuição por classe de ativo
+    """
+    try:
+        logger.info("📊 Buscando resumo do dashboard")
+        summary = get_dashboard_summary()
+        return summary
+    except Exception as e:
+        logger.error(f"Erro ao buscar resumo do dashboard: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Erro ao buscar resumo: {str(e)}")
 
 # ========== ENDPOINTS DE ATIVOS ==========
 

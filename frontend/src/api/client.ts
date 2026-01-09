@@ -507,3 +507,60 @@ export async function clearQuoteCache(ticker?: string): Promise<{ status: string
   return response.json();
 }
 
+// ========== DASHBOARD ==========
+
+export interface TopPosition {
+  id: number;
+  ticker: string;
+  asset_class: string;
+  product_name: string;
+  quantity: number;
+  invested_value: number;
+  average_price: number;
+}
+
+export interface RecentOperation {
+  id: number;
+  asset_id: number;
+  ticker: string;
+  asset_class: string;
+  product_name: string;
+  movement_type: string;
+  quantity: number;
+  price: number;
+  value: number;
+  trade_date: string;
+  market?: string;
+  source: string;
+}
+
+export interface AssetAllocation {
+  asset_class: string;
+  count: number;
+  value: number;
+  percentage: number;
+}
+
+export interface DashboardSummary {
+  total_assets: number;
+  total_invested: number;
+  current_value: number;
+  total_bought_value: number;
+  total_sold_value: number;
+  top_positions: TopPosition[];
+  recent_operations: RecentOperation[];
+  asset_allocation: AssetAllocation[];
+  daily_change: number;
+  daily_change_percent: number;
+}
+
+export async function fetchDashboardSummary(): Promise<DashboardSummary> {
+  const response = await fetch(`${API_URL}/dashboard/summary`);
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ detail: "Erro ao carregar resumo do dashboard" }));
+    throw new Error(error.detail || "Erro ao carregar resumo do dashboard");
+  }
+
+  return response.json();
+}
