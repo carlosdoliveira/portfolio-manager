@@ -28,6 +28,12 @@ coverage/
 /backend/app/data/*.sqlite3
 *.db
 
+# SQLite WAL (Write-Ahead Logging) files
+*.db-wal
+*.db-shm
+/backend/data/*.db-wal
+/backend/data/*.db-shm
+
 # Logs
 *.log
 logs/
