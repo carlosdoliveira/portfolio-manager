@@ -73,6 +73,9 @@ docker-compose.override.yml
 *.pid
 *.sqlite
 
+# MkDocs
+site/
+
 # Allow README, LICENSE, etc
 !README.md
 !LICENSE
