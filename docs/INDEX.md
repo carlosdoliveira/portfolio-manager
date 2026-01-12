@@ -63,10 +63,16 @@ Bem-vindo à documentação completa do Portfolio Manager v2, um sistema de gest
   - Como operações à vista e fracionárias são consolidadas
   - Exemplos práticos e SQL
 
-- [**Integração com Cotações**](./guides/integracao-cotacoes.md) 🔥 **NOVO**
+- [**Integração com Cotações**](./guides/integracao-cotacoes.md) 🔥 **IMPLEMENTADO**
   - Cotações em tempo quase real via yfinance
   - API endpoints e uso no frontend
   - Cache e performance
+
+- [**Refatoração: Dashboard com Cotações**](./guides/refactor-dashboard-cotacoes.md) 🆕 **12 JAN 2026**
+  - Dependency injection e performance optimization
+  - Eliminação de N+1 queries com batch downloads
+  - Correção de lógica de fallback
+  - Documentação completa de APIs e comportamentos
   
 - [**Implementação CRUD**](./guides/crud-implementation.md)
   - Padrões de criação de recursos
