@@ -35,6 +35,14 @@
   color: var(--text-secondary);
 }
 
+.stat-card__value--positive {
+  color: var(--success-green);
+}
+
+.stat-card__value--negative {
+  color: var(--danger-red);
+}
+
 .stat-card__sublabel {
   font-size: 0.75rem;
   color: var(--text-tertiary);
