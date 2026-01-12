@@ -1,25 +1,36 @@
 import logging
 from app.db.database import get_db
-from app.services.market_data_service import MarketDataService
+from app.services.market_data_service import get_market_data_service
 
 logger = logging.getLogger(__name__)
-market_service = MarketDataService()
 
 
 def get_dashboard_summary() -> dict:
     """
     Busca um resumo completo da carteira para o dashboard.
     
+    O cálculo do valor atual da carteira (`current_value`) utiliza cotações de 
+    mercado em tempo real para Ações e ETFs, obtidas via MarketDataService.
+    Para outros ativos (FIIs, etc.) ou quando cotações não estão disponíveis,
+    utiliza-se o valor investido como fallback.
+    
+    Os campos `daily_change` e `daily_change_percent` representam o lucro/prejuízo
+    TOTAL acumulado da carteira (variação = current_value - total_invested), não
+    a variação diária. Os nomes foram mantidos para compatibilidade com o frontend.
+    
     Returns:
         Dicionário com:
         - total_assets: número total de ativos com posição
         - total_invested: valor total investido (compras - vendas)
-        - current_value: valor atual da carteira (com cotações se disponíveis)
+        - current_value: valor atual da carteira calculado com cotações de mercado
+                        para Ações/ETFs, valor investido para outros ativos
         - total_bought_value: soma de todas as compras
         - total_sold_value: soma de todas as vendas
         - top_positions: lista dos 5 maiores ativos por valor investido
         - recent_operations: lista das 10 operações mais recentes
         - asset_allocation: distribuição por classe de ativo
+        - daily_change: lucro/prejuízo total em reais (valor atual - investido)
+        - daily_change_percent: percentual de retorno sobre investimento
     """
     with get_db() as conn:
         cursor = conn.cursor()
@@ -144,7 +155,9 @@ def get_dashboard_summary() -> dict:
             })
         
         # 5. Calcular valor atual da carteira com cotações
+        market_service = get_market_data_service()
         current_value = 0
+        quotes_found = False
         tickers_with_positions = []
         
         logger.info("💰 Calculando valor atual da carteira com cotações...")
@@ -193,6 +206,7 @@ def get_dashboard_summary() -> dict:
                     # Usar cotação atual
                     market_value = position * quote['price']
                     current_value += market_value
+                    quotes_found = True
                     logger.info(f"  📊 {ticker}: {position} x R$ {quote['price']:.2f} = R$ {market_value:.2f} (investido: R$ {invested:.2f})")
                 else:
                     # Se não tiver cotação, usar valor investido
@@ -214,10 +228,10 @@ def get_dashboard_summary() -> dict:
             current_value += other_value
             logger.info(f"💼 Outros ativos (FIIs, etc): R$ {other_value:.2f}")
         
-        # Se não calculou nada, usar valor investido total
-        if current_value == 0:
+        # Se não encontrou nenhuma cotação válida para ações/ETFs, usar valor investido total
+        if not quotes_found and current_value == 0:
             current_value = total_invested
-            logger.warning("⚠️  Nenhuma cotação encontrada, usando valor investido")
+            logger.warning("⚠️  Nenhuma cotação encontrada, usando valor investido total")
         
         # 6. Calcular variação (lucro/prejuízo total)
         variation = current_value - total_invested
@@ -234,6 +248,8 @@ def get_dashboard_summary() -> dict:
             "top_positions": top_positions,
             "recent_operations": recent_operations,
             "asset_allocation": asset_allocation,
-            "daily_change": variation,  # Renomeado mas mantém compatibilidade com frontend
-            "daily_change_percent": variation_percent  # Renomeado mas mantém compatibilidade
+            # ATENÇÃO: estes campos representam lucro/prejuízo TOTAL acumulado,
+            # não variação diária. Os nomes foram mantidos por compatibilidade com frontend legado.
+            "daily_change": variation,
+            "daily_change_percent": variation_percent
         }
