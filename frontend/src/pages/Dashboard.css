@@ -1,6 +1,6 @@
 .stat-card {
   background: #fff;
-  border: 1px solid var(--border-gray);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   padding: 1.5rem;
   transition: all 0.2s ease;
@@ -35,9 +35,17 @@
   color: var(--text-secondary);
 }
 
+.stat-card__value--positive {
+  color: var(--success);
+}
+
+.stat-card__value--negative {
+  color: var(--danger);
+}
+
 .stat-card__sublabel {
   font-size: 0.75rem;
-  color: var(--text-tertiary);
+  color: var(--color-text-muted);
   margin-top: 0.25rem;
 }
 
@@ -51,11 +59,11 @@
 }
 
 .stat-card__change--positive {
-  color: var(--success-green);
+  color: var(--success);
 }
 
 .stat-card__change--negative {
-  color: var(--danger-red);
+  color: var(--danger);
 }
 
 .stat-card__change--neutral {
@@ -107,7 +115,7 @@
 /* Section Card */
 .section-card {
   background: #fff;
-  border: 1px solid var(--border-gray);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   padding: 1.5rem;
 }
@@ -118,7 +126,7 @@
   align-items: center;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border-gray);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .section-card__title {
@@ -153,7 +161,7 @@
   text-transform: uppercase;
   color: var(--text-secondary);
   padding: 0.75rem 0.5rem;
-  border-bottom: 1px solid var(--border-gray);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .positions-table td {
@@ -228,13 +236,13 @@
 }
 
 .operation-item__badge--buy {
-  background: var(--success-light);
-  color: var(--success-green);
+  background: #d1fae5;
+  color: var(--success);
 }
 
 .operation-item__badge--sell {
-  background: var(--danger-light);
-  color: var(--danger-red);
+  background: #fee2e2;
+  color: var(--danger);
 }
 
 .operation-item__value {
@@ -245,7 +253,7 @@
 
 .operation-item__date {
   font-size: 0.75rem;
-  color: var(--text-tertiary);
+  color: var(--color-text-muted);
   margin-top: 0.25rem;
 }
 
@@ -284,7 +292,7 @@
 
 .allocation-item__percentage {
   font-size: 0.75rem;
-  color: var(--text-tertiary);
+  color: var(--color-text-muted);
   min-width: 50px;
   text-align: right;
 }
@@ -300,8 +308,8 @@
 
 /* Error State */
 .dashboard__error {
-  background: var(--danger-light);
-  color: var(--danger-red);
+  background: #fee2e2;
+  color: var(--danger);
   padding: 1rem;
   border-radius: 6px;
   margin-bottom: 1rem;

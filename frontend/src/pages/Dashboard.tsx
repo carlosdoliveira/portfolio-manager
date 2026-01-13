@@ -102,12 +102,16 @@ export default function Dashboard() {
           <div className="stat-card__value stat-card__value--currency">
             {formatCurrency(summary.current_value)}
           </div>
-          <div className="stat-card__sublabel">Posição consolidada</div>
+          <div className="stat-card__sublabel">Com cotações atuais</div>
         </div>
 
         <div className="stat-card">
-          <div className="stat-card__label">Variação</div>
-          <div className="stat-card__value">
+          <div className="stat-card__label">Lucro/Prejuízo</div>
+          <div className={`stat-card__value ${
+            summary.daily_change_percent >= 0 
+              ? "stat-card__value--positive" 
+              : "stat-card__value--negative"
+          }`}>
             {summary.daily_change_percent > 0 ? "+" : ""}
             {summary.daily_change_percent.toFixed(2)}%
           </div>

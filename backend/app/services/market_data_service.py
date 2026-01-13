@@ -130,7 +130,7 @@ class MarketDataService:
     
     def get_batch_quotes(self, tickers: List[str]) -> Dict[str, Optional[Dict]]:
         """
-        Busca cotações de múltiplos ativos.
+        Busca cotações de múltiplos ativos em lote usando batch download do yfinance.
         
         Args:
             tickers: Lista de códigos de ativos
@@ -145,11 +145,138 @@ class MarketDataService:
             'INVALID': None
         }
         """
-        results = {}
+        if not tickers:
+            return {}
         
+        results = {}
+        tickers_to_fetch = []
+        
+        # Separar tickers que já estão em cache dos que precisam ser buscados
         for ticker in tickers:
             ticker_clean = ticker.upper().replace('.SA', '')
-            results[ticker_clean] = self.get_quote(ticker)
+            if self._is_cache_valid(ticker_clean):
+                results[ticker_clean] = self._cache[ticker_clean]['data']
+            else:
+                tickers_to_fetch.append(ticker_clean)
+        
+        # Se todos já estão em cache, retornar
+        if not tickers_to_fetch:
+            return results
+        
+        # Normalizar tickers para formato Yahoo Finance
+        tickers_normalized = [self._normalize_ticker(t) for t in tickers_to_fetch]
+        
+        try:
+            # Buscar múltiplas cotações em uma única chamada usando yfinance
+            import pandas as pd
+            
+            # Usar download para buscar dados históricos de múltiplos tickers
+            data = yf.download(
+                tickers=tickers_normalized,
+                period='1d',
+                group_by='ticker',
+                progress=False,
+                threads=True
+            )
+            
+            # Se for apenas um ticker, yfinance retorna formato diferente
+            if len(tickers_normalized) == 1:
+                ticker_clean = tickers_to_fetch[0]
+                ticker_normalized = tickers_normalized[0]
+                
+                if not data.empty and 'Close' in data.columns:
+                    try:
+                        # Buscar info adicional para previous_close
+                        stock = yf.Ticker(ticker_normalized)
+                        info = stock.info
+                        
+                        last_row = data.iloc[-1]
+                        current_price = float(last_row['Close'])
+                        
+                        previous_close = info.get('previousClose', current_price)
+                        change = current_price - previous_close
+                        change_percent = (change / previous_close * 100) if previous_close else 0
+                        
+                        quote_data = {
+                            'ticker': ticker_clean,
+                            'price': round(current_price, 2),
+                            'change': round(change, 2),
+                            'change_percent': round(change_percent, 2),
+                            'volume': int(last_row['Volume']) if not pd.isna(last_row['Volume']) else 0,
+                            'open': round(float(last_row['Open']), 2) if not pd.isna(last_row['Open']) else 0,
+                            'high': round(float(last_row['High']), 2) if not pd.isna(last_row['High']) else 0,
+                            'low': round(float(last_row['Low']), 2) if not pd.isna(last_row['Low']) else 0,
+                            'previous_close': round(float(previous_close), 2),
+                            'updated_at': data.index[-1].isoformat(),
+                            'source': 'yfinance'
+                        }
+                        
+                        # Cachear
+                        self._cache[ticker_clean] = {
+                            'data': quote_data,
+                            'cached_at': datetime.now()
+                        }
+                        results[ticker_clean] = quote_data
+                    except Exception as e:
+                        print(f"Erro ao processar cotação de {ticker_normalized}: {str(e)}")
+                        results[ticker_clean] = None
+                else:
+                    results[ticker_clean] = None
+            else:
+                # Múltiplos tickers - processar cada um
+                for i, ticker_clean in enumerate(tickers_to_fetch):
+                    ticker_normalized = tickers_normalized[i]
+                    
+                    try:
+                        # Acessar dados do ticker específico
+                        if ticker_normalized in data.columns.get_level_values(0):
+                            ticker_data = data[ticker_normalized]
+                            
+                            if not ticker_data.empty and 'Close' in ticker_data.columns:
+                                # Buscar info adicional para previous_close
+                                stock = yf.Ticker(ticker_normalized)
+                                info = stock.info
+                                
+                                last_row = ticker_data.iloc[-1]
+                                current_price = float(last_row['Close'])
+                                
+                                previous_close = info.get('previousClose', current_price)
+                                change = current_price - previous_close
+                                change_percent = (change / previous_close * 100) if previous_close else 0
+                                
+                                quote_data = {
+                                    'ticker': ticker_clean,
+                                    'price': round(current_price, 2),
+                                    'change': round(change, 2),
+                                    'change_percent': round(change_percent, 2),
+                                    'volume': int(last_row['Volume']) if not pd.isna(last_row['Volume']) else 0,
+                                    'open': round(float(last_row['Open']), 2) if not pd.isna(last_row['Open']) else 0,
+                                    'high': round(float(last_row['High']), 2) if not pd.isna(last_row['High']) else 0,
+                                    'low': round(float(last_row['Low']), 2) if not pd.isna(last_row['Low']) else 0,
+                                    'previous_close': round(float(previous_close), 2),
+                                    'updated_at': ticker_data.index[-1].isoformat(),
+                                    'source': 'yfinance'
+                                }
+                                
+                                # Cachear
+                                self._cache[ticker_clean] = {
+                                    'data': quote_data,
+                                    'cached_at': datetime.now()
+                                }
+                                results[ticker_clean] = quote_data
+                            else:
+                                results[ticker_clean] = None
+                        else:
+                            results[ticker_clean] = None
+                    except Exception as e:
+                        print(f"Erro ao processar cotação de {ticker_normalized}: {str(e)}")
+                        results[ticker_clean] = None
+                        
+        except Exception as e:
+            print(f"Erro ao buscar cotações em lote: {str(e)}")
+            # Fallback para busca individual
+            for ticker_clean in tickers_to_fetch:
+                results[ticker_clean] = self.get_quote(ticker_clean)
         
         return results
     
