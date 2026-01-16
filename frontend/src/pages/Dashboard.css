@@ -35,6 +35,14 @@
   color: var(--text-secondary);
 }
 
+.stat-card__value--positive {
+  color: var(--success-green);
+}
+
+.stat-card__value--negative {
+  color: var(--danger-red);
+}
+
 .stat-card__sublabel {
   font-size: 0.75rem;
   color: var(--text-tertiary);
@@ -250,6 +258,18 @@
 }
 
 /* Allocation Chart Placeholder */
+.allocation-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.allocation-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
 .allocation-chart {
   display: flex;
   flex-direction: column;
@@ -259,7 +279,7 @@
 .allocation-item {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .allocation-item__color {

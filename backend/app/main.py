@@ -37,6 +37,7 @@ from app.repositories.assets_repository import (
 from app.repositories.dashboard_repository import (
     get_dashboard_summary
 )
+from app.repositories import quotes_repository
 from app.repositories.fixed_income_repository import (
     create_fixed_income_asset,
     list_fixed_income_assets,
@@ -135,6 +136,76 @@ def get_dashboard():
     except Exception as e:
         logger.error(f"Erro ao buscar resumo do dashboard: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Erro ao buscar resumo: {str(e)}")
+
+# ========== ENDPOINTS DE COTAÇÕES ==========
+
+@app.post("/quotes/update")
+def update_quotes():
+    """
+    Atualiza cotações de todos os ativos com posição.
+    Busca do yfinance e salva no cache do banco de dados.
+    """
+    try:
+        logger.info("🔄 Iniciando atualização de cotações")
+        
+        # Buscar tickers que precisam atualização
+        tickers = quotes_repository.get_tickers_to_update()
+        
+        if not tickers:
+            return {"message": "Nenhum ticker para atualizar", "updated": 0}
+        
+        logger.info(f"📋 {len(tickers)} tickers para atualizar: {', '.join(tickers[:5])}{'...' if len(tickers) > 5 else ''}")
+        
+        # Buscar cotações em lote do yfinance
+        market_service = get_market_data_service()
+        quotes = market_service.get_batch_quotes(tickers)
+        
+        # Salvar no banco
+        updated_count = 0
+        for ticker, quote_data in quotes.items():
+            if quote_data:
+                if quotes_repository.save_quote(ticker, quote_data):
+                    updated_count += 1
+        
+        logger.info(f"✅ {updated_count} cotações atualizadas com sucesso")
+        
+        return {
+            "message": f"{updated_count} cotações atualizadas",
+            "total_tickers": len(tickers),
+            "updated": updated_count
+        }
+        
+    except Exception as e:
+        logger.error(f"Erro ao atualizar cotações: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Erro ao atualizar cotações: {str(e)}")
+
+@app.get("/quotes")
+def list_quotes():
+    """
+    Lista todas as cotações armazenadas no cache.
+    """
+    try:
+        quotes = quotes_repository.get_all_quotes()
+        return quotes
+    except Exception as e:
+        logger.error(f"Erro ao listar cotações: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Erro ao listar cotações: {str(e)}")
+
+@app.get("/quotes/{ticker}")
+def get_quote(ticker: str):
+    """
+    Busca cotação de um ticker específico do cache.
+    """
+    try:
+        quote = quotes_repository.get_quote(ticker.upper())
+        if not quote:
+            raise HTTPException(status_code=404, detail=f"Cotação de {ticker} não encontrada")
+        return quote
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Erro ao buscar cotação de {ticker}: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Erro ao buscar cotação: {str(e)}")
 
 # ========== ENDPOINTS DE ATIVOS ==========
 

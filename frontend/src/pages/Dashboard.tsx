@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
 import { fetchDashboardSummary, DashboardSummary } from "../api/client";
 import "./Dashboard.css";
 
@@ -102,12 +103,16 @@ export default function Dashboard() {
           <div className="stat-card__value stat-card__value--currency">
             {formatCurrency(summary.current_value)}
           </div>
-          <div className="stat-card__sublabel">Posição consolidada</div>
+          <div className="stat-card__sublabel">Com cotações atuais</div>
         </div>
 
         <div className="stat-card">
-          <div className="stat-card__label">Variação</div>
-          <div className="stat-card__value">
+          <div className="stat-card__label">Lucro/Prejuízo</div>
+          <div className={`stat-card__value ${
+            summary.daily_change_percent >= 0 
+              ? "stat-card__value--positive" 
+              : "stat-card__value--negative"
+          }`}>
             {summary.daily_change_percent > 0 ? "+" : ""}
             {summary.daily_change_percent.toFixed(2)}%
           </div>
@@ -185,17 +190,50 @@ export default function Dashboard() {
               Sem dados de alocação
             </p>
           ) : (
-            <div className="allocation-chart">
-              {summary.asset_allocation.map((allocation, index) => (
-                <div key={allocation.asset_class} className="allocation-item">
-                  <div 
-                    className="allocation-item__color"
-                    style={{ backgroundColor: allocationColors[index % allocationColors.length] }}
+            <div className="allocation-container">
+              {/* Gráfico de Pizza */}
+              <ResponsiveContainer width="100%" height={250}>
+                <PieChart>
+                  <Pie
+                    data={summary.asset_allocation.map((allocation, index) => ({
+                      name: allocation.asset_class,
+                      value: allocation.value,
+                      percentage: allocation.percentage
+                    }))}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    label={({ percentage }) => `${percentage.toFixed(1)}%`}
+                    outerRadius={80}
+                    fill="#8884d8"
+                    dataKey="value"
+                  >
+                    {summary.asset_allocation.map((_, index) => (
+                      <Cell key={`cell-${index}`} fill={allocationColors[index % allocationColors.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip 
+                    formatter={(value: number) => `R$ ${value.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
                   />
-                  <div className="allocation-item__label">{allocation.asset_class}</div>
-                  <div className="allocation-item__percentage">{allocation.percentage.toFixed(1)}%</div>
-                </div>
-              ))}
+                </PieChart>
+              </ResponsiveContainer>
+
+              {/* Legenda */}
+              <div className="allocation-legend">
+                {summary.asset_allocation.map((allocation, index) => (
+                  <div key={allocation.asset_class} className="allocation-item">
+                    <div 
+                      className="allocation-item__color"
+                      style={{ backgroundColor: allocationColors[index % allocationColors.length] }}
+                    />
+                    <div className="allocation-item__label">{allocation.asset_class}</div>
+                    <div className="allocation-item__value">
+                      R$ {formatCurrency(allocation.value)}
+                    </div>
+                    <div className="allocation-item__percentage">{allocation.percentage.toFixed(1)}%</div>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </div>

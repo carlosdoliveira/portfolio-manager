@@ -1,7 +1,10 @@
 import logging
 from app.db.database import get_db
+from app.services.market_data_service import MarketDataService
+from app.repositories import quotes_repository
 
 logger = logging.getLogger(__name__)
+market_service = MarketDataService()
 
 
 def get_dashboard_summary() -> dict:
@@ -141,17 +144,96 @@ def get_dashboard_summary() -> dict:
                 "percentage": round(percentage, 2)
             })
         
-        logger.info(f"Dashboard summary: {total_assets} ativos, R$ {total_invested:.2f} investido")
+        # 5. Calcular valor atual da carteira com cotações
+        current_value = 0
+        tickers_with_positions = []
+        
+        logger.info("💰 Calculando valor atual da carteira...")
+        
+        # Buscar todos os ativos com posição (Ações e ETFs)
+        cursor.execute("""
+            SELECT 
+                a.ticker,
+                COALESCE(SUM(CASE WHEN UPPER(o.movement_type) = 'COMPRA' THEN o.quantity ELSE 0 END), 0) as total_bought,
+                COALESCE(SUM(CASE WHEN UPPER(o.movement_type) = 'VENDA' THEN o.quantity ELSE 0 END), 0) as total_sold,
+                COALESCE(SUM(CASE WHEN UPPER(o.movement_type) = 'COMPRA' THEN o.value ELSE 0 END), 0) as bought_value,
+                COALESCE(SUM(CASE WHEN UPPER(o.movement_type) = 'VENDA' THEN o.value ELSE 0 END), 0) as sold_value
+            FROM assets a
+            LEFT JOIN operations o ON a.id = o.asset_id AND o.status = 'ACTIVE'
+            WHERE a.status = 'ACTIVE' AND (a.asset_class = 'AÇÕES' OR a.asset_class = 'ETF')
+            GROUP BY a.ticker
+            HAVING (total_bought - total_sold) > 0
+        """)
+        
+        for row in cursor.fetchall():
+            ticker = row[0]
+            current_position = row[1] - row[2]
+            invested_value = row[3] - row[4]
+            tickers_with_positions.append((ticker, current_position, invested_value))
+        
+        logger.info(f"📈 Encontrados {len(tickers_with_positions)} ativos com posição")
+        
+        # Buscar cotações (primeiro do cache, depois do yfinance)
+        if tickers_with_positions:
+            for ticker, position, invested in tickers_with_positions:
+                # Tentar buscar do cache primeiro
+                quote = quotes_repository.get_quote(ticker)
+                
+                if quote and quote.get('price'):
+                    # Usar cotação do cache
+                    market_value = position * quote['price']
+                    current_value += market_value
+                    logger.info(f"  📊 {ticker}: {position} x R$ {quote['price']:.2f} = R$ {market_value:.2f} (cache)")
+                else:
+                    # Fallback: buscar do yfinance
+                    logger.info(f"  🔍 Buscando cotação de {ticker} no yfinance...")
+                    quote = market_service.get_quote(ticker)
+                    
+                    if quote and quote.get('price'):
+                        market_value = position * quote['price']
+                        current_value += market_value
+                        logger.info(f"  📊 {ticker}: {position} x R$ {quote['price']:.2f} = R$ {market_value:.2f}")
+                        # Salvar no cache
+                        quotes_repository.save_quote(ticker, quote)
+                    else:
+                        # Sem cotação: usar valor investido
+                        current_value += invested
+                        logger.warning(f"  ⚠️  {ticker}: sem cotação, usando valor investido R$ {invested:.2f}")
+        
+        # Para FIIs e outros ativos, usar valor investido
+        cursor.execute("""
+            SELECT 
+                COALESCE(SUM(CASE WHEN UPPER(o.movement_type) = 'COMPRA' THEN o.value ELSE 0 END), 0) as bought,
+                COALESCE(SUM(CASE WHEN UPPER(o.movement_type) = 'VENDA' THEN o.value ELSE 0 END), 0) as sold
+            FROM operations o
+            INNER JOIN assets a ON a.id = o.asset_id
+            WHERE a.status = 'ACTIVE' AND a.asset_class NOT IN ('AÇÕES', 'ETF') AND o.status = 'ACTIVE'
+        """)
+        other_value_row = cursor.fetchone()
+        if other_value_row:
+            other_value = other_value_row[0] - other_value_row[1]
+            current_value += other_value
+            logger.info(f"💼 Outros ativos (FIIs, etc): R$ {other_value:.2f}")
+        
+        # Se não calculou nada, usar valor investido total
+        if current_value == 0:
+            current_value = total_invested
+        
+        # 6. Calcular variação (lucro/prejuízo total)
+        variation = current_value - total_invested
+        variation_percent = (variation / total_invested * 100) if total_invested > 0 else 0
+        
+        logger.info(f"Dashboard summary: {total_assets} ativos, R$ {total_invested:.2f} investido, R$ {current_value:.2f} atual, variação: R$ {variation:.2f} ({variation_percent:.2f}%)")
         
         return {
             "total_assets": total_assets,
             "total_invested": total_invested,
-            "current_value": total_invested,  # Será substituído por cotações se disponíveis
+            "current_value": current_value,
             "total_bought_value": total_bought_value,
             "total_sold_value": total_sold_value,
             "top_positions": top_positions,
             "recent_operations": recent_operations,
             "asset_allocation": asset_allocation,
-            "daily_change": 0,  # Placeholder para integração futura
-            "daily_change_percent": 0  # Placeholder para integração futura
+            "daily_change": variation,
+            "daily_change_percent": variation_percent
         }

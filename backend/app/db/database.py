@@ -145,6 +145,25 @@ def init_db():
         )
     """)
 
+    # Tabela de cotações (cache)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS quotes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            ticker TEXT NOT NULL,
+            price REAL NOT NULL,
+            change_value REAL,
+            change_percent REAL,
+            volume INTEGER,
+            open_price REAL,
+            high_price REAL,
+            low_price REAL,
+            previous_close REAL,
+            source TEXT NOT NULL,
+            updated_at TEXT NOT NULL,
+            UNIQUE (ticker)
+        )
+    """)
+
     conn.commit()
     conn.close()
     logger.info("Banco de dados inicializado com sucesso")
