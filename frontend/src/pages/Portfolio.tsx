@@ -172,12 +172,20 @@ export default function Portfolio() {
   const totalInvested = totalBoughtValue - totalSoldValue;
   
   // Valor Atual da Carteira = Preço de mercado * Posição atual
+  // Para ativos sem cotação, usa valor investido líquido
   const portfolioMarketValue = assets.reduce((sum, asset) => {
     const quote = quotes[asset.ticker];
     const position = asset.current_position || 0;
     
-    if (quote && quote.price && position > 0) {
-      return sum + (quote.price * position);
+    if (position > 0) {
+      if (quote && quote.price) {
+        // Usar cotação de mercado
+        return sum + (quote.price * position);
+      } else {
+        // Sem cotação: usar valor investido líquido (compras - vendas)
+        const investedValue = (asset.total_bought_value || 0) - (asset.total_sold_value || 0);
+        return sum + investedValue;
+      }
     }
     
     return sum;
