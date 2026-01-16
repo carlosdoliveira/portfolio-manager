@@ -32,7 +32,11 @@
 
   /* Status colors */
   --success: #22c55e;
+  --success-green: #22c55e;
   --danger: #ef4444;
+  --danger-red: #ef4444;
+  --danger-light: #fee2e2;
+  --success-light: #dcfce7;
   --warning: #fbbf24;
 
   /* Spacing */

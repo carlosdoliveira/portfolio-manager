@@ -37,7 +37,12 @@ from app.repositories.assets_repository import (
 from app.repositories.dashboard_repository import (
     get_dashboard_summary
 )
-from app.repositories import quotes_repository
+from app.repositories.quotes_repository import (
+    save_quote,
+    get_quote,
+    get_all_quotes,
+    get_tickers_to_update
+)
 from app.repositories.fixed_income_repository import (
     create_fixed_income_asset,
     list_fixed_income_assets,
@@ -149,7 +154,7 @@ def update_quotes():
         logger.info("🔄 Iniciando atualização de cotações")
         
         # Buscar tickers que precisam atualização
-        tickers = quotes_repository.get_tickers_to_update()
+        tickers = get_tickers_to_update()
         
         if not tickers:
             return {"message": "Nenhum ticker para atualizar", "updated": 0}
@@ -164,7 +169,18 @@ def update_quotes():
         updated_count = 0
         for ticker, quote_data in quotes.items():
             if quote_data:
-                if quotes_repository.save_quote(ticker, quote_data):
+                if save_quote(
+                    ticker=ticker,
+                    price=quote_data.get("price"),
+                    change_value=quote_data.get("change_value"),
+                    change_percent=quote_data.get("change_percent"),
+                    volume=quote_data.get("volume"),
+                    open_price=quote_data.get("open_price"),
+                    high_price=quote_data.get("high_price"),
+                    low_price=quote_data.get("low_price"),
+                    previous_close=quote_data.get("previous_close"),
+                    source="yfinance"
+                ):
                     updated_count += 1
         
         logger.info(f"✅ {updated_count} cotações atualizadas com sucesso")
@@ -185,19 +201,19 @@ def list_quotes():
     Lista todas as cotações armazenadas no cache.
     """
     try:
-        quotes = quotes_repository.get_all_quotes()
+        quotes = get_all_quotes()
         return quotes
     except Exception as e:
         logger.error(f"Erro ao listar cotações: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Erro ao listar cotações: {str(e)}")
 
 @app.get("/quotes/{ticker}")
-def get_quote(ticker: str):
+def get_quote_endpoint(ticker: str):
     """
     Busca cotação de um ticker específico do cache.
     """
     try:
-        quote = quotes_repository.get_quote(ticker.upper())
+        quote = get_quote(ticker.upper())
         if not quote:
             raise HTTPException(status_code=404, detail=f"Cotação de {ticker} não encontrada")
         return quote
@@ -662,6 +678,9 @@ def get_portfolio_quotes_endpoint():
     """
     Busca cotações de todos os ativos com posição atual no portfólio.
     
+    IMPORTANTE: Usa cache de cotações quando disponível (atualizado a cada 15 min via cron).
+    Busca cotação em tempo real via yfinance apenas se não houver cache.
+    
     Returns:
         Dicionário com ticker -> cotação para todos os ativos em carteira
     """
@@ -680,11 +699,51 @@ def get_portfolio_quotes_endpoint():
         if not tickers_with_position:
             return {}
         
-        # Buscar cotações em lote
+        # Buscar cotações usando o sistema de cache
         market_service = get_market_data_service()
-        quotes = market_service.get_batch_quotes(tickers_with_position)
+        quotes_result = {}
         
-        return quotes
+        for ticker in tickers_with_position:
+            # 1. Tentar cache primeiro
+            cached_quote = get_quote(ticker)
+            
+            if cached_quote:
+                logger.debug(f"📦 {ticker}: usando cotação do cache")
+                quotes_result[ticker] = {
+                    "price": cached_quote["price"],
+                    "change_percent": cached_quote.get("change_percent"),
+                    "change_value": cached_quote.get("change_value"),
+                    "volume": cached_quote.get("volume"),
+                    "source": "cache"
+                }
+            else:
+                # 2. Se não houver cache, buscar via yfinance
+                logger.debug(f"🌐 {ticker}: buscando cotação via yfinance")
+                try:
+                    quote = market_service.get_quote(ticker)
+                    if quote and quote.get("price"):
+                        quotes_result[ticker] = quote
+                        
+                        # Salvar no cache para próximas requisições
+                        save_quote(
+                            ticker=ticker,
+                            price=quote["price"],
+                            change_value=quote.get("change_value"),
+                            change_percent=quote.get("change_percent"),
+                            volume=quote.get("volume"),
+                            open_price=quote.get("open_price"),
+                            high_price=quote.get("high_price"),
+                            low_price=quote.get("low_price"),
+                            previous_close=quote.get("previous_close"),
+                            source="yfinance"
+                        )
+                        logger.debug(f"💾 {ticker}: cotação salva no cache")
+                except Exception as e:
+                    logger.error(f"Erro ao buscar cotação de {ticker}: {str(e)}")
+                    # Continuar com próximo ticker em caso de erro
+                    continue
+        
+        return quotes_result
         
     except Exception as e:
         logger.error(f"Erro ao buscar cotações do portfólio: {str(e)}")

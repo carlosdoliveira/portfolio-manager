@@ -109,7 +109,7 @@ export default function Dashboard() {
         <div className="stat-card">
           <div className="stat-card__label">Lucro/Prejuízo</div>
           <div className={`stat-card__value ${
-            summary.daily_change_percent >= 0 
+            summary.daily_change_percent > 0 
               ? "stat-card__value--positive" 
               : "stat-card__value--negative"
           }`}>
@@ -117,7 +117,7 @@ export default function Dashboard() {
             {summary.daily_change_percent.toFixed(2)}%
           </div>
           <div className={`stat-card__change ${
-            summary.daily_change >= 0 
+            summary.daily_change > 0 
               ? "stat-card__change--positive" 
               : "stat-card__change--negative"
           }`}>

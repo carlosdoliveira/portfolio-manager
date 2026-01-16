@@ -161,8 +161,10 @@ Ou adicione no arquivo `.env` na raiz do projeto.
 - `POST /operations` — Criar operação manual
 - `POST /fixed-income/assets` — Criar ativo RF
 - `GET /fixed-income/projection/{id}` — Projeção de rendimento
+- `GET /quotes/portfolio/current` — Cotações do portfólio (com cache)
 
-📖 **Documentação completa:** [api/endpoints.md](api/endpoints.md)
+📖 **Documentação completa:** [api/endpoints.md](api/endpoints.md)  
+⚡ **Performance:** [guides/otimizacao-carteira.md](guides/otimizacao-carteira.md)
 
 ---
 
