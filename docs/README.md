@@ -1,7 +1,7 @@
 # 📚 Documentação do Portfolio Manager v2
 
-**Última atualização:** 9 de Janeiro de 2026  
-**Versão:** v2.1.0
+**Última atualização:** 17 de Janeiro de 2026  
+**Versão:** v2.2.0
 
 > 🚀 **Início Rápido:** Leia o [INDEX.md](./INDEX.md) para visão completa do sistema
 
@@ -12,7 +12,6 @@
 ### Para Todos
 - 🏠 **[INDEX.md](./INDEX.md)** — Página inicial completa com visão geral
 - 📊 **[STATUS-PROJETO.md](./STATUS-PROJETO.md)** — Estado atual e roadmap
-- 📋 **[PENDENCIAS.md](./PENDENCIAS.md)** ⭐ **NOVO** — Lista detalhada de pendências
 - 📖 **[REFERENCIA-TECNICA.md](./REFERENCIA-TECNICA.md)** — Especificações técnicas
 
 ### Para Desenvolvedores
@@ -21,11 +20,14 @@
 - [Princípios Core](./architecture/principios-core.md) — Event-based, immutability
 
 #### 🔌 API
-- [Endpoints](./api/endpoints.md) — Ativos, Operações, Renda Fixa
+- [Endpoints](./api/endpoints.md) — Ativos, Operações, Renda Fixa, Cotações
 
 #### 📖 Guias
 - [Consolidação de Mercados](./guides/consolidacao-mercados.md) ⭐ **Recomendado**
 - [Integração com Cotações](./guides/integracao-cotacoes.md) 🔥 **Implementado**
+- [Atualização de Cotações (Cron)](./guides/atualizacao-cotacoes.md) 🔥 **Implementado**
+- [Otimização de Carteira](./guides/otimizacao-carteira.md) 🔥 **Implementado**
+- [Consistência de Cálculos](./guides/consistencia-calculos.md) ✅ **Resolvido**
 - [Implementação CRUD](./guides/crud-implementation.md)
 - [Fluxo Visual de Consolidação](./guides/fluxo-consolidacao-visual.md)
 
@@ -34,9 +36,11 @@
 
 ### Documentação Especializada
 - 💰 [Renda Fixa](./renda-fixa.md) — Guia completo de RF
-- � [Integração com Cotações](./guides/integracao-cotacoes.md) — API de mercado
-- ✅ [CORRECAO-CALCULOS-CARTEIRA.md](./CORRECAO-CALCULOS-CARTEIRA.md) — Histórico de correções (CONCLUÍDO)
-- 📋 [DIAGNOSTICO-CONSOLIDACAO-FINAL.md](./DIAGNOSTICO-CONSOLIDACAO-FINAL.md) — Debug da consolidação
+- 📈 [Integração com Cotações](./guides/integracao-cotacoes.md) — API de mercado
+- ⚡ [Otimização de Carteira](./guides/otimizacao-carteira.md) — Sistema de cache
+- 🕒 [Atualização de Cotações](./guides/atualizacao-cotacoes.md) — Cron job automático
+- ✅ [Consistência de Cálculos](./guides/consistencia-calculos.md) — Correções implementadas
+- 📋 [Diagnóstico de Consolidação](./DIAGNOSTICO-CONSOLIDACAO-FINAL.md) — Debug da consolidação
 
 ---
 
@@ -46,11 +50,9 @@
 docs/
 ├── INDEX.md                    # 🏠 PÁGINA INICIAL — comece aqui
 ├── STATUS-PROJETO.md           # 📊 Estado atual e roadmap
-├── PENDENCIAS.md              # 📋 Lista detalhada de pendências ⭐ NOVO
 ├── REFERENCIA-TECNICA.md       # 📖 Especificações técnicas
 ├── renda-fixa.md              # 💰 Guia de Renda Fixa
-├── CORRECAO-CALCULOS-CARTEIRA.md  # ✅ Histórico de correções (CONCLUÍDO)
-├── DIAGNOSTICO-CONSOLIDACAO-FINAL.md  # Debug da consolidação
+├── DIAGNOSTICO-CONSOLIDACAO-FINAL.md  # 🔧 Debug da consolidação
 │
 ├── architecture/               # 🏗️ Decisões arquiteturais
 │   └── principios-core.md
@@ -59,7 +61,11 @@ docs/
 │   └── endpoints.md
 │
 ├── guides/                    # 📖 Guias práticos
-│   ├── consolidacao-mercados.md
+│   ├── consolidacao-mercados.md         # ⭐ Recomendado
+│   ├── integracao-cotacoes.md           # 🔥 Sistema de cotações
+│   ├── atualizacao-cotacoes.md          # 🔥 Cron job
+│   ├── otimizacao-carteira.md           # 🔥 Cache e performance
+│   ├── consistencia-calculos.md         # ✅ Correções implementadas
 │   ├── crud-implementation.md
 │   ├── exemplo-consolidacao.sql
 │   └── fluxo-consolidacao-visual.md
@@ -109,10 +115,14 @@ docs/
 | **Configurar ambiente local** | [development/setup.md](./development/setup.md) |
 | **Entender consolidação de mercados** | [guides/consolidacao-mercados.md](./guides/consolidacao-mercados.md) |
 | **Ver endpoints da API** | [api/endpoints.md](./api/endpoints.md) |
+| **Integrar cotações de mercado** | [guides/integracao-cotacoes.md](./guides/integracao-cotacoes.md) |
+| **Implementar cache de cotações** | [guides/otimizacao-carteira.md](./guides/otimizacao-carteira.md) |
+| **Configurar cron job de cotações** | [guides/atualizacao-cotacoes.md](./guides/atualizacao-cotacoes.md) |
 | **Calcular projeção de RF** | [REFERENCIA-TECNICA.md](./REFERENCIA-TECNICA.md#cálculo-de-projeção) |
 | **Criar novo CRUD** | [guides/crud-implementation.md](./guides/crud-implementation.md) |
 | **Saber o que está implementado** | [STATUS-PROJETO.md](./STATUS-PROJETO.md#funcionalidades-implementadas) |
 | **Ver próximos passos** | [STATUS-PROJETO.md](./STATUS-PROJETO.md#próximos-passos) |
+| **Resolver bugs de cálculo** | [guides/consistencia-calculos.md](./guides/consistencia-calculos.md) |
 
 ---
 
@@ -123,6 +133,8 @@ Análises antigas e documentos obsoletos foram movidos para [`archive/`](./archi
 - Análises de código de Dezembro/2025
 - Oportunidades de melhoria (já consolidadas)
 - Versões antigas de documentos
+- CORRECAO-CALCULOS-CARTEIRA.md (bug resolvido)
+- PENDENCIAS.md (consolidado em STATUS-PROJETO.md)
 
 **Motivo:** Informações já consolidadas em STATUS-PROJETO.md e INDEX.md
 
@@ -131,15 +143,27 @@ Análises antigas e documentos obsoletos foram movidos para [`archive/`](./archi
 ## 🆕 Novidades
 
 ### Janeiro 2026
+
+#### v2.2.0 (16 Jan 2026) 🔥
+- ✅ **Sistema de cache de cotações** — SQLite com TTL de 15min
+- ✅ **Cron job automático** — Atualização em lote a cada 15 minutos
+- ✅ **Performance otimizada** — Dashboard/Carteira <100ms (redução de 95%)
+- ✅ **Consistência de cálculos** — Dashboard e Carteira 100% sincronizados
+- ✅ **Mark-to-market real** — FIIs agora calculados com cotação de mercado
+- ✅ **Fallback inteligente** — Valor investido para ativos sem cotação
+- ✅ **Cores de lucro/prejuízo** — Verde (positivo) e vermelho (negativo)
+
+#### v2.1.0 (09 Jan 2026)
 - ✅ Consolidação de mercados documentada e implementada
 - ✅ Renda Fixa com projeções completas
 - ✅ Documentação reorganizada e atualizada
 - ✅ INDEX.md criado como página inicial
 
 ### Próximas Adições
-- 🔜 Dashboard principal (Sprint 1)
-- 🔜 Página de análises (Sprint 1)
+- 🔜 Página de análises completa (Sprint 2)
 - 🔜 Testes automatizados (Sprint 1-2)
+- 🔜 Proventos e dividendos (Sprint 3)
+- 🔜 Gráficos históricos (Sprint 4)
 
 ---
 
@@ -183,4 +207,5 @@ Análises antigas e documentos obsoletos foram movidos para [`archive/`](./archi
 ---
 
 **Mantido por:** Equipe Portfolio Manager v2  
-**Próxima Revisão:** 10/01/2026 (Sprint Planning)
+**Próxima Revisão:** 20/01/2026 (Planejamento Sprint 2)  
+**Versão Atual:** v2.2.0
