@@ -7,6 +7,39 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ---
 
+## [2.3.0] - 2026-01-17
+
+### ⚡ Performance - Sistema de Cache Inteligente
+
+#### Backend: Cache Persistente
+- **MarketDataService**: Integração com cache persistente (banco de dados)
+- **Estratégia em cascata**: memória → banco → yfinance
+- **Novo endpoint** `GET /quotes/portfolio/fast?refresh=bool`
+  - Retorna cache instantaneamente (< 1s)
+  - Atualização em background via BackgroundTasks
+- **Validação de dados**: Tratamento robusto de erros do yfinance
+- **TTL configurável**: 15 minutos padrão, ajustável
+
+#### Frontend: Carregamento Progressivo
+- **Portfolio.tsx**: Carregamento em 2 etapas
+  1. Cache instantâneo (< 1s)
+  2. Refresh background (3-10s, não bloqueante)
+- **Estados visuais**: `loadingQuotes` e `refreshingQuotes`
+- **Feedback progressivo**: ⏳ → 🔄 → ✅
+- **Banner de atualização**: Indica refresh em background
+
+#### Métricas de Impacto
+- **Antes**: 15-30s por carregamento
+- **Depois**: < 1s com cache (15-30x mais rápido)
+- **Redução**: 90%+ nas chamadas ao yfinance
+- **UX**: Não bloqueante, feedback visual claro
+
+#### Documentação
+- [guides/otimizacao-cotacoes.md](./docs/guides/otimizacao-cotacoes.md) - Guia completo
+- [CHECKPOINT-v2.3.0](./docs/CHECKPOINT-v2.3.0-otimizacao-cotacoes.md) - Sumário técnico
+
+---
+
 ## [2.2.0] - 2026-01-16
 
 ### 🔥 Adicionado

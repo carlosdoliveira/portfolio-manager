@@ -1,9 +1,10 @@
 import os
 import logging
-from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi import FastAPI, UploadFile, File, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from datetime import date
+import asyncio
 
 # Configuração de logging
 logging.basicConfig(
@@ -791,3 +792,93 @@ def clear_all_quotes_cache_endpoint():
     except Exception as e:
         logger.error(f"Erro ao limpar cache: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/quotes/portfolio/fast")
+def get_portfolio_quotes_fast(background_tasks: BackgroundTasks, refresh: bool = False):
+    """
+    Busca cotações do portfólio de forma otimizada.
+    
+    Estratégia:
+    1. Retorna imediatamente cotações do cache persistente (banco de dados)
+    2. Se refresh=true, dispara atualização em background para próximas consultas
+    
+    Args:
+        refresh: Se True, atualiza cotações em background após retornar cache
+    
+    Returns:
+        Dicionário com ticker -> cotação do cache
+    """
+    logger.debug(f"Requisição rápida de cotações (refresh={refresh})")
+    
+    try:
+        # Buscar todos os ativos com posição
+        assets = list_assets()
+        
+        # Filtrar apenas ativos com posição atual > 0
+        tickers_with_position = []
+        for asset in assets:
+            if asset.get('current_position', 0) > 0:
+                tickers_with_position.append(asset['ticker'])
+        
+        if not tickers_with_position:
+            return {}
+        
+        # Buscar cotações do cache (banco de dados) - RÁPIDO
+        quotes_result = {}
+        tickers_to_refresh = []
+        
+        for ticker in tickers_with_position:
+            cached_quote = get_quote(ticker)
+            
+            if cached_quote:
+                quotes_result[ticker] = cached_quote
+            else:
+                # Sem cache, adicionar na lista para refresh
+                tickers_to_refresh.append(ticker)
+        
+        # Se refresh=True ou existem tickers sem cache, atualizar em background
+        if refresh or tickers_to_refresh:
+            background_tasks.add_task(
+                _update_quotes_background,
+                tickers_with_position
+            )
+            logger.debug(f"🔄 Atualização em background agendada para {len(tickers_with_position)} tickers")
+        
+        return quotes_result
+        
+    except Exception as e:
+        logger.error(f"Erro ao buscar cotações rápidas: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+def _update_quotes_background(tickers: list):
+    """
+    Atualiza cotações em background.
+    Executado de forma assíncrona após retornar resposta ao cliente.
+    """
+    logger.info(f"🔄 Iniciando atualização em background de {len(tickers)} cotações")
+    
+    try:
+        market_service = get_market_data_service()
+        updated_count = 0
+        
+        for ticker in tickers:
+            try:
+                # Buscar cotação do yfinance (com force_refresh)
+                quote = market_service.get_quote(ticker, force_refresh=True)
+                
+                if quote and quote.get("price"):
+                    # Salvar no banco
+                    save_quote(ticker, quote)
+                    updated_count += 1
+                    logger.debug(f"✅ {ticker}: cotação atualizada")
+                    
+            except Exception as e:
+                logger.error(f"❌ {ticker}: erro ao atualizar - {str(e)}")
+                continue
+        
+        logger.info(f"✅ Atualização concluída: {updated_count}/{len(tickers)} cotações atualizadas")
+        
+    except Exception as e:
+        logger.error(f"Erro na atualização em background: {str(e)}")

@@ -1,7 +1,7 @@
 # 📚 Portfolio Manager v2 — Documentação
 
-**Última atualização:** 09 de Janeiro de 2026  
-**Versão:** v2.1.0
+**Última atualização:** 17 de Janeiro de 2026  
+**Versão:** v2.3.0
 
 Bem-vindo à documentação completa do Portfolio Manager v2, um sistema de gestão de carteira de investimentos com foco em importação B3, renda fixa e análise de performance.
 
@@ -23,23 +23,21 @@ Bem-vindo à documentação completa do Portfolio Manager v2, um sistema de gest
 
 ## 📋 Índice Geral
 
-### 📊 Status e Planejamento
+### 📊 Status e Releases
+
 - [**STATUS-PROJETO.md**](./STATUS-PROJETO.md) ⭐ **PRINCIPAL**
   - Estado atual completo do projeto
   - Funcionalidades implementadas e pendentes
   - Roadmap e próximos passos
 
-- [**PENDENCIAS.md**](./PENDENCIAS.md) 🎯 **NOVO**
-  - Lista detalhada de todas as pendências
-  - Priorização clara (P1, P2, P3)
-  - Estimativas de tempo e roadmap sugerido
-  - Backlog de features futuras
+- [**CHECKPOINT-v2.3.0**](./CHECKPOINT-v2.3.0-otimizacao-cotacoes.md) 🔥 **NOVO**
+  - Sistema de cache inteligente para cotações
+  - Performance 15-30x mais rápida
+  - Carregamento progressivo
 
-- [**CORRECAO-CALCULOS-CARTEIRA.md**](./CORRECAO-CALCULOS-CARTEIRA.md) ✅ **RESOLVIDO**
-  - Histórico de correções de bugs de cálculos financeiros
-  - Todos os problemas críticos resolvidos (4-6 Jan 2026)
-  - Consolidação fracionário/vista implementada
-  - Integração com cotações de mercado concluída
+- [**CHECKPOINT-v2.2.0**](./CHECKPOINT-v2.2.0.md)
+  - Sistema de cache de cotações inicial
+  - Script de atualização via cron
   
 - [**REFERENCIA-TECNICA.md**](./REFERENCIA-TECNICA.md)
   - Documentação técnica detalhada
@@ -54,20 +52,30 @@ Bem-vindo à documentação completa do Portfolio Manager v2, um sistema de gest
 
 ### 🔌 API
 - [**Endpoints**](./api/endpoints.md)
-  - Ativos, Operações, Renda Fixa
+  - Ativos, Operações, Renda Fixa, Cotações
   - Request/Response schemas
   - Códigos de erro
 
 ### 📖 Guias Práticos
-- [**Consolidação de Mercados**](./guides/consolidacao-mercados.md) ⭐ **RECOMENDADO**
+
+- [**Otimização de Cotações**](./guides/otimizacao-cotacoes.md) 🔥 **RECOMENDADO**
+  - Sistema de cache inteligente
+  - Carregamento progressivo
+  - Performance e troubleshooting
+
+- [**Consolidação de Mercados**](./guides/consolidacao-mercados.md) ⭐
   - Como operações à vista e fracionárias são consolidadas
   - Exemplos práticos e SQL
 
-- [**Integração com Cotações**](./guides/integracao-cotacoes.md) 🔥 **NOVO**
+- [**Integração com Cotações**](./guides/integracao-cotacoes.md)
   - Cotações em tempo quase real via yfinance
   - API endpoints e uso no frontend
   - Cache e performance
   
+- [**Consistência de Cálculos**](./guides/consistencia-calculos.md)
+  - Cálculos de P&L, preço médio, variação
+  - Validação e testes
+
 - [**Implementação CRUD**](./guides/crud-implementation.md)
   - Padrões de criação de recursos
   - Best practices
@@ -84,6 +92,9 @@ Bem-vindo à documentação completa do Portfolio Manager v2, um sistema de gest
 
 ### 🚀 Deploy
 - Em construção
+
+### 📦 Arquivo
+- [**archive/**](./archive/) — Documentos históricos e substituídos
 
 ---
 

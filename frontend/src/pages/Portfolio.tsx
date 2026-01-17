@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchAssets, createAsset, updateAsset, deleteAsset, Asset, AssetCreate, getPortfolioQuotes, QuotesMap } from "../api/client";
+import { fetchAssets, createAsset, updateAsset, deleteAsset, Asset, AssetCreate, getPortfolioQuotesFast, QuotesMap } from "../api/client";
 import "./Portfolio.css";
 
 export default function Portfolio() {
   const [assets, setAssets] = useState<Asset[]>([]);
   const [quotes, setQuotes] = useState<QuotesMap>({});
   const [loadingQuotes, setLoadingQuotes] = useState(false);
+  const [refreshingQuotes, setRefreshingQuotes] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -57,13 +58,28 @@ export default function Portfolio() {
   async function loadQuotes() {
     try {
       setLoadingQuotes(true);
-      const quotesData = await getPortfolioQuotes();
+      
+      // 1ª etapa: Carregar do cache (rápido)
+      const quotesData = await getPortfolioQuotesFast(false);
       setQuotes(quotesData);
+      setLoadingQuotes(false);
+      
+      // 2ª etapa: Disparar refresh em background
+      setRefreshingQuotes(true);
+      const refreshedQuotes = await getPortfolioQuotesFast(true);
+      
+      // Atualizar com dados atualizados após alguns segundos
+      setTimeout(async () => {
+        const updatedQuotes = await getPortfolioQuotesFast(false);
+        setQuotes(updatedQuotes);
+        setRefreshingQuotes(false);
+      }, 3000); // Esperar 3 segundos para o background task processar
+      
     } catch (err) {
       console.error("Erro ao carregar cotações:", err);
-      // Não mostrar erro de cotações como crítico
-    } finally {
       setLoadingQuotes(false);
+      setRefreshingQuotes(false);
+      // Não mostrar erro de cotações como crítico
     }
   }
 
@@ -228,6 +244,13 @@ export default function Portfolio() {
         </div>
       )}
 
+      {/* Banner de atualização de cotações */}
+      {refreshingQuotes && (
+        <div className="alert" style={{background: '#e7f3ff', border: '1px solid #90caf9', color: '#0d47a1'}}>
+          <span>🔄 Atualizando cotações em tempo real...</span>
+        </div>
+      )}
+
       {/* Cards de estatísticas */}
       <div className="stats-grid">
         <div className="stat-card">
@@ -238,14 +261,22 @@ export default function Portfolio() {
           <div className="stat-label">
             Valor Atual da Carteira
             {loadingQuotes && <span style={{fontSize: '12px', marginLeft: '8px'}}>⏳</span>}
+            {refreshingQuotes && <span style={{fontSize: '12px', marginLeft: '8px'}}>🔄</span>}
           </div>
           <div className="stat-value">
             {portfolioMarketValue > 0 
               ? formatCurrency(portfolioMarketValue)
-              : '---'
+              : loadingQuotes ? '---' : formatCurrency(0)
             }
           </div>
-          <div className="stat-sublabel">Cotações em tempo quase real (delay ~15min)</div>
+          <div className="stat-sublabel">
+            {loadingQuotes 
+              ? 'Carregando cotações...'
+              : refreshingQuotes 
+                ? 'Atualizando preços...'
+                : 'Cotações em tempo quase real (delay ~15min)'
+            }
+          </div>
         </div>
         <div className="stat-card">
           <div className="stat-label">Total Investido</div>
@@ -311,7 +342,9 @@ export default function Portfolio() {
                     <td>{asset.asset_class}</td>
                     <td>{asset.asset_type}</td>
                     <td className="text-right">
-                      {quote && quote.price ? (
+                      {loadingQuotes ? (
+                        <span style={{color: '#888'}}>⏳</span>
+                      ) : quote && quote.price ? (
                         <div>
                           <div>{formatCurrency(quote.price)}</div>
                           {quote.change_percent !== 0 && (
@@ -329,7 +362,13 @@ export default function Portfolio() {
                     </td>
                     <td className="text-right">{position.toLocaleString('pt-BR')}</td>
                     <td className="text-right">
-                      {marketValue !== null ? formatCurrency(marketValue) : <span style={{color: '#888'}}>---</span>}
+                      {loadingQuotes ? (
+                        <span style={{color: '#888'}}>⏳</span>
+                      ) : marketValue !== null ? (
+                        formatCurrency(marketValue)
+                      ) : (
+                        <span style={{color: '#888'}}>---</span>
+                      )}
                     </td>
                     <td className="text-right">{formatCurrency(asset.total_bought_value || 0)}</td>
                     <td className="text-right">{formatCurrency(asset.total_sold_value || 0)}</td>

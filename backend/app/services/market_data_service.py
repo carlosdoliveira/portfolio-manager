@@ -2,12 +2,13 @@
 Serviço de cotações de mercado usando yfinance.
 
 Responsável por buscar cotações em tempo quase real da B3,
-com cache para evitar requisições excessivas.
+com cache persistente (banco de dados) para evitar requisições excessivas.
 """
 
 import yfinance as yf
 from datetime import datetime, timedelta
 from typing import Optional, Dict, List
+from app.repositories import quotes_repository
 
 
 class MarketDataService:
@@ -22,7 +23,7 @@ class MarketDataService:
         self._cache_ttl = timedelta(minutes=cache_ttl_minutes)
     
     def _is_cache_valid(self, ticker: str) -> bool:
-        """Verifica se o cache está válido para o ticker."""
+        """Verifica se o cache em memória está válido para o ticker."""
         if ticker not in self._cache:
             return False
         
@@ -31,6 +32,17 @@ class MarketDataService:
             return False
         
         return datetime.now() - cached_time < self._cache_ttl
+    
+    def _is_db_cache_valid(self, quote: Dict) -> bool:
+        """Verifica se o cache do banco de dados está válido."""
+        if not quote or 'updated_at' not in quote:
+            return False
+        
+        try:
+            updated_at = datetime.fromisoformat(quote['updated_at'])
+            return datetime.now() - updated_at < self._cache_ttl
+        except (ValueError, TypeError):
+            return False
     
     def _normalize_ticker(self, ticker: str) -> str:
         """
@@ -43,12 +55,18 @@ class MarketDataService:
             ticker = f'{ticker}.SA'
         return ticker
     
-    def get_quote(self, ticker: str) -> Optional[Dict]:
+    def get_quote(self, ticker: str, force_refresh: bool = False) -> Optional[Dict]:
         """
         Busca cotação de um ativo específico.
         
+        Estratégia:
+        1. Verificar cache em memória (se válido, retornar)
+        2. Verificar cache persistente no banco (se válido, retornar)
+        3. Buscar do yfinance e salvar no banco
+        
         Args:
             ticker: Código do ativo (ex: PETR4, PETR4.SA)
+            force_refresh: Se True, força atualização do yfinance ignorando cache
         
         Returns:
             Dict com dados da cotação ou None se não encontrado
@@ -72,9 +90,20 @@ class MarketDataService:
         ticker_normalized = self._normalize_ticker(ticker)
         original_ticker = ticker.upper().replace('.SA', '')
         
-        # Verificar cache
-        if self._is_cache_valid(original_ticker):
+        # Se não forçar refresh, verificar cache em memória
+        if not force_refresh and self._is_cache_valid(original_ticker):
             return self._cache[original_ticker]['data']
+        
+        # Verificar cache persistente (banco de dados)
+        if not force_refresh:
+            db_quote = quotes_repository.get_quote(original_ticker)
+            if db_quote and self._is_db_cache_valid(db_quote):
+                # Cachear em memória também
+                self._cache[original_ticker] = {
+                    'data': db_quote,
+                    'cached_at': datetime.now()
+                }
+                return db_quote
         
         try:
             # Buscar dados do yfinance
@@ -88,17 +117,27 @@ class MarketDataService:
             last_row = hist.iloc[-1]
             last_timestamp = hist.index[-1]
             
+            # Validar dados essenciais
+            if not last_row['Close'] or last_row['Close'] == 0:
+                print(f"Cotação inválida para {ticker_normalized}: preço zero ou nulo")
+                return None
+            
             # Calcular variação
             previous_close = last_row['Close']
             current_price = last_row['Close']
             
-            # Tentar pegar previous_close do info
-            info = stock.info
-            if 'previousClose' in info and info['previousClose']:
-                previous_close = info['previousClose']
-                change = current_price - previous_close
-                change_percent = (change / previous_close) * 100
-            else:
+            # Tentar pegar previous_close do info (com tratamento de erro)
+            try:
+                info = stock.info
+                if info and 'previousClose' in info and info['previousClose']:
+                    previous_close = info['previousClose']
+                    change = current_price - previous_close
+                    change_percent = (change / previous_close) * 100
+                else:
+                    change = 0
+                    change_percent = 0
+            except Exception:
+                # Se falhar ao buscar info, usar valores padrão
                 change = 0
                 change_percent = 0
             
@@ -116,7 +155,10 @@ class MarketDataService:
                 'source': 'yfinance'
             }
             
-            # Cachear resultado
+            # Salvar no banco de dados (cache persistente)
+            quotes_repository.save_quote(original_ticker, quote_data)
+            
+            # Cachear em memória também
             self._cache[original_ticker] = {
                 'data': quote_data,
                 'cached_at': datetime.now()

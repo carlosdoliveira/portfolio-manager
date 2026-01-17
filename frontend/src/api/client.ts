@@ -492,6 +492,17 @@ export async function getPortfolioQuotes(): Promise<QuotesMap> {
   return response.json();
 }
 
+export async function getPortfolioQuotesFast(refresh: boolean = false): Promise<QuotesMap> {
+  const response = await fetch(`${API_URL}/quotes/portfolio/fast?refresh=${refresh}`);
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ detail: "Erro ao buscar cotações do portfólio" }));
+    throw new Error(error.detail || "Erro ao buscar cotações do portfólio");
+  }
+
+  return response.json();
+}
+
 export async function clearQuoteCache(ticker?: string): Promise<{ status: string; message: string }> {
   const url = ticker ? `${API_URL}/quotes/cache/${ticker}` : `${API_URL}/quotes/cache`;
   
