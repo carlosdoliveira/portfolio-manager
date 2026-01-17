@@ -1,0 +1,1036 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Sistema web de gestão de carteira de investimentos com foco em importação B3, renda fixa e análise de performance">
+      
+      
+      
+        <link rel="canonical" href="https://carlosdoliveira.github.io/portfolio-manager/architecture/principios-core/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Princípios Arquiteturais do Portfolio Manager v2 - Portfolio Manager</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#principios-arquiteturais-do-portfolio-manager-v2" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Portfolio Manager" class="md-header__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Portfolio Manager
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Princípios Arquiteturais do Portfolio Manager v2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Portfolio Manager" class="md-nav__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Portfolio Manager
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guia Rápido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../referencia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#filosofia-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Filosofia Geral
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-operacoes-sao-eventos-imutaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Operações São Eventos Imutáveis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Operações São Eventos Imutáveis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#principio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Princípio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#regras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regras
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#justificativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Justificativa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo-correto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo Correto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo-incorreto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo Incorreto ❌
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-importacao-e-idempotente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Importação É Idempotente
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Importação É Idempotente">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#principio_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Princípio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#garantias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Garantias
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-pensamento-orientado-a-eventos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Pensamento Orientado a Eventos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Pensamento Orientado a Eventos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#principio_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Princípio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valores-derivados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valores Derivados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-armazenar-estado-derivado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando Armazenar Estado Derivado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-explicito-implicito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Explícito &gt; Implícito
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Explícito &gt; Implícito">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#principio_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Princípio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diretrizes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diretrizes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-testabilidade-e-confiabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Testabilidade e Confiabilidade
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Testabilidade e Confiabilidade">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#principio_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Princípio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Práticas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checklist-antes-de-commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist Antes de Commit
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-simplicidade-para-documentacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Simplicidade para Documentação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Simplicidade para Documentação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#principio_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Princípio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diretrizes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diretrizes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-para-validar-decisoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas para Validar Decisões
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nao-objetivos-por-enquanto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Não-Objetivos (Por Enquanto)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="principios-arquiteturais-do-portfolio-manager-v2">Princípios Arquiteturais do Portfolio Manager v2<a class="headerlink" href="#principios-arquiteturais-do-portfolio-manager-v2" title="Permanent link">&para;</a></h1>
+<p>Esta documentação descreve os princípios fundamentais que guiam todas as decisões técnicas do projeto.</p>
+<hr />
+<h2 id="filosofia-geral">🎯 Filosofia Geral<a class="headerlink" href="#filosofia-geral" title="Permanent link">&para;</a></h2>
+<p>Portfolio Manager v2 é construído sobre uma <strong>fundação sólida orientada a eventos</strong>.</p>
+<p>Favoreça sempre:
+- <strong>Clareza</strong> sobre abstrações prematuras
+- <strong>Auditabilidade</strong> sobre otimização precoce
+- <strong>Corretude</strong> sobre rapidez de implementação</p>
+<hr />
+<h2 id="1-operacoes-sao-eventos-imutaveis">1. Operações São Eventos Imutáveis<a class="headerlink" href="#1-operacoes-sao-eventos-imutaveis" title="Permanent link">&para;</a></h2>
+<h3 id="principio">Princípio<a class="headerlink" href="#principio" title="Permanent link">&para;</a></h3>
+<p>Toda ação financeira (compra ou venda) é representada como uma <strong>nova operação</strong>.</p>
+<h3 id="regras">Regras<a class="headerlink" href="#regras" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ <strong>Nunca mutate uma operação existente</strong> para representar uma venda</li>
+<li>✅ Uma venda é sempre um novo registro com <code>movement_type = "VENDA"</code></li>
+<li>❌ <strong>Não atualize</strong> uma operação de compra quando o ativo é vendido</li>
+</ul>
+<h3 id="justificativa">Justificativa<a class="headerlink" href="#justificativa" title="Permanent link">&para;</a></h3>
+<p>Este princípio é <strong>inegociável</strong> porque:
+- Permite auditoria completa do histórico
+- Facilita reconciliação com extratos da corretora
+- Torna cálculos de P&amp;L determinísticos
+- Evita perda acidental de dados históricos</p>
+<h3 id="exemplo-correto">Exemplo Correto<a class="headerlink" href="#exemplo-correto" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Compra</span>
+<span class="p">{</span>
+  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;ticker&quot;</span><span class="p">:</span> <span class="s2">&quot;PETR4&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;movement_type&quot;</span><span class="p">:</span> <span class="s2">&quot;COMPRA&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;quantity&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+  <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="mf">30.50</span><span class="p">,</span>
+  <span class="s2">&quot;trade_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-01-15&quot;</span>
+<span class="p">}</span>
+
+<span class="c1"># Venda (operação separada)</span>
+<span class="p">{</span>
+  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">&quot;ticker&quot;</span><span class="p">:</span> <span class="s2">&quot;PETR4&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;movement_type&quot;</span><span class="p">:</span> <span class="s2">&quot;VENDA&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;quantity&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+  <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="mf">32.00</span><span class="p">,</span>
+  <span class="s2">&quot;trade_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-02-20&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="exemplo-incorreto">Exemplo Incorreto ❌<a class="headerlink" href="#exemplo-incorreto" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># NÃO FAÇA ISSO!</span>
+<span class="c1"># Atualizar operação de compra ao vender</span>
+<span class="p">{</span>
+  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;ticker&quot;</span><span class="p">:</span> <span class="s2">&quot;PETR4&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;movement_type&quot;</span><span class="p">:</span> <span class="s2">&quot;COMPRA&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;quantity&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>  <span class="c1"># ❌ Alterado de 100 para 50</span>
+  <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="mf">30.50</span><span class="p">,</span>
+  <span class="s2">&quot;trade_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-01-15&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="2-importacao-e-idempotente">2. Importação É Idempotente<a class="headerlink" href="#2-importacao-e-idempotente" title="Permanent link">&para;</a></h2>
+<h3 id="principio_1">Princípio<a class="headerlink" href="#principio_1" title="Permanent link">&para;</a></h3>
+<p>Importar o mesmo arquivo Excel da B3 múltiplas vezes <strong>não deve criar duplicatas</strong>.</p>
+<h3 id="implementacao">Implementação<a class="headerlink" href="#implementacao" title="Permanent link">&para;</a></h3>
+<p>Deduplicação baseada em chave de negócio:
+- <code>trade_date</code>
+- <code>movement_type</code>
+- <code>market</code>
+- <code>institution</code>
+- <code>ticker</code>
+- <code>quantity</code>
+- <code>price</code></p>
+<h3 id="garantias">Garantias<a class="headerlink" href="#garantias" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Banco de dados:</strong> UNIQUE constraint na tabela <code>operations</code></li>
+<li><strong>Código:</strong> Tratamento específico de <code>sqlite3.IntegrityError</code></li>
+<li><strong>UX:</strong> Feedback claro sobre operações duplicadas</li>
+</ol>
+<h3 id="exemplo">Exemplo<a class="headerlink" href="#exemplo" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Primeira importação</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">import_b3_excel</span><span class="p">(</span><span class="s2">&quot;negociacao-2025-12-31.xlsx&quot;</span><span class="p">)</span>
+<span class="c1"># { &quot;inserted&quot;: 167, &quot;duplicated&quot;: 0 }</span>
+
+<span class="c1"># Segunda importação (mesmo arquivo)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">import_b3_excel</span><span class="p">(</span><span class="s2">&quot;negociacao-2025-12-31.xlsx&quot;</span><span class="p">)</span>
+<span class="c1"># { &quot;inserted&quot;: 0, &quot;duplicated&quot;: 167 }</span>
+</code></pre></div>
+
+<hr />
+<h2 id="3-pensamento-orientado-a-eventos">3. Pensamento Orientado a Eventos<a class="headerlink" href="#3-pensamento-orientado-a-eventos" title="Permanent link">&para;</a></h2>
+<h3 id="principio_2">Princípio<a class="headerlink" href="#principio_2" title="Permanent link">&para;</a></h3>
+<p>Sempre raciocine sobre dados como <strong>eventos ao longo do tempo</strong>, não como estado mutável.</p>
+<h3 id="valores-derivados">Valores Derivados<a class="headerlink" href="#valores-derivados" title="Permanent link">&para;</a></h3>
+<p>Posição atual, saldo, P&amp;L são <strong>calculados</strong> a partir de operações, nunca armazenados como estado autoritativo.</p>
+<p>Ao menos nas fases iniciais, derivados devem ser:
+- Calculados sob demanda
+- Recalculáveis a qualquer momento
+- Determinísticos (mesmas operações = mesmos resultados)</p>
+<h3 id="quando-armazenar-estado-derivado">Quando Armazenar Estado Derivado<a class="headerlink" href="#quando-armazenar-estado-derivado" title="Permanent link">&para;</a></h3>
+<p>Apenas quando:
+- Performance se torna um problema real (medido, não assumido)
+- Com estratégia de invalidação clara
+- Mantendo operações como fonte da verdade</p>
+<h3 id="exemplo_1">Exemplo<a class="headerlink" href="#exemplo_1" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># ✅ Correto: calcular posição atual</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_current_position</span><span class="p">(</span><span class="n">ticker</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="n">operations</span> <span class="o">=</span> <span class="n">fetch_operations</span><span class="p">(</span><span class="n">ticker</span><span class="p">)</span>
+
+    <span class="n">position</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">operations</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">op</span><span class="o">.</span><span class="n">movement_type</span> <span class="o">==</span> <span class="s2">&quot;COMPRA&quot;</span><span class="p">:</span>
+            <span class="n">position</span> <span class="o">+=</span> <span class="n">op</span><span class="o">.</span><span class="n">quantity</span>
+        <span class="k">elif</span> <span class="n">op</span><span class="o">.</span><span class="n">movement_type</span> <span class="o">==</span> <span class="s2">&quot;VENDA&quot;</span><span class="p">:</span>
+            <span class="n">position</span> <span class="o">-=</span> <span class="n">op</span><span class="o">.</span><span class="n">quantity</span>
+
+    <span class="k">return</span> <span class="n">position</span>
+
+<span class="c1"># ❌ Incorreto: armazenar posição como coluna</span>
+<span class="c1"># Tabela: positions (ticker, quantity)</span>
+<span class="c1"># Requer atualização a cada operação, pode desincronizar</span>
+</code></pre></div>
+
+<hr />
+<h2 id="4-explicito-implicito">4. Explícito &gt; Implícito<a class="headerlink" href="#4-explicito-implicito" title="Permanent link">&para;</a></h2>
+<h3 id="principio_3">Princípio<a class="headerlink" href="#principio_3" title="Permanent link">&para;</a></h3>
+<p>Código deve ser óbvio e fácil de auditar.</p>
+<h3 id="diretrizes">Diretrizes<a class="headerlink" href="#diretrizes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Prefira SQL explícito sobre ORMs pesados</li>
+<li>Funções pequenas e focadas</li>
+<li>Tratamento de exceções específico</li>
+<li>Validação de entrada rigorosa</li>
+<li>Logging estruturado em pontos-chave</li>
+</ul>
+<h3 id="exemplo_2">Exemplo<a class="headerlink" href="#exemplo_2" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># ✅ Correto: SQL explícito, exceções tratadas</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_operation</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">operation</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            INSERT INTO operations </span>
+<span class="s2">            (ticker, movement_type, quantity, price, trade_date)</span>
+<span class="s2">            VALUES (?, ?, ?, ?, ?)</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">,</span> <span class="p">(</span>
+            <span class="n">operation</span><span class="o">.</span><span class="n">ticker</span><span class="p">,</span>
+            <span class="n">operation</span><span class="o">.</span><span class="n">movement_type</span><span class="p">,</span>
+            <span class="n">operation</span><span class="o">.</span><span class="n">quantity</span><span class="p">,</span>
+            <span class="n">operation</span><span class="o">.</span><span class="n">price</span><span class="p">,</span>
+            <span class="n">operation</span><span class="o">.</span><span class="n">trade_date</span>
+        <span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Operação criada: </span><span class="si">{</span><span class="n">operation</span><span class="o">.</span><span class="n">ticker</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">IntegrityError</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Operação duplicada: </span><span class="si">{</span><span class="n">operation</span><span class="o">.</span><span class="n">ticker</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="mi">409</span><span class="p">,</span> <span class="s2">&quot;Operação já existe&quot;</span><span class="p">)</span>
+
+<span class="c1"># ❌ Incorreto: ORM mágico, exceção genérica</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_operation</span><span class="p">(</span><span class="n">operation</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">operation</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Erro&quot;</span><span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="5-testabilidade-e-confiabilidade">5. Testabilidade e Confiabilidade<a class="headerlink" href="#5-testabilidade-e-confiabilidade" title="Permanent link">&para;</a></h2>
+<h3 id="principio_4">Princípio<a class="headerlink" href="#principio_4" title="Permanent link">&para;</a></h3>
+<p>Toda nova funcionalidade deve ser testável e testada antes do commit.</p>
+<h3 id="praticas">Práticas<a class="headerlink" href="#praticas" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Backend:</strong> Testar endpoints, validação, casos de erro</li>
+<li><strong>Frontend:</strong> Verificar renderização, interações, estados de erro</li>
+<li><strong>Integração:</strong> Fluxos completos (upload → import → display)</li>
+</ol>
+<h3 id="checklist-antes-de-commit">Checklist Antes de Commit<a class="headerlink" href="#checklist-antes-de-commit" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Código executa sem erros</li>
+<li>[ ] Casos de erro são tratados</li>
+<li>[ ] Logs estão presentes</li>
+<li>[ ] Testes manuais executados</li>
+<li>[ ] Documentação atualizada</li>
+</ul>
+<hr />
+<h2 id="6-simplicidade-para-documentacao">6. Simplicidade para Documentação<a class="headerlink" href="#6-simplicidade-para-documentacao" title="Permanent link">&para;</a></h2>
+<h3 id="principio_5">Princípio<a class="headerlink" href="#principio_5" title="Permanent link">&para;</a></h3>
+<p>Código refatorado deve ser <strong>simples de documentar</strong>.</p>
+<p>Se uma função precisa de 3 parágrafos para ser explicada, ela provavelmente precisa ser dividida.</p>
+<h3 id="diretrizes_1">Diretrizes<a class="headerlink" href="#diretrizes_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Nomes descritivos (funções, variáveis)</li>
+<li>Funções pequenas e com propósito único</li>
+<li>Evite truques "inteligentes"</li>
+<li>Prefira lógica explícita</li>
+<li>Docstrings em funções públicas</li>
+</ul>
+<h3 id="exemplo_3">Exemplo<a class="headerlink" href="#exemplo_3" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># ✅ Fácil de documentar</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_total_invested</span><span class="p">(</span><span class="n">operations</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Operation</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calcula o total investido somando todas as compras.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span>
+        <span class="n">op</span><span class="o">.</span><span class="n">quantity</span> <span class="o">*</span> <span class="n">op</span><span class="o">.</span><span class="n">price</span> 
+        <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">operations</span> 
+        <span class="k">if</span> <span class="n">op</span><span class="o">.</span><span class="n">movement_type</span> <span class="o">==</span> <span class="s2">&quot;COMPRA&quot;</span>
+    <span class="p">)</span>
+
+<span class="c1"># ❌ Difícil de documentar</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc</span><span class="p">(</span><span class="n">ops</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">:</span> <span class="n">a</span><span class="o">+</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="k">if</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;C&quot;</span> <span class="k">else</span> <span class="mi">0</span><span class="p">),</span> <span class="n">ops</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="perguntas-para-validar-decisoes">Perguntas para Validar Decisões<a class="headerlink" href="#perguntas-para-validar-decisoes" title="Permanent link">&para;</a></h2>
+<p>Antes de adicionar qualquer funcionalidade, pergunte:</p>
+<ol>
+<li>✅ Isto é um <strong>evento</strong> ou uma <strong>visão derivada</strong>?</li>
+<li>✅ Pode ser recalculado a partir de operações existentes?</li>
+<li>✅ Isto preserva auditabilidade?</li>
+<li>✅ Isto quebra idempotência?</li>
+<li>✅ Isto dificulta reconciliação futura?</li>
+</ol>
+<p>Se alguma resposta for problemática, <strong>redesenhe</strong>.</p>
+<hr />
+<h2 id="nao-objetivos-por-enquanto">Não-Objetivos (Por Enquanto)<a class="headerlink" href="#nao-objetivos-por-enquanto" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Otimização prematura</li>
+<li>ORMs pesados</li>
+<li>Bibliotecas complexas de estado (Redux, etc.)</li>
+<li>Abstrações over-engineered</li>
+</ul>
+<hr />
+<h2 id="resumo">Resumo<a class="headerlink" href="#resumo" title="Permanent link">&para;</a></h2>
+<p>Portfolio Manager v2 é construído sobre:
+- <strong>Imutabilidade</strong> de eventos
+- <strong>Idempotência</strong> de importações
+- <strong>Derivação</strong> de valores
+- <strong>Clareza</strong> de código
+- <strong>Testabilidade</strong> de funcionalidades</p>
+<p>Seu papel: <strong>preserve essa fundação</strong> enquanto estende o sistema incrementalmente.</p>
+<p>Se em dúvida, favoreça <strong>clareza, auditabilidade e corretude</strong>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1187 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Sistema web de gestão de carteira de investimentos com foco em importação B3, renda fixa e análise de performance">
+      
+      
+      
+        <link rel="canonical" href="https://carlosdoliveira.github.io/portfolio-manager/development/setup/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Guia de Setup do Ambiente de Desenvolvimento - Portfolio Manager</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#guia-de-setup-do-ambiente-de-desenvolvimento" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Portfolio Manager" class="md-header__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Portfolio Manager
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Guia de Setup do Ambiente de Desenvolvimento
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Portfolio Manager" class="md-nav__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Portfolio Manager
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guia Rápido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../referencia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pre-requisitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Pré-requisitos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Pré-requisitos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verificando-instalacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verificando Instalações
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-inicial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 Setup Inicial
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Setup Inicial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-clonar-o-repositorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Clonar o Repositório
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-configurar-variaveis-de-ambiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Configurar Variáveis de Ambiente
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Configurar Variáveis de Ambiente">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-iniciar-a-aplicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Iniciar a Aplicação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-verificar-se-esta-funcionando" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Verificar se Está Funcionando
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comandos-da-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ Comandos da CLI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🛠️ Comandos da CLI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Start
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#restart" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Restart
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clean
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clean-all" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clean All
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Help
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estrutura-do-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🏗️ Estrutura do Projeto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#desenvolvimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 Desenvolvimento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Desenvolvimento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modo-de-desenvolvimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modo de Desenvolvimento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#executando-comandos-nos-containers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Executando Comandos nos Containers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Executando Comandos nos Containers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testando-a-importacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧪 Testando a Importação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧪 Testando a Importação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-de-teste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arquivo de Teste
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acessando-o-banco-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Acessando o Banco de Dados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debugging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔍 Debugging
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔍 Debugging">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verificar-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verificar Logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problemas-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problemas Comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Problemas Comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#porta-em-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Porta em Uso
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#containers-nao-iniciam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Containers Não Iniciam
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mudancas-nao-aparecem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mudanças Não Aparecem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erro-de-permissao-no-sqlite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erro de Permissão no SQLite
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limpeza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧹 Limpeza
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧹 Limpeza">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#limpar-dados-reset-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limpar Dados (Reset Database)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limpar-docker-completamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limpar Docker Completamente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proximos-passos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Próximos Passos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#precisa-de-ajuda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🆘 Precisa de Ajuda?
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="guia-de-setup-do-ambiente-de-desenvolvimento">Guia de Setup do Ambiente de Desenvolvimento<a class="headerlink" href="#guia-de-setup-do-ambiente-de-desenvolvimento" title="Permanent link">&para;</a></h1>
+<p>Este guia descreve como configurar o ambiente local para desenvolvimento do Portfolio Manager v2.</p>
+<hr />
+<h2 id="pre-requisitos">📋 Pré-requisitos<a class="headerlink" href="#pre-requisitos" title="Permanent link">&para;</a></h2>
+<p>Antes de começar, certifique-se de ter instalado:</p>
+<ul>
+<li><strong>Docker</strong> (versão 20.10 ou superior)</li>
+<li><strong>Docker Compose</strong> (versão 2.0 ou superior)</li>
+<li><strong>Git</strong></li>
+</ul>
+<h3 id="verificando-instalacoes">Verificando Instalações<a class="headerlink" href="#verificando-instalacoes" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>--version
+<span class="c1"># Docker version 20.10.x ou superior</span>
+
+docker<span class="w"> </span>compose<span class="w"> </span>version
+<span class="c1"># Docker Compose version v2.x.x ou superior</span>
+
+git<span class="w"> </span>--version
+<span class="c1"># git version 2.x.x ou superior</span>
+</code></pre></div>
+
+<hr />
+<h2 id="setup-inicial">🚀 Setup Inicial<a class="headerlink" href="#setup-inicial" title="Permanent link">&para;</a></h2>
+<h3 id="1-clonar-o-repositorio">1. Clonar o Repositório<a class="headerlink" href="#1-clonar-o-repositorio" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/carlosdoliveira/portfolio-manager.git
+<span class="nb">cd</span><span class="w"> </span>portfolio-manager-v2
+</code></pre></div>
+
+<h3 id="2-configurar-variaveis-de-ambiente">2. Configurar Variáveis de Ambiente<a class="headerlink" href="#2-configurar-variaveis-de-ambiente" title="Permanent link">&para;</a></h3>
+<h4 id="backend">Backend<a class="headerlink" href="#backend" title="Permanent link">&para;</a></h4>
+<p>Crie o arquivo <code>.env</code> na raiz do projeto:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># .env</span>
+<span class="nv">CORS_ORIGINS</span><span class="o">=</span>http://localhost:5173
+</code></pre></div>
+
+<h4 id="frontend">Frontend<a class="headerlink" href="#frontend" title="Permanent link">&para;</a></h4>
+<p>Crie o arquivo <code>frontend/.env</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>frontend
+cp<span class="w"> </span>.env.example<span class="w"> </span>.env
+</code></pre></div>
+
+<p>Conteúdo de <code>frontend/.env</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="nv">VITE_API_URL</span><span class="o">=</span>http://localhost:8000
+</code></pre></div>
+
+<h3 id="3-iniciar-a-aplicacao">3. Iniciar a Aplicação<a class="headerlink" href="#3-iniciar-a-aplicacao" title="Permanent link">&para;</a></h3>
+<p>Use a CLI do projeto para gerenciar os containers:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Tornar a CLI executável (primeira vez)</span>
+chmod<span class="w"> </span>+x<span class="w"> </span>portfolio
+
+<span class="c1"># Iniciar todos os serviços</span>
+./portfolio<span class="w"> </span>start
+</code></pre></div>
+
+<p>A CLI irá:
+- Construir as imagens Docker
+- Iniciar os containers (backend + frontend)
+- Exibir os logs em tempo real</p>
+<h3 id="4-verificar-se-esta-funcionando">4. Verificar se Está Funcionando<a class="headerlink" href="#4-verificar-se-esta-funcionando" title="Permanent link">&para;</a></h3>
+<p>Após alguns segundos, você deverá ver:</p>
+<div class="codehilite"><pre><span></span><code>✓ Backend disponível em http://localhost:8000
+✓ Frontend disponível em http://localhost:5173
+</code></pre></div>
+
+<p>Acesse http://localhost:5173 no navegador para ver a aplicação.</p>
+<hr />
+<h2 id="comandos-da-cli">🛠️ Comandos da CLI<a class="headerlink" href="#comandos-da-cli" title="Permanent link">&para;</a></h2>
+<p>A CLI <code>./portfolio</code> oferece os seguintes comandos:</p>
+<h3 id="start">Start<a class="headerlink" href="#start" title="Permanent link">&para;</a></h3>
+<p>Inicia todos os serviços:</p>
+<div class="codehilite"><pre><span></span><code>./portfolio<span class="w"> </span>start
+</code></pre></div>
+
+<h3 id="stop">Stop<a class="headerlink" href="#stop" title="Permanent link">&para;</a></h3>
+<p>Para todos os serviços:</p>
+<div class="codehilite"><pre><span></span><code>./portfolio<span class="w"> </span>stop
+</code></pre></div>
+
+<h3 id="restart">Restart<a class="headerlink" href="#restart" title="Permanent link">&para;</a></h3>
+<p>Reinicia os serviços (útil após mudanças de código):</p>
+<div class="codehilite"><pre><span></span><code>./portfolio<span class="w"> </span>restart
+</code></pre></div>
+
+<h3 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h3>
+<p>Verifica o status dos containers:</p>
+<div class="codehilite"><pre><span></span><code>./portfolio<span class="w"> </span>status
+</code></pre></div>
+
+<h3 id="logs">Logs<a class="headerlink" href="#logs" title="Permanent link">&para;</a></h3>
+<p>Exibe logs de um serviço específico:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Logs do backend</span>
+./portfolio<span class="w"> </span>logs<span class="w"> </span>backend
+
+<span class="c1"># Logs do frontend</span>
+./portfolio<span class="w"> </span>logs<span class="w"> </span>frontend
+
+<span class="c1"># Logs de ambos</span>
+./portfolio<span class="w"> </span>logs
+</code></pre></div>
+
+<h3 id="clean">Clean<a class="headerlink" href="#clean" title="Permanent link">&para;</a></h3>
+<p>Remove containers e volumes (mantém imagens):</p>
+<div class="codehilite"><pre><span></span><code>./portfolio<span class="w"> </span>clean
+</code></pre></div>
+
+<h3 id="clean-all">Clean All<a class="headerlink" href="#clean-all" title="Permanent link">&para;</a></h3>
+<p>Remove tudo (containers, volumes, imagens):</p>
+<div class="codehilite"><pre><span></span><code>./portfolio<span class="w"> </span>clean-all
+</code></pre></div>
+
+<h3 id="help">Help<a class="headerlink" href="#help" title="Permanent link">&para;</a></h3>
+<p>Exibe ajuda completa:</p>
+<div class="codehilite"><pre><span></span><code>./portfolio<span class="w"> </span><span class="nb">help</span>
+</code></pre></div>
+
+<hr />
+<h2 id="estrutura-do-projeto">🏗️ Estrutura do Projeto<a class="headerlink" href="#estrutura-do-projeto" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code><span class="nx">portfolio</span><span class="o">-</span><span class="nx">manager</span><span class="o">-</span><span class="nx">v2</span><span class="o">/</span>
+<span class="err">├──</span><span class="w"> </span><span class="nx">backend</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">app</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">main</span><span class="p">.</span><span class="nx">py</span><span class="w">              </span><span class="err">#</span><span class="w"> </span><span class="nx">FastAPI</span><span class="w"> </span><span class="nx">app</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">db</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="nx">database</span><span class="p">.</span><span class="nx">py</span><span class="w">      </span><span class="err">#</span><span class="w"> </span><span class="nx">SQLite</span><span class="w"> </span><span class="nx">setup</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">repositories</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="nx">operations_repository</span><span class="p">.</span><span class="nx">py</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="nx">services</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">       </span><span class="err">└──</span><span class="w"> </span><span class="nx">importer</span><span class="p">.</span><span class="nx">py</span><span class="w">      </span><span class="err">#</span><span class="w"> </span><span class="nx">B3</span><span class="w"> </span><span class="nx">Excel</span><span class="w"> </span><span class="kn">import</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">data</span><span class="o">/</span><span class="w">                    </span><span class="err">#</span><span class="w"> </span><span class="nx">SQLite</span><span class="w"> </span><span class="nx">database</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">Dockerfile</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="nx">requirements</span><span class="p">.</span><span class="nx">txt</span>
+<span class="err">│</span>
+<span class="err">├──</span><span class="w"> </span><span class="nx">frontend</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">src</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">App</span><span class="p">.</span><span class="nx">tsx</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">main</span><span class="p">.</span><span class="nx">tsx</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="kn">api</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">ts</span><span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="nx">API</span><span class="w"> </span><span class="nx">client</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">components</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">ImportB3Card</span><span class="p">.</span><span class="nx">tsx</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="nx">layout</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">pages</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">Dashboard</span><span class="p">.</span><span class="nx">tsx</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">Import</span><span class="p">.</span><span class="nx">tsx</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="nx">Portfolio</span><span class="p">.</span><span class="nx">tsx</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="nx">styles</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">Dockerfile</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="kn">package</span><span class="p">.</span><span class="nx">json</span>
+<span class="err">│</span>
+<span class="err">├──</span><span class="w"> </span><span class="nx">docs</span><span class="o">/</span><span class="w">                        </span><span class="err">#</span><span class="w"> </span><span class="nx">Documentação</span><span class="w"> </span><span class="nx">wiki</span>
+<span class="err">├──</span><span class="w"> </span><span class="nx">docker</span><span class="o">-</span><span class="nx">compose</span><span class="p">.</span><span class="nx">yml</span>
+<span class="err">├──</span><span class="w"> </span><span class="nx">portfolio</span><span class="w">                    </span><span class="err">#</span><span class="w"> </span><span class="nx">CLI</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">orquestração</span>
+<span class="err">└──</span><span class="w"> </span><span class="p">.</span><span class="nx">env</span><span class="w">                        </span><span class="err">#</span><span class="w"> </span><span class="nx">Configurações</span>
+</code></pre></div>
+
+<hr />
+<h2 id="desenvolvimento">🔧 Desenvolvimento<a class="headerlink" href="#desenvolvimento" title="Permanent link">&para;</a></h2>
+<h3 id="modo-de-desenvolvimento">Modo de Desenvolvimento<a class="headerlink" href="#modo-de-desenvolvimento" title="Permanent link">&para;</a></h3>
+<p>O projeto está configurado para <strong>hot reload</strong>:</p>
+<ul>
+<li><strong>Backend:</strong> FastAPI recarrega automaticamente ao salvar arquivos <code>.py</code></li>
+<li><strong>Frontend:</strong> Vite recarrega instantaneamente ao salvar arquivos <code>.tsx/.ts/.css</code></li>
+</ul>
+<p>Basta editar os arquivos e ver as mudanças no navegador.</p>
+<h3 id="executando-comandos-nos-containers">Executando Comandos nos Containers<a class="headerlink" href="#executando-comandos-nos-containers" title="Permanent link">&para;</a></h3>
+<h4 id="backend_1">Backend<a class="headerlink" href="#backend_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Entrar no container do backend</span>
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>backend<span class="w"> </span>bash
+
+<span class="c1"># Executar Python</span>
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>backend<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;print(&#39;Hello&#39;)&quot;</span>
+</code></pre></div>
+
+<h4 id="frontend_1">Frontend<a class="headerlink" href="#frontend_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Entrar no container do frontend</span>
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>frontend<span class="w"> </span>sh
+
+<span class="c1"># Executar npm commands</span>
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>frontend<span class="w"> </span>npm<span class="w"> </span>run<span class="w"> </span>build
+</code></pre></div>
+
+<hr />
+<h2 id="testando-a-importacao">🧪 Testando a Importação<a class="headerlink" href="#testando-a-importacao" title="Permanent link">&para;</a></h2>
+<p>Para testar a funcionalidade de importação:</p>
+<ol>
+<li>Acesse http://localhost:5173/import</li>
+<li>Arraste um arquivo Excel da B3 (formato oficial de negociações)</li>
+<li>Clique em "Importar"</li>
+<li>Verifique o resumo da importação</li>
+</ol>
+<h3 id="arquivo-de-teste">Arquivo de Teste<a class="headerlink" href="#arquivo-de-teste" title="Permanent link">&para;</a></h3>
+<p>Um arquivo de exemplo está disponível em <code>tests/</code> (se houver).</p>
+<hr />
+<h2 id="acessando-o-banco-de-dados">📊 Acessando o Banco de Dados<a class="headerlink" href="#acessando-o-banco-de-dados" title="Permanent link">&para;</a></h2>
+<p>O banco SQLite está em <code>backend/data/portfolio.db</code>.</p>
+<p>Para inspecionar:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Entrar no container</span>
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>backend<span class="w"> </span>bash
+
+<span class="c1"># Abrir SQLite</span>
+sqlite3<span class="w"> </span>/app/data/portfolio.db
+
+<span class="c1"># Ver tabelas</span>
+.tables
+
+<span class="c1"># Ver schema</span>
+.schema<span class="w"> </span>operations
+
+<span class="c1"># Fazer query</span>
+SELECT<span class="w"> </span>COUNT<span class="o">(</span>*<span class="o">)</span><span class="w"> </span>FROM<span class="w"> </span>operations<span class="p">;</span>
+
+<span class="c1"># Sair</span>
+.quit
+</code></pre></div>
+
+<hr />
+<h2 id="debugging">🔍 Debugging<a class="headerlink" href="#debugging" title="Permanent link">&para;</a></h2>
+<h3 id="verificar-logs">Verificar Logs<a class="headerlink" href="#verificar-logs" title="Permanent link">&para;</a></h3>
+<p>Use <code>./portfolio logs</code> para verificar erros:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Logs completos</span>
+./portfolio<span class="w"> </span>logs
+
+<span class="c1"># Últimas 50 linhas do backend</span>
+./portfolio<span class="w"> </span>logs<span class="w"> </span>backend<span class="w"> </span>--tail<span class="o">=</span><span class="m">50</span>
+</code></pre></div>
+
+<h3 id="problemas-comuns">Problemas Comuns<a class="headerlink" href="#problemas-comuns" title="Permanent link">&para;</a></h3>
+<h4 id="porta-em-uso">Porta em Uso<a class="headerlink" href="#porta-em-uso" title="Permanent link">&para;</a></h4>
+<p>Se portas 8000 ou 5173 estiverem ocupadas:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Verificar processos usando a porta</span>
+lsof<span class="w"> </span>-i<span class="w"> </span>:8000
+lsof<span class="w"> </span>-i<span class="w"> </span>:5173
+
+<span class="c1"># Matar processo</span>
+<span class="nb">kill</span><span class="w"> </span>-9<span class="w"> </span>&lt;PID&gt;
+</code></pre></div>
+
+<h4 id="containers-nao-iniciam">Containers Não Iniciam<a class="headerlink" href="#containers-nao-iniciam" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Limpar tudo e reconstruir</span>
+./portfolio<span class="w"> </span>clean-all
+./portfolio<span class="w"> </span>start
+</code></pre></div>
+
+<h4 id="mudancas-nao-aparecem">Mudanças Não Aparecem<a class="headerlink" href="#mudancas-nao-aparecem" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Reiniciar serviços</span>
+./portfolio<span class="w"> </span>restart
+</code></pre></div>
+
+<h4 id="erro-de-permissao-no-sqlite">Erro de Permissão no SQLite<a class="headerlink" href="#erro-de-permissao-no-sqlite" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Garantir permissões no diretório data</span>
+chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>backend/data
+</code></pre></div>
+
+<hr />
+<h2 id="limpeza">🧹 Limpeza<a class="headerlink" href="#limpeza" title="Permanent link">&para;</a></h2>
+<h3 id="limpar-dados-reset-database">Limpar Dados (Reset Database)<a class="headerlink" href="#limpar-dados-reset-database" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Parar serviços</span>
+./portfolio<span class="w"> </span>stop
+
+<span class="c1"># Remover banco de dados</span>
+rm<span class="w"> </span>backend/data/portfolio.db
+
+<span class="c1"># Reiniciar (banco será recriado)</span>
+./portfolio<span class="w"> </span>start
+</code></pre></div>
+
+<h3 id="limpar-docker-completamente">Limpar Docker Completamente<a class="headerlink" href="#limpar-docker-completamente" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Remover tudo do projeto</span>
+./portfolio<span class="w"> </span>clean-all
+
+<span class="c1"># Remover imagens órfãs do Docker</span>
+docker<span class="w"> </span>system<span class="w"> </span>prune<span class="w"> </span>-a
+</code></pre></div>
+
+<hr />
+<h2 id="proximos-passos">📚 Próximos Passos<a class="headerlink" href="#proximos-passos" title="Permanent link">&para;</a></h2>
+<p>Após configurar o ambiente:</p>
+<ol>
+<li>Leia <a href="../../architecture/principios-core/">Princípios Arquiteturais</a></li>
+<li>Consulte <a href="../api/">Documentação de API</a></li>
+<li>Veja <a href="../oportunidades-backend.md">Oportunidades de Melhoria</a> e <a href="../oportunidades-frontend.md">Frontend</a></li>
+<li>Escolha uma tarefa e comece a contribuir!</li>
+</ol>
+<hr />
+<h2 id="precisa-de-ajuda">🆘 Precisa de Ajuda?<a class="headerlink" href="#precisa-de-ajuda" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Consulte a <a href="../README.md">documentação completa</a></li>
+<li>Abra uma issue no GitHub</li>
+<li>Entre em contato com o time de desenvolvimento</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

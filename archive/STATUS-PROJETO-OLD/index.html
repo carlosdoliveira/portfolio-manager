@@ -1,0 +1,1706 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Sistema web de gestão de carteira de investimentos com foco em importação B3, renda fixa e análise de performance">
+      
+      
+      
+        <link rel="canonical" href="https://carlosdoliveira.github.io/portfolio-manager/archive/STATUS-PROJETO-OLD/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>📊 Status do Projeto — Portfolio Manager v2 - Portfolio Manager</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#status-do-projeto-portfolio-manager-v2" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Portfolio Manager" class="md-header__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Portfolio Manager
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              📊 Status do Projeto — Portfolio Manager v2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Portfolio Manager" class="md-nav__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Portfolio Manager
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guia Rápido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../referencia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Índice
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visao-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visão Geral
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Visão Geral">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stack-tecnologica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stack Tecnológica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arquitetura-atual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arquitetura Atual
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funcionalidades-implementadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funcionalidades Implementadas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funcionalidades Implementadas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Backend — Completo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend-parcialmente-implementado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Frontend — Parcialmente Implementado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importacao-b3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Importação B3
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#renda-fixa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Renda Fixa
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problemas-conhecidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problemas Conhecidos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Problemas Conhecidos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend-criticos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔴 Backend — Críticos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend-melhorias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟡 Backend — Melhorias
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend-criticos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔴 Frontend — Críticos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend-melhorias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟡 Frontend — Melhorias
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modelagem-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelagem de Dados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modelagem de Dados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schema-atual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schema Atual
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#campos-calculados-em-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Campos Calculados em Runtime
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#otimizacoes-para-dashboards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Otimizações para Dashboards
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Otimizações para Dashboards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-tabelas-materializadas-para-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Tabelas Materializadas para Performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-integracao-com-precos-de-mercado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Integração com Preços de Mercado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-indices-recomendados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Índices Recomendados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-agregacoes-para-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Agregações para Dashboard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-estrutura-de-resposta-para-graficos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Estrutura de Resposta para Gráficos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roadmap-sugerido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Roadmap Sugerido
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Roadmap Sugerido">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fase-1-consolidacao-1-2-semanas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 1 — Consolidação (1-2 semanas)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-2-valorizacao-2-3-semanas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 2 — Valorização (2-3 semanas)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-3-otimizacao-1-2-semanas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 3 — Otimização (1-2 semanas)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-4-novas-features-ongoing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 4 — Novas Features (ongoing)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusão
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="status-do-projeto-portfolio-manager-v2">📊 Status do Projeto — Portfolio Manager v2<a class="headerlink" href="#status-do-projeto-portfolio-manager-v2" title="Permanent link">&para;</a></h1>
+<p><strong>Última atualização</strong>: 02 de Janeiro de 2026</p>
+<p>Este documento apresenta uma visão completa do estado atual do projeto, funcionalidades implementadas, problemas conhecidos e oportunidades de otimização.</p>
+<hr />
+<h2 id="indice">📋 Índice<a class="headerlink" href="#indice" title="Permanent link">&para;</a></h2>
+<ol>
+<li><a href="#visão-geral">Visão Geral</a></li>
+<li><a href="#arquitetura-atual">Arquitetura Atual</a></li>
+<li><a href="#funcionalidades-implementadas">Funcionalidades Implementadas</a></li>
+<li><a href="#problemas-conhecidos">Problemas Conhecidos</a></li>
+<li><a href="#modelagem-de-dados">Modelagem de Dados</a></li>
+<li><a href="#otimizações-para-dashboards">Otimizações para Dashboards</a></li>
+<li><a href="#roadmap-sugerido">Roadmap Sugerido</a></li>
+</ol>
+<hr />
+<h2 id="visao-geral">Visão Geral<a class="headerlink" href="#visao-geral" title="Permanent link">&para;</a></h2>
+<p>O Portfolio Manager v2 é um sistema de gestão de carteira de investimentos com foco inicial em:</p>
+<ul>
+<li>Importação de relatórios oficiais da B3 (Excel)</li>
+<li>Gerenciamento manual de ativos e operações</li>
+<li>Suporte especializado para Renda Fixa</li>
+<li>Projeções de rendimento com cálculo de IR</li>
+</ul>
+<h3 id="stack-tecnologica">Stack Tecnológica<a class="headerlink" href="#stack-tecnologica" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Camada</th>
+<th>Tecnologia</th>
+<th>Versão</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Backend</td>
+<td>Python + FastAPI</td>
+<td>3.11</td>
+</tr>
+<tr>
+<td>Banco de Dados</td>
+<td>SQLite (WAL mode)</td>
+<td>3.x</td>
+</tr>
+<tr>
+<td>Frontend</td>
+<td>React + TypeScript</td>
+<td>18.x</td>
+</tr>
+<tr>
+<td>Build Tool</td>
+<td>Vite</td>
+<td>5.4.x</td>
+</tr>
+<tr>
+<td>Containerização</td>
+<td>Docker Compose</td>
+<td>2.x</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="arquitetura-atual">Arquitetura Atual<a class="headerlink" href="#arquitetura-atual" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code><span class="err">┌─────────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span>                         <span class="n">FRONTEND</span>                            <span class="err">│</span>
+<span class="err">│</span>                    <span class="n">React</span> <span class="o">+</span> <span class="n">TypeScript</span>                       <span class="err">│</span>
+<span class="err">│</span>  <span class="err">┌─────────┬─────────┬──────────┬─────────┬──────────┐</span>     <span class="err">│</span>
+<span class="err">│</span>  <span class="err">│</span><span class="n">Dashboard</span><span class="err">│</span><span class="n">Portfolio</span><span class="err">│</span><span class="n">FixedIncome</span><span class="err">│</span> <span class="n">Import</span> <span class="err">│</span> <span class="n">Analysis</span> <span class="err">│</span>     <span class="err">│</span>
+<span class="err">│</span>  <span class="err">│</span> <span class="p">(</span><span class="n">vazio</span><span class="p">)</span> <span class="err">│</span>   <span class="err">✓</span>     <span class="err">│</span>    <span class="err">✓</span>     <span class="err">│</span>   <span class="err">✓</span>    <span class="err">│</span> <span class="p">(</span><span class="n">vazio</span><span class="p">)</span>  <span class="err">│</span>     <span class="err">│</span>
+<span class="err">│</span>  <span class="err">└────┬────┴────┬────┴────┬─────┴───┬────┴────┬─────┘</span>     <span class="err">│</span>
+<span class="err">│</span>       <span class="err">│</span>         <span class="err">│</span>         <span class="err">│</span>         <span class="err">│</span>         <span class="err">│</span>            <span class="err">│</span>
+<span class="err">│</span>       <span class="err">└─────────┴─────────┼─────────┴─────────┘</span>            <span class="err">│</span>
+<span class="err">│</span>                           <span class="err">│</span>                                 <span class="err">│</span>
+<span class="err">│</span>                    <span class="err">┌──────▼──────┐</span>                         <span class="err">│</span>
+<span class="err">│</span>                    <span class="err">│</span> <span class="n">API</span> <span class="n">Client</span>  <span class="err">│</span>                         <span class="err">│</span>
+<span class="err">│</span>                    <span class="err">│</span> <span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="n">ts</span><span class="p">)</span> <span class="err">│</span>                         <span class="err">│</span>
+<span class="err">│</span>                    <span class="err">└──────┬──────┘</span>                         <span class="err">│</span>
+<span class="err">└───────────────────────────┼─────────────────────────────────┘</span>
+                            <span class="err">│</span> <span class="n">HTTP</span> <span class="n">REST</span>
+                            <span class="err">▼</span>
+<span class="err">┌───────────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span>                          <span class="n">BACKEND</span>                              <span class="err">│</span>
+<span class="err">│</span>                    <span class="n">FastAPI</span> <span class="o">+</span> <span class="n">Python</span>                           <span class="err">│</span>
+<span class="err">│</span>  <span class="err">┌──────────────────────────────────────────────────────┐</span>    <span class="err">│</span>
+<span class="err">│</span>  <span class="err">│</span>                     <span class="n">main</span><span class="p">.</span><span class="n">py</span>                           <span class="err">│</span>    <span class="err">│</span>
+<span class="err">│</span>  <span class="err">│</span>  <span class="err">•</span> <span class="o">/</span><span class="n">assets</span>          <span class="err">→</span> <span class="n">CRUD</span> <span class="n">de</span> <span class="n">ativos</span>                 <span class="err">│</span>    <span class="err">│</span>
+<span class="err">│</span>  <span class="err">│</span>  <span class="err">•</span> <span class="o">/</span><span class="n">operations</span>      <span class="err">→</span> <span class="n">CRUD</span> <span class="n">de</span> <span class="n">operações</span>              <span class="err">│</span>    <span class="err">│</span>
+<span class="err">│</span>  <span class="err">│</span>  <span class="err">•</span> <span class="o">/</span><span class="n">import</span><span class="o">/</span><span class="n">b3</span>       <span class="err">→</span> <span class="n">Importação</span> <span class="n">Excel</span> <span class="n">B3</span>            <span class="err">│</span>    <span class="err">│</span>
+<span class="err">│</span>  <span class="err">│</span>  <span class="err">•</span> <span class="o">/</span><span class="n">fixed</span><span class="o">-</span><span class="n">income</span><span class="o">/*</span>  <span class="err">→</span> <span class="n">CRUD</span> <span class="n">Renda</span> <span class="n">Fixa</span> <span class="o">+</span> <span class="n">Projeções</span>    <span class="err">│</span>    <span class="err">│</span>
+<span class="err">│</span>  <span class="err">└──────────────────────┬───────────────────────────────┘</span>    <span class="err">│</span>
+<span class="err">│</span>                         <span class="err">│</span>                                     <span class="err">│</span>
+<span class="err">│</span>  <span class="err">┌──────────────────────▼───────────────────────────────┐</span>    <span class="err">│</span>
+<span class="err">│</span>  <span class="err">│</span>                  <span class="n">Repositories</span>                         <span class="err">│</span>    <span class="err">│</span>
+<span class="err">│</span>  <span class="err">│</span>  <span class="err">•</span> <span class="n">assets_repository</span><span class="p">.</span><span class="n">py</span>                              <span class="err">│</span>    <span class="err">│</span>
+<span class="err">│</span>  <span class="err">│</span>  <span class="err">•</span> <span class="n">operations_repository</span><span class="p">.</span><span class="n">py</span>                          <span class="err">│</span>    <span class="err">│</span>
+<span class="err">│</span>  <span class="err">│</span>  <span class="err">•</span> <span class="n">fixed_income_repository</span><span class="p">.</span><span class="n">py</span>                        <span class="err">│</span>    <span class="err">│</span>
+<span class="err">│</span>  <span class="err">└──────────────────────┬───────────────────────────────┘</span>    <span class="err">│</span>
+<span class="err">│</span>                         <span class="err">│</span>                                     <span class="err">│</span>
+<span class="err">│</span>  <span class="err">┌──────────────────────▼───────────────────────────────┐</span>    <span class="err">│</span>
+<span class="err">│</span>  <span class="err">│</span>                    <span class="n">Services</span>                           <span class="err">│</span>    <span class="err">│</span>
+<span class="err">│</span>  <span class="err">│</span>  <span class="err">•</span> <span class="n">importer</span><span class="p">.</span><span class="n">py</span> <span class="p">(</span><span class="n">classificação</span> <span class="o">+</span> <span class="n">importação</span> <span class="n">B3</span><span class="p">)</span>       <span class="err">│</span>    <span class="err">│</span>
+<span class="err">│</span>  <span class="err">└──────────────────────┬───────────────────────────────┘</span>    <span class="err">│</span>
+<span class="err">│</span>                         <span class="err">│</span>                                     <span class="err">│</span>
+<span class="err">└─────────────────────────┼─────────────────────────────────────┘</span>
+                          <span class="err">│</span>
+                          <span class="err">▼</span>
+<span class="err">┌───────────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span>                        <span class="n">DATABASE</span>                               <span class="err">│</span>
+<span class="err">│</span>                   <span class="n">SQLite</span> <span class="p">(</span><span class="n">WAL</span> <span class="n">mode</span><span class="p">)</span>                           <span class="err">│</span>
+<span class="err">│</span>  <span class="err">┌──────────────┬───────────────┬────────────────────────┐</span>   <span class="err">│</span>
+<span class="err">│</span>  <span class="err">│</span>    <span class="n">assets</span>    <span class="err">│</span>  <span class="n">operations</span>   <span class="err">│</span> <span class="n">fixed_income_assets</span>    <span class="err">│</span>   <span class="err">│</span>
+<span class="err">│</span>  <span class="err">└──────────────┴───────────────┴────────────────────────┘</span>   <span class="err">│</span>
+<span class="err">│</span>                                  <span class="err">│</span>                            <span class="err">│</span>
+<span class="err">│</span>                        <span class="err">┌─────────▼─────────┐</span>                 <span class="err">│</span>
+<span class="err">│</span>                        <span class="err">│</span> <span class="n">fixed_income_ops</span>  <span class="err">│</span>                 <span class="err">│</span>
+<span class="err">│</span>                        <span class="err">└───────────────────┘</span>                 <span class="err">│</span>
+<span class="err">└───────────────────────────────────────────────────────────────┘</span>
+</code></pre></div>
+
+<hr />
+<h2 id="funcionalidades-implementadas">Funcionalidades Implementadas<a class="headerlink" href="#funcionalidades-implementadas" title="Permanent link">&para;</a></h2>
+<h3 id="backend-completo">✅ Backend — Completo<a class="headerlink" href="#backend-completo" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Módulo</th>
+<th>Endpoint</th>
+<th>Método</th>
+<th>Status</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ativos</strong></td>
+<td><code>/assets</code></td>
+<td>POST</td>
+<td>✅</td>
+<td>Criar ativo</td>
+</tr>
+<tr>
+<td></td>
+<td><code>/assets</code></td>
+<td>GET</td>
+<td>✅</td>
+<td>Listar ativos com agregações</td>
+</tr>
+<tr>
+<td></td>
+<td><code>/assets/{id}</code></td>
+<td>GET</td>
+<td>✅</td>
+<td>Buscar ativo por ID</td>
+</tr>
+<tr>
+<td></td>
+<td><code>/assets/{id}</code></td>
+<td>PUT</td>
+<td>✅</td>
+<td>Atualizar ativo</td>
+</tr>
+<tr>
+<td></td>
+<td><code>/assets/{id}</code></td>
+<td>DELETE</td>
+<td>✅</td>
+<td>Deletar ativo (soft delete)</td>
+</tr>
+<tr>
+<td></td>
+<td><code>/assets/{id}/operations</code></td>
+<td>GET</td>
+<td>✅</td>
+<td>Listar operações do ativo</td>
+</tr>
+<tr>
+<td><strong>Operações</strong></td>
+<td><code>/operations</code></td>
+<td>POST</td>
+<td>✅</td>
+<td>Criar operação manual</td>
+</tr>
+<tr>
+<td></td>
+<td><code>/operations</code></td>
+<td>GET</td>
+<td>✅</td>
+<td>Listar todas operações</td>
+</tr>
+<tr>
+<td></td>
+<td><code>/operations/{id}</code></td>
+<td>GET</td>
+<td>✅</td>
+<td>Buscar operação por ID</td>
+</tr>
+<tr>
+<td></td>
+<td><code>/operations/{id}</code></td>
+<td>PUT</td>
+<td>✅</td>
+<td>Atualizar operação</td>
+</tr>
+<tr>
+<td></td>
+<td><code>/operations/{id}</code></td>
+<td>DELETE</td>
+<td>✅</td>
+<td>Deletar operação</td>
+</tr>
+<tr>
+<td><strong>Importação</strong></td>
+<td><code>/import/b3</code></td>
+<td>POST</td>
+<td>✅</td>
+<td>Importar Excel B3</td>
+</tr>
+<tr>
+<td><strong>Renda Fixa</strong></td>
+<td><code>/fixed-income/assets</code></td>
+<td>POST</td>
+<td>✅</td>
+<td>Criar ativo RF</td>
+</tr>
+<tr>
+<td></td>
+<td><code>/fixed-income/assets</code></td>
+<td>GET</td>
+<td>✅</td>
+<td>Listar ativos RF</td>
+</tr>
+<tr>
+<td></td>
+<td><code>/fixed-income/assets/{id}</code></td>
+<td>GET</td>
+<td>✅</td>
+<td>Buscar ativo RF</td>
+</tr>
+<tr>
+<td></td>
+<td><code>/fixed-income/assets/{id}</code></td>
+<td>PUT</td>
+<td>✅</td>
+<td>Atualizar ativo RF</td>
+</tr>
+<tr>
+<td></td>
+<td><code>/fixed-income/assets/{id}</code></td>
+<td>DELETE</td>
+<td>✅</td>
+<td>Deletar ativo RF</td>
+</tr>
+<tr>
+<td></td>
+<td><code>/fixed-income/operations</code></td>
+<td>POST</td>
+<td>✅</td>
+<td>Criar operação RF</td>
+</tr>
+<tr>
+<td></td>
+<td><code>/fixed-income/operations/{id}</code></td>
+<td>GET</td>
+<td>✅</td>
+<td>Listar operações RF</td>
+</tr>
+<tr>
+<td></td>
+<td><code>/fixed-income/projection/{id}</code></td>
+<td>GET</td>
+<td>✅</td>
+<td>Projeção de rendimento</td>
+</tr>
+</tbody>
+</table>
+<h3 id="frontend-parcialmente-implementado">✅ Frontend — Parcialmente Implementado<a class="headerlink" href="#frontend-parcialmente-implementado" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Página</th>
+<th>Rota</th>
+<th>Status</th>
+<th>Funcionalidades</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Dashboard</strong></td>
+<td><code>/</code></td>
+<td>⚠️ Placeholder</td>
+<td>Apenas título, sem dados</td>
+</tr>
+<tr>
+<td><strong>Importar</strong></td>
+<td><code>/import</code></td>
+<td>✅ Completo</td>
+<td>Upload B3, drag-and-drop, feedback</td>
+</tr>
+<tr>
+<td><strong>Carteira</strong></td>
+<td><code>/portfolio</code></td>
+<td>✅ Completo</td>
+<td>CRUD ativos, tabela com agregações monetárias</td>
+</tr>
+<tr>
+<td><strong>Detalhe Ativo</strong></td>
+<td><code>/portfolio/:id</code></td>
+<td>✅ Completo</td>
+<td>Operações do ativo, gráficos básicos</td>
+</tr>
+<tr>
+<td><strong>Renda Fixa</strong></td>
+<td><code>/fixed-income</code></td>
+<td>✅ Completo</td>
+<td>CRUD RF, projeções, edição</td>
+</tr>
+<tr>
+<td><strong>Análises</strong></td>
+<td><code>/analysis</code></td>
+<td>⚠️ Placeholder</td>
+<td>Apenas título, sem dados</td>
+</tr>
+<tr>
+<td><strong>Configurações</strong></td>
+<td><code>/settings</code></td>
+<td>⚠️ Placeholder</td>
+<td>Apenas título, sem funcionalidades</td>
+</tr>
+</tbody>
+</table>
+<h3 id="importacao-b3">✅ Importação B3<a class="headerlink" href="#importacao-b3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Upload de arquivo</td>
+<td>✅</td>
+<td>Suporte a .xlsx via drag-and-drop</td>
+</tr>
+<tr>
+<td>Validação de colunas</td>
+<td>✅</td>
+<td>Verifica colunas obrigatórias da B3</td>
+</tr>
+<tr>
+<td>Classificação automática</td>
+<td>✅</td>
+<td>Detecta Ações (ON/PN), FIIs, ETFs, RF</td>
+</tr>
+<tr>
+<td>Deduplicação</td>
+<td>✅</td>
+<td>Evita duplicatas via UNIQUE constraint</td>
+</tr>
+<tr>
+<td>Idempotência</td>
+<td>✅</td>
+<td>Múltiplas importações do mesmo arquivo são seguras</td>
+</tr>
+</tbody>
+</table>
+<h3 id="renda-fixa">✅ Renda Fixa<a class="headerlink" href="#renda-fixa" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cadastro de ativos</td>
+<td>✅</td>
+<td>CDB, LCI, LCA, Tesouro (Selic, IPCA+, Pré)</td>
+</tr>
+<tr>
+<td>Operações</td>
+<td>✅</td>
+<td>Aplicação, Resgate, Vencimento</td>
+</tr>
+<tr>
+<td>Projeção de rendimento</td>
+<td>✅</td>
+<td>Cálculo com CDI, IPCA, Pré, Selic</td>
+</tr>
+<tr>
+<td>IR regressivo</td>
+<td>✅</td>
+<td>22.5% → 15% baseado em dias</td>
+</tr>
+<tr>
+<td>Isenção LCI/LCA</td>
+<td>✅</td>
+<td>Automaticamente isento de IR</td>
+</tr>
+<tr>
+<td>Taxa de custódia</td>
+<td>✅</td>
+<td>Suporte para Tesouro Direto</td>
+</tr>
+<tr>
+<td>Edição de ativos</td>
+<td>✅</td>
+<td>Atualização de taxa, indexador, datas</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="problemas-conhecidos">Problemas Conhecidos<a class="headerlink" href="#problemas-conhecidos" title="Permanent link">&para;</a></h2>
+<h3 id="backend-criticos">🔴 Backend — Críticos<a class="headerlink" href="#backend-criticos" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Problema</th>
+<th>Impacto</th>
+<th>Arquivo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>B01</td>
+<td>Sem suíte de testes</td>
+<td>Regressões não detectadas</td>
+<td><code>backend/tests/</code></td>
+</tr>
+<tr>
+<td>B02</td>
+<td>Sem validação de preços de mercado</td>
+<td>Posição não reflete valor real</td>
+<td><code>assets_repository.py</code></td>
+</tr>
+<tr>
+<td>B03</td>
+<td>Projeção RF usa taxas fixas</td>
+<td>CDI/IPCA hardcoded</td>
+<td><code>fixed_income_repository.py</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="backend-melhorias">🟡 Backend — Melhorias<a class="headerlink" href="#backend-melhorias" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Problema</th>
+<th>Impacto</th>
+<th>Sugestão</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>B04</td>
+<td>Sem paginação em listagens</td>
+<td>Performance com muitos registros</td>
+<td>Adicionar limit/offset</td>
+</tr>
+<tr>
+<td>B05</td>
+<td>Logs em português e inglês</td>
+<td>Inconsistência</td>
+<td>Padronizar idioma</td>
+</tr>
+<tr>
+<td>B06</td>
+<td>Migrations manuais</td>
+<td>Risco em atualizações</td>
+<td>Usar Alembic ou similar</td>
+</tr>
+<tr>
+<td>B07</td>
+<td>Sem cache de consultas</td>
+<td>Queries repetidas</td>
+<td>Implementar cache Redis</td>
+</tr>
+</tbody>
+</table>
+<h3 id="frontend-criticos">🔴 Frontend — Críticos<a class="headerlink" href="#frontend-criticos" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Problema</th>
+<th>Impacto</th>
+<th>Arquivo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F01</td>
+<td>Dashboard vazio</td>
+<td>UX incompleta</td>
+<td><code>Dashboard.tsx</code></td>
+</tr>
+<tr>
+<td>F02</td>
+<td>Análises vazias</td>
+<td>Feature não entregue</td>
+<td><code>Analysis.tsx</code></td>
+</tr>
+<tr>
+<td>F03</td>
+<td>Configurações vazias</td>
+<td>Sem personalização</td>
+<td><code>Settings.tsx</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="frontend-melhorias">🟡 Frontend — Melhorias<a class="headerlink" href="#frontend-melhorias" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Problema</th>
+<th>Impacto</th>
+<th>Sugestão</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F04</td>
+<td>Sem loading states globais</td>
+<td>UX fragmentada</td>
+<td>Criar contexto global</td>
+</tr>
+<tr>
+<td>F05</td>
+<td>Sem tratamento offline</td>
+<td>Erros silenciosos</td>
+<td>Service Worker / cache</td>
+</tr>
+<tr>
+<td>F06</td>
+<td>Sem gráficos na carteira</td>
+<td>Visualização limitada</td>
+<td>Recharts / Chart.js</td>
+</tr>
+<tr>
+<td>F07</td>
+<td>Formatação de datas inconsistente</td>
+<td>Confusão do usuário</td>
+<td>Criar helper de formatação</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="modelagem-de-dados">Modelagem de Dados<a class="headerlink" href="#modelagem-de-dados" title="Permanent link">&para;</a></h2>
+<h3 id="schema-atual">Schema Atual<a class="headerlink" href="#schema-atual" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Tabela principal de ativos</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">assets</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ticker</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">asset_class</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">      </span><span class="c1">-- AÇÕES, FUNDO IMOBILIÁRIO, ETF, RENDA FIXA</span>
+<span class="w">    </span><span class="n">asset_type</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">       </span><span class="c1">-- ON, PN, FII, ETF, CDB, LCI, LCA, etc.</span>
+<span class="w">    </span><span class="n">product_name</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;ACTIVE&#39;</span>
+<span class="p">);</span>
+
+<span class="c1">-- Operações de compra/venda (renda variável)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">operations</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">asset_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">movement_type</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">    </span><span class="c1">-- COMPRA, VENDA</span>
+<span class="w">    </span><span class="n">quantity</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">price</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">value</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">trade_date</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="k">source</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">           </span><span class="c1">-- B3, MANUAL</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;ACTIVE&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">market</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">institution</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">asset_id</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">assets</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">trade_date</span><span class="p">,</span><span class="w"> </span><span class="n">movement_type</span><span class="p">,</span><span class="w"> </span><span class="n">market</span><span class="p">,</span><span class="w"> </span><span class="n">institution</span><span class="p">,</span><span class="w"> </span><span class="n">asset_id</span><span class="p">,</span><span class="w"> </span><span class="n">quantity</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="p">,</span><span class="w"> </span><span class="k">source</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">-- Ativos de Renda Fixa (extensão)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">fixed_income_assets</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">asset_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">issuer</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">           </span><span class="c1">-- Banco XYZ, Tesouro Nacional</span>
+<span class="w">    </span><span class="n">product_type</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">     </span><span class="c1">-- CDB, LCI, LCA, TESOURO_SELIC, etc.</span>
+<span class="w">    </span><span class="n">indexer</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">          </span><span class="c1">-- CDI, IPCA, PRE, SELIC</span>
+<span class="w">    </span><span class="n">rate</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">             </span><span class="c1">-- Taxa contratada (%)</span>
+<span class="w">    </span><span class="n">maturity_date</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">custody_fee</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="n">issue_date</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;ACTIVE&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">asset_id</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">assets</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">asset_id</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">-- Operações de Renda Fixa</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">fixed_income_operations</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">asset_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">operation_type</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">   </span><span class="c1">-- APLICACAO, RESGATE, VENCIMENTO</span>
+<span class="w">    </span><span class="n">amount</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">net_amount</span><span class="w"> </span><span class="nb">REAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ir_amount</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="n">trade_date</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;ACTIVE&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">asset_id</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">assets</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
+
+<h3 id="campos-calculados-em-runtime">Campos Calculados em Runtime<a class="headerlink" href="#campos-calculados-em-runtime" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Entidade</th>
+<th>Campo</th>
+<th>Cálculo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Asset</td>
+<td><code>total_bought</code></td>
+<td>SUM(quantity) WHERE movement_type = 'COMPRA'</td>
+</tr>
+<tr>
+<td>Asset</td>
+<td><code>total_sold</code></td>
+<td>SUM(quantity) WHERE movement_type = 'VENDA'</td>
+</tr>
+<tr>
+<td>Asset</td>
+<td><code>current_position</code></td>
+<td>total_bought - total_sold</td>
+</tr>
+<tr>
+<td>Asset</td>
+<td><code>total_bought_value</code></td>
+<td>SUM(value) WHERE movement_type = 'COMPRA'</td>
+</tr>
+<tr>
+<td>Asset</td>
+<td><code>total_sold_value</code></td>
+<td>SUM(value) WHERE movement_type = 'VENDA'</td>
+</tr>
+<tr>
+<td>RF Asset</td>
+<td><code>total_invested</code></td>
+<td>SUM(amount) WHERE operation_type = 'APLICACAO'</td>
+</tr>
+<tr>
+<td>RF Asset</td>
+<td><code>total_redeemed</code></td>
+<td>SUM(amount) WHERE operation_type IN ('RESGATE', 'VENCIMENTO')</td>
+</tr>
+<tr>
+<td>RF Asset</td>
+<td><code>current_balance</code></td>
+<td>total_invested - total_redeemed</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="otimizacoes-para-dashboards">Otimizações para Dashboards<a class="headerlink" href="#otimizacoes-para-dashboards" title="Permanent link">&para;</a></h2>
+<h3 id="1-tabelas-materializadas-para-performance">1. Tabelas Materializadas para Performance<a class="headerlink" href="#1-tabelas-materializadas-para-performance" title="Permanent link">&para;</a></h3>
+<p>Para dashboards com grandes volumes de dados, recomenda-se criar tabelas de resumo:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Resumo diário de posição por ativo</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">daily_positions</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">asset_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">reference_date</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">quantity</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">avg_price</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">total_value</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">asset_id</span><span class="p">,</span><span class="w"> </span><span class="n">reference_date</span><span class="p">),</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">asset_id</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">assets</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">-- Resumo mensal de performance</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">monthly_performance</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">asset_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">year_month</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">       </span><span class="c1">-- 2026-01</span>
+<span class="w">    </span><span class="n">opening_position</span><span class="w"> </span><span class="nb">INTEGER</span><span class="p">,</span>
+<span class="w">    </span><span class="n">closing_position</span><span class="w"> </span><span class="nb">INTEGER</span><span class="p">,</span>
+<span class="w">    </span><span class="n">total_bought</span><span class="w"> </span><span class="nb">INTEGER</span><span class="p">,</span>
+<span class="w">    </span><span class="n">total_sold</span><span class="w"> </span><span class="nb">INTEGER</span><span class="p">,</span>
+<span class="w">    </span><span class="n">realized_gain</span><span class="w"> </span><span class="nb">REAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">dividend_income</span><span class="w"> </span><span class="nb">REAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">asset_id</span><span class="p">,</span><span class="w"> </span><span class="n">year_month</span><span class="p">),</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">asset_id</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">assets</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">-- Alocação por classe de ativo</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">allocation_snapshot</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">snapshot_date</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">asset_class</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">total_value</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">percentage</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">snapshot_date</span><span class="p">,</span><span class="w"> </span><span class="n">asset_class</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
+
+<h3 id="2-integracao-com-precos-de-mercado">2. Integração com Preços de Mercado<a class="headerlink" href="#2-integracao-com-precos-de-mercado" title="Permanent link">&para;</a></h3>
+<p>Para calcular o valor real da carteira:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Cotações diárias</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">market_prices</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ticker</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">reference_date</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">open_price</span><span class="w"> </span><span class="nb">REAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">high_price</span><span class="w"> </span><span class="nb">REAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">low_price</span><span class="w"> </span><span class="nb">REAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">close_price</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">volume</span><span class="w"> </span><span class="nb">INTEGER</span><span class="p">,</span>
+<span class="w">    </span><span class="k">source</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">           </span><span class="c1">-- B3, YAHOO, ALPHA_VANTAGE</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">ticker</span><span class="p">,</span><span class="w"> </span><span class="n">reference_date</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">-- View para posição valorizada</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">portfolio_valuation</span><span class="w"> </span><span class="k">AS</span>
+<span class="k">SELECT</span><span class="w"> </span>
+<span class="w">    </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
+<span class="w">    </span><span class="n">a</span><span class="p">.</span><span class="n">ticker</span><span class="p">,</span>
+<span class="w">    </span><span class="n">a</span><span class="p">.</span><span class="n">asset_class</span><span class="p">,</span>
+<span class="w">    </span><span class="n">a</span><span class="p">.</span><span class="n">asset_type</span><span class="p">,</span>
+<span class="w">    </span><span class="k">COALESCE</span><span class="p">(</span><span class="k">SUM</span><span class="p">(</span><span class="k">CASE</span><span class="w"> </span><span class="k">WHEN</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">movement_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;COMPRA&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">quantity</span><span class="w"> </span><span class="k">ELSE</span><span class="w"> </span><span class="o">-</span><span class="n">o</span><span class="p">.</span><span class="n">quantity</span><span class="w"> </span><span class="k">END</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">position</span><span class="p">,</span>
+<span class="w">    </span><span class="n">mp</span><span class="p">.</span><span class="n">close_price</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">current_price</span><span class="p">,</span>
+<span class="w">    </span><span class="k">position</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">mp</span><span class="p">.</span><span class="n">close_price</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">market_value</span><span class="p">,</span>
+<span class="w">    </span><span class="k">SUM</span><span class="p">(</span><span class="k">CASE</span><span class="w"> </span><span class="k">WHEN</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">movement_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;COMPRA&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="k">ELSE</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">END</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">total_cost</span><span class="p">,</span>
+<span class="w">    </span><span class="p">(</span><span class="n">market_value</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">total_cost</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">unrealized_gain</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">assets</span><span class="w"> </span><span class="n">a</span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">operations</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">asset_id</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;ACTIVE&#39;</span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">market_prices</span><span class="w"> </span><span class="n">mp</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">ticker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mp</span><span class="p">.</span><span class="n">ticker</span><span class="w"> </span>
+<span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">mp</span><span class="p">.</span><span class="n">reference_date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="k">MAX</span><span class="p">(</span><span class="n">reference_date</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">market_prices</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">ticker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">ticker</span><span class="p">)</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;ACTIVE&#39;</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="3-indices-recomendados">3. Índices Recomendados<a class="headerlink" href="#3-indices-recomendados" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Otimizar consultas por data</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_operations_trade_date</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">operations</span><span class="p">(</span><span class="n">trade_date</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_operations_asset_id</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">operations</span><span class="p">(</span><span class="n">asset_id</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_fixed_income_ops_trade_date</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">fixed_income_operations</span><span class="p">(</span><span class="n">trade_date</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_market_prices_ticker_date</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">market_prices</span><span class="p">(</span><span class="n">ticker</span><span class="p">,</span><span class="w"> </span><span class="n">reference_date</span><span class="p">);</span>
+
+<span class="c1">-- Otimizar buscas por classe</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_assets_class</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">assets</span><span class="p">(</span><span class="n">asset_class</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_assets_status</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">assets</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
+</code></pre></div>
+
+<h3 id="4-agregacoes-para-dashboard">4. Agregações para Dashboard<a class="headerlink" href="#4-agregacoes-para-dashboard" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Exemplo de endpoint otimizado para dashboard</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/dashboard/summary&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_dashboard_summary</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retorna resumo consolidado para o dashboard principal.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">get_db</span><span class="p">()</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+        <span class="c1"># Total por classe de ativo</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            SELECT </span>
+<span class="s2">                a.asset_class,</span>
+<span class="s2">                COUNT(DISTINCT a.id) as total_assets,</span>
+<span class="s2">                SUM(CASE WHEN o.movement_type = &#39;COMPRA&#39; THEN o.value ELSE 0 END) as total_invested,</span>
+<span class="s2">                SUM(CASE WHEN o.movement_type = &#39;VENDA&#39; THEN o.value ELSE 0 END) as total_sold</span>
+<span class="s2">            FROM assets a</span>
+<span class="s2">            LEFT JOIN operations o ON a.id = o.asset_id AND o.status = &#39;ACTIVE&#39;</span>
+<span class="s2">            WHERE a.status = &#39;ACTIVE&#39;</span>
+<span class="s2">            GROUP BY a.asset_class</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="n">allocation</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+        <span class="c1"># Top 5 maiores posições</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            SELECT </span>
+<span class="s2">                a.ticker,</span>
+<span class="s2">                a.asset_class,</span>
+<span class="s2">                SUM(CASE WHEN o.movement_type = &#39;COMPRA&#39; THEN o.value ELSE -o.value END) as net_value</span>
+<span class="s2">            FROM assets a</span>
+<span class="s2">            INNER JOIN operations o ON a.id = o.asset_id AND o.status = &#39;ACTIVE&#39;</span>
+<span class="s2">            WHERE a.status = &#39;ACTIVE&#39;</span>
+<span class="s2">            GROUP BY a.id</span>
+<span class="s2">            ORDER BY net_value DESC</span>
+<span class="s2">            LIMIT 5</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="n">top_positions</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+        <span class="c1"># Operações recentes</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            SELECT </span>
+<span class="s2">                o.trade_date,</span>
+<span class="s2">                a.ticker,</span>
+<span class="s2">                o.movement_type,</span>
+<span class="s2">                o.quantity,</span>
+<span class="s2">                o.value</span>
+<span class="s2">            FROM operations o</span>
+<span class="s2">            INNER JOIN assets a ON o.asset_id = a.id</span>
+<span class="s2">            WHERE o.status = &#39;ACTIVE&#39;</span>
+<span class="s2">            ORDER BY o.trade_date DESC, o.id DESC</span>
+<span class="s2">            LIMIT 10</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="n">recent_operations</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;allocation&quot;</span><span class="p">:</span> <span class="n">allocation</span><span class="p">,</span>
+            <span class="s2">&quot;top_positions&quot;</span><span class="p">:</span> <span class="n">top_positions</span><span class="p">,</span>
+            <span class="s2">&quot;recent_operations&quot;</span><span class="p">:</span> <span class="n">recent_operations</span>
+        <span class="p">}</span>
+</code></pre></div>
+
+<h3 id="5-estrutura-de-resposta-para-graficos">5. Estrutura de Resposta para Gráficos<a class="headerlink" href="#5-estrutura-de-resposta-para-graficos" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Interface para dados de gráfico de alocação</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">AllocationData</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">asset_class</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">total_value</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">percentage</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Interface para evolução patrimonial</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">PortfolioEvolution</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">date</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">total_value</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">invested</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">gain_loss</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Interface para performance por ativo</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">AssetPerformance</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">ticker</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">buy_price</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">current_price</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">return_percentage</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">return_value</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="roadmap-sugerido">Roadmap Sugerido<a class="headerlink" href="#roadmap-sugerido" title="Permanent link">&para;</a></h2>
+<h3 id="fase-1-consolidacao-1-2-semanas">Fase 1 — Consolidação (1-2 semanas)<a class="headerlink" href="#fase-1-consolidacao-1-2-semanas" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Implementar Dashboard Principal</strong></li>
+<li>Card de patrimônio total</li>
+<li>Gráfico de alocação por classe</li>
+<li>Lista de operações recentes</li>
+<li>
+<p>Top 5 posições</p>
+</li>
+<li>
+<p><strong>Implementar Página de Análises</strong></p>
+</li>
+<li>Evolução patrimonial (gráfico de linha)</li>
+<li>Performance por ativo (tabela rankeada)</li>
+<li>
+<p>Dividendos/proventos recebidos</p>
+</li>
+<li>
+<p><strong>Adicionar Testes Automatizados</strong></p>
+</li>
+<li>Testes unitários para repositories</li>
+<li>Testes de integração para endpoints</li>
+<li>Testes E2E básicos com Playwright</li>
+</ol>
+<h3 id="fase-2-valorizacao-2-3-semanas">Fase 2 — Valorização (2-3 semanas)<a class="headerlink" href="#fase-2-valorizacao-2-3-semanas" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Integrar Cotações de Mercado</strong></li>
+<li>API de cotações (Yahoo Finance / Alpha Vantage)</li>
+<li>Job para atualização diária</li>
+<li>
+<p>Cálculo de posição valorizada</p>
+</li>
+<li>
+<p><strong>Mark-to-Market</strong></p>
+</li>
+<li>Valor atual da carteira em tempo real</li>
+<li>Ganho/perda não realizado</li>
+<li>Comparação com benchmark (IBOV, CDI)</li>
+</ol>
+<h3 id="fase-3-otimizacao-1-2-semanas">Fase 3 — Otimização (1-2 semanas)<a class="headerlink" href="#fase-3-otimizacao-1-2-semanas" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Materializar Agregações</strong></li>
+<li>Criar tabelas de resumo diário/mensal</li>
+<li>Jobs de recálculo periódico</li>
+<li>
+<p>Cache de consultas frequentes</p>
+</li>
+<li>
+<p><strong>Performance e Escala</strong></p>
+</li>
+<li>Migrar para PostgreSQL (produção)</li>
+<li>Implementar paginação em todas as listagens</li>
+<li>Otimizar queries N+1</li>
+</ol>
+<h3 id="fase-4-novas-features-ongoing">Fase 4 — Novas Features (ongoing)<a class="headerlink" href="#fase-4-novas-features-ongoing" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Proventos e Dividendos</strong> (Issue #1)</li>
+<li><strong>Suporte a FIIs completo</strong> (Issue #2)</li>
+<li><strong>Suporte a Criptomoedas</strong> (Issue #6)</li>
+<li><strong>Suporte a Investimentos Internacionais</strong> (Issue #7)</li>
+</ol>
+<hr />
+<h2 id="conclusao">Conclusão<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h2>
+<p>O Portfolio Manager v2 possui uma base sólida com:</p>
+<ul>
+<li>✅ Arquitetura bem definida (separação de camadas)</li>
+<li>✅ Importação robusta com deduplicação</li>
+<li>✅ Suporte completo a Renda Fixa</li>
+<li>✅ CRUD funcional para ativos e operações</li>
+</ul>
+<p>Os principais gaps são:</p>
+<ul>
+<li>⚠️ Dashboard e Análises não implementados</li>
+<li>⚠️ Sem integração com preços de mercado</li>
+<li>⚠️ Sem testes automatizados</li>
+</ul>
+<p>Com as otimizações sugeridas, o sistema estará pronto para:</p>
+<ul>
+<li>Dashboards com grandes volumes de dados</li>
+<li>Cálculo de performance em tempo real</li>
+<li>Escalabilidade para produção</li>
+</ul>
+<hr />
+<p><strong>Próximos Passos Imediatos:</strong></p>
+<ol>
+<li>Implementar <code>/dashboard/summary</code> no backend</li>
+<li>Criar componentes de gráfico no Dashboard</li>
+<li>Adicionar cotações mock para desenvolvimento</li>
+<li>Escrever testes básicos para garantir estabilidade</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

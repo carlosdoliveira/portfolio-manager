@@ -1,0 +1,1390 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Sistema web de gestão de carteira de investimentos com foco em importação B3, renda fixa e análise de performance">
+      
+      
+      
+        <link rel="canonical" href="https://carlosdoliveira.github.io/portfolio-manager/guides/crud-implementation/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Implementação CRUD Completo — Portfolio Manager v2 - Portfolio Manager</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#implementacao-crud-completo-portfolio-manager-v2" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Portfolio Manager" class="md-header__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Portfolio Manager
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Implementação CRUD Completo — Portfolio Manager v2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Portfolio Manager" class="md-nav__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Portfolio Manager
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guia Rápido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../referencia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#resumo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Resumo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funcionalidades-implementadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Funcionalidades Implementadas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✅ Funcionalidades Implementadas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend-fastapi-sqlite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend (FastAPI + SQLite)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backend (FastAPI + SQLite)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-schema-do-banco-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Schema do Banco de Dados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-endpoints-rest-implementados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Endpoints REST Implementados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-logica-de-update-preserva-imutabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Lógica de UPDATE (Preserva Imutabilidade)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-logica-de-delete-soft-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Lógica de DELETE (Soft Delete)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-validacao-e-tratamento-de-erros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Validação e Tratamento de Erros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-logging-estruturado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Logging Estruturado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-cors-atualizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. CORS Atualizado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend-react-typescript-vite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend (React + TypeScript + Vite)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Frontend (React + TypeScript + Vite)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-tipos-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Tipos TypeScript
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-cliente-api-srcapiclientts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Cliente API (src/api/client.ts)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-componente-operationform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Componente OperationForm
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-pagina-portfolio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Página Portfolio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-estilos-css" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Estilos CSS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testes-realizados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧪 Testes Realizados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧪 Testes Realizados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metricas-de-implementacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Métricas de Implementação
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#principios-arquiteturais-preservados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Princípios Arquiteturais Preservados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Princípios Arquiteturais Preservados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-operacoes-sao-eventos-imutaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ 1. Operações São Eventos Imutáveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-auditoria-completa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ 2. Auditoria Completa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-soft-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ 3. Soft Delete
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-validacao-rigorosa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ 4. Validação Rigorosa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-tratamento-de-erros-especifico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ 5. Tratamento de Erros Específico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-context-manager-para-db" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ 6. Context Manager para DB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-logging-estruturado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ 7. Logging Estruturado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-usar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 Como Usar
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Como Usar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#criar-operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Criar Operação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editar-operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Editar Operação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deletar-operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deletar Operação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proximos-passos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔄 Próximos Passos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔄 Próximos Passos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#curto-prazo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Curto Prazo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#medio-prazo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Médio Prazo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#longo-prazo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Longo Prazo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎉 Conclusão
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="implementacao-crud-completo-portfolio-manager-v2">Implementação CRUD Completo — Portfolio Manager v2<a class="headerlink" href="#implementacao-crud-completo-portfolio-manager-v2" title="Permanent link">&para;</a></h1>
+<p>Documentação da implementação completa do sistema CRUD de operações financeiras.</p>
+<p><strong>Data de implementação:</strong> 2026-01-02</p>
+<hr />
+<h2 id="resumo">📋 Resumo<a class="headerlink" href="#resumo" title="Permanent link">&para;</a></h2>
+<p>Foi implementado um sistema CRUD completo para gerenciamento de operações de investimento, respeitando rigorosamente os princípios arquiteturais do projeto (eventos imutáveis, auditoria, soft delete).</p>
+<hr />
+<h2 id="funcionalidades-implementadas">✅ Funcionalidades Implementadas<a class="headerlink" href="#funcionalidades-implementadas" title="Permanent link">&para;</a></h2>
+<h3 id="backend-fastapi-sqlite">Backend (FastAPI + SQLite)<a class="headerlink" href="#backend-fastapi-sqlite" title="Permanent link">&para;</a></h3>
+<h4 id="1-schema-do-banco-de-dados">1. Schema do Banco de Dados<a class="headerlink" href="#1-schema-do-banco-de-dados" title="Permanent link">&para;</a></h4>
+<p>Adicionado campo <code>status</code> à tabela <code>operations</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">status</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;ACTIVE&#39;</span>
+</code></pre></div>
+
+<p><strong>Valores possíveis:</strong>
+- <code>ACTIVE</code> - Operação ativa e visível
+- <code>CANCELLED</code> - Operação substituída por atualização
+- <code>DELETED</code> - Operação deletada pelo usuário</p>
+<p><strong>Migration automática:</strong> O código tenta adicionar a coluna se a tabela já existir.</p>
+<h4 id="2-endpoints-rest-implementados">2. Endpoints REST Implementados<a class="headerlink" href="#2-endpoints-rest-implementados" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Endpoint</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td><code>/operations</code></td>
+<td>Lista todas operações ativas</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/operations/{id}</code></td>
+<td>Busca operação por ID</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/operations</code></td>
+<td>Cria nova operação</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td><code>/operations/{id}</code></td>
+<td>Atualiza operação (cria nova, cancela antiga)</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/operations/{id}</code></td>
+<td>Soft delete (marca como DELETED)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-logica-de-update-preserva-imutabilidade">3. Lógica de UPDATE (Preserva Imutabilidade)<a class="headerlink" href="#3-logica-de-update-preserva-imutabilidade" title="Permanent link">&para;</a></h4>
+<p>Quando uma operação é atualizada:</p>
+<ol>
+<li>A operação original é marcada como <code>CANCELLED</code></li>
+<li>Uma nova operação é criada com os dados atualizados</li>
+<li>O cliente recebe ambos os IDs: <code>old_id</code> e <code>new_id</code></li>
+</ol>
+<p><strong>Por quê?</strong>
+- Preserva histórico completo
+- Mantém auditoria
+- Permite reconciliação com extratos
+- Segue princípio de eventos imutáveis</p>
+<h4 id="4-logica-de-delete-soft-delete">4. Lógica de DELETE (Soft Delete)<a class="headerlink" href="#4-logica-de-delete-soft-delete" title="Permanent link">&para;</a></h4>
+<p>Quando uma operação é deletada:</p>
+<ol>
+<li>O status é alterado para <code>DELETED</code></li>
+<li>O registro permanece no banco</li>
+<li>Não aparece mais na listagem de operações ativas</li>
+</ol>
+<p><strong>Por quê?</strong>
+- Preserva auditoria
+- Permite recuperação se necessário
+- Mantém integridade referencial</p>
+<h4 id="5-validacao-e-tratamento-de-erros">5. Validação e Tratamento de Erros<a class="headerlink" href="#5-validacao-e-tratamento-de-erros" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Validação Pydantic</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">OperationCreate</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">asset_class</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">asset_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">product_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">movement_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;^(COMPRA|VENDA)$&quot;</span><span class="p">)</span>
+    <span class="n">quantity</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">price</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">trade_date</span><span class="p">:</span> <span class="n">date</span>
+    <span class="c1"># ... outros campos</span>
+
+<span class="c1"># Tratamento de erros específico</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">update_operation</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+</code></pre></div>
+
+<h4 id="6-logging-estruturado">6. Logging Estruturado<a class="headerlink" href="#6-logging-estruturado" title="Permanent link">&para;</a></h4>
+<p>Logs em todos os pontos críticos:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Criando operação: </span><span class="si">{</span><span class="n">ticker</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">movement_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Operação </span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2"> marcada como CANCELLED&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Nova operação criada com ID: </span><span class="si">{</span><span class="n">new_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Operação </span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2"> marcada como DELETED&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h4 id="7-cors-atualizado">7. CORS Atualizado<a class="headerlink" href="#7-cors-atualizado" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="n">allow_methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;PUT&quot;</span><span class="p">,</span> <span class="s2">&quot;DELETE&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+<hr />
+<h3 id="frontend-react-typescript-vite">Frontend (React + TypeScript + Vite)<a class="headerlink" href="#frontend-react-typescript-vite" title="Permanent link">&para;</a></h3>
+<h4 id="1-tipos-typescript">1. Tipos TypeScript<a class="headerlink" href="#1-tipos-typescript" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">Operation</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">asset_class</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">asset_type</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">product_name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">ticker</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">movement_type</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;COMPRA&quot;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s2">&quot;VENDA&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">quantity</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">price</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">trade_date</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">source</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">created_at</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">status</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">market?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">institution?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">OperationCreate</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">asset_class</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">asset_type</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">product_name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">ticker?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">movement_type</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;COMPRA&quot;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s2">&quot;VENDA&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">quantity</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">price</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">trade_date</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">market?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">institution?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4 id="2-cliente-api-srcapiclientts">2. Cliente API (<code>src/api/client.ts</code>)<a class="headerlink" href="#2-cliente-api-srcapiclientts" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">fetchOperations</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">Operation</span><span class="p">[]</span><span class="o">&gt;</span>
+<span class="k">export</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">fetchOperationById</span><span class="p">(</span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">Operation</span><span class="o">&gt;</span>
+<span class="k">export</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">createOperation</span><span class="p">(</span><span class="nx">operation</span><span class="o">:</span><span class="w"> </span><span class="kt">OperationCreate</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="p">{</span><span class="nx">status</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">}</span><span class="o">&gt;</span>
+<span class="k">export</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">updateOperation</span><span class="p">(</span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">,</span><span class="w"> </span><span class="nx">operation</span><span class="o">:</span><span class="w"> </span><span class="kt">OperationCreate</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="p">{...}</span><span class="o">&gt;</span>
+<span class="k">export</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">deleteOperation</span><span class="p">(</span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="p">{...}</span><span class="o">&gt;</span>
+</code></pre></div>
+
+<h4 id="3-componente-operationform">3. Componente <code>OperationForm</code><a class="headerlink" href="#3-componente-operationform" title="Permanent link">&para;</a></h4>
+<p>Formulário reutilizável para criar e editar operações.</p>
+<p><strong>Features:</strong>
+- Validação client-side (HTML5 + TypeScript)
+- Campos obrigatórios marcados com *
+- Cálculo automático do valor total
+- Estados de loading durante submit
+- Responsivo (mobile-first)</p>
+<p><strong>Props:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">OperationFormProps</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">initialData?</span><span class="o">:</span><span class="w"> </span><span class="kt">OperationCreate</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">onSubmit</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">operation</span><span class="o">:</span><span class="w"> </span><span class="kt">OperationCreate</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="ow">void</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">onCancel</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">void</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">submitLabel?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4 id="4-pagina-portfolio">4. Página <code>Portfolio</code><a class="headerlink" href="#4-pagina-portfolio" title="Permanent link">&para;</a></h4>
+<p>Interface completa de gerenciamento de operações.</p>
+<p><strong>Funcionalidades:</strong></p>
+<p><strong>a) Listagem de Operações</strong>
+- Tabela responsiva com todas as operações ativas
+- Ordenação por data (mais recente primeiro)
+- Badges visuais para COMPRA (verde) e VENDA (vermelho)
+- Formatação de moeda e data brasileira
+- Hover effects e animações suaves</p>
+<p><strong>b) Estatísticas</strong>
+- Total de operações
+- Total investido (soma de compras)
+- Ativos únicos (contagem de tickers)</p>
+<p><strong>c) Criação de Operação</strong>
+- Botão "Nova Operação" abre formulário
+- Validação completa antes de enviar
+- Feedback de sucesso após criação</p>
+<p><strong>d) Edição de Operação</strong>
+- Botão de editar (✏️) em cada linha
+- Aviso sobre preservação de histórico
+- Preenche formulário com dados atuais
+- Envia requisição PUT</p>
+<p><strong>e) Exclusão de Operação</strong>
+- Botão de deletar (🗑️) em cada linha
+- Modal de confirmação antes de deletar
+- Feedback de sucesso após exclusão</p>
+<p><strong>f) Estados de UI</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Loading state</span>
+<span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;loading-state&quot;</span><span class="o">&gt;</span>
+<span class="w">  </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;spinner&quot;</span><span class="o">&gt;&lt;</span><span class="err">/div&gt;</span>
+<span class="w">  </span><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Carregando</span><span class="w"> </span><span class="nx">operações</span><span class="p">...</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+<span class="o">&lt;</span><span class="err">/div&gt;</span>
+
+<span class="c1">// Success alert</span>
+<span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;alert alert-success&quot;</span><span class="o">&gt;</span>
+<span class="w">  </span><span class="o">&lt;</span><span class="nx">span</span><span class="o">&gt;</span><span class="err">✓</span><span class="o">&lt;</span><span class="err">/span&gt; Operação criada com sucesso!</span>
+<span class="o">&lt;</span><span class="err">/div&gt;</span>
+
+<span class="c1">// Error alert</span>
+<span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;alert alert-error&quot;</span><span class="o">&gt;</span>
+<span class="w">  </span><span class="o">&lt;</span><span class="nx">span</span><span class="o">&gt;</span><span class="err">✗</span><span class="o">&lt;</span><span class="err">/span&gt; {errorMessage}</span>
+<span class="w">  </span><span class="o">&lt;</span><span class="nx">button</span><span class="w"> </span><span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">setError</span><span class="p">(</span><span class="kc">null</span><span class="p">)}</span><span class="o">&gt;</span><span class="err">×</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+<span class="o">&lt;</span><span class="err">/div&gt;</span>
+
+<span class="c1">// Empty state</span>
+<span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;empty-state&quot;</span><span class="o">&gt;</span>
+<span class="w">  </span><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Nenhuma</span><span class="w"> </span><span class="nx">operação</span><span class="w"> </span><span class="nx">registrada</span><span class="w"> </span><span class="nx">ainda</span><span class="p">.</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+<span class="w">  </span><span class="o">&lt;</span><span class="nx">button</span><span class="o">&gt;</span><span class="nx">Criar</span><span class="w"> </span><span class="nx">primeira</span><span class="w"> </span><span class="nx">operação</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+<span class="o">&lt;</span><span class="err">/div&gt;</span>
+</code></pre></div>
+
+<h4 id="5-estilos-css">5. Estilos CSS<a class="headerlink" href="#5-estilos-css" title="Permanent link">&para;</a></h4>
+<p><strong>Design System:</strong>
+- Uso de variáveis CSS (<code>var(--color-primary)</code>)
+- Tokens de tema consistentes
+- Animações suaves (transitions)
+- Responsivo com media queries
+- Estados hover/focus/disabled</p>
+<p><strong>Componentes estilizados:</strong>
+- Tabela com hover effects
+- Botões primários e secundários
+- Alerts coloridos (success/error)
+- Modal com overlay
+- Badges de status
+- Spinner de loading</p>
+<hr />
+<h2 id="testes-realizados">🧪 Testes Realizados<a class="headerlink" href="#testes-realizados" title="Permanent link">&para;</a></h2>
+<h3 id="backend">Backend<a class="headerlink" href="#backend" title="Permanent link">&para;</a></h3>
+<p><strong>1. CREATE (POST /operations)</strong></p>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/operations<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;asset_class&quot;:&quot;Renda Variável&quot;,&quot;asset_type&quot;:&quot;Ações&quot;,...}&#39;</span>
+
+✓<span class="w"> </span>Status:<span class="w"> </span><span class="m">200</span><span class="w"> </span>OK
+✓<span class="w"> </span>Response:<span class="w"> </span><span class="o">{</span><span class="s2">&quot;status&quot;</span>:<span class="s2">&quot;success&quot;</span><span class="o">}</span>
+</code></pre></div>
+
+<p><strong>2. READ (GET /operations)</strong></p>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>http://localhost:8000/operations
+
+✓<span class="w"> </span>Status:<span class="w"> </span><span class="m">200</span><span class="w"> </span>OK
+✓<span class="w"> </span>Retorna<span class="w"> </span>apenas<span class="w"> </span>operações<span class="w"> </span>com<span class="w"> </span>status<span class="w"> </span>ACTIVE
+✓<span class="w"> </span>Ordenação<span class="w"> </span>correta<span class="w"> </span><span class="o">(</span>data<span class="w"> </span>DESC<span class="o">)</span>
+</code></pre></div>
+
+<p><strong>3. READ by ID (GET /operations/:id)</strong></p>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>http://localhost:8000/operations/1
+
+✓<span class="w"> </span>Status:<span class="w"> </span><span class="m">200</span><span class="w"> </span>OK
+✓<span class="w"> </span>Retorna<span class="w"> </span>todos<span class="w"> </span>os<span class="w"> </span>campos<span class="w"> </span>incluindo<span class="w"> </span>status
+✓<span class="w"> </span><span class="m">404</span><span class="w"> </span>se<span class="w"> </span>não<span class="w"> </span>encontrar
+</code></pre></div>
+
+<p><strong>4. UPDATE (PUT /operations/:id)</strong></p>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>http://localhost:8000/operations/1<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;quantity&quot;:250,...}&#39;</span>
+
+✓<span class="w"> </span>Status:<span class="w"> </span><span class="m">200</span><span class="w"> </span>OK
+✓<span class="w"> </span>Response:<span class="w"> </span><span class="o">{</span><span class="s2">&quot;old_id&quot;</span>:1,<span class="s2">&quot;new_id&quot;</span>:2<span class="o">}</span>
+✓<span class="w"> </span>Operação<span class="w"> </span>antiga<span class="w"> </span>marcada<span class="w"> </span>como<span class="w"> </span>CANCELLED
+✓<span class="w"> </span>Nova<span class="w"> </span>operação<span class="w"> </span>criada<span class="w"> </span>como<span class="w"> </span>ACTIVE
+✓<span class="w"> </span>Listagem<span class="w"> </span>mostra<span class="w"> </span>apenas<span class="w"> </span>a<span class="w"> </span>nova
+</code></pre></div>
+
+<p><strong>5. DELETE (DELETE /operations/:id)</strong></p>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span>http://localhost:8000/operations/1
+
+✓<span class="w"> </span>Status:<span class="w"> </span><span class="m">200</span><span class="w"> </span>OK
+✓<span class="w"> </span>Response:<span class="w"> </span><span class="o">{</span><span class="s2">&quot;deleted_id&quot;</span>:1<span class="o">}</span>
+✓<span class="w"> </span>Operação<span class="w"> </span>marcada<span class="w"> </span>como<span class="w"> </span>DELETED
+✓<span class="w"> </span>Não<span class="w"> </span>aparece<span class="w"> </span>mais<span class="w"> </span>na<span class="w"> </span>listagem
+✓<span class="w"> </span>Ainda<span class="w"> </span>existe<span class="w"> </span>no<span class="w"> </span>banco
+</code></pre></div>
+
+<p><strong>6. Validação de Erros</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Tentar deletar operação já deletada</span>
+✓<span class="w"> </span>Status:<span class="w"> </span><span class="m">400</span><span class="w"> </span>Bad<span class="w"> </span>Request
+✓<span class="w"> </span>Detail:<span class="w"> </span><span class="s2">&quot;Operação não está ativa&quot;</span>
+
+<span class="c1"># Tentar atualizar operação inexistente</span>
+✓<span class="w"> </span>Status:<span class="w"> </span><span class="m">404</span><span class="w"> </span>Not<span class="w"> </span>Found
+✓<span class="w"> </span>Detail:<span class="w"> </span><span class="s2">&quot;Operação não encontrada&quot;</span>
+</code></pre></div>
+
+<h3 id="frontend">Frontend<a class="headerlink" href="#frontend" title="Permanent link">&para;</a></h3>
+<p><strong>Testes manuais realizados:</strong></p>
+<ol>
+<li>✓ Página carrega com loading state</li>
+<li>✓ Listagem de operações renderiza corretamente</li>
+<li>✓ Estatísticas calculadas corretas</li>
+<li>✓ Botão "Nova Operação" abre formulário</li>
+<li>✓ Formulário valida campos obrigatórios</li>
+<li>✓ Criação de operação bem-sucedida com feedback</li>
+<li>✓ Listagem atualiza após criação</li>
+<li>✓ Botão editar preenche formulário com dados</li>
+<li>✓ Atualização bem-sucedida com feedback</li>
+<li>✓ Botão deletar abre modal de confirmação</li>
+<li>✓ Exclusão bem-sucedida com feedback</li>
+<li>✓ Alerts desaparecem após 3 segundos</li>
+<li>✓ Tabela responsiva em mobile</li>
+<li>✓ Formulário responsivo em mobile</li>
+</ol>
+<hr />
+<h2 id="metricas-de-implementacao">📊 Métricas de Implementação<a class="headerlink" href="#metricas-de-implementacao" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Categoria</th>
+<th>Quantidade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Backend</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Endpoints novos</td>
+<td>3 (GET/:id, PUT/:id, DELETE/:id)</td>
+</tr>
+<tr>
+<td>Funções no repository</td>
+<td>3 (get_by_id, update, delete)</td>
+</tr>
+<tr>
+<td>Linhas de código (Python)</td>
+<td>~200</td>
+</tr>
+<tr>
+<td><strong>Frontend</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Componentes novos</td>
+<td>2 (OperationForm, Portfolio)</td>
+</tr>
+<tr>
+<td>Funções de API</td>
+<td>3 (fetchById, update, delete)</td>
+</tr>
+<tr>
+<td>Linhas de código (TS/TSX)</td>
+<td>~600</td>
+</tr>
+<tr>
+<td>Linhas de CSS</td>
+<td>~350</td>
+</tr>
+<tr>
+<td><strong>Documentação</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Endpoints documentados</td>
+<td>7 total</td>
+</tr>
+<tr>
+<td>Exemplos de código</td>
+<td>15+</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Arquivos alterados</td>
+<td>9</td>
+</tr>
+<tr>
+<td>Linhas adicionadas</td>
+<td>~1555</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="principios-arquiteturais-preservados">🎯 Princípios Arquiteturais Preservados<a class="headerlink" href="#principios-arquiteturais-preservados" title="Permanent link">&para;</a></h2>
+<h3 id="1-operacoes-sao-eventos-imutaveis">✅ 1. Operações São Eventos Imutáveis<a class="headerlink" href="#1-operacoes-sao-eventos-imutaveis" title="Permanent link">&para;</a></h3>
+<ul>
+<li>UPDATE não modifica operação existente</li>
+<li>Cria nova operação e marca antiga como CANCELLED</li>
+<li>Histórico completo preservado</li>
+</ul>
+<h3 id="2-auditoria-completa">✅ 2. Auditoria Completa<a class="headerlink" href="#2-auditoria-completa" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Todas as operações permanecem no banco</li>
+<li>Status indica o estado atual</li>
+<li>Logs estruturados em todas as ações</li>
+<li>Timestamps de criação preservados</li>
+</ul>
+<h3 id="3-soft-delete">✅ 3. Soft Delete<a class="headerlink" href="#3-soft-delete" title="Permanent link">&para;</a></h3>
+<ul>
+<li>DELETE não remove fisicamente</li>
+<li>Marca como DELETED</li>
+<li>Permite recuperação futura</li>
+<li>Mantém integridade referencial</li>
+</ul>
+<h3 id="4-validacao-rigorosa">✅ 4. Validação Rigorosa<a class="headerlink" href="#4-validacao-rigorosa" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Pydantic no backend</li>
+<li>HTML5 + TypeScript no frontend</li>
+<li>Campos obrigatórios marcados</li>
+<li>Tipos numéricos validados</li>
+</ul>
+<h3 id="5-tratamento-de-erros-especifico">✅ 5. Tratamento de Erros Específico<a class="headerlink" href="#5-tratamento-de-erros-especifico" title="Permanent link">&para;</a></h3>
+<ul>
+<li>HTTPException com status code correto</li>
+<li>Mensagens de erro descritivas</li>
+<li>Propagação correta de erros</li>
+<li>Feedback visual no frontend</li>
+</ul>
+<h3 id="6-context-manager-para-db">✅ 6. Context Manager para DB<a class="headerlink" href="#6-context-manager-para-db" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Garantia de commit/rollback/close</li>
+<li>Zero leaks de conexão</li>
+<li>Transações seguras</li>
+</ul>
+<h3 id="7-logging-estruturado">✅ 7. Logging Estruturado<a class="headerlink" href="#7-logging-estruturado" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Logs em todos os pontos críticos</li>
+<li>Níveis apropriados (INFO, DEBUG, ERROR)</li>
+<li>Informações relevantes (ID, ticker, status)</li>
+</ul>
+<hr />
+<h2 id="como-usar">🚀 Como Usar<a class="headerlink" href="#como-usar" title="Permanent link">&para;</a></h2>
+<h3 id="criar-operacao">Criar Operação<a class="headerlink" href="#criar-operacao" title="Permanent link">&para;</a></h3>
+<p><strong>Backend:</strong></p>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/operations<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">    &quot;asset_class&quot;: &quot;Renda Variável&quot;,</span>
+<span class="s1">    &quot;asset_type&quot;: &quot;Ações&quot;,</span>
+<span class="s1">    &quot;product_name&quot;: &quot;Petrobras PN&quot;,</span>
+<span class="s1">    &quot;ticker&quot;: &quot;PETR4&quot;,</span>
+<span class="s1">    &quot;movement_type&quot;: &quot;COMPRA&quot;,</span>
+<span class="s1">    &quot;quantity&quot;: 100,</span>
+<span class="s1">    &quot;price&quot;: 30.50,</span>
+<span class="s1">    &quot;trade_date&quot;: &quot;2026-01-02&quot;</span>
+<span class="s1">  }&#39;</span>
+</code></pre></div>
+
+<p><strong>Frontend:</strong>
+1. Acesse http://localhost:5173/portfolio
+2. Clique em "Nova Operação"
+3. Preencha o formulário
+4. Clique em "Criar Operação"</p>
+<h3 id="editar-operacao">Editar Operação<a class="headerlink" href="#editar-operacao" title="Permanent link">&para;</a></h3>
+<p><strong>Backend:</strong></p>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>http://localhost:8000/operations/1<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{ ... dados atualizados ... }&#39;</span>
+</code></pre></div>
+
+<p><strong>Frontend:</strong>
+1. Clique no botão ✏️ na linha da operação
+2. Modifique os campos desejados
+3. Clique em "Atualizar Operação"</p>
+<h3 id="deletar-operacao">Deletar Operação<a class="headerlink" href="#deletar-operacao" title="Permanent link">&para;</a></h3>
+<p><strong>Backend:</strong></p>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span>http://localhost:8000/operations/1
+</code></pre></div>
+
+<p><strong>Frontend:</strong>
+1. Clique no botão 🗑️ na linha da operação
+2. Confirme no modal
+3. Operação será marcada como DELETED</p>
+<hr />
+<h2 id="proximos-passos">🔄 Próximos Passos<a class="headerlink" href="#proximos-passos" title="Permanent link">&para;</a></h2>
+<h3 id="curto-prazo">Curto Prazo<a class="headerlink" href="#curto-prazo" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Adicionar filtros na listagem (por ticker, data, tipo)</li>
+<li>[ ] Implementar paginação (backend e frontend)</li>
+<li>[ ] Adicionar ordenação por colunas</li>
+<li>[ ] Exportar operações para CSV/Excel</li>
+</ul>
+<h3 id="medio-prazo">Médio Prazo<a class="headerlink" href="#medio-prazo" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Dashboard com gráficos de distribuição</li>
+<li>[ ] Cálculo de P&amp;L (lucro/prejuízo)</li>
+<li>[ ] Posição atual por ativo</li>
+<li>[ ] Histórico de preços médios</li>
+</ul>
+<h3 id="longo-prazo">Longo Prazo<a class="headerlink" href="#longo-prazo" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Autenticação de usuários</li>
+<li>[ ] Multi-tenancy (múltiplos usuários)</li>
+<li>[ ] Reconciliação com extratos da B3</li>
+<li>[ ] Integração com APIs de cotações</li>
+</ul>
+<hr />
+<h2 id="referencias">📚 Referências<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="./api/endpoints.md">Documentação de API completa</a></li>
+<li><a href="./architecture/principios-core.md">Princípios Arquiteturais</a></li>
+<li><a href="./development/setup.md">Guia de Setup</a></li>
+<li><a href="./oportunidades-backend.md">Oportunidades Backend</a></li>
+<li><a href="./oportunidades-frontend.md">Oportunidades Frontend</a></li>
+</ul>
+<hr />
+<h2 id="conclusao">🎉 Conclusão<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h2>
+<p>A implementação do CRUD completo foi bem-sucedida, respeitando todos os princípios arquiteturais do projeto:</p>
+<ul>
+<li>✅ Imutabilidade de eventos preservada</li>
+<li>✅ Auditoria completa mantida</li>
+<li>✅ Soft delete implementado</li>
+<li>✅ Validação rigorosa em ambos os lados</li>
+<li>✅ Feedback visual claro para usuário</li>
+<li>✅ Código limpo e documentado</li>
+<li>✅ Testes manuais realizados com sucesso</li>
+</ul>
+<p>O sistema está pronto para uso e pode ser estendido com novas funcionalidades mantendo a mesma base sólida.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

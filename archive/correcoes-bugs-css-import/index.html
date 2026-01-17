@@ -1,0 +1,943 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Sistema web de gestão de carteira de investimentos com foco em importação B3, renda fixa e análise de performance">
+      
+      
+      
+        <link rel="canonical" href="https://carlosdoliveira.github.io/portfolio-manager/archive/correcoes-bugs-css-import/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Correção de Bugs: CSS e Importação B3 - Portfolio Manager</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#correcao-de-bugs-css-e-importacao-b3" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Portfolio Manager" class="md-header__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Portfolio Manager
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Correção de Bugs: CSS e Importação B3
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Portfolio Manager" class="md-nav__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Portfolio Manager
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guia Rápido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../referencia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-2026-01-02" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data: 2026-01-02
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bug-1-css-mal-formatado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bug #1: CSS Mal Formatado
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bug #1: CSS Mal Formatado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#causa-raiz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Causa Raiz
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solução
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resultado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bug-2-database-is-locked-na-importacao-b3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bug #2: Database is Locked na Importação B3
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bug #2: Database is Locked na Importação B3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problema_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#causa-raiz_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Causa Raiz
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solucao_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solução
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Solução">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-backendappdbdatabasepy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. backend/app/db/database.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-backendappservicesimporterpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. backend/app/services/importer.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultado_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resultado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Validação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Importação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#commits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Commits
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#licoes-aprendidas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lições Aprendidas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lições Aprendidas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#css" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CSS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sqlite-concorrencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQLite &amp; Concorrência
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importacao-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Importação de Dados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proximos-passos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Próximos Passos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="correcao-de-bugs-css-e-importacao-b3">Correção de Bugs: CSS e Importação B3<a class="headerlink" href="#correcao-de-bugs-css-e-importacao-b3" title="Permanent link">&para;</a></h1>
+<h2 id="data-2026-01-02">Data: 2026-01-02<a class="headerlink" href="#data-2026-01-02" title="Permanent link">&para;</a></h2>
+<h2 id="resumo">Resumo<a class="headerlink" href="#resumo" title="Permanent link">&para;</a></h2>
+<p>Dois bugs críticos foram identificados e corrigidos após o deploy da estrutura hierárquica (Carteira → Ativos → Operações):</p>
+<ol>
+<li><strong>CSS mal formatado</strong> na experiência de adicionar novo ativo</li>
+<li><strong>Erro de "database is locked"</strong> na importação de planilhas B3</li>
+</ol>
+<hr />
+<h2 id="bug-1-css-mal-formatado">Bug #1: CSS Mal Formatado<a class="headerlink" href="#bug-1-css-mal-formatado" title="Permanent link">&para;</a></h2>
+<h3 id="problema">Problema<a class="headerlink" href="#problema" title="Permanent link">&para;</a></h3>
+<p>A experiência de adicionar um novo ativo estava ruim porque o arquivo <code>Portfolio.css</code> estava incompleto e não tinha estilos para:</p>
+<ul>
+<li>Modal overlay (fundo escurecido)</li>
+<li>Modal content (caixa de diálogo)</li>
+<li>Modal header e botão de fechar</li>
+<li>Formulário de ativos</li>
+<li>Form groups e form rows</li>
+<li>Botões de ação</li>
+</ul>
+<h3 id="causa-raiz">Causa Raiz<a class="headerlink" href="#causa-raiz" title="Permanent link">&para;</a></h3>
+<p>O arquivo CSS antigo foi criado quando a página Portfolio mostrava operações diretamente. Após a refatoração para mostrar ativos com modais, os estilos não foram atualizados adequadamente.</p>
+<h3 id="solucao">Solução<a class="headerlink" href="#solucao" title="Permanent link">&para;</a></h3>
+<p><strong>Arquivo modificado:</strong> <code>frontend/src/pages/Portfolio.css</code></p>
+<p><strong>Mudanças:</strong></p>
+<ol>
+<li><strong>Adicionadas classes de modal:</strong>
+   ```css
+   .modal-overlay {
+     position: fixed;
+     background: rgba(0, 0, 0, 0.5);
+     /<em> ... animação fadeIn </em>/
+   }</li>
+</ol>
+<p>.modal-content {
+     background: white;
+     border-radius: 12px;
+     /<em> ... animação slideUp </em>/
+   }</p>
+<p>.modal-header, .modal-close, .modal-body
+   ```</p>
+<ol>
+<li>
+<p><strong>Adicionadas classes de formulário:</strong>
+   <code>css
+   .asset-form
+   .form-group
+   .form-row
+   .form-actions</code></p>
+</li>
+<li>
+<p><strong>Melhorados estilos de botões:</strong>
+   <code>css
+   .btn-primary, .btn-secondary, .btn-danger
+   .btn-icon (view, edit, delete)</code></p>
+</li>
+<li>
+<p><strong>Adicionadas animações:</strong></p>
+</li>
+<li><code>fadeIn</code> para modal overlay</li>
+<li><code>slideUp</code> para modal content</li>
+<li>
+<p><code>slideIn</code> para alerts</p>
+</li>
+<li>
+<p><strong>Responsividade:</strong></p>
+</li>
+<li>Grid adaptativo para stats</li>
+<li>Formulário em coluna única em mobile</li>
+<li>Botões fullwidth em telas pequenas</li>
+</ol>
+<h3 id="resultado">Resultado<a class="headerlink" href="#resultado" title="Permanent link">&para;</a></h3>
+<p>✅ Modal de adicionar ativo agora tem boa apresentação visual
+✅ Formulário bem formatado com labels e inputs alinhados
+✅ Botões com feedback visual (hover, disabled states)
+✅ Animações suaves para melhor UX
+✅ Responsivo em todos os tamanhos de tela</p>
+<hr />
+<h2 id="bug-2-database-is-locked-na-importacao-b3">Bug #2: Database is Locked na Importação B3<a class="headerlink" href="#bug-2-database-is-locked-na-importacao-b3" title="Permanent link">&para;</a></h2>
+<h3 id="problema_1">Problema<a class="headerlink" href="#problema_1" title="Permanent link">&para;</a></h3>
+<p>Ao importar uma planilha B3, o seguinte erro aparecia:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">ValueError</span><span class="o">:</span><span class="w"> </span><span class="n">Erro</span><span class="w"> </span><span class="n">ao</span><span class="w"> </span><span class="n">processar</span><span class="w"> </span><span class="n">linha</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="w"> </span><span class="n">database</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">locked</span>
+</code></pre></div>
+
+<h3 id="causa-raiz_1">Causa Raiz<a class="headerlink" href="#causa-raiz_1" title="Permanent link">&para;</a></h3>
+<p>O problema tinha duas causas:</p>
+<ol>
+<li><strong>Múltiplas conexões simultâneas:</strong></li>
+<li>A função <code>create_asset()</code> abria uma nova conexão para cada ticker</li>
+<li>Dentro do loop de importação, múltiplas conexões competiam pelo lock do SQLite</li>
+<li>
+<p>SQLite não lida bem com alta concorrência por padrão</p>
+</li>
+<li>
+<p><strong>Falta de timeout:</strong></p>
+</li>
+<li>A conexão SQLite não tinha timeout configurado</li>
+<li>Sem WAL (Write-Ahead Logging) habilitado</li>
+</ol>
+<h3 id="solucao_1">Solução<a class="headerlink" href="#solucao_1" title="Permanent link">&para;</a></h3>
+<p><strong>Arquivos modificados:</strong></p>
+<h4 id="1-backendappdbdatabasepy">1. <code>backend/app/db/database.py</code><a class="headerlink" href="#1-backendappdbdatabasepy" title="Permanent link">&para;</a></h4>
+<p><strong>Mudanças:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_connection</span><span class="p">():</span>
+    <span class="n">DATA_DIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">DB_PATH</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>  <span class="c1"># ← Timeout de 30s</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;PRAGMA journal_mode=WAL&quot;</span><span class="p">)</span>        <span class="c1"># ← Write-Ahead Logging</span>
+    <span class="k">return</span> <span class="n">conn</span>
+</code></pre></div>
+
+<p><strong>Benefícios:</strong>
+- <code>timeout=30.0</code>: Espera até 30 segundos antes de lançar "database is locked"
+- <code>PRAGMA journal_mode=WAL</code>: Permite leituras concorrentes e melhor performance</p>
+<h4 id="2-backendappservicesimporterpy">2. <code>backend/app/services/importer.py</code><a class="headerlink" href="#2-backendappservicesimporterpy" title="Permanent link">&para;</a></h4>
+<p><strong>Mudanças:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># ANTES: Chamava create_asset() dentro do loop</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">asset_id</span> <span class="o">=</span> <span class="n">create_asset</span><span class="p">(</span><span class="n">ticker</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>  <span class="c1"># ← Nova conexão a cada iteração!</span>
+
+<span class="c1"># DEPOIS: Uma única conexão, dois passos</span>
+<span class="k">with</span> <span class="n">get_db</span><span class="p">()</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+    <span class="c1"># Passo 1: Criar todos os ativos únicos</span>
+    <span class="n">unique_tickers</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Código de Negociação&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">ticker</span> <span class="ow">in</span> <span class="n">unique_tickers</span><span class="p">:</span>
+        <span class="c1"># Verificar se existe ou criar</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT id FROM assets WHERE ticker = ?&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">ticker</span><span class="p">,))</span>
+        <span class="c1"># ... criar se necessário</span>
+        <span class="n">asset_cache</span><span class="p">[</span><span class="n">ticker</span><span class="p">]</span> <span class="o">=</span> <span class="n">asset_id</span>
+
+    <span class="c1"># Passo 2: Inserir operações usando o cache</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="n">asset_id</span> <span class="o">=</span> <span class="n">asset_cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ticker</span><span class="p">)</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;INSERT INTO operations ...&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Benefícios:</strong>
+- Uma única conexão para toda a importação
+- Cache de asset IDs para evitar queries repetidas
+- Lógica em dois passos: primeiro ativos, depois operações
+- Menos overhead de conexões</p>
+<p><strong>Removido:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">app.repositories.assets_repository</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_asset</span>  <span class="c1"># ← Não mais necessário</span>
+</code></pre></div>
+
+<h3 id="resultado_1">Resultado<a class="headerlink" href="#resultado_1" title="Permanent link">&para;</a></h3>
+<p>✅ Importação B3 funciona sem erros de lock
+✅ Performance melhorada (menos conexões)
+✅ Cache de ativos reduz queries repetidas
+✅ WAL permite melhor concorrência
+✅ Timeout de 30s previne locks eternos</p>
+<hr />
+<h2 id="validacao">Validação<a class="headerlink" href="#validacao" title="Permanent link">&para;</a></h2>
+<h3 id="backend">Backend<a class="headerlink" href="#backend" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Verificar logs</span>
+docker<span class="w"> </span>logs<span class="w"> </span>portfolio-manager-v2-api-1<span class="w"> </span>--tail<span class="w"> </span><span class="m">20</span>
+
+<span class="c1"># Resultado esperado:</span>
+<span class="c1"># INFO: Application startup complete.</span>
+<span class="c1"># INFO: Uvicorn running on http://0.0.0.0:8000</span>
+</code></pre></div>
+
+<h3 id="frontend">Frontend<a class="headerlink" href="#frontend" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Abrir <code>http://localhost:5173/portfolio</code></li>
+<li>Clicar em "Adicionar Ativo"</li>
+<li>Verificar que modal aparece com boa formatação</li>
+<li>Preencher formulário e salvar</li>
+<li>Verificar que ativo é criado com sucesso</li>
+</ol>
+<h3 id="importacao">Importação<a class="headerlink" href="#importacao" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Ir para página de Import</li>
+<li>Selecionar planilha B3 válida</li>
+<li>Fazer upload</li>
+<li>Verificar que importação completa sem erros</li>
+<li>Verificar que ativos e operações são criados corretamente</li>
+</ol>
+<hr />
+<h2 id="commits">Commits<a class="headerlink" href="#commits" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;fix: Corrige CSS do Portfolio e erro de database lock na importação B3</span>
+
+<span class="s2">- Reescreve Portfolio.css com suporte completo a modais</span>
+<span class="s2">- Adiciona animações e estilos responsivos</span>
+<span class="s2">- Configura SQLite com timeout de 30s e WAL mode</span>
+<span class="s2">- Refatora importer.py para usar uma única conexão</span>
+<span class="s2">- Remove chamadas a create_asset() dentro do loop de importação&quot;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="licoes-aprendidas">Lições Aprendidas<a class="headerlink" href="#licoes-aprendidas" title="Permanent link">&para;</a></h2>
+<h3 id="css">CSS<a class="headerlink" href="#css" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Sempre atualizar estilos após refatorações de UI</strong></li>
+<li>Componentes modais precisam de overlay + content + header + body</li>
+<li>Animações melhoram percepção de qualidade</li>
+<li>Responsividade não é opcional</li>
+</ul>
+<h3 id="sqlite-concorrencia">SQLite &amp; Concorrência<a class="headerlink" href="#sqlite-concorrencia" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>SQLite não é thread-safe por padrão</strong></li>
+<li>Sempre configurar <code>timeout</code> em conexões</li>
+<li>WAL mode melhora significativamente concorrência</li>
+<li>Evitar múltiplas conexões dentro de loops</li>
+<li>Cache de dados reduz queries e melhora performance</li>
+</ul>
+<h3 id="importacao-de-dados">Importação de Dados<a class="headerlink" href="#importacao-de-dados" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Separar criação de entidades da inserção de eventos</strong></li>
+<li>Processar em lotes quando possível</li>
+<li>Usar cache para evitar lookups repetidos</li>
+<li>Uma transação para toda a operação garante atomicidade</li>
+</ul>
+<hr />
+<h2 id="proximos-passos">Próximos Passos<a class="headerlink" href="#proximos-passos" title="Permanent link">&para;</a></h2>
+<ul>
+<li>[ ] Testar importação com arquivos grandes (&gt;1000 linhas)</li>
+<li>[ ] Adicionar barra de progresso para importação</li>
+<li>[ ] Implementar validação de dados antes de salvar</li>
+<li>[ ] Adicionar testes automatizados para importação</li>
+<li>[ ] Documentar estrutura esperada da planilha B3</li>
+</ul>
+<hr />
+<h2 id="referencias">Referências<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://www.sqlite.org/wal.html">SQLite WAL Mode</a></li>
+<li><a href="https://docs.python.org/3/library/sqlite3.html">SQLite and Python</a></li>
+<li><a href="https://www.w3schools.com/howto/howto_css_modals.asp">CSS Modal Patterns</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

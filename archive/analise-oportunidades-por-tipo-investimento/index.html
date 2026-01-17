@@ -1,0 +1,1105 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Sistema web de gestão de carteira de investimentos com foco em importação B3, renda fixa e análise de performance">
+      
+      
+      
+        <link rel="canonical" href="https://carlosdoliveira.github.io/portfolio-manager/archive/analise-oportunidades-por-tipo-investimento/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Análise de Oportunidades por Tipo de Investimento - Portfolio Manager</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#analise-de-oportunidades-por-tipo-de-investimento" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Portfolio Manager" class="md-header__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Portfolio Manager
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Análise de Oportunidades por Tipo de Investimento
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Portfolio Manager" class="md-nav__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Portfolio Manager
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guia Rápido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../referencia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-2026-01-02" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data: 2026-01-02
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visao-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visão Geral
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-investimentos-brasileiros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de Investimentos Brasileiros
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos de Investimentos Brasileiros">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-acoes-onpn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Ações (ON/PN)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-fundos-imobiliarios-fiis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Fundos Imobiliários (FIIs)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-renda-fixa-cdb-lci-lca-tesouro-direto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Renda Fixa (CDB, LCI, LCA, Tesouro Direto)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-etfs-exchange-traded-funds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. ETFs (Exchange Traded Funds)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-bdrs-brazilian-depositary-receipts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. BDRs (Brazilian Depositary Receipts)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-criptomoedas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Criptomoedas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-fundos-de-investimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Fundos de Investimento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funcionalidades-transversais-aplicaveis-a-multiplos-tipos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funcionalidades Transversais (Aplicáveis a Múltiplos Tipos)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funcionalidades Transversais (Aplicáveis a Múltiplos Tipos)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-proventos-completo-critico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Proventos Completo 🎯 CRÍTICO
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-eventos-corporativos-alta-prioridade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Eventos Corporativos 🎯 ALTA PRIORIDADE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-preco-medio-posicao-alta-prioridade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Preço Médio &amp; Posição 📊 ALTA PRIORIDADE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-lucroprejuizo-realizado-alta-prioridade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Lucro/Prejuízo Realizado 💰 ALTA PRIORIDADE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-imposto-de-renda-media-prioridade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Imposto de Renda 🧮 MÉDIA PRIORIDADE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-integracao-com-apis-de-cotacao-media-prioridade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Integração com APIs de Cotação 📡 MÉDIA PRIORIDADE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-moeda-estrangeira-media-prioridade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Moeda Estrangeira 💵 MÉDIA PRIORIDADE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-relatorios-e-dashboards-media-prioridade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Relatórios e Dashboards 📊 MÉDIA PRIORIDADE
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priorizacao-de-implementacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Priorização de Implementação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Priorização de Implementação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#critico-implementar-primeiro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔴 CRÍTICO (Implementar Primeiro)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alta-prioridade-implementar-em-seguida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟡 ALTA PRIORIDADE (Implementar em Seguida)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#media-prioridade-futuro-proximo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟢 MÉDIA PRIORIDADE (Futuro Próximo)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#baixa-prioridade-backlog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔵 BAIXA PRIORIDADE (Backlog)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roadmap-sugerido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Roadmap Sugerido
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Roadmap Sugerido">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fase-1-fundacao-q1-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 1: Fundação (Q1 2026)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-2-maturidade-q2-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 2: Maturidade (Q2 2026)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-3-expansao-q3-q4-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 3: Expansão (Q3-Q4 2026)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proximos-passos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Próximos Passos
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="analise-de-oportunidades-por-tipo-de-investimento">Análise de Oportunidades por Tipo de Investimento<a class="headerlink" href="#analise-de-oportunidades-por-tipo-de-investimento" title="Permanent link">&para;</a></h1>
+<h2 id="data-2026-01-02">Data: 2026-01-02<a class="headerlink" href="#data-2026-01-02" title="Permanent link">&para;</a></h2>
+<h2 id="visao-geral">Visão Geral<a class="headerlink" href="#visao-geral" title="Permanent link">&para;</a></h2>
+<p>Este documento analisa oportunidades de funcionalidades baseadas nos diferentes tipos de investimentos que podem ser gerenciados pela ferramenta Portfolio Manager v2.</p>
+<hr />
+<h2 id="tipos-de-investimentos-brasileiros">Tipos de Investimentos Brasileiros<a class="headerlink" href="#tipos-de-investimentos-brasileiros" title="Permanent link">&para;</a></h2>
+<h3 id="1-acoes-onpn">1. Ações (ON/PN)<a class="headerlink" href="#1-acoes-onpn" title="Permanent link">&para;</a></h3>
+<p><strong>Status Atual:</strong> ✅ Suportado (COMPRA/VENDA)</p>
+<p><strong>Características:</strong>
+- Negociação em pregão B3
+- Dividendos e JCP
+- Bonificações
+- Desdobramentos e grupamentos
+- Subscrições
+- Direitos de venda</p>
+<p><strong>Oportunidades:</strong>
+1. 🎯 <strong>Proventos (Dividendos e JCP)</strong> - ALTA PRIORIDADE
+2. 🎯 <strong>Bonificações</strong> - Recebimento gratuito de ações
+3. 🎯 <strong>Desdobramentos/Grupamentos</strong> - Ajuste automático de quantidade
+4. 📊 <strong>Preço Médio por Ticker</strong> - Cálculo automático
+5. 💰 <strong>Lucro/Prejuízo Realizado</strong> - Por venda
+6. 📈 <strong>Posição Consolidada</strong> - Quantidade atual por ticker</p>
+<hr />
+<h3 id="2-fundos-imobiliarios-fiis">2. Fundos Imobiliários (FIIs)<a class="headerlink" href="#2-fundos-imobiliarios-fiis" title="Permanent link">&para;</a></h3>
+<p><strong>Status Atual:</strong> ⚠️ Suportado parcialmente (como ações)</p>
+<p><strong>Características:</strong>
+- Dividendos mensais obrigatórios
+- Amortizações de cotas
+- Subscrições de novas cotas
+- Cisão e incorporação
+- Isenção de IR em dividendos</p>
+<p><strong>Oportunidades:</strong>
+1. 🎯 <strong>Proventos Mensais</strong> - ALTA PRIORIDADE (FIIs pagam todo mês)
+2. 🎯 <strong>Amortizações</strong> - Redução de cotas com pagamento
+3. 📊 <strong>Yield Mensal</strong> - Rendimento médio mensal
+4. 💡 <strong>Alertas de Pagamento</strong> - Próximos dividendos esperados
+5. 📈 <strong>DY Acumulado</strong> - Dividend Yield anualizado</p>
+<hr />
+<h3 id="3-renda-fixa-cdb-lci-lca-tesouro-direto">3. Renda Fixa (CDB, LCI, LCA, Tesouro Direto)<a class="headerlink" href="#3-renda-fixa-cdb-lci-lca-tesouro-direto" title="Permanent link">&para;</a></h3>
+<p><strong>Status Atual:</strong> ❌ Não suportado</p>
+<p><strong>Características:</strong>
+- Data de vencimento
+- Taxa contratada (% CDI, IPCA+, Pré-fixado)
+- Resgate automático ou manual
+- Taxa de custódia (Tesouro)
+- IR regressivo (15% a 22.5%)</p>
+<p><strong>Oportunidades:</strong>
+1. 🎯 <strong>Suporte a Renda Fixa</strong> - ALTA PRIORIDADE
+2. 📅 <strong>Data de Vencimento</strong> - Campo obrigatório
+3. 💰 <strong>Resgate Automático</strong> - Entrada de saldo no vencimento
+4. 📊 <strong>Rentabilidade Contratada</strong> - % CDI, IPCA+, Pré
+5. ⚠️ <strong>Alertas de Vencimento</strong> - Próximos resgates
+6. 💸 <strong>Taxa de Custódia</strong> - Cálculo automático (Tesouro)
+7. 🧮 <strong>Projeção de Rendimento</strong> - Quanto vai render até o vencimento</p>
+<hr />
+<h3 id="4-etfs-exchange-traded-funds">4. ETFs (Exchange Traded Funds)<a class="headerlink" href="#4-etfs-exchange-traded-funds" title="Permanent link">&para;</a></h3>
+<p><strong>Status Atual:</strong> ✅ Suportado (como ações)</p>
+<p><strong>Características:</strong>
+- Negociação em bolsa
+- Dividendos (alguns ETFs)
+- Taxa de administração embutida
+- Rebalanceamento interno automático</p>
+<p><strong>Oportunidades:</strong>
+1. 📊 <strong>Identificação de ETF</strong> - Campo "asset_type" específico
+2. 💰 <strong>Proventos</strong> - Alguns ETFs distribuem dividendos
+3. 📈 <strong>Tracking Error</strong> - Comparar com índice de referência</p>
+<hr />
+<h3 id="5-bdrs-brazilian-depositary-receipts">5. BDRs (Brazilian Depositary Receipts)<a class="headerlink" href="#5-bdrs-brazilian-depositary-receipts" title="Permanent link">&para;</a></h3>
+<p><strong>Status Atual:</strong> ⚠️ Suportado parcialmente (como ações)</p>
+<p><strong>Características:</strong>
+- Representa ação estrangeira
+- Dividendos em dólar convertidos
+- Taxa de conversão aplicada
+- Imposto na fonte (EUA: 30%)</p>
+<p><strong>Oportunidades:</strong>
+1. 🎯 <strong>Moeda Estrangeira</strong> - Suporte a USD, EUR
+2. 💵 <strong>Conversão Cambial</strong> - Registro de taxa de câmbio
+3. 💰 <strong>Proventos em Moeda Estrangeira</strong>
+4. 📊 <strong>Ganho/Perda Cambial</strong> - Variação do câmbio</p>
+<hr />
+<h3 id="6-criptomoedas">6. Criptomoedas<a class="headerlink" href="#6-criptomoedas" title="Permanent link">&para;</a></h3>
+<p><strong>Status Atual:</strong> ❌ Não suportado</p>
+<p><strong>Características:</strong>
+- 24/7 negociação
+- Alta volatilidade
+- Exchanges diferentes
+- Transferências entre wallets
+- Staking (rendimento)</p>
+<p><strong>Oportunidades:</strong>
+1. 🎯 <strong>Suporte a Cripto</strong> - BTC, ETH, etc.
+2. 💱 <strong>Múltiplas Exchanges</strong> - Binance, Mercado Bitcoin
+3. 🔄 <strong>Transferências</strong> - Entre wallets/exchanges
+4. 📊 <strong>Staking Rewards</strong> - Rendimento de staking
+5. 💸 <strong>Taxas de Rede</strong> - Gas fees</p>
+<hr />
+<h3 id="7-fundos-de-investimento">7. Fundos de Investimento<a class="headerlink" href="#7-fundos-de-investimento" title="Permanent link">&para;</a></h3>
+<p><strong>Status Atual:</strong> ❌ Não suportado</p>
+<p><strong>Características:</strong>
+- Aplicação e resgate
+- Come-cotas semestral (maio/novembro)
+- Taxa de administração
+- Taxa de performance
+- Rendimento sem movimentação física</p>
+<p><strong>Oportunidades:</strong>
+1. 🎯 <strong>Suporte a Fundos</strong> - Aplicação/Resgate
+2. 📅 <strong>Come-Cotas</strong> - Cálculo automático IR
+3. 💰 <strong>Rentabilidade Acumulada</strong> - Sem venda física
+4. 📊 <strong>Taxa de Administração</strong> - Impacto no rendimento</p>
+<hr />
+<h2 id="funcionalidades-transversais-aplicaveis-a-multiplos-tipos">Funcionalidades Transversais (Aplicáveis a Múltiplos Tipos)<a class="headerlink" href="#funcionalidades-transversais-aplicaveis-a-multiplos-tipos" title="Permanent link">&para;</a></h2>
+<h3 id="1-proventos-completo-critico">1. <strong>Proventos Completo</strong> 🎯 CRÍTICO<a class="headerlink" href="#1-proventos-completo-critico" title="Permanent link">&para;</a></h3>
+<p><strong>Aplicável a:</strong> Ações, FIIs, ETFs, BDRs, Alguns Fundos</p>
+<p><strong>Descrição:</strong>
+Sistema completo de gerenciamento de proventos (dividendos, JCP, rendimentos)</p>
+<p><strong>Campos necessários:</strong>
+- Tipo (Dividendo, JCP, Rendimento, Amortização)
+- Valor por cota/ação
+- Data COM (última data para ter direito)
+- Data de pagamento
+- Asset relacionado</p>
+<p><strong>Impacto:</strong>
+- Calcula DY (Dividend Yield)
+- Rastreia rendimento passivo
+- Essencial para estratégia buy &amp; hold
+- Base para cálculo de IR (JCP tem retenção)</p>
+<hr />
+<h3 id="2-eventos-corporativos-alta-prioridade">2. <strong>Eventos Corporativos</strong> 🎯 ALTA PRIORIDADE<a class="headerlink" href="#2-eventos-corporativos-alta-prioridade" title="Permanent link">&para;</a></h3>
+<p><strong>Aplicável a:</strong> Ações, FIIs, ETFs</p>
+<p><strong>Tipos:</strong>
+- Bonificação (ganho de ações grátis)
+- Desdobramento (split - 1 ação vira 2)
+- Grupamento (1 ação vira 0.5)
+- Subscrição (direito de compra com desconto)</p>
+<p><strong>Impacto:</strong>
+- Ajusta quantidade de ativos automaticamente
+- Mantém preço médio correto
+- Essencial para auditoria histórica</p>
+<hr />
+<h3 id="3-preco-medio-posicao-alta-prioridade">3. <strong>Preço Médio &amp; Posição</strong> 📊 ALTA PRIORIDADE<a class="headerlink" href="#3-preco-medio-posicao-alta-prioridade" title="Permanent link">&para;</a></h3>
+<p><strong>Aplicável a:</strong> TODOS os tipos</p>
+<p><strong>Cálculo:</strong></p>
+<div class="codehilite"><pre><span></span><code>Preço Médio = (Σ (Quantidade × Preço de Compra)) / Quantidade Total
+Posição Atual = Quantidade Comprada - Quantidade Vendida
+</code></pre></div>
+
+<p><strong>Impacto:</strong>
+- Base para cálculo de lucro/prejuízo
+- Decisão de compra/venda
+- Rebalanceamento de carteira</p>
+<hr />
+<h3 id="4-lucroprejuizo-realizado-alta-prioridade">4. <strong>Lucro/Prejuízo Realizado</strong> 💰 ALTA PRIORIDADE<a class="headerlink" href="#4-lucroprejuizo-realizado-alta-prioridade" title="Permanent link">&para;</a></h3>
+<p><strong>Aplicável a:</strong> Ações, FIIs, ETFs, BDRs, Cripto</p>
+<p><strong>Cálculo:</strong></p>
+<div class="codehilite"><pre><span></span><code>L/P = (Preço de Venda - Preço Médio) × Quantidade Vendida
+</code></pre></div>
+
+<p><strong>Impacto:</strong>
+- Saber quanto ganhou/perdeu em cada operação
+- Base para IR (day-trade 20%, swing 15%)
+- Análise de performance</p>
+<hr />
+<h3 id="5-imposto-de-renda-media-prioridade">5. <strong>Imposto de Renda</strong> 🧮 MÉDIA PRIORIDADE<a class="headerlink" href="#5-imposto-de-renda-media-prioridade" title="Permanent link">&para;</a></h3>
+<p><strong>Aplicável a:</strong> TODOS (cada tipo tem regra diferente)</p>
+<p><strong>Regras:</strong>
+- Ações: 15% sobre lucro (swing), 20% (day-trade), isenção até R$ 20k/mês
+- FIIs: Isento em dividendos, 20% sobre ganho de capital
+- Renda Fixa: 22.5% a 15% (regressivo)
+- Day-trade: 1% retenção na fonte + ajuste na declaração</p>
+<p><strong>Impacto:</strong>
+- DARF automático
+- Declaração de IR simplificada
+- Compliance fiscal</p>
+<hr />
+<h3 id="6-integracao-com-apis-de-cotacao-media-prioridade">6. <strong>Integração com APIs de Cotação</strong> 📡 MÉDIA PRIORIDADE<a class="headerlink" href="#6-integracao-com-apis-de-cotacao-media-prioridade" title="Permanent link">&para;</a></h3>
+<p><strong>Aplicável a:</strong> Ações, FIIs, ETFs, BDRs</p>
+<p><strong>Fontes:</strong>
+- B3 API (oficial, mas limitada)
+- Yahoo Finance (grátis, boa cobertura)
+- Alpha Vantage (grátis com limite)
+- Brapi (API brasileira gratuita)</p>
+<p><strong>Impacto:</strong>
+- Valor atual do portfólio em tempo real
+- Gráficos de evolução
+- Alertas de preço</p>
+<hr />
+<h3 id="7-moeda-estrangeira-media-prioridade">7. <strong>Moeda Estrangeira</strong> 💵 MÉDIA PRIORIDADE<a class="headerlink" href="#7-moeda-estrangeira-media-prioridade" title="Permanent link">&para;</a></h3>
+<p><strong>Aplicável a:</strong> BDRs, Stocks internacionais, Cripto</p>
+<p><strong>Características:</strong>
+- Múltiplas moedas (USD, EUR, BTC)
+- Taxa de câmbio no momento da operação
+- Conversão para BRL na visualização
+- Ganho/perda cambial separado</p>
+<p><strong>Impacto:</strong>
+- Investimentos internacionais
+- Diversificação geográfica
+- Proteção cambial</p>
+<hr />
+<h3 id="8-relatorios-e-dashboards-media-prioridade">8. <strong>Relatórios e Dashboards</strong> 📊 MÉDIA PRIORIDADE<a class="headerlink" href="#8-relatorios-e-dashboards-media-prioridade" title="Permanent link">&para;</a></h3>
+<p><strong>Aplicável a:</strong> TODOS</p>
+<p><strong>Relatórios:</strong>
+- Posição consolidada por ativo
+- Rentabilidade por classe de ativo
+- Evolução patrimonial mensal
+- Proventos recebidos no ano
+- IR a pagar/pago
+- Alocação de portfólio (% por ativo)</p>
+<p><strong>Impacto:</strong>
+- Tomada de decisão
+- Rebalanceamento
+- Compliance
+- Performance tracking</p>
+<hr />
+<h2 id="priorizacao-de-implementacao">Priorização de Implementação<a class="headerlink" href="#priorizacao-de-implementacao" title="Permanent link">&para;</a></h2>
+<h3 id="critico-implementar-primeiro">🔴 <strong>CRÍTICO (Implementar Primeiro)</strong><a class="headerlink" href="#critico-implementar-primeiro" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Proventos (Dividendos e JCP)</strong></li>
+<li>Motivo: Essencial para FIIs e ações, impacta estratégia de investimento</li>
+<li>Effort: Médio</li>
+<li>
+<p>Value: Muito Alto</p>
+</li>
+<li>
+<p><strong>Preço Médio &amp; Posição Consolidada</strong></p>
+</li>
+<li>Motivo: Base para qualquer análise de carteira</li>
+<li>Effort: Baixo</li>
+<li>
+<p>Value: Muito Alto</p>
+</li>
+<li>
+<p><strong>Lucro/Prejuízo Realizado</strong></p>
+</li>
+<li>Motivo: Necessário para IR e análise de performance</li>
+<li>Effort: Médio</li>
+<li>Value: Alto</li>
+</ol>
+<h3 id="alta-prioridade-implementar-em-seguida">🟡 <strong>ALTA PRIORIDADE (Implementar em Seguida)</strong><a class="headerlink" href="#alta-prioridade-implementar-em-seguida" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Eventos Corporativos (Bonificação, Desdobramento)</strong></li>
+<li>Motivo: Mantém histórico correto, essencial para auditoria</li>
+<li>Effort: Alto</li>
+<li>
+<p>Value: Alto</p>
+</li>
+<li>
+<p><strong>Suporte a Renda Fixa</strong></p>
+</li>
+<li>Motivo: Diversificação de portfólio, mercado grande no Brasil</li>
+<li>Effort: Alto</li>
+<li>
+<p>Value: Alto</p>
+</li>
+<li>
+<p><strong>Cálculo Automático de IR</strong></p>
+</li>
+<li>Motivo: Compliance, evita multas</li>
+<li>Effort: Alto</li>
+<li>Value: Médio-Alto</li>
+</ol>
+<h3 id="media-prioridade-futuro-proximo">🟢 <strong>MÉDIA PRIORIDADE (Futuro Próximo)</strong><a class="headerlink" href="#media-prioridade-futuro-proximo" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Integração com APIs de Cotação</strong></li>
+<li>Motivo: Melhora UX, valor em tempo real</li>
+<li>Effort: Médio</li>
+<li>
+<p>Value: Médio</p>
+</li>
+<li>
+<p><strong>Moeda Estrangeira (USD, EUR)</strong></p>
+</li>
+<li>Motivo: Investimentos internacionais crescendo</li>
+<li>Effort: Alto</li>
+<li>
+<p>Value: Médio</p>
+</li>
+<li>
+<p><strong>Dashboards e Relatórios Avançados</strong></p>
+</li>
+<li>Motivo: Análise e tomada de decisão</li>
+<li>Effort: Médio</li>
+<li>Value: Médio</li>
+</ol>
+<h3 id="baixa-prioridade-backlog">🔵 <strong>BAIXA PRIORIDADE (Backlog)</strong><a class="headerlink" href="#baixa-prioridade-backlog" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Suporte a Criptomoedas</strong></p>
+<ul>
+<li>Motivo: Nicho específico, APIs complexas</li>
+<li>Effort: Muito Alto</li>
+<li>Value: Baixo-Médio</li>
+</ul>
+</li>
+<li>
+<p><strong>Suporte a Fundos de Investimento</strong></p>
+<ul>
+<li>Motivo: Menos transparência, dados difíceis de obter</li>
+<li>Effort: Alto</li>
+<li>Value: Baixo-Médio</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="roadmap-sugerido">Roadmap Sugerido<a class="headerlink" href="#roadmap-sugerido" title="Permanent link">&para;</a></h2>
+<h3 id="fase-1-fundacao-q1-2026"><strong>Fase 1: Fundação (Q1 2026)</strong><a class="headerlink" href="#fase-1-fundacao-q1-2026" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ CRUD de Ativos e Operações</li>
+<li>✅ Importação B3</li>
+<li>🎯 Proventos</li>
+<li>🎯 Preço Médio &amp; Posição</li>
+<li>🎯 Lucro/Prejuízo Realizado</li>
+</ul>
+<h3 id="fase-2-maturidade-q2-2026"><strong>Fase 2: Maturidade (Q2 2026)</strong><a class="headerlink" href="#fase-2-maturidade-q2-2026" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Eventos Corporativos</li>
+<li>Renda Fixa</li>
+<li>Cálculo de IR</li>
+<li>Dashboards básicos</li>
+</ul>
+<h3 id="fase-3-expansao-q3-q4-2026"><strong>Fase 3: Expansão (Q3-Q4 2026)</strong><a class="headerlink" href="#fase-3-expansao-q3-q4-2026" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Integração com APIs</li>
+<li>Moeda Estrangeira</li>
+<li>Relatórios avançados</li>
+<li>Mobile app</li>
+</ul>
+<hr />
+<h2 id="conclusao">Conclusão<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h2>
+<p>A ferramenta já tem uma base sólida com CRUD de ativos e operações. As próximas funcionalidades mais críticas são:</p>
+<ol>
+<li><strong>Proventos</strong> - Para FIIs e ações gerarem renda passiva</li>
+<li><strong>Preço Médio</strong> - Para saber se está lucrando ou não</li>
+<li><strong>Lucro Realizado</strong> - Para calcular IR e performance</li>
+</ol>
+<p>Essas três funcionalidades transformariam a ferramenta de um simples "registrador de operações" para um <strong>gerenciador de carteira funcional</strong>.</p>
+<hr />
+<h2 id="proximos-passos">Próximos Passos<a class="headerlink" href="#proximos-passos" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Criar issues no GitHub para cada oportunidade priorizada</li>
+<li>Detalhar specs técnicas de cada funcionalidade</li>
+<li>Implementar Fase 1 iterativamente</li>
+<li>Coletar feedback de usuários reais</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

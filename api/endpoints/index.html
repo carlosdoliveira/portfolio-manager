@@ -1,0 +1,1695 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Sistema web de gestão de carteira de investimentos com foco em importação B3, renda fixa e análise de performance">
+      
+      
+      
+        <link rel="canonical" href="https://carlosdoliveira.github.io/portfolio-manager/api/endpoints/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>API Reference — Portfolio Manager v2 - Portfolio Manager</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api-reference-portfolio-manager-v2" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Portfolio Manager" class="md-header__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Portfolio Manager
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              API Reference — Portfolio Manager v2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Portfolio Manager" class="md-nav__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Portfolio Manager
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guia Rápido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../referencia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#base-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔗 Base URL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-health-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Health Check
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Health Check">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Response
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status Codes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-importar-arquivo-b3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Importar Arquivo B3
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Importar Arquivo B3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Request
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Response
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status-codes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status Codes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erros-possiveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros Possíveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-listar-operacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Listar Operações
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Listar Operações">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#response_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Response
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Query Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status-codes_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status Codes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-buscar-operacao-por-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Buscar Operação por ID
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Buscar Operação por ID">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#path-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Path Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Response
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status-codes_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status Codes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-criar-operacao-manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Criar Operação Manual
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Criar Operação Manual">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#request_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Request
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Response
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status-codes_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status Codes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erros-possiveis_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros Possíveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-atualizar-operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Atualizar Operação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Atualizar Operação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#path-parameters_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Path Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Request
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Response
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status-codes_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status Codes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erros-possiveis_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros Possíveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-deletar-operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Deletar Operação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Deletar Operação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#path-parameters_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Path Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Response
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status-codes_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status Codes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erros-possiveis_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros Possíveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autenticacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔒 Autenticação
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ CORS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rate-limiting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Rate Limiting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testando-a-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧪 Testando a API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧪 Testando a API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usando-curl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usando cURL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usando-postman" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usando Postman
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usando-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usando Python
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schemas-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Schemas de Dados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📝 Schemas de Dados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operationcreate-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OperationCreate (Request)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operation-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operation (Response)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importsummary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ImportSummary
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endpoints-futuros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚧 Endpoints Futuros
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚧 Endpoints Futuros">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analise-de-carteira" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Análise de Carteira
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estatisticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estatísticas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configurações
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentacao-interativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Documentação Interativa
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#suporte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🆘 Suporte
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="api-reference-portfolio-manager-v2">API Reference — Portfolio Manager v2<a class="headerlink" href="#api-reference-portfolio-manager-v2" title="Permanent link">&para;</a></h1>
+<p>Documentação completa dos endpoints da API REST do Portfolio Manager v2.</p>
+<hr />
+<h2 id="base-url">🔗 Base URL<a class="headerlink" href="#base-url" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code>http://localhost:8000
+</code></pre></div>
+
+<p><strong>Produção:</strong> A definir</p>
+<hr />
+<h2 id="endpoints">📋 Endpoints<a class="headerlink" href="#endpoints" title="Permanent link">&para;</a></h2>
+<h3 id="1-health-check">1. Health Check<a class="headerlink" href="#1-health-check" title="Permanent link">&para;</a></h3>
+<p><strong>GET</strong> <code>/</code></p>
+<p>Verifica se a API está online.</p>
+<h4 id="response">Response<a class="headerlink" href="#response" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Portfolio Manager API — Running&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4 id="status-codes">Status Codes<a class="headerlink" href="#status-codes" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>200 OK</code> — API está funcionando</li>
+</ul>
+<h4 id="exemplo">Exemplo<a class="headerlink" href="#exemplo" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>http://localhost:8000/
+</code></pre></div>
+
+<hr />
+<h3 id="2-importar-arquivo-b3">2. Importar Arquivo B3<a class="headerlink" href="#2-importar-arquivo-b3" title="Permanent link">&para;</a></h3>
+<p><strong>POST</strong> <code>/import/b3</code></p>
+<p>Importa um arquivo Excel de negociações da B3.</p>
+<h4 id="request">Request<a class="headerlink" href="#request" title="Permanent link">&para;</a></h4>
+<p><strong>Content-Type:</strong> <code>multipart/form-data</code></p>
+<p><strong>Body:</strong>
+- <code>file</code> (File, required): Arquivo Excel da B3 (<code>.xlsx</code>)</p>
+<h4 id="response_1">Response<a class="headerlink" href="#response_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Importação concluída&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;summary&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;total_rows&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">167</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;inserted&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;duplicated&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;unique_assets&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;imported_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-02T15:30:00&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4 id="status-codes_1">Status Codes<a class="headerlink" href="#status-codes_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>200 OK</code> — Importação bem-sucedida</li>
+<li><code>400 Bad Request</code> — Arquivo inválido ou formato incorreto</li>
+<li><code>500 Internal Server Error</code> — Erro ao processar arquivo</li>
+</ul>
+<h4 id="erros-possiveis">Erros Possíveis<a class="headerlink" href="#erros-possiveis" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Erro ao processar arquivo: arquivo não é um Excel válido&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Erro ao importar: colunas obrigatórias não encontradas&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4 id="exemplo_1">Exemplo<a class="headerlink" href="#exemplo_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/import/b3<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-F<span class="w"> </span><span class="s2">&quot;file=@negociacao-2025-12-31.xlsx&quot;</span>
+</code></pre></div>
+
+<p><strong>JavaScript:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">formData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">FormData</span><span class="p">();</span>
+<span class="nx">formData</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;file&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">fileInput</span><span class="p">.</span><span class="nx">files</span><span class="p">[</span><span class="mf">0</span><span class="p">]);</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s2">&quot;http://localhost:8000/import/b3&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;POST&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nx">formData</span><span class="p">,</span>
+<span class="p">});</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">summary</span><span class="p">);</span>
+</code></pre></div>
+
+<hr />
+<h3 id="3-listar-operacoes">3. Listar Operações<a class="headerlink" href="#3-listar-operacoes" title="Permanent link">&para;</a></h3>
+<p><strong>GET</strong> <code>/operations</code></p>
+<p>Retorna todas as operações importadas.</p>
+<h4 id="response_2">Response<a class="headerlink" href="#response_2" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;trade_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-12-31&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;movement_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;COMPRA&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;market&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MERCADO A VISTA&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;institution&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CORRETORA XP&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;ticker&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PETR4&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;quantity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">30.50</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;total_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3050.00</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;trade_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-05&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;movement_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;VENDA&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;market&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MERCADO A VISTA&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;institution&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CORRETORA XP&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;ticker&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PETR4&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;quantity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">32.00</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;total_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1600.00</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<h4 id="query-parameters">Query Parameters<a class="headerlink" href="#query-parameters" title="Permanent link">&para;</a></h4>
+<p><strong>Futuros (não implementados ainda):</strong>
+- <code>ticker</code> (string): Filtrar por ticker
+- <code>movement_type</code> (string): <code>COMPRA</code> ou <code>VENDA</code>
+- <code>start_date</code> (date): Data inicial
+- <code>end_date</code> (date): Data final
+- <code>limit</code> (int): Limitar número de resultados
+- <code>offset</code> (int): Paginação</p>
+<h4 id="status-codes_2">Status Codes<a class="headerlink" href="#status-codes_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>200 OK</code> — Lista retornada com sucesso</li>
+<li><code>500 Internal Server Error</code> — Erro ao buscar operações</li>
+</ul>
+<h4 id="exemplo_2">Exemplo<a class="headerlink" href="#exemplo_2" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>http://localhost:8000/operations
+</code></pre></div>
+
+<p><strong>JavaScript:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s2">&quot;http://localhost:8000/operations&quot;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">operations</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">operations</span><span class="p">);</span>
+</code></pre></div>
+
+<hr />
+<h3 id="4-buscar-operacao-por-id">4. Buscar Operação por ID<a class="headerlink" href="#4-buscar-operacao-por-id" title="Permanent link">&para;</a></h3>
+<p><strong>GET</strong> <code>/operations/{operation_id}</code></p>
+<p>Retorna uma operação específica por ID.</p>
+<h4 id="path-parameters">Path Parameters<a class="headerlink" href="#path-parameters" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>operation_id</code> (integer, required): ID da operação</li>
+</ul>
+<h4 id="response_3">Response<a class="headerlink" href="#response_3" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;trade_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-12-31&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;movement_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;COMPRA&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;market&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MERCADO A VISTA&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;institution&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CORRETORA XP&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;ticker&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PETR4&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;quantity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">30.50</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;total_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3050.00</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ACTIVE&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;asset_class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Renda Variável&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;asset_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ações&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;product_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Petrobras PN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MANUAL&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-02T15:00:00&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4 id="status-codes_3">Status Codes<a class="headerlink" href="#status-codes_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>200 OK</code> — Operação encontrada</li>
+<li><code>404 Not Found</code> — Operação não encontrada</li>
+<li><code>500 Internal Server Error</code> — Erro ao buscar operação</li>
+</ul>
+<h4 id="exemplo_3">Exemplo<a class="headerlink" href="#exemplo_3" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>http://localhost:8000/operations/1
+</code></pre></div>
+
+<p><strong>JavaScript:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s2">&quot;http://localhost:8000/operations/1&quot;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">operation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">operation</span><span class="p">);</span>
+</code></pre></div>
+
+<hr />
+<h3 id="5-criar-operacao-manual">5. Criar Operação Manual<a class="headerlink" href="#5-criar-operacao-manual" title="Permanent link">&para;</a></h3>
+<p><strong>POST</strong> <code>/operations</code></p>
+<p>Cria uma nova operação manualmente (não via importação).</p>
+<h4 id="request_1">Request<a class="headerlink" href="#request_1" title="Permanent link">&para;</a></h4>
+<p><strong>Content-Type:</strong> <code>application/json</code></p>
+<p><strong>Body:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;trade_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-10&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;movement_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;COMPRA&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;market&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MERCADO A VISTA&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;institution&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CORRETORA EXEMPLO&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;ticker&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;VALE3&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;quantity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">60.75</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4 id="validacao">Validação<a class="headerlink" href="#validacao" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>trade_date</code>: String no formato <code>YYYY-MM-DD</code></li>
+<li><code>movement_type</code>: <code>"COMPRA"</code> ou <code>"VENDA"</code> (obrigatório)</li>
+<li><code>market</code>: String (obrigatório)</li>
+<li><code>institution</code>: String (obrigatório)</li>
+<li><code>ticker</code>: String (obrigatório)</li>
+<li><code>quantity</code>: Integer &gt; 0 (obrigatório)</li>
+<li><code>price</code>: Float &gt; 0 (obrigatório)</li>
+</ul>
+<h4 id="response_4">Response<a class="headerlink" href="#response_4" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">168</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;trade_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-10&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;movement_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;COMPRA&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;market&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MERCADO A VISTA&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;institution&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CORRETORA EXEMPLO&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;ticker&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;VALE3&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;quantity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">60.75</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;total_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">12150.00</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4 id="status-codes_4">Status Codes<a class="headerlink" href="#status-codes_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>201 Created</code> — Operação criada com sucesso</li>
+<li><code>400 Bad Request</code> — Dados inválidos</li>
+<li><code>409 Conflict</code> — Operação duplicada</li>
+<li><code>500 Internal Server Error</code> — Erro ao criar operação</li>
+</ul>
+<h4 id="erros-possiveis_1">Erros Possíveis<a class="headerlink" href="#erros-possiveis_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;loc&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;quantity&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;value is not a valid integer&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;type_error.integer&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Operação duplicada&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4 id="exemplo_4">Exemplo<a class="headerlink" href="#exemplo_4" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/operations<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">    &quot;trade_date&quot;: &quot;2026-01-10&quot;,</span>
+<span class="s1">    &quot;movement_type&quot;: &quot;COMPRA&quot;,</span>
+<span class="s1">    &quot;market&quot;: &quot;MERCADO A VISTA&quot;,</span>
+<span class="s1">    &quot;institution&quot;: &quot;CORRETORA EXEMPLO&quot;,</span>
+<span class="s1">    &quot;ticker&quot;: &quot;VALE3&quot;,</span>
+<span class="s1">    &quot;quantity&quot;: 200,</span>
+<span class="s1">    &quot;price&quot;: 60.75</span>
+<span class="s1">  }&#39;</span>
+</code></pre></div>
+
+<p><strong>JavaScript:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">operation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">trade_date</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2026-01-10&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">movement_type</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;COMPRA&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">market</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;MERCADO A VISTA&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">institution</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;CORRETORA EXEMPLO&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">ticker</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;VALE3&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">quantity</span><span class="o">:</span><span class="w"> </span><span class="mf">200</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">price</span><span class="o">:</span><span class="w"> </span><span class="mf">60.75</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s2">&quot;http://localhost:8000/operations&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;POST&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;Content-Type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;application/json&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">operation</span><span class="p">),</span>
+<span class="p">});</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+</code></pre></div>
+
+<hr />
+<h3 id="6-atualizar-operacao">6. Atualizar Operação<a class="headerlink" href="#6-atualizar-operacao" title="Permanent link">&para;</a></h3>
+<p><strong>PUT</strong> <code>/operations/{operation_id}</code></p>
+<p>Atualiza uma operação existente seguindo o princípio de imutabilidade:
+1. Marca a operação antiga como <code>CANCELLED</code>
+2. Cria uma nova operação com os dados atualizados</p>
+<p><strong>Importante:</strong> Esta abordagem preserva o histórico completo e a auditoria.</p>
+<h4 id="path-parameters_1">Path Parameters<a class="headerlink" href="#path-parameters_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>operation_id</code> (integer, required): ID da operação a ser atualizada</li>
+</ul>
+<h4 id="request_2">Request<a class="headerlink" href="#request_2" title="Permanent link">&para;</a></h4>
+<p><strong>Content-Type:</strong> <code>application/json</code></p>
+<p><strong>Body:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;trade_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-10&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;movement_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;COMPRA&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;market&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MERCADO A VISTA&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;institution&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CORRETORA EXEMPLO&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;ticker&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;VALE3&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;quantity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">250</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">62.00</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4 id="response_5">Response<a class="headerlink" href="#response_5" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Operação atualizada com sucesso&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;old_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;new_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4 id="status-codes_5">Status Codes<a class="headerlink" href="#status-codes_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>200 OK</code> — Operação atualizada com sucesso</li>
+<li><code>400 Bad Request</code> — Dados inválidos ou operação não está ativa</li>
+<li><code>404 Not Found</code> — Operação não encontrada</li>
+<li><code>500 Internal Server Error</code> — Erro ao atualizar operação</li>
+</ul>
+<h4 id="erros-possiveis_2">Erros Possíveis<a class="headerlink" href="#erros-possiveis_2" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Operação 1 não encontrada&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Operação 1 não está ativa (status: CANCELLED)&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4 id="exemplo_5">Exemplo<a class="headerlink" href="#exemplo_5" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>http://localhost:8000/operations/1<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">    &quot;trade_date&quot;:&quot;2026-01-10&quot;,</span>
+<span class="s1">    &quot;movement_type&quot;:&quot;COMPRA&quot;,</span>
+<span class="s1">    &quot;market&quot;:&quot;MERCADO A VISTA&quot;,</span>
+<span class="s1">    &quot;institution&quot;:&quot;TESTE&quot;,</span>
+<span class="s1">    &quot;ticker&quot;:&quot;VALE3&quot;,</span>
+<span class="s1">    &quot;quantity&quot;:250,</span>
+<span class="s1">    &quot;price&quot;:62.00</span>
+<span class="s1">  }&#39;</span>
+</code></pre></div>
+
+<p><strong>JavaScript:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">updatedOperation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">trade_date</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2026-01-10&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">movement_type</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;COMPRA&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">market</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;MERCADO A VISTA&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">institution</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;TESTE&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">ticker</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;VALE3&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">quantity</span><span class="o">:</span><span class="w"> </span><span class="mf">250</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">price</span><span class="o">:</span><span class="w"> </span><span class="mf">62.00</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s2">&quot;http://localhost:8000/operations/1&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;PUT&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;Content-Type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;application/json&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">updatedOperation</span><span class="p">),</span>
+<span class="p">});</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span><span class="w"> </span><span class="c1">// { old_id: 1, new_id: 2, ... }</span>
+</code></pre></div>
+
+<hr />
+<h3 id="7-deletar-operacao">7. Deletar Operação<a class="headerlink" href="#7-deletar-operacao" title="Permanent link">&para;</a></h3>
+<p><strong>DELETE</strong> <code>/operations/{operation_id}</code></p>
+<p>Realiza soft delete de uma operação, marcando-a como <code>DELETED</code> ao invés de removê-la do banco.</p>
+<p><strong>Importante:</strong> A operação não é removida fisicamente, preservando auditoria.</p>
+<h4 id="path-parameters_2">Path Parameters<a class="headerlink" href="#path-parameters_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>operation_id</code> (integer, required): ID da operação a ser deletada</li>
+</ul>
+<h4 id="response_6">Response<a class="headerlink" href="#response_6" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Operação deletada com sucesso&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;deleted_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4 id="status-codes_6">Status Codes<a class="headerlink" href="#status-codes_6" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>200 OK</code> — Operação deletada com sucesso</li>
+<li><code>400 Bad Request</code> — Operação não está ativa</li>
+<li><code>404 Not Found</code> — Operação não encontrada</li>
+<li><code>500 Internal Server Error</code> — Erro ao deletar operação</li>
+</ul>
+<h4 id="erros-possiveis_3">Erros Possíveis<a class="headerlink" href="#erros-possiveis_3" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Operação 1 não encontrada&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Operação 1 não está ativa (status: DELETED)&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4 id="exemplo_6">Exemplo<a class="headerlink" href="#exemplo_6" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span>http://localhost:8000/operations/1
+</code></pre></div>
+
+<p><strong>JavaScript:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s2">&quot;http://localhost:8000/operations/1&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;DELETE&quot;</span><span class="p">,</span>
+<span class="p">});</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span><span class="w"> </span><span class="c1">// { status: &quot;success&quot;, deleted_id: 1, ... }</span>
+</code></pre></div>
+
+<hr />
+<h2 id="autenticacao">🔒 Autenticação<a class="headerlink" href="#autenticacao" title="Permanent link">&para;</a></h2>
+<p><strong>Status:</strong> Não implementada ainda.</p>
+<p><strong>Futura implementação:</strong>
+- JWT tokens
+- OAuth 2.0 (Google, GitHub)</p>
+<hr />
+<h2 id="cors">⚠️ CORS<a class="headerlink" href="#cors" title="Permanent link">&para;</a></h2>
+<p>A API está configurada para aceitar requisições de:</p>
+<div class="codehilite"><pre><span></span><code>http://localhost:5173
+</code></pre></div>
+
+<p><strong>Métodos HTTP permitidos:</strong>
+- GET
+- POST
+- PUT
+- DELETE</p>
+<p>Para produção, configure a variável de ambiente <code>CORS_ORIGINS</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="nv">CORS_ORIGINS</span><span class="o">=</span>https://seu-dominio.com,https://app.seu-dominio.com
+</code></pre></div>
+
+<p><strong>Nota:</strong> Múltiplas origens devem ser separadas por vírgula.</p>
+<hr />
+<h2 id="rate-limiting">📊 Rate Limiting<a class="headerlink" href="#rate-limiting" title="Permanent link">&para;</a></h2>
+<p><strong>Status:</strong> Não implementado ainda.</p>
+<p><strong>Planejado:</strong>
+- 100 requisições por minuto por IP
+- 1000 requisições por hora por IP</p>
+<hr />
+<h2 id="testando-a-api">🧪 Testando a API<a class="headerlink" href="#testando-a-api" title="Permanent link">&para;</a></h2>
+<h3 id="usando-curl">Usando cURL<a class="headerlink" href="#usando-curl" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Health check</span>
+curl<span class="w"> </span>http://localhost:8000/
+
+<span class="c1"># Listar operações</span>
+curl<span class="w"> </span>http://localhost:8000/operations
+
+<span class="c1"># Criar operação</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/operations<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;trade_date&quot;:&quot;2026-01-10&quot;,&quot;movement_type&quot;:&quot;COMPRA&quot;,&quot;market&quot;:&quot;MERCADO A VISTA&quot;,&quot;institution&quot;:&quot;TESTE&quot;,&quot;ticker&quot;:&quot;PETR4&quot;,&quot;quantity&quot;:100,&quot;price&quot;:30.50}&#39;</span>
+</code></pre></div>
+
+<h3 id="usando-postman">Usando Postman<a class="headerlink" href="#usando-postman" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Importar collection (disponível em breve)</li>
+<li>Configurar <code>baseUrl</code> para <code>http://localhost:8000</code></li>
+<li>Executar requests</li>
+</ol>
+<h3 id="usando-python">Usando Python<a class="headerlink" href="#usando-python" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="c1"># Health check</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://localhost:8000/&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+
+<span class="c1"># Listar operações</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://localhost:8000/operations&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+
+<span class="c1"># Criar operação</span>
+<span class="n">operation</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;trade_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2026-01-10&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;movement_type&quot;</span><span class="p">:</span> <span class="s2">&quot;COMPRA&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;market&quot;</span><span class="p">:</span> <span class="s2">&quot;MERCADO A VISTA&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;institution&quot;</span><span class="p">:</span> <span class="s2">&quot;TESTE&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ticker&quot;</span><span class="p">:</span> <span class="s2">&quot;VALE3&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;quantity&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="mf">60.50</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;http://localhost:8000/operations&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">operation</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+</code></pre></div>
+
+<hr />
+<h2 id="schemas-de-dados">📝 Schemas de Dados<a class="headerlink" href="#schemas-de-dados" title="Permanent link">&para;</a></h2>
+<h3 id="operationcreate-request">OperationCreate (Request)<a class="headerlink" href="#operationcreate-request" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">OperationCreate</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">asset_class</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w">       </span><span class="c1">// &quot;Renda Variável&quot;, &quot;Renda Fixa&quot;, etc.</span>
+<span class="w">  </span><span class="nx">asset_type</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w">        </span><span class="c1">// &quot;Ações&quot;, &quot;Debêntures&quot;, etc.</span>
+<span class="w">  </span><span class="nx">product_name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w">      </span><span class="c1">// Nome completo do produto</span>
+<span class="w">  </span><span class="nx">ticker?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w">    </span><span class="c1">// Código de negociação (opcional)</span>
+<span class="w">  </span><span class="nx">trade_date</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w">        </span><span class="c1">// &quot;YYYY-MM-DD&quot;</span>
+<span class="w">  </span><span class="nx">movement_type</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w">     </span><span class="c1">// &quot;COMPRA&quot; | &quot;VENDA&quot;</span>
+<span class="w">  </span><span class="nx">quantity</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span><span class="w">          </span><span class="c1">// integer &gt; 0</span>
+<span class="w">  </span><span class="nx">price</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span><span class="w">             </span><span class="c1">// float &gt; 0</span>
+<span class="w">  </span><span class="nx">market?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w">    </span><span class="c1">// &quot;MERCADO A VISTA&quot;, etc. (opcional)</span>
+<span class="w">  </span><span class="nx">institution?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="c1">// Nome da corretora (opcional)</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="operation-response">Operation (Response)<a class="headerlink" href="#operation-response" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">Operation</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">asset_class</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">asset_type</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">product_name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">ticker</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">trade_date</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">movement_type</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">quantity</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">price</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span><span class="w">             </span><span class="c1">// quantity * price (calculado)</span>
+<span class="w">  </span><span class="nx">status</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w">            </span><span class="c1">// &quot;ACTIVE&quot; | &quot;CANCELLED&quot; | &quot;DELETED&quot;</span>
+<span class="w">  </span><span class="nx">source</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w">            </span><span class="c1">// &quot;MANUAL&quot; | &quot;B3_IMPORT&quot;</span>
+<span class="w">  </span><span class="nx">created_at</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w">        </span><span class="c1">// ISO 8601 timestamp</span>
+<span class="w">  </span><span class="nx">market</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">institution</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="importsummary">ImportSummary<a class="headerlink" href="#importsummary" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">ImportSummary</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">total_rows</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">inserted</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">duplicated</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">unique_assets</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">imported_at</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w">       </span><span class="c1">// ISO 8601 timestamp</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="endpoints-futuros">🚧 Endpoints Futuros<a class="headerlink" href="#endpoints-futuros" title="Permanent link">&para;</a></h2>
+<h3 id="analise-de-carteira">Análise de Carteira<a class="headerlink" href="#analise-de-carteira" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>GET /portfolio/summary
+GET /portfolio/positions
+GET /portfolio/pl
+</code></pre></div>
+
+<h3 id="estatisticas">Estatísticas<a class="headerlink" href="#estatisticas" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>GET /analytics/performance
+GET /analytics/distribution
+</code></pre></div>
+
+<h3 id="configuracoes">Configurações<a class="headerlink" href="#configuracoes" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>GET /settings
+PUT /settings
+</code></pre></div>
+
+<hr />
+<h2 id="documentacao-interativa">📚 Documentação Interativa<a class="headerlink" href="#documentacao-interativa" title="Permanent link">&para;</a></h2>
+<p>Acesse a documentação interativa gerada pelo FastAPI:</p>
+<ul>
+<li><strong>Swagger UI:</strong> http://localhost:8000/docs</li>
+<li><strong>ReDoc:</strong> http://localhost:8000/redoc</li>
+</ul>
+<hr />
+<h2 id="suporte">🆘 Suporte<a class="headerlink" href="#suporte" title="Permanent link">&para;</a></h2>
+<p>Para dúvidas ou problemas:</p>
+<ol>
+<li>Consulte a <a href="../README.md">documentação completa</a></li>
+<li>Veja <a href="../guides/">exemplos de uso</a></li>
+<li>Abra uma issue no GitHub</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

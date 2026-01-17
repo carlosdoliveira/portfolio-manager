@@ -1,0 +1,1407 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Sistema web de gestão de carteira de investimentos com foco em importação B3, renda fixa e análise de performance">
+      
+      
+      
+        <link rel="canonical" href="https://carlosdoliveira.github.io/portfolio-manager/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Portfolio Manager</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#portfolio-manager-v2" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="." title="Portfolio Manager" class="md-header__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Portfolio Manager
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Início
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Portfolio Manager" class="md-nav__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Portfolio Manager
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#inicio-rapido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 Início Rápido
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Início Rápido">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#para-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para Usuários
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#para-desenvolvedores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para Desenvolvedores
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#principais-funcionalidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✨ Principais Funcionalidades
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✨ Principais Funcionalidades">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Implementado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#em-progresso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ Em Progresso
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#planejado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📅 Planejado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stack-tecnologica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🏗️ Stack Tecnológica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#principios-arquiteturais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔑 Princípios Arquiteturais
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔑 Princípios Arquiteturais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-eventos-imutaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Eventos Imutáveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-import-idempotente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Import Idempotente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-estado-derivado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Estado Derivado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguranca-e-qualidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔒 Segurança e Qualidade
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔒 Segurança e Qualidade">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementado_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Implementado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📖 Documentação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📖 Documentação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#principais-documentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Principais Documentos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-persona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Por Persona
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comandos-uteis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ Comandos Úteis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🛠️ Comandos Úteis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usando-docker-compose-diretamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usando Docker Compose Diretamente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variaveis-de-ambiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variáveis de Ambiente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📡 API Principal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📡 API Principal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#endpoints-disponiveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoints Disponíveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estrutura-do-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🗂️ Estrutura do Projeto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧪 Testes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solucao-de-problemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 Solução de Problemas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contribuindo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🤝 Contribuindo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#links-uteis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📞 Links Úteis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#licenca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📄 Licença
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="guia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guia Rápido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="referencia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#inicio-rapido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 Início Rápido
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Início Rápido">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#para-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para Usuários
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#para-desenvolvedores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para Desenvolvedores
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#principais-funcionalidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✨ Principais Funcionalidades
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✨ Principais Funcionalidades">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Implementado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#em-progresso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ Em Progresso
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#planejado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📅 Planejado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stack-tecnologica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🏗️ Stack Tecnológica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#principios-arquiteturais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔑 Princípios Arquiteturais
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔑 Princípios Arquiteturais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-eventos-imutaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Eventos Imutáveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-import-idempotente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Import Idempotente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-estado-derivado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Estado Derivado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguranca-e-qualidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔒 Segurança e Qualidade
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔒 Segurança e Qualidade">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementado_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Implementado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📖 Documentação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📖 Documentação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#principais-documentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Principais Documentos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-persona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Por Persona
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comandos-uteis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ Comandos Úteis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🛠️ Comandos Úteis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usando-docker-compose-diretamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usando Docker Compose Diretamente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variaveis-de-ambiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variáveis de Ambiente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📡 API Principal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📡 API Principal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#endpoints-disponiveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoints Disponíveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estrutura-do-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🗂️ Estrutura do Projeto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧪 Testes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solucao-de-problemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 Solução de Problemas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contribuindo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🤝 Contribuindo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#links-uteis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📞 Links Úteis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#licenca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📄 Licença
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="portfolio-manager-v2">Portfolio Manager v2<a class="headerlink" href="#portfolio-manager-v2" title="Permanent link">&para;</a></h1>
+<p>Sistema web de gestão de carteira de investimentos com foco em importação B3, renda fixa e análise de performance.</p>
+<p><strong>Versão:</strong> v2.2.0 | <strong>Status:</strong> ✅ MVP Funcional | <strong>Última atualização:</strong> 16/01/2026</p>
+<hr />
+<h2 id="inicio-rapido">🚀 Início Rápido<a class="headerlink" href="#inicio-rapido" title="Permanent link">&para;</a></h2>
+<h3 id="para-usuarios">Para Usuários<a class="headerlink" href="#para-usuarios" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>./portfolio<span class="w"> </span>start<span class="w">    </span><span class="c1"># Inicia containers (backend + frontend)</span>
+<span class="c1"># Acesse: http://localhost:5173</span>
+</code></pre></div>
+
+<h3 id="para-desenvolvedores">Para Desenvolvedores<a class="headerlink" href="#para-desenvolvedores" title="Permanent link">&para;</a></h3>
+<ol>
+<li>📖 <a href="development/setup/">Guia de Setup</a></li>
+<li>🏗️ <a href="architecture/principios-core/">Arquitetura</a></li>
+<li>🔌 <a href="api/endpoints/">API Reference</a></li>
+</ol>
+<hr />
+<h2 id="principais-funcionalidades">✨ Principais Funcionalidades<a class="headerlink" href="#principais-funcionalidades" title="Permanent link">&para;</a></h2>
+<h3 id="implementado">✅ Implementado<a class="headerlink" href="#implementado" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Importação B3</strong> — Upload de Excel com deduplicação automática</li>
+<li><strong>CRUD Completo</strong> — Ativos e operações com interface web</li>
+<li><strong>Renda Fixa</strong> — CDB, LCI, LCA, Tesouro com projeções e IR</li>
+<li><strong>Consolidação de Mercados</strong> — Operações à vista e fracionárias unificadas</li>
+<li><strong>Sistema de Cotações</strong> — Cache otimizado + atualização automática (cron job)</li>
+<li><strong>Mark-to-Market</strong> — Valor real com cotações de mercado (&lt;100ms)</li>
+<li><strong>Dashboard Completo</strong> — Cards, gráficos, estatísticas em tempo real</li>
+<li><strong>Cálculos Consistentes</strong> — Dashboard e Carteira 100% sincronizados</li>
+</ul>
+<h3 id="em-progresso">⚠️ Em Progresso<a class="headerlink" href="#em-progresso" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Página de análises (placeholder)</li>
+<li>Testes automatizados (cobertura parcial)</li>
+</ul>
+<h3 id="planejado">📅 Planejado<a class="headerlink" href="#planejado" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Proventos e dividendos</li>
+<li>Eventos corporativos (splits, bonificações)</li>
+<li>Relatórios de IR</li>
+<li>Gráficos históricos</li>
+</ul>
+<hr />
+<h2 id="stack-tecnologica">🏗️ Stack Tecnológica<a class="headerlink" href="#stack-tecnologica" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Camada</th>
+<th>Tecnologia</th>
+<th>Versão</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Backend</td>
+<td>Python + FastAPI</td>
+<td>3.11</td>
+</tr>
+<tr>
+<td>Frontend</td>
+<td>React + TypeScript + Vite</td>
+<td>18.x / 5.4.x</td>
+</tr>
+<tr>
+<td>Banco de Dados</td>
+<td>SQLite (WAL mode)</td>
+<td>3.x</td>
+</tr>
+<tr>
+<td>Container</td>
+<td>Docker Compose</td>
+<td>2.x</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="principios-arquiteturais">🔑 Princípios Arquiteturais<a class="headerlink" href="#principios-arquiteturais" title="Permanent link">&para;</a></h2>
+<h3 id="1-eventos-imutaveis">1. <strong>Eventos Imutáveis</strong><a class="headerlink" href="#1-eventos-imutaveis" title="Permanent link">&para;</a></h3>
+<p>Cada operação é armazenada como evento — nunca mutamos registros existentes.</p>
+<h3 id="2-import-idempotente">2. <strong>Import Idempotente</strong><a class="headerlink" href="#2-import-idempotente" title="Permanent link">&para;</a></h3>
+<p>Reimportar o mesmo arquivo não cria duplicatas (UNIQUE constraint).</p>
+<h3 id="3-estado-derivado">3. <strong>Estado Derivado</strong><a class="headerlink" href="#3-estado-derivado" title="Permanent link">&para;</a></h3>
+<p>Posições e agregações são calculadas em runtime, não armazenadas.</p>
+<p>📖 <strong>Leia mais:</strong> <a href="architecture/principios-core/">Princípios Core</a></p>
+<hr />
+<h2 id="seguranca-e-qualidade">🔒 Segurança e Qualidade<a class="headerlink" href="#seguranca-e-qualidade" title="Permanent link">&para;</a></h2>
+<h3 id="implementado_1">✅ Implementado<a class="headerlink" href="#implementado_1" title="Permanent link">&para;</a></h3>
+<p><strong>Validação de Entrada</strong> — Pydantic com tipos e constraints<br />
+<strong>Proteção SQL Injection</strong> — Queries parametrizados<br />
+<strong>CORS Configurável</strong> — <code>CORS_ORIGINS</code> via env<br />
+<strong>Gerenciamento de Conexões</strong> — Context managers<br />
+<strong>Logging Estruturado</strong> — Todos os pontos críticos  </p>
+<p>📖 <strong>Leia mais:</strong> <a href="REFERENCIA-TECNICA/">REFERENCIA-TECNICA.md</a></p>
+<hr />
+<h2 id="documentacao">📖 Documentação<a class="headerlink" href="#documentacao" title="Permanent link">&para;</a></h2>
+<h3 id="principais-documentos">📚 Principais Documentos<a class="headerlink" href="#principais-documentos" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong><a href="INDEX/">INDEX.md</a></strong> — Página inicial completa</li>
+<li><strong><a href="STATUS-PROJETO/">STATUS-PROJETO.md</a></strong> — Estado atual e roadmap</li>
+<li><strong><a href="REFERENCIA-TECNICA/">REFERENCIA-TECNICA.md</a></strong> — Especificações técnicas</li>
+</ul>
+<h3 id="por-persona">🎯 Por Persona<a class="headerlink" href="#por-persona" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Gestores:</strong> <a href="INDEX/">INDEX.md</a> → <a href="STATUS-PROJETO/">STATUS-PROJETO.md</a></li>
+<li><strong>Backend:</strong> <a href="development/setup/">Setup</a> → <a href="api/endpoints/">API</a></li>
+<li><strong>Frontend:</strong> <a href="development/setup/">Setup</a> → <a href="guides/crud-implementation/">CRUD</a></li>
+</ul>
+<hr />
+<h2 id="comandos-uteis">🛠️ Comandos Úteis<a class="headerlink" href="#comandos-uteis" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code>./portfolio<span class="w"> </span>start<span class="w">       </span><span class="c1"># Inicia containers</span>
+./portfolio<span class="w"> </span>status<span class="w">      </span><span class="c1"># Status dos serviços</span>
+./portfolio<span class="w"> </span>logs<span class="w">        </span><span class="c1"># Logs em tempo real</span>
+./portfolio<span class="w"> </span>stop<span class="w">        </span><span class="c1"># Para containers</span>
+./portfolio<span class="w"> </span>clean-all<span class="w">   </span><span class="c1"># Remove tudo (incluindo DB)</span>
+</code></pre></div>
+
+<p><strong>Comandos disponíveis:</strong>
+- <code>start</code> - Inicia todos os serviços (backend + frontend)
+- <code>stop</code> - Para todos os serviços
+- <code>restart</code> - Reinicia todos os serviços
+- <code>status</code> - Mostra o status atual
+- <code>logs [serviço]</code> - Exibe logs (api, frontend ou ambos)
+- <code>clean</code> - Remove containers e imagens Docker
+- <code>clean-all</code> - Remove tudo, incluindo dados persistidos
+- <code>help</code> - Exibe ajuda completa</p>
+<h3 id="usando-docker-compose-diretamente">Usando Docker Compose Diretamente<a class="headerlink" href="#usando-docker-compose-diretamente" title="Permanent link">&para;</a></h3>
+<p>Alternativa ao CLI para usuários avançados:</p>
+<div class="codehilite"><pre><span></span><code>docker-compose<span class="w"> </span>up<span class="w"> </span>--build
+</code></pre></div>
+
+<p>Serviços expostos por padrão:
+- Backend: http://localhost:8000
+- Frontend: http://localhost:5173
+- API Docs: http://localhost:8000/docs</p>
+<p>O banco de dados SQLite é persistido em <code>./backend/data/portfolio.db</code> via volume do Docker.</p>
+<h3 id="variaveis-de-ambiente">Variáveis de Ambiente<a class="headerlink" href="#variaveis-de-ambiente" title="Permanent link">&para;</a></h3>
+<p><strong>Backend (CORS):</strong></p>
+<p>Para configurar origens CORS em produção, defina a variável de ambiente:</p>
+<div class="codehilite"><pre><span></span><code><span class="nv">CORS_ORIGINS</span><span class="o">=</span><span class="s2">&quot;https://seu-dominio.com,https://app.seu-dominio.com&quot;</span><span class="w"> </span>docker-compose<span class="w"> </span>up
+</code></pre></div>
+
+<p>Ou adicione no arquivo <code>.env</code> na raiz do projeto.</p>
+<p>📖 <strong>Detalhes completos:</strong> <a href="development/setup/">docs/development/setup.md</a></p>
+<hr />
+<h2 id="api-principal">📡 API Principal<a class="headerlink" href="#api-principal" title="Permanent link">&para;</a></h2>
+<h3 id="endpoints-disponiveis">Endpoints Disponíveis<a class="headerlink" href="#endpoints-disponiveis" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>GET /health</code> — Status de saúde</li>
+<li><code>POST /import/b3</code> — Upload Excel B3</li>
+<li><code>GET /assets</code> — Listar ativos com agregações</li>
+<li><code>POST /assets</code> — Criar novo ativo</li>
+<li><code>GET /operations</code> — Listar operações</li>
+<li><code>POST /operations</code> — Criar operação manual</li>
+<li><code>POST /fixed-income/assets</code> — Criar ativo RF</li>
+<li><code>GET /fixed-income/projection/{id}</code> — Projeção de rendimento</li>
+<li><code>GET /dashboard/summary</code> — Resumo completo da carteira</li>
+<li><code>GET /quotes/portfolio/current</code> — Cotações com cache (&lt;100ms)</li>
+<li><code>POST /quotes/update</code> — Atualizar cache de cotações</li>
+</ul>
+<p>📖 <strong>Documentação completa:</strong> <a href="api/endpoints/">api/endpoints.md</a><br />
+⚡ <strong>Performance:</strong> <a href="guides/otimizacao-carteira.md">guides/otimizacao-carteira.md</a><br />
+🔄 <strong>Cache de cotações:</strong> <a href="guides/atualizacao-cotacoes.md">guides/atualizacao-cotacoes.md</a></p>
+<hr />
+<h2 id="estrutura-do-projeto">🗂️ Estrutura do Projeto<a class="headerlink" href="#estrutura-do-projeto" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code>portfolio-manager-v2/
+├── portfolio              # CLI de gerenciamento
+├── docker-compose.yml     # Orquestração
+├── backend/              # FastAPI + SQLite
+│   ├── app/
+│   │   ├── main.py       # Endpoints
+│   │   ├── db/           # Database
+│   │   ├── repositories/ # Data layer
+│   │   └── services/     # Business logic
+│   └── data/             # SQLite (persistido)
+├── frontend/             # React + TypeScript
+│   └── src/
+│       ├── pages/        # Páginas
+│       ├── components/   # Componentes
+│       └── api/          # HTTP client
+├── docs/                 # 📚 Documentação
+│   ├── INDEX.md          # 🏠 Página inicial
+│   ├── STATUS-PROJETO.md # Estado atual
+│   ├── api/              # API docs
+│   ├── guides/           # Guias práticos
+│   └── architecture/     # Decisões técnicas
+└── tests/                # Testes automatizados
+</code></pre></div>
+
+<hr />
+<h2 id="testes">🧪 Testes<a class="headerlink" href="#testes" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Backend</span>
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>api<span class="w"> </span>pytest<span class="w"> </span>tests/
+
+<span class="c1"># Teste de consolidação</span>
+python3<span class="w"> </span>tests/test_consolidacao_mercados.py
+</code></pre></div>
+
+<p>📖 <strong>Mais informações:</strong> <a href="STATUS-PROJETO/">STATUS-PROJETO.md</a></p>
+<hr />
+<h2 id="solucao-de-problemas">🔧 Solução de Problemas<a class="headerlink" href="#solucao-de-problemas" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Problema</th>
+<th>Solução</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Containers não iniciam</td>
+<td><code>./portfolio clean &amp;&amp; ./portfolio start</code></td>
+</tr>
+<tr>
+<td>Porta em uso</td>
+<td>Ajuste <code>docker-compose.yml</code></td>
+</tr>
+<tr>
+<td>Banco corrompido</td>
+<td><code>./portfolio clean-all &amp;&amp; ./portfolio start</code></td>
+</tr>
+<tr>
+<td>Ver logs</td>
+<td><code>./portfolio logs [api\|frontend]</code></td>
+</tr>
+</tbody>
+</table>
+<p>📖 <strong>Troubleshooting completo:</strong> <a href="development/setup/">development/setup.md</a></p>
+<hr />
+<h2 id="contribuindo">🤝 Contribuindo<a class="headerlink" href="#contribuindo" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Siga os <a href="architecture/principios-core/">Princípios Core</a></li>
+<li>Use CLI <code>./portfolio</code> para desenvolvimento</li>
+<li>Documente mudanças significativas</li>
+<li>Execute testes antes de submeter</li>
+</ol>
+<p>📖 <strong>Guia de contribuição:</strong> <a href="INDEX/">INDEX.md</a></p>
+<hr />
+<h2 id="links-uteis">📞 Links Úteis<a class="headerlink" href="#links-uteis" title="Permanent link">&para;</a></h2>
+<ul>
+<li>📚 <a href="INDEX/">Documentação Completa</a></li>
+<li>📊 <a href="STATUS-PROJETO/">Status do Projeto</a></li>
+<li>🔌 <a href="api/endpoints/">API Reference</a></li>
+<li>📝 <a href="../CHANGELOG.md">Changelog</a></li>
+<li>🐛 <a href="https://github.com/carlosdoliveira/portfolio-manager/issues">Issues</a></li>
+</ul>
+<hr />
+<h2 id="licenca">📄 Licença<a class="headerlink" href="#licenca" title="Permanent link">&para;</a></h2>
+<p>MIT — Uso pessoal e educacional</p>
+<hr />
+<p><strong>Mantido por:</strong> Equipe Portfolio Manager v2<br />
+<strong>Versão:</strong> v2.1.0<br />
+<strong>Última atualização:</strong> 09/01/2026</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.tabs.link"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

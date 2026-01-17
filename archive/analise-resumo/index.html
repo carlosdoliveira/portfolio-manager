@@ -1,0 +1,952 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Sistema web de gestão de carteira de investimentos com foco em importação B3, renda fixa e análise de performance">
+      
+      
+      
+        <link rel="canonical" href="https://carlosdoliveira.github.io/portfolio-manager/archive/analise-resumo/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Análise de Código — Resumo Executivo - Portfolio Manager</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#analise-de-codigo-resumo-executivo" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Portfolio Manager" class="md-header__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Portfolio Manager
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Análise de Código — Resumo Executivo
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Portfolio Manager" class="md-nav__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Portfolio Manager
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guia Rápido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../referencia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#metricas-gerais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Métricas Gerais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problemas-criticos-acao-imediata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔴 Problemas Críticos (Ação Imediata)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔴 Problemas Críticos (Ação Imediata)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problemas-importantes-proximos-passos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟠 Problemas Importantes (Próximos Passos)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🟠 Problemas Importantes (Próximos Passos)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ambos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ambos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roadmap-sugerido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Roadmap Sugerido
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Roadmap Sugerido">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sprint-1-2-semanas-seguranca-e-estabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sprint 1 (2 semanas) — Segurança e Estabilidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sprint-2-2-semanas-qualidade-e-manutenibilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sprint 2 (2 semanas) — Qualidade e Manutenibilidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sprint-3-2-semanas-features-e-ux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sprint 3 (2 semanas) — Features e UX
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sprint-4-melhorias-continuas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sprint 4+ (Melhorias Contínuas)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estimativa-de-esforco-total" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💰 Estimativa de Esforço Total
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-wins-1-dia-cada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🏆 Quick Wins (&lt; 1 dia cada)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metricas-de-sucesso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📈 Métricas de Sucesso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📈 Métricas de Sucesso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#curto-prazo-sprint-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Curto Prazo (Sprint 1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#medio-prazo-sprint-2-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Médio Prazo (Sprint 2-3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#longo-prazo-sprint-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Longo Prazo (Sprint 4+)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ferramentas-recomendadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ Ferramentas Recomendadas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🛠️ Ferramentas Recomendadas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#devops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DevOps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#principios-de-implementacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎓 Princípios de Implementação
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proximos-passos-imediatos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Próximos Passos Imediatos
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="analise-de-codigo-resumo-executivo">Análise de Código — Resumo Executivo<a class="headerlink" href="#analise-de-codigo-resumo-executivo" title="Permanent link">&para;</a></h1>
+<p>Este documento apresenta uma visão consolidada das oportunidades de melhoria identificadas no Portfolio Manager v2.</p>
+<hr />
+<h2 id="metricas-gerais">📊 Métricas Gerais<a class="headerlink" href="#metricas-gerais" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Categoria</th>
+<th>Backend</th>
+<th>Frontend</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Críticas</strong></td>
+<td>4</td>
+<td>4</td>
+<td>8</td>
+</tr>
+<tr>
+<td><strong>Importantes</strong></td>
+<td>6</td>
+<td>7</td>
+<td>13</td>
+</tr>
+<tr>
+<td><strong>Nice to Have</strong></td>
+<td>7</td>
+<td>8</td>
+<td>15</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>17</strong></td>
+<td><strong>19</strong></td>
+<td><strong>36</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="problemas-criticos-acao-imediata">🔴 Problemas Críticos (Ação Imediata)<a class="headerlink" href="#problemas-criticos-acao-imediata" title="Permanent link">&para;</a></h2>
+<h3 id="backend">Backend<a class="headerlink" href="#backend" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>CORS aberto</strong> — Qualquer origem pode acessar a API (risco de segurança)</li>
+<li><strong>Validação de entrada ausente</strong> — Endpoint <code>/operations</code> aceita qualquer JSON</li>
+<li><strong>Tratamento de exceções genérico</strong> — Oculta erros reais na importação</li>
+<li><strong>Campos obrigatórios não preenchidos</strong> — Schema do banco inconsistente com importação</li>
+</ol>
+<h3 id="frontend">Frontend<a class="headerlink" href="#frontend" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>URL da API hardcoded</strong> — Não funciona em produção</li>
+<li><strong>Erro genérico sem detalhes</strong> — Usuário não sabe o que falhou</li>
+<li><strong>Páginas principais vazias</strong> — Dashboard, Portfolio e Analysis não funcionam</li>
+<li><strong>Validação de arquivo ausente</strong> — Aceita formatos não suportados pelo backend</li>
+</ol>
+<hr />
+<h2 id="problemas-importantes-proximos-passos">🟠 Problemas Importantes (Próximos Passos)<a class="headerlink" href="#problemas-importantes-proximos-passos" title="Permanent link">&para;</a></h2>
+<h3 id="ambos">Ambos<a class="headerlink" href="#ambos" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Ausência de testes</strong> (unitários e de integração)</li>
+<li><strong>Falta de logging estruturado</strong> (backend)</li>
+<li><strong>Gerenciamento de conexões inadequado</strong> (backend)</li>
+<li><strong>Gerenciamento de estado global ausente</strong> (frontend)</li>
+<li><strong>Tipagem e validação de API responses</strong> (frontend)</li>
+<li><strong>Layout não responsivo</strong> (frontend)</li>
+</ul>
+<hr />
+<h2 id="roadmap-sugerido">🎯 Roadmap Sugerido<a class="headerlink" href="#roadmap-sugerido" title="Permanent link">&para;</a></h2>
+<h3 id="sprint-1-2-semanas-seguranca-e-estabilidade">Sprint 1 (2 semanas) — Segurança e Estabilidade<a class="headerlink" href="#sprint-1-2-semanas-seguranca-e-estabilidade" title="Permanent link">&para;</a></h3>
+<p><strong>Objetivo:</strong> Corrigir problemas críticos de segurança e funcionalidade básica.</p>
+<p><strong>Backend:</strong>
+- [ ] Configurar CORS com origens específicas
+- [ ] Adicionar validação Pydantic em <code>/operations</code>
+- [ ] Melhorar tratamento de exceções no importador
+- [ ] Ajustar schema do banco (tornar campos opcionais ou preencher valores padrão)</p>
+<p><strong>Frontend:</strong>
+- [ ] Mover URL da API para variável de ambiente
+- [ ] Implementar tratamento de erro detalhado com mensagens
+- [ ] Adicionar validação de arquivo (tamanho e formato)
+- [ ] Implementar página Portfolio básica (lista de operações)</p>
+<p><strong>Entregáveis:</strong>
+- API mais segura e validada
+- Frontend mostra dados reais importados
+- Usuário recebe feedback claro sobre erros</p>
+<hr />
+<h3 id="sprint-2-2-semanas-qualidade-e-manutenibilidade">Sprint 2 (2 semanas) — Qualidade e Manutenibilidade<a class="headerlink" href="#sprint-2-2-semanas-qualidade-e-manutenibilidade" title="Permanent link">&para;</a></h3>
+<p><strong>Objetivo:</strong> Adicionar infraestrutura de qualidade e melhorar código.</p>
+<p><strong>Backend:</strong>
+- [ ] Implementar context manager para conexões de banco
+- [ ] Adicionar logging estruturado (INFO, ERROR)
+- [ ] Criar testes unitários para importação e deduplicação
+- [ ] Melhorar healthcheck (verificar banco de dados)</p>
+<p><strong>Frontend:</strong>
+- [ ] Implementar gerenciamento de estado (Context API ou Zustand)
+- [ ] Adicionar tipagem e validação de respostas da API (Zod)
+- [ ] Criar componente de tabela reutilizável
+- [ ] Tornar layout responsivo (mobile-first)</p>
+<p><strong>Entregáveis:</strong>
+- Código mais testável e rastreável
+- Frontend com estado compartilhado entre páginas
+- UI funciona em dispositivos móveis</p>
+<hr />
+<h3 id="sprint-3-2-semanas-features-e-ux">Sprint 3 (2 semanas) — Features e UX<a class="headerlink" href="#sprint-3-2-semanas-features-e-ux" title="Permanent link">&para;</a></h3>
+<p><strong>Objetivo:</strong> Completar funcionalidades principais e melhorar experiência.</p>
+<p><strong>Backend:</strong>
+- [ ] Adicionar paginação em <code>/operations</code>
+- [ ] Criar endpoint <code>/operations/summary</code> (estatísticas agregadas)
+- [ ] Implementar migrations básicas para schema
+- [ ] Adicionar variáveis de ambiente para configuração</p>
+<p><strong>Frontend:</strong>
+- [ ] Implementar Dashboard com métricas (total investido, ativos, última importação)
+- [ ] Implementar página Analysis com gráficos básicos
+- [ ] Adicionar React Query para cache de requisições
+- [ ] Implementar toast notifications</p>
+<p><strong>Entregáveis:</strong>
+- Dashboard funcional com dados agregados
+- Gráficos de análise (distribuição por ativo)
+- UX mais fluida com feedback visual</p>
+<hr />
+<h3 id="sprint-4-melhorias-continuas">Sprint 4+ (Melhorias Contínuas)<a class="headerlink" href="#sprint-4-melhorias-continuas" title="Permanent link">&para;</a></h3>
+<p><strong>Objetivo:</strong> Polimento e features avançadas.</p>
+<p><strong>Backend:</strong>
+- [ ] Rate limiting
+- [ ] Padronizar respostas de erro
+- [ ] Adicionar tipos de retorno nos endpoints
+- [ ] Implementar SQLAlchemy ou Tortoise ORM</p>
+<p><strong>Frontend:</strong>
+- [ ] Lazy loading de rotas
+- [ ] Dark mode
+- [ ] PWA (instalável, offline)
+- [ ] Testes E2E com Playwright
+- [ ] ESLint + Prettier
+- [ ] Acessibilidade (a11y)</p>
+<p><strong>Entregáveis:</strong>
+- Aplicação polida e profissional
+- Funciona offline (PWA)
+- Cobertura de testes &gt; 70%</p>
+<hr />
+<h2 id="estimativa-de-esforco-total">💰 Estimativa de Esforço Total<a class="headerlink" href="#estimativa-de-esforco-total" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Fase</th>
+<th>Duração</th>
+<th>Prioridade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sprint 1</td>
+<td>2 semanas</td>
+<td>🔴 Crítica</td>
+</tr>
+<tr>
+<td>Sprint 2</td>
+<td>2 semanas</td>
+<td>🟠 Alta</td>
+</tr>
+<tr>
+<td>Sprint 3</td>
+<td>2 semanas</td>
+<td>🟡 Média</td>
+</tr>
+<tr>
+<td>Sprint 4+</td>
+<td>Contínuo</td>
+<td>🟢 Baixa</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total para MVP Robusto:</strong> 6-8 semanas<br />
+<strong>Total para Produção:</strong> 10-12 semanas</p>
+<hr />
+<h2 id="quick-wins-1-dia-cada">🏆 Quick Wins (&lt; 1 dia cada)<a class="headerlink" href="#quick-wins-1-dia-cada" title="Permanent link">&para;</a></h2>
+<p>Melhorias de alto impacto com pouco esforço:</p>
+<ol>
+<li>✅ <strong>CORS configurado</strong> (30min)</li>
+<li>✅ <strong>URL da API em <code>.env</code></strong> (15min)</li>
+<li>✅ <strong>Validação de arquivo no frontend</strong> (30min)</li>
+<li>✅ <strong>Logging básico</strong> (1h)</li>
+<li>✅ <strong>Healthcheck melhorado</strong> (30min)</li>
+<li>✅ <strong>Mensagens de erro detalhadas</strong> (1h)</li>
+</ol>
+<p><strong>Esforço:</strong> ~4 horas<br />
+<strong>Impacto:</strong> 🚀 Enorme (resolve 6 das 8 críticas)</p>
+<hr />
+<h2 id="metricas-de-sucesso">📈 Métricas de Sucesso<a class="headerlink" href="#metricas-de-sucesso" title="Permanent link">&para;</a></h2>
+<h3 id="curto-prazo-sprint-1">Curto Prazo (Sprint 1)<a class="headerlink" href="#curto-prazo-sprint-1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ Zero vulnerabilidades críticas de segurança</li>
+<li>✅ Usuário consegue ver operações importadas</li>
+<li>✅ Taxa de erro de importação &lt; 5%</li>
+</ul>
+<h3 id="medio-prazo-sprint-2-3">Médio Prazo (Sprint 2-3)<a class="headerlink" href="#medio-prazo-sprint-2-3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ Cobertura de testes &gt; 50%</li>
+<li>✅ Tempo de resposta da API &lt; 200ms (p95)</li>
+<li>✅ UI funciona em mobile (&lt; 768px)</li>
+<li>✅ Dashboard mostra métricas em tempo real</li>
+</ul>
+<h3 id="longo-prazo-sprint-4">Longo Prazo (Sprint 4+)<a class="headerlink" href="#longo-prazo-sprint-4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ Cobertura de testes &gt; 70%</li>
+<li>✅ Lighthouse score &gt; 90</li>
+<li>✅ Acessibilidade WCAG 2.1 AA</li>
+<li>✅ PWA instalável</li>
+</ul>
+<hr />
+<h2 id="ferramentas-recomendadas">🛠️ Ferramentas Recomendadas<a class="headerlink" href="#ferramentas-recomendadas" title="Permanent link">&para;</a></h2>
+<h3 id="backend_1">Backend<a class="headerlink" href="#backend_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Validação:</strong> Pydantic</li>
+<li><strong>ORM (opcional):</strong> SQLAlchemy, Tortoise</li>
+<li><strong>Testes:</strong> pytest, pytest-cov</li>
+<li><strong>Logging:</strong> structlog</li>
+<li><strong>Migrations:</strong> Alembic</li>
+<li><strong>Rate Limiting:</strong> slowapi</li>
+</ul>
+<h3 id="frontend_1">Frontend<a class="headerlink" href="#frontend_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Estado:</strong> Zustand ou Context API</li>
+<li><strong>Data Fetching:</strong> TanStack Query (React Query)</li>
+<li><strong>Validação:</strong> Zod</li>
+<li><strong>UI:</strong> Radix UI (componentes acessíveis)</li>
+<li><strong>Notificações:</strong> react-hot-toast</li>
+<li><strong>Gráficos:</strong> Recharts ou Chart.js</li>
+<li><strong>Testes:</strong> Vitest + Testing Library</li>
+<li><strong>E2E:</strong> Playwright</li>
+<li><strong>Linting:</strong> ESLint + Prettier</li>
+</ul>
+<h3 id="devops">DevOps<a class="headerlink" href="#devops" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>CI/CD:</strong> GitHub Actions</li>
+<li><strong>Análise de código:</strong> SonarQube</li>
+<li><strong>Monitoramento:</strong> Sentry (erros) + Plausible (analytics)</li>
+</ul>
+<hr />
+<h2 id="principios-de-implementacao">🎓 Princípios de Implementação<a class="headerlink" href="#principios-de-implementacao" title="Permanent link">&para;</a></h2>
+<p>Ao implementar as melhorias, seguir:</p>
+<ol>
+<li><strong>Incremental, não reescrever</strong> — Melhorar aos poucos, não refazer tudo</li>
+<li><strong>Testes antes de features</strong> — Garantir que mudanças não quebrem o existente</li>
+<li><strong>Documentar decisões</strong> — ADRs (Architecture Decision Records) para mudanças estruturais</li>
+<li><strong>Preservar princípios do projeto</strong> — Eventos imutáveis, import idempotente</li>
+<li><strong>Priorizar impacto sobre esforço</strong> — Quick wins primeiro</li>
+</ol>
+<hr />
+<h2 id="proximos-passos-imediatos">📝 Próximos Passos Imediatos<a class="headerlink" href="#proximos-passos-imediatos" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Revisar este documento</strong> com o time (estimativa: 1h)</li>
+<li><strong>Priorizar Sprint 1</strong> no backlog (estimativa: 30min)</li>
+<li><strong>Criar issues no GitHub</strong> para cada item crítico (estimativa: 1h)</li>
+<li><strong>Implementar Quick Wins</strong> (estimativa: 4h)</li>
+<li><strong>Iniciar Sprint 1</strong> 🚀</li>
+</ol>
+<hr />
+<p><strong>Última atualização:</strong> 31/12/2025<br />
+<strong>Revisores:</strong> GitHub Copilot (análise automática)<br />
+<strong>Status:</strong> ✅ Pronto para discussão e priorização</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

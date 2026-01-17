@@ -1,0 +1,1171 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Sistema web de gestão de carteira de investimentos com foco em importação B3, renda fixa e análise de performance">
+      
+      
+      
+        <link rel="canonical" href="https://carlosdoliveira.github.io/portfolio-manager/guides/consolidacao-mercados/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>📊 Guia: Consolidação de Mercados (Fracionário + À Vista) - Portfolio Manager</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#guia-consolidacao-de-mercados-fracionario-a-vista" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Portfolio Manager" class="md-header__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Portfolio Manager
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              📊 Guia: Consolidação de Mercados (Fracionário + À Vista)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Portfolio Manager" class="md-nav__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Portfolio Manager
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guia Rápido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../referencia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#visao-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Visão Geral
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comportamento-do-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Comportamento do Sistema
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Comportamento do Sistema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#antes-da-implementacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes da Implementação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#depois-da-implementacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Depois da Implementação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚙️ Como Funciona
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚙️ Como Funciona">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nivel-1-normalizacao-de-ticker-no-import" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nível 1: Normalização de Ticker no Import
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nível 1: Normalização de Ticker no Import">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#codigo-de-normalizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Código de Normalização
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nivel-2-consolidacao-de-operacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nível 2: Consolidação de Operações
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fluxo-completo-de-importacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fluxo Completo de Importação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplos-praticos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Exemplos Práticos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Exemplos Práticos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemplo-1-compras-em-ambos-mercados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo 1: Compras em Ambos Mercados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo-2-compra-e-venda-consolidadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo 2: Compra e Venda Consolidadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualizacao-na-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📱 Visualização na Interface
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📱 Visualização na Interface">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pagina-portfolio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Página Portfolio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#historico-de-operacoes-detalhe-do-ativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Histórico de Operações (Detalhe do Ativo)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migracao-de-dados-existentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔄 Migração de Dados Existentes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔄 Migração de Dados Existentes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#passo-1-backup-do-banco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Passo 1: Backup do Banco
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passo-2-dry-run-simular" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Passo 2: Dry-Run (Simular)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passo-3-executar-migracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Passo 3: Executar Migração
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passo-4-validar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Passo 4: Validar
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧪 Testes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧪 Testes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testes-automatizados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes Automatizados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teste-manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teste Manual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❓ FAQ
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="❓ FAQ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-acontece-se-eu-importar-um-arquivo-com-abev3f-depois-de-ja-ter-importado-abev3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que acontece se eu importar um arquivo com ABEV3F depois de já ter importado ABEV3?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-eu-vou-perder-a-informacao-de-qual-mercado-foi-a-operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Eu vou perder a informação de qual mercado foi a operação?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-e-se-eu-ja-tenho-dados-importados-com-abev3-e-abev3f-separados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. E se eu já tenho dados importados com ABEV3 e ABEV3F separados?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-fiis-e-etfs-tambem-sao-consolidados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. FIIs e ETFs também são consolidados?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-posso-desabilitar-a-consolidacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Posso desabilitar a consolidação?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-como-calcular-o-preco-medio-considerando-ambos-os-mercados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Como calcular o preço médio considerando ambos os mercados?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-a-consolidacao-afeta-operacoes-manuais-crud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. A consolidação afeta operações manuais (CRUD)?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-posso-ver-quantas-operacoes-foram-de-cada-mercado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Posso ver quantas operações foram de cada mercado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#melhorias-futuras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎨 Melhorias Futuras
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎨 Melhorias Futuras">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#badges-de-mercado-no-historico-p2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Badges de Mercado no Histórico (P2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtro-por-mercado-p2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filtro por Mercado (P2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="guia-consolidacao-de-mercados-fracionario-a-vista">📊 Guia: Consolidação de Mercados (Fracionário + À Vista)<a class="headerlink" href="#guia-consolidacao-de-mercados-fracionario-a-vista" title="Permanent link">&para;</a></h1>
+<p><strong>Data</strong>: 3 de janeiro de 2026<br />
+<strong>Versão</strong>: 2.0 (Atualizado com normalização de tickers)<br />
+<strong>Status</strong>: ✅ Implementado</p>
+<hr />
+<h2 id="visao-geral">📋 Visão Geral<a class="headerlink" href="#visao-geral" title="Permanent link">&para;</a></h2>
+<p>No mercado brasileiro de ações, existem dois tipos de negociação:</p>
+<ul>
+<li><strong>Mercado à Vista</strong>: Lotes padrão de 100 ações (ex: <code>ABEV3</code>, <code>PETR4</code>)</li>
+<li><strong>Mercado Fracionário</strong>: Menos de 100 ações (ex: <code>ABEV3F</code>, <code>PETR4F</code>)</li>
+</ul>
+<p>Embora negociados com <strong>tickers diferentes</strong>, representam o <strong>mesmo ativo</strong>. O Portfolio Manager v2 implementa <strong>consolidação automática em dois níveis</strong>:</p>
+<ol>
+<li><strong>Normalização de Ticker</strong> (nível de ativo): <code>ABEV3F</code> → <code>ABEV3</code></li>
+<li><strong>Consolidação de Operações</strong> (nível de cálculos): Soma todas operações independente do mercado</li>
+</ol>
+<hr />
+<h2 id="comportamento-do-sistema">🎯 Comportamento do Sistema<a class="headerlink" href="#comportamento-do-sistema" title="Permanent link">&para;</a></h2>
+<h3 id="antes-da-implementacao">Antes da Implementação<a class="headerlink" href="#antes-da-implementacao" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>Carteira:
+├─ ABEV3  (100 ações, mercado à vista)
+└─ ABEV3F (20 ações, mercado fracionário)
+
+Total na carteira: 2 linhas separadas ❌
+</code></pre></div>
+
+<h3 id="depois-da-implementacao">Depois da Implementação<a class="headerlink" href="#depois-da-implementacao" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nv">Carteira</span>:
+└─<span class="w"> </span><span class="nv">ABEV3</span><span class="w"> </span><span class="ss">(</span><span class="mi">120</span><span class="w"> </span><span class="nv">a</span>çõ<span class="nv">es</span><span class="w"> </span><span class="nv">consolidadas</span><span class="ss">)</span>
+<span class="w">    </span>├─<span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nv">mercado</span><span class="w"> </span>à<span class="w"> </span><span class="nv">vista</span>
+<span class="w">    </span>└─<span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nv">mercado</span><span class="w"> </span><span class="nv">fracion</span>á<span class="nv">rio</span>
+
+<span class="nv">Total</span><span class="w"> </span><span class="nv">na</span><span class="w"> </span><span class="nv">carteira</span>:<span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nv">linha</span><span class="w"> </span>✅
+</code></pre></div>
+
+<p><strong>Histórico de operações</strong> continua mostrando a origem de cada operação (vista ou fracionário).</p>
+<hr />
+<h2 id="como-funciona">⚙️ Como Funciona<a class="headerlink" href="#como-funciona" title="Permanent link">&para;</a></h2>
+<h3 id="nivel-1-normalizacao-de-ticker-no-import">Nível 1: Normalização de Ticker no Import<a class="headerlink" href="#nivel-1-normalizacao-de-ticker-no-import" title="Permanent link">&para;</a></h3>
+<p>Quando um arquivo B3 é importado, o sistema:</p>
+<ol>
+<li><strong>Identifica o mercado</strong> de cada operação</li>
+<li><strong>Normaliza o ticker</strong>:</li>
+<li>Se <code>MERCADO FRACIONARIO</code> + ticker termina com <code>F</code> → Remove o <code>F</code></li>
+<li>Caso contrário → Mantém o ticker original</li>
+<li><strong>Cria ou busca o ativo consolidado</strong></li>
+<li><strong>Vincula a operação</strong> ao ativo consolidado</li>
+<li><strong>Mantém o campo <code>market</code></strong> em cada operação para rastreabilidade</li>
+</ol>
+<h4 id="codigo-de-normalizacao">Código de Normalização<a class="headerlink" href="#codigo-de-normalizacao" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">normalize_ticker</span><span class="p">(</span><span class="n">ticker</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">market</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Remove sufixo F de tickers fracionários.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; normalize_ticker(&quot;ABEV3F&quot;, &quot;MERCADO FRACIONARIO&quot;)</span>
+<span class="sd">        &quot;ABEV3&quot;</span>
+
+<span class="sd">        &gt;&gt;&gt; normalize_ticker(&quot;ABEV3&quot;, &quot;MERCADO A VISTA&quot;)</span>
+<span class="sd">        &quot;ABEV3&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ticker</span> <span class="o">=</span> <span class="n">ticker</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="n">market</span> <span class="o">=</span> <span class="p">(</span><span class="n">market</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="s2">&quot;FRACIONARIO&quot;</span> <span class="ow">in</span> <span class="n">market</span> <span class="ow">and</span> <span class="n">ticker</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;F&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ticker</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">ticker</span>
+</code></pre></div>
+
+<h3 id="nivel-2-consolidacao-de-operacoes">Nível 2: Consolidação de Operações<a class="headerlink" href="#nivel-2-consolidacao-de-operacoes" title="Permanent link">&para;</a></h3>
+<p>Na listagem de ativos, a query SQL agrega <strong>todas as operações</strong> do ativo consolidado:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
+<span class="w">    </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="n">a</span><span class="p">.</span><span class="n">ticker</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="c1">-- Soma TODAS compras (vista + fracionário)</span>
+<span class="w">    </span><span class="k">SUM</span><span class="p">(</span><span class="k">CASE</span><span class="w"> </span><span class="k">WHEN</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">movement_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;COMPRA&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">quantity</span><span class="w"> </span><span class="k">ELSE</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">END</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">total_bought</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">-- Soma TODAS vendas (vista + fracionário)</span>
+<span class="w">    </span><span class="k">SUM</span><span class="p">(</span><span class="k">CASE</span><span class="w"> </span><span class="k">WHEN</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">movement_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;VENDA&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">quantity</span><span class="w"> </span><span class="k">ELSE</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">END</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">total_sold</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">-- Posição = comprado - vendido</span>
+<span class="w">    </span><span class="p">(</span><span class="k">SUM</span><span class="p">(...)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="k">SUM</span><span class="p">(...))</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">current_position</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">-- Valores em R$</span>
+<span class="w">    </span><span class="k">SUM</span><span class="p">(</span><span class="k">CASE</span><span class="w"> </span><span class="k">WHEN</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">movement_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;COMPRA&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="k">ELSE</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">END</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">total_bought_value</span><span class="p">,</span>
+<span class="w">    </span><span class="k">SUM</span><span class="p">(</span><span class="k">CASE</span><span class="w"> </span><span class="k">WHEN</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">movement_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;VENDA&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="k">ELSE</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">END</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">total_sold_value</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">assets</span><span class="w"> </span><span class="n">a</span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">operations</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">asset_id</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;ACTIVE&#39;</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;ACTIVE&#39;</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="fluxo-completo-de-importacao">Fluxo Completo de Importação<a class="headerlink" href="#fluxo-completo-de-importacao" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>Arquivo B3 (Excel)
+    ↓
+Leitura do DataFrame
+    ↓
+Para cada linha:
+    ├─ ticker_raw = &quot;ABEV3F&quot;
+    ├─ market = &quot;MERCADO FRACIONARIO&quot;
+    ├─ ticker_normalized = normalize_ticker(&quot;ABEV3F&quot;, &quot;MERCADO FRACIONARIO&quot;)
+    ├─ ticker_normalized = &quot;ABEV3&quot;
+    ↓
+Criar/Buscar ativo com ticker &quot;ABEV3&quot;
+    ↓
+Criar operação vinculada ao ativo &quot;ABEV3&quot;
+    ├─ quantity: 20
+    ├─ price: 15.50
+    ├─ market: &quot;MERCADO FRACIONARIO&quot; ← mantido para histórico
+    ↓
+Resultado: Operação consolidada no ativo &quot;ABEV3&quot;
+</code></pre></div>
+
+<hr />
+<h2 id="exemplos-praticos">📊 Exemplos Práticos<a class="headerlink" href="#exemplos-praticos" title="Permanent link">&para;</a></h2>
+<h3 id="exemplo-1-compras-em-ambos-mercados">Exemplo 1: Compras em Ambos Mercados<a class="headerlink" href="#exemplo-1-compras-em-ambos-mercados" title="Permanent link">&para;</a></h3>
+<p><strong>Operações</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="mf">01</span><span class="o">/</span><span class="mf">01</span><span class="o">/</span><span class="mf">2026</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="n">COMPRA</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="n">MERCADO</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="n">VISTA</span><span class="w">     </span><span class="err">|</span><span class="w"> </span><span class="n">ABEV3</span><span class="w">  </span><span class="err">|</span><span class="w"> </span><span class="mf">100</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="n">R$</span><span class="w"> </span><span class="mf">15</span><span class="p">,</span><span class="mf">00</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="n">R$</span><span class="w"> </span><span class="mf">1.500</span>
+<span class="mf">02</span><span class="o">/</span><span class="mf">01</span><span class="o">/</span><span class="mf">2026</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="n">COMPRA</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="n">MERCADO</span><span class="w"> </span><span class="n">FRACIONARIO</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="n">ABEV3F</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="mf">20</span><span class="w">  </span><span class="err">|</span><span class="w"> </span><span class="n">R$</span><span class="w"> </span><span class="mf">15</span><span class="p">,</span><span class="mf">50</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="n">R$</span><span class="w"> </span><span class="mf">310</span>
+</code></pre></div>
+
+<p><strong>Resultado na Carteira</strong>:</p>
+<div class="codehilite"><pre><span></span><code>ABEV3
+├─ Posição Atual: 120 ações
+├─ Total Investido: R$ 1.810,00
+├─ Preço Médio: R$ 15,08
+└─ Total de Operações: 2
+</code></pre></div>
+
+<h3 id="exemplo-2-compra-e-venda-consolidadas">Exemplo 2: Compra e Venda Consolidadas<a class="headerlink" href="#exemplo-2-compra-e-venda-consolidadas" title="Permanent link">&para;</a></h3>
+<p><strong>Operações</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="mf">01</span><span class="o">/</span><span class="mf">01</span><span class="o">/</span><span class="mf">2026</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="n">COMPRA</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="n">MERCADO</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="n">VISTA</span><span class="w">     </span><span class="err">|</span><span class="w"> </span><span class="n">PETR4</span><span class="w">  </span><span class="err">|</span><span class="w"> </span><span class="mf">200</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="n">R$</span><span class="w"> </span><span class="mf">30</span><span class="p">,</span><span class="mf">00</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="n">R$</span><span class="w"> </span><span class="mf">6.000</span>
+<span class="mf">15</span><span class="o">/</span><span class="mf">01</span><span class="o">/</span><span class="mf">2026</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="n">VENDA</span><span class="w">  </span><span class="err">|</span><span class="w"> </span><span class="n">MERCADO</span><span class="w"> </span><span class="n">FRACIONARIO</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="n">PETR4F</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="mf">50</span><span class="w">  </span><span class="err">|</span><span class="w"> </span><span class="n">R$</span><span class="w"> </span><span class="mf">32</span><span class="p">,</span><span class="mf">00</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="n">R$</span><span class="w"> </span><span class="mf">1.600</span>
+</code></pre></div>
+
+<p><strong>Resultado na Carteira</strong>:</p>
+<div class="codehilite"><pre><span></span><code>PETR4
+├─ Posição Atual: 150 ações (200 - 50)
+├─ Total Comprado: R$ 6.000,00
+├─ Total Vendido: R$ 1.600,00
+└─ Investimento Líquido: R$ 4.400,00
+</code></pre></div>
+
+<hr />
+<h2 id="visualizacao-na-interface">📱 Visualização na Interface<a class="headerlink" href="#visualizacao-na-interface" title="Permanent link">&para;</a></h2>
+<h3 id="pagina-portfolio">Página Portfolio<a class="headerlink" href="#pagina-portfolio" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>┌─────────────────────────────────────────────────────┐
+│ ABEV3 - Ambev S.A.                      Ações / ON  │
+├─────────────────────────────────────────────────────┤
+│ Posição Atual:    120 ações                         │
+│ Total Comprado:   R$ 1.810,00                       │
+│ Total Vendido:    R$ 0,00                           │
+│ Preço Médio:      R$ 15,08                          │
+└─────────────────────────────────────────────────────┘
+</code></pre></div>
+
+<h3 id="historico-de-operacoes-detalhe-do-ativo">Histórico de Operações (Detalhe do Ativo)<a class="headerlink" href="#historico-de-operacoes-detalhe-do-ativo" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>┌────────────┬────────┬──────────┬────────┬───────────┬───────────┐
+│ Data       │ Tipo   │ Mercado  │ Qtd    │ Preço     │ Valor     │
+├────────────┼────────┼──────────┼────────┼───────────┼───────────┤
+│ 02/01/2026 │ COMPRA │ 🟦 Vista │ 100    │ R$ 15,00  │ R$ 1.500  │
+│ 03/01/2026 │ COMPRA │ 🟨 Frac  │ 20     │ R$ 15,50  │ R$ 310    │
+└────────────┴────────┴──────────┴────────┴───────────┴───────────┘
+
+Consolidado: 120 ações por R$ 1.810,00 (preço médio: R$ 15,08)
+</code></pre></div>
+
+<hr />
+<h2 id="migracao-de-dados-existentes">🔄 Migração de Dados Existentes<a class="headerlink" href="#migracao-de-dados-existentes" title="Permanent link">&para;</a></h2>
+<p>Se você já possui dados importados <strong>antes</strong> da consolidação, use o script de migração:</p>
+<h3 id="passo-1-backup-do-banco">Passo 1: Backup do Banco<a class="headerlink" href="#passo-1-backup-do-banco" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>cp<span class="w"> </span>backend/app/data/portfolio.db<span class="w"> </span>backend/app/data/portfolio.db.backup
+</code></pre></div>
+
+<h3 id="passo-2-dry-run-simular">Passo 2: Dry-Run (Simular)<a class="headerlink" href="#passo-2-dry-run-simular" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>backend<span class="w"> </span>python<span class="w"> </span>scripts/migrate_consolidate_tickers.py<span class="w"> </span>--dry-run
+</code></pre></div>
+
+<p><strong>Saída esperada</strong>:</p>
+<div class="codehilite"><pre><span></span><code>🔄 MIGRAÇÃO: Consolidação de Tickers Fracionários
+⚠️  MODO DRY-RUN: Nenhuma alteração será feita no banco
+
+📊 Encontrados 3 tickers fracionários:
+
+🔹 Processando: ABEV3F (ID: 5)
+   Operações ativas: 2
+  ✅ Ativo consolidado já existe: ABEV3 (ID: 2)
+  🔍 [DRY-RUN] Migraria 2 operações
+  🔍 [DRY-RUN] Marcaria ativo 5 como DELETED
+
+✅ DRY-RUN COMPLETO - Nenhuma alteração foi feita
+   • 3 ativos seriam consolidados
+   • 5 operações seriam migradas
+</code></pre></div>
+
+<h3 id="passo-3-executar-migracao">Passo 3: Executar Migração<a class="headerlink" href="#passo-3-executar-migracao" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>backend<span class="w"> </span>python<span class="w"> </span>scripts/migrate_consolidate_tickers.py
+</code></pre></div>
+
+<p>O script pedirá confirmação antes de modificar o banco.</p>
+<h3 id="passo-4-validar">Passo 4: Validar<a class="headerlink" href="#passo-4-validar" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Ver ativos consolidados</span>
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>backend<span class="w"> </span>sqlite3<span class="w"> </span>/app/app/data/portfolio.db<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;SELECT ticker, COUNT(*) as ops FROM assets a </span>
+<span class="s2">   JOIN operations o ON a.id = o.asset_id </span>
+<span class="s2">   WHERE a.status = &#39;ACTIVE&#39; </span>
+<span class="s2">   GROUP BY ticker;&quot;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="testes">🧪 Testes<a class="headerlink" href="#testes" title="Permanent link">&para;</a></h2>
+<h3 id="testes-automatizados">Testes Automatizados<a class="headerlink" href="#testes-automatizados" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Rodar testes de normalização</span>
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>backend<span class="w"> </span>pytest<span class="w"> </span>tests/test_ticker_normalization.py<span class="w"> </span>-v
+</code></pre></div>
+
+<p><strong>Cobertura</strong>:
+- ✅ Normalização de tickers fracionários
+- ✅ Manutenção de tickers à vista
+- ✅ Tratamento de edge cases (espaços, maiúsculas/minúsculas)
+- ✅ Mercados com valores None ou vazios
+- ✅ FIIs com F no nome (não devem ser normalizados)
+- ✅ Tickers comuns (PETR4, VALE3, ITUB4, etc.)</p>
+<h3 id="teste-manual">Teste Manual<a class="headerlink" href="#teste-manual" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Criar arquivo B3 de teste</strong> com operações em ambos mercados</p>
+</li>
+<li>
+<p><strong>Importar via interface</strong> (<code>/import</code>)</p>
+</li>
+<li>
+<p><strong>Validar</strong>:</p>
+</li>
+<li>✅ Apenas 1 ativo <code>ABEV3</code> aparece na carteira</li>
+<li>✅ Posição mostra 120 ações</li>
+<li>✅ Histórico exibe ambas operações com distinção de mercado</li>
+</ol>
+<hr />
+<h2 id="faq">❓ FAQ<a class="headerlink" href="#faq" title="Permanent link">&para;</a></h2>
+<h3 id="1-o-que-acontece-se-eu-importar-um-arquivo-com-abev3f-depois-de-ja-ter-importado-abev3">1. O que acontece se eu importar um arquivo com ABEV3F depois de já ter importado ABEV3?<a class="headerlink" href="#1-o-que-acontece-se-eu-importar-um-arquivo-com-abev3f-depois-de-ja-ter-importado-abev3" title="Permanent link">&para;</a></h3>
+<p>✅ <strong>Resposta</strong>: As operações serão consolidadas automaticamente no ativo <code>ABEV3</code>. O sistema normaliza o ticker <code>ABEV3F</code> para <code>ABEV3</code> antes de criar a operação.</p>
+<h3 id="2-eu-vou-perder-a-informacao-de-qual-mercado-foi-a-operacao">2. Eu vou perder a informação de qual mercado foi a operação?<a class="headerlink" href="#2-eu-vou-perder-a-informacao-de-qual-mercado-foi-a-operacao" title="Permanent link">&para;</a></h3>
+<p>❌ <strong>Não</strong>. O campo <code>market</code> em <code>operations</code> é preservado. O histórico continua mostrando se foi mercado à vista ou fracionário.</p>
+<h3 id="3-e-se-eu-ja-tenho-dados-importados-com-abev3-e-abev3f-separados">3. E se eu já tenho dados importados com ABEV3 e ABEV3F separados?<a class="headerlink" href="#3-e-se-eu-ja-tenho-dados-importados-com-abev3-e-abev3f-separados" title="Permanent link">&para;</a></h3>
+<p>🔧 <strong>Use o script de migração</strong>:</p>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>backend<span class="w"> </span>python<span class="w"> </span>scripts/migrate_consolidate_tickers.py
+</code></pre></div>
+
+<h3 id="4-fiis-e-etfs-tambem-sao-consolidados">4. FIIs e ETFs também são consolidados?<a class="headerlink" href="#4-fiis-e-etfs-tambem-sao-consolidados" title="Permanent link">&para;</a></h3>
+<p>❌ <strong>Não</strong>. A normalização só se aplica a tickers com sufixo <code>F</code> em mercado fracionário. FIIs (ex: HGLG11, HFOF11) e ETFs (ex: BOVA11) não são afetados.</p>
+<h3 id="5-posso-desabilitar-a-consolidacao">5. Posso desabilitar a consolidação?<a class="headerlink" href="#5-posso-desabilitar-a-consolidacao" title="Permanent link">&para;</a></h3>
+<p>⚠️ <strong>Não recomendado</strong>. A consolidação é parte fundamental da lógica de negócio. Se desabilitar, você terá posições duplicadas e cálculos incorretos.</p>
+<h3 id="6-como-calcular-o-preco-medio-considerando-ambos-os-mercados">6. Como calcular o preço médio considerando ambos os mercados?<a class="headerlink" href="#6-como-calcular-o-preco-medio-considerando-ambos-os-mercados" title="Permanent link">&para;</a></h3>
+<p>💡 <strong>Automático</strong>. O sistema calcula:</p>
+<div class="codehilite"><pre><span></span><code>preço_médio = total_investido / total_quantidade
+
+Exemplo:
+<span class="k">-</span> 100 ações à vista a R$ 15,00 = R$ 1.500,00
+<span class="k">-</span> 20 ações fracionárias a R$ 15,50 = R$ 310,00
+<span class="k">-</span> Total: R$ 1.810,00 / 120 = R$ 15,08
+</code></pre></div>
+
+<h3 id="7-a-consolidacao-afeta-operacoes-manuais-crud">7. A consolidação afeta operações manuais (CRUD)?<a class="headerlink" href="#7-a-consolidacao-afeta-operacoes-manuais-crud" title="Permanent link">&para;</a></h3>
+<p>✅ <strong>Sim</strong>. Se você criar uma operação manual para <code>ABEV3</code>, ela será consolidada com operações importadas de <code>ABEV3F</code>. O sistema trata tudo de forma uniforme.</p>
+<h3 id="8-posso-ver-quantas-operacoes-foram-de-cada-mercado">8. Posso ver quantas operações foram de cada mercado?<a class="headerlink" href="#8-posso-ver-quantas-operacoes-foram-de-cada-mercado" title="Permanent link">&para;</a></h3>
+<p>✅ <strong>Sim</strong>. No histórico do ativo, cada operação mostra o campo <code>market</code>. Você pode filtrar ou contar por mercado se necessário.</p>
+<hr />
+<h2 id="melhorias-futuras">🎨 Melhorias Futuras<a class="headerlink" href="#melhorias-futuras" title="Permanent link">&para;</a></h2>
+<h3 id="badges-de-mercado-no-historico-p2">Badges de Mercado no Histórico (P2)<a class="headerlink" href="#badges-de-mercado-no-historico-p2" title="Permanent link">&para;</a></h3>
+<p><strong>Status</strong>: Planejado no roadmap</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Em AssetDetail.tsx</span>
+<span class="p">&lt;</span><span class="nt">span</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="p">{</span><span class="sb">`market-badge market-badge-</span><span class="si">${</span><span class="nx">market</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span><span class="si">}</span><span class="sb">`</span><span class="p">}&gt;</span>
+<span class="w">  </span><span class="p">{</span><span class="nx">market</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;MERCADO A VISTA&quot;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">&quot;🟦 Vista&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;🟨 Fracionário&quot;</span><span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p>CSS correspondente:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">.</span><span class="nc">market-badge</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mf">0.85</span><span class="kt">em</span><span class="p">;</span>
+<span class="w">  </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">market-badge-vista</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#E3F2FD</span><span class="p">;</span>
+<span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#1976D2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">market-badge-fracionario</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#FFF9C4</span><span class="p">;</span>
+<span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#F57F17</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="filtro-por-mercado-p2">Filtro por Mercado (P2)<a class="headerlink" href="#filtro-por-mercado-p2" title="Permanent link">&para;</a></h3>
+<p>Permitir filtrar operações no histórico:
+- 🔵 Todas
+- 🟦 Apenas Vista
+- 🟨 Apenas Fracionário</p>
+<hr />
+<h2 id="referencias">📚 Referências<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../CORRECAO-CALCULOS-CARTEIRA.md#2-❌-falta-consolidação-fracionáriovista">Problema Original (Item #2)</a></li>
+<li><a href="../../backend/app/services/importer.py">Código: normalize_ticker()</a></li>
+<li><a href="../../backend/tests/test_ticker_normalization.py">Testes: test_ticker_normalization.py</a></li>
+<li><a href="../../backend/scripts/migrate_consolidate_tickers.py">Script de Migração</a></li>
+<li><a href="http://www.b3.com.br/pt_br/produtos-e-servicos/negociacao/renda-variavel/mercado-fracionario/">B3: Mercado Fracionário</a></li>
+</ul>
+<hr />
+<p><strong>Documento criado por</strong>: GitHub Copilot<br />
+<strong>Última atualização</strong>: 3 de janeiro de 2026<br />
+<strong>Versão</strong>: 2.0</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

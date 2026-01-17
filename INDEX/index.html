@@ -1,0 +1,1408 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Sistema web de gestão de carteira de investimentos com foco em importação B3, renda fixa e análise de performance">
+      
+      
+      
+        <link rel="canonical" href="https://carlosdoliveira.github.io/portfolio-manager/INDEX/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>📚 Portfolio Manager v2 — Documentação - Portfolio Manager</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#portfolio-manager-v2-documentacao" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href=".." title="Portfolio Manager" class="md-header__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Portfolio Manager
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              📚 Portfolio Manager v2 — Documentação
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Portfolio Manager" class="md-nav__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Portfolio Manager
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guia Rápido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../referencia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#inicio-rapido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 Início Rápido
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Início Rápido">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#novos-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Novos Usuários
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desenvolvedores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Desenvolvedores
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#indice-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Índice Geral
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Índice Geral">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#status-e-releases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Status e Releases
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquitetura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🏗️ Arquitetura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔌 API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#guias-praticos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📖 Guias Práticos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desenvolvimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ Desenvolvimento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 Deploy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📦 Arquivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visao-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📖 Visão Geral
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📖 Visão Geral">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#o-que-e-o-portfolio-manager-v2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que é o Portfolio Manager v2?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="O que é o Portfolio Manager v2?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funcionalidades-principais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Funcionalidades Principais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#casos-de-uso-atuais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Casos de Uso Atuais
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arquitetura-do-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🏗️ Arquitetura do Sistema
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🏗️ Arquitetura do Sistema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stack-tecnologica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stack Tecnológica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#principios-arquiteturais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Princípios Arquiteturais
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#status-de-implementacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Status de Implementação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Status de Implementação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend-fastapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend (FastAPI)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend-react-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend (React + TypeScript)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Roadmap
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Roadmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fase-1-mvp-concluida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Fase 1 — MVP (Concluída)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-2-dashboards-em-progresso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚧 Fase 2 — Dashboards (Em Progresso)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-3-valorizacao-planejada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📅 Fase 3 — Valorização (Planejada)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-4-avancado-futuro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔮 Fase 4 — Avançado (Futuro)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#guias-por-persona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Guias por Persona
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📚 Guias por Persona">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gestores-product-owners" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        👨‍💼 Gestores / Product Owners
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desenvolvedores-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        👨‍💻 Desenvolvedores Backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desenvolvedores-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        👨‍💻 Desenvolvedores Frontend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qa-testadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        👨‍🔬 QA / Testadores
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#suporte-e-contribuicao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🆘 Suporte e Contribuição
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🆘 Suporte e Contribuição">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reportar-bugs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reportar Bugs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contribuir-com-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contribuir com Código
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#melhorar-documentacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Melhorar Documentação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#links-importantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📞 Links Importantes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conquistas-recentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🏆 Conquistas Recentes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#convencoes-de-documentacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Convenções de Documentação
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="portfolio-manager-v2-documentacao">📚 Portfolio Manager v2 — Documentação<a class="headerlink" href="#portfolio-manager-v2-documentacao" title="Permanent link">&para;</a></h1>
+<p><strong>Última atualização:</strong> 17 de Janeiro de 2026<br />
+<strong>Versão:</strong> v2.3.0</p>
+<p>Bem-vindo à documentação completa do Portfolio Manager v2, um sistema de gestão de carteira de investimentos com foco em importação B3, renda fixa e análise de performance.</p>
+<hr />
+<h2 id="inicio-rapido">🚀 Início Rápido<a class="headerlink" href="#inicio-rapido" title="Permanent link">&para;</a></h2>
+<h3 id="novos-usuarios">Novos Usuários<a class="headerlink" href="#novos-usuarios" title="Permanent link">&para;</a></h3>
+<ol>
+<li>📖 <a href="../development/setup/"><strong>Guia de Setup</strong></a> — Configure o ambiente local</li>
+<li>🎯 <a href="#visão-geral"><strong>Visão Geral do Sistema</strong></a> — Entenda o que o sistema faz</li>
+<li>📊 <a href="../STATUS-PROJETO/"><strong>Status do Projeto</strong></a> — Veja o que está implementado</li>
+</ol>
+<h3 id="desenvolvedores">Desenvolvedores<a class="headerlink" href="#desenvolvedores" title="Permanent link">&para;</a></h3>
+<ol>
+<li>🏗️ <a href="../architecture/principios-core/"><strong>Arquitetura</strong></a> — Princípios e decisões técnicas</li>
+<li>🔌 <a href="../api/endpoints/"><strong>API Reference</strong></a> — Endpoints e contratos</li>
+<li>📝 <a href="#guias-práticos"><strong>Guias de Implementação</strong></a> — Como fazer tarefas comuns</li>
+</ol>
+<hr />
+<h2 id="indice-geral">📋 Índice Geral<a class="headerlink" href="#indice-geral" title="Permanent link">&para;</a></h2>
+<h3 id="status-e-releases">📊 Status e Releases<a class="headerlink" href="#status-e-releases" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="../STATUS-PROJETO/"><strong>STATUS-PROJETO.md</strong></a> ⭐ <strong>PRINCIPAL</strong></li>
+<li>Estado atual completo do projeto</li>
+<li>Funcionalidades implementadas e pendentes</li>
+<li>
+<p>Roadmap e próximos passos</p>
+</li>
+<li>
+<p><a href="../CHECKPOINT-v2.3.0-otimizacao-cotacoes/"><strong>CHECKPOINT-v2.3.0</strong></a> 🔥 <strong>NOVO</strong></p>
+</li>
+<li>Sistema de cache inteligente para cotações</li>
+<li>Performance 15-30x mais rápida</li>
+<li>
+<p>Carregamento progressivo</p>
+</li>
+<li>
+<p><a href="../CHECKPOINT-v2.2.0/"><strong>CHECKPOINT-v2.2.0</strong></a></p>
+</li>
+<li>Sistema de cache de cotações inicial</li>
+<li>
+<p>Script de atualização via cron</p>
+</li>
+<li>
+<p><a href="../REFERENCIA-TECNICA/"><strong>REFERENCIA-TECNICA.md</strong></a></p>
+</li>
+<li>Documentação técnica detalhada</li>
+<li>Especificações de API</li>
+<li>Schemas e interfaces</li>
+</ul>
+<h3 id="arquitetura">🏗️ Arquitetura<a class="headerlink" href="#arquitetura" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="../architecture/principios-core/"><strong>Princípios Core</strong></a></li>
+<li>Event-based architecture</li>
+<li>Operações imutáveis</li>
+<li>Import idempotente</li>
+</ul>
+<h3 id="api">🔌 API<a class="headerlink" href="#api" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="../api/endpoints/"><strong>Endpoints</strong></a></li>
+<li>Ativos, Operações, Renda Fixa, Cotações</li>
+<li>Request/Response schemas</li>
+<li>Códigos de erro</li>
+</ul>
+<h3 id="guias-praticos">📖 Guias Práticos<a class="headerlink" href="#guias-praticos" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="../guides/otimizacao-cotacoes/"><strong>Otimização de Cotações</strong></a> 🔥 <strong>RECOMENDADO</strong></li>
+<li>Sistema de cache inteligente</li>
+<li>Carregamento progressivo</li>
+<li>
+<p>Performance e troubleshooting</p>
+</li>
+<li>
+<p><a href="../guides/consolidacao-mercados/"><strong>Consolidação de Mercados</strong></a> ⭐</p>
+</li>
+<li>Como operações à vista e fracionárias são consolidadas</li>
+<li>
+<p>Exemplos práticos e SQL</p>
+</li>
+<li>
+<p><a href="../guides/integracao-cotacoes/"><strong>Integração com Cotações</strong></a></p>
+</li>
+<li>Cotações em tempo quase real via yfinance</li>
+<li>API endpoints e uso no frontend</li>
+<li>
+<p>Cache e performance</p>
+</li>
+<li>
+<p><a href="../guides/consistencia-calculos/"><strong>Consistência de Cálculos</strong></a></p>
+</li>
+<li>Cálculos de P&amp;L, preço médio, variação</li>
+<li>
+<p>Validação e testes</p>
+</li>
+<li>
+<p><a href="../guides/crud-implementation/"><strong>Implementação CRUD</strong></a></p>
+</li>
+<li>Padrões de criação de recursos</li>
+<li>
+<p>Best practices</p>
+</li>
+<li>
+<p><a href="../renda-fixa/"><strong>Renda Fixa</strong></a></p>
+</li>
+<li>Funcionalidades completas de RF</li>
+<li>Cálculo de projeções e IR</li>
+</ul>
+<h3 id="desenvolvimento">🛠️ Desenvolvimento<a class="headerlink" href="#desenvolvimento" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="../development/setup/"><strong>Setup Local</strong></a></li>
+<li>Docker Compose</li>
+<li>Configuração de ambiente</li>
+<li>Comandos úteis</li>
+</ul>
+<h3 id="deploy">🚀 Deploy<a class="headerlink" href="#deploy" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Em construção</li>
+</ul>
+<h3 id="arquivo">📦 Arquivo<a class="headerlink" href="#arquivo" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="./archive/"><strong>archive/</strong></a> — Documentos históricos e substituídos</li>
+</ul>
+<hr />
+<h2 id="visao-geral">📖 Visão Geral<a class="headerlink" href="#visao-geral" title="Permanent link">&para;</a></h2>
+<h3 id="o-que-e-o-portfolio-manager-v2">O que é o Portfolio Manager v2?<a class="headerlink" href="#o-que-e-o-portfolio-manager-v2" title="Permanent link">&para;</a></h3>
+<p>Sistema web para gestão de carteira de investimentos pessoais com foco em:</p>
+<h4 id="funcionalidades-principais">✅ Funcionalidades Principais<a class="headerlink" href="#funcionalidades-principais" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Importação B3</strong></td>
+<td>✅ Completo</td>
+<td>Upload de relatórios Excel B3, deduplicação automática</td>
+</tr>
+<tr>
+<td><strong>Carteira</strong></td>
+<td>✅ Completo</td>
+<td>CRUD de ativos, posições consolidadas, histórico</td>
+</tr>
+<tr>
+<td><strong>Renda Fixa</strong></td>
+<td>✅ Completo</td>
+<td>Gestão completa: CDB, LCI, LCA, Tesouro + projeções</td>
+</tr>
+<tr>
+<td><strong>Consolidação de Mercados</strong></td>
+<td>✅ Completo</td>
+<td>Operações à vista e fracionárias somadas automaticamente</td>
+</tr>
+<tr>
+<td><strong>Cotações de Mercado</strong></td>
+<td>✅ Completo</td>
+<td>Integração com yfinance, preços em tempo quase real</td>
+</tr>
+<tr>
+<td><strong>Dashboard</strong></td>
+<td>⚠️ Placeholder</td>
+<td>Visão geral da carteira (pendente)</td>
+</tr>
+<tr>
+<td><strong>Análises</strong></td>
+<td>⚠️ Placeholder</td>
+<td>Gráficos e métricas (pendente)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="casos-de-uso-atuais">🎯 Casos de Uso Atuais<a class="headerlink" href="#casos-de-uso-atuais" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>Importar operações da B3</strong></li>
+<li>Baixe o relatório de negociações em Excel</li>
+<li>Arraste para a área de upload</li>
+<li>Sistema classifica automaticamente (Ações, FIIs, ETFs, RF)</li>
+<li>
+<p>Deduplica operações repetidas</p>
+</li>
+<li>
+<p><strong>Gerenciar ativos manualmente</strong></p>
+</li>
+<li>Criar, editar e deletar ativos</li>
+<li>Registrar operações de compra/venda</li>
+<li>
+<p>Ver histórico completo</p>
+</li>
+<li>
+<p><strong>Acompanhar Renda Fixa</strong></p>
+</li>
+<li>Cadastrar investimentos RF com todos os detalhes</li>
+<li>Projeções de rendimento com IR regressivo</li>
+<li>
+<p>Cálculo automático de isenção para LCI/LCA</p>
+</li>
+<li>
+<p><strong>Visualizar posições consolidadas</strong></p>
+</li>
+<li>Posição atual por ativo</li>
+<li>Preço médio de compra</li>
+<li>Total investido vs vendido</li>
+</ol>
+<hr />
+<h2 id="arquitetura-do-sistema">🏗️ Arquitetura do Sistema<a class="headerlink" href="#arquitetura-do-sistema" title="Permanent link">&para;</a></h2>
+<h3 id="stack-tecnologica">Stack Tecnológica<a class="headerlink" href="#stack-tecnologica" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Camada</th>
+<th>Tecnologia</th>
+<th>Versão</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Backend</strong></td>
+<td>Python + FastAPI</td>
+<td>3.11</td>
+</tr>
+<tr>
+<td><strong>Banco de Dados</strong></td>
+<td>SQLite (WAL mode)</td>
+<td>3.x</td>
+</tr>
+<tr>
+<td><strong>Frontend</strong></td>
+<td>React + TypeScript + Vite</td>
+<td>18.x / 5.4.x</td>
+</tr>
+<tr>
+<td><strong>Containerização</strong></td>
+<td>Docker Compose</td>
+<td>2.x</td>
+</tr>
+</tbody>
+</table>
+<h3 id="principios-arquiteturais">Princípios Arquiteturais<a class="headerlink" href="#principios-arquiteturais" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Event-Based Architecture</strong></li>
+<li>Operações são eventos imutáveis</li>
+<li>Estado é derivado, não armazenado</li>
+<li>
+<p>Auditoria completa por design</p>
+</li>
+<li>
+<p><strong>Import Idempotente</strong></p>
+</li>
+<li>Mesmo arquivo pode ser importado múltiplas vezes</li>
+<li>Deduplicação baseada em chave de negócio</li>
+<li>
+<p>UNIQUE constraint no banco</p>
+</li>
+<li>
+<p><strong>Consolidação Transparente</strong></p>
+</li>
+<li>Operações em diferentes mercados são somadas</li>
+<li>Preservação das operações originais</li>
+<li>UI explica o comportamento</li>
+</ol>
+<p>📖 <strong>Leia mais:</strong> <a href="../architecture/principios-core/">Princípios Core</a></p>
+<hr />
+<h2 id="status-de-implementacao">📊 Status de Implementação<a class="headerlink" href="#status-de-implementacao" title="Permanent link">&para;</a></h2>
+<h3 id="backend-fastapi">Backend (FastAPI)<a class="headerlink" href="#backend-fastapi" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Módulo</th>
+<th>Status</th>
+<th>Endpoints Implementados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ativos</strong></td>
+<td>✅ 100%</td>
+<td>POST, GET, PUT, DELETE</td>
+</tr>
+<tr>
+<td><strong>Operações</strong></td>
+<td>✅ 100%</td>
+<td>POST, GET, PUT, DELETE</td>
+</tr>
+<tr>
+<td><strong>Importação B3</strong></td>
+<td>✅ 100%</td>
+<td>POST /import/b3</td>
+</tr>
+<tr>
+<td><strong>Renda Fixa</strong></td>
+<td>✅ 100%</td>
+<td>CRUD + projeções</td>
+</tr>
+<tr>
+<td><strong>Dashboard API</strong></td>
+<td>❌ 0%</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="frontend-react-typescript">Frontend (React + TypeScript)<a class="headerlink" href="#frontend-react-typescript" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Página</th>
+<th>Status</th>
+<th>Funcionalidades</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Import</strong></td>
+<td>✅ 100%</td>
+<td>Upload, drag-and-drop, feedback</td>
+</tr>
+<tr>
+<td><strong>Portfolio</strong></td>
+<td>✅ 100%</td>
+<td>CRUD ativos, tabela, estatísticas</td>
+</tr>
+<tr>
+<td><strong>AssetDetail</strong></td>
+<td>✅ 100%</td>
+<td>Operações, resumo por mercado</td>
+</tr>
+<tr>
+<td><strong>FixedIncome</strong></td>
+<td>✅ 100%</td>
+<td>CRUD RF, projeções, operações</td>
+</tr>
+<tr>
+<td><strong>Dashboard</strong></td>
+<td>⚠️ 5%</td>
+<td>Apenas placeholder</td>
+</tr>
+<tr>
+<td><strong>Analysis</strong></td>
+<td>⚠️ 5%</td>
+<td>Apenas placeholder</td>
+</tr>
+<tr>
+<td><strong>Settings</strong></td>
+<td>⚠️ 5%</td>
+<td>Apenas placeholder</td>
+</tr>
+</tbody>
+</table>
+<h3 id="testes">Testes<a class="headerlink" href="#testes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Status</th>
+<th>Cobertura</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Testes Unitários</strong></td>
+<td>⚠️ Mínimo</td>
+<td>&lt; 5%</td>
+</tr>
+<tr>
+<td><strong>Testes Integração</strong></td>
+<td>⚠️ Mínimo</td>
+<td>1 teste de consolidação</td>
+</tr>
+<tr>
+<td><strong>Testes E2E</strong></td>
+<td>❌ Não implementado</td>
+<td>0%</td>
+</tr>
+</tbody>
+</table>
+<p>📖 <strong>Leia mais:</strong> <a href="../STATUS-PROJETO/">STATUS-PROJETO.md</a></p>
+<hr />
+<h2 id="roadmap">🎯 Roadmap<a class="headerlink" href="#roadmap" title="Permanent link">&para;</a></h2>
+<h3 id="fase-1-mvp-concluida">✅ Fase 1 — MVP (Concluída)<a class="headerlink" href="#fase-1-mvp-concluida" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Import B3 com deduplicação</li>
+<li>CRUD de ativos e operações</li>
+<li>Renda Fixa completa</li>
+<li>Consolidação de mercados</li>
+</ul>
+<h3 id="fase-2-dashboards-em-progresso">🚧 Fase 2 — Dashboards (Em Progresso)<a class="headerlink" href="#fase-2-dashboards-em-progresso" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Dashboard principal com cards</li>
+<li>[ ] Gráficos de alocação</li>
+<li>[ ] Análise de performance</li>
+<li>[ ] Operações recentes</li>
+</ul>
+<h3 id="fase-3-valorizacao-planejada">📅 Fase 3 — Valorização (Planejada)<a class="headerlink" href="#fase-3-valorizacao-planejada" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Integração com cotações (Yahoo Finance)</li>
+<li>[ ] Mark-to-market</li>
+<li>[ ] Ganho/perda não realizado</li>
+<li>[ ] Benchmark (IBOV, CDI)</li>
+</ul>
+<h3 id="fase-4-avancado-futuro">🔮 Fase 4 — Avançado (Futuro)<a class="headerlink" href="#fase-4-avancado-futuro" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Proventos e dividendos</li>
+<li>[ ] Eventos corporativos (splits, bonificações)</li>
+<li>[ ] Relatórios de IR</li>
+<li>[ ] API externa para apps mobile</li>
+</ul>
+<hr />
+<h2 id="guias-por-persona">📚 Guias por Persona<a class="headerlink" href="#guias-por-persona" title="Permanent link">&para;</a></h2>
+<h3 id="gestores-product-owners">👨‍💼 Gestores / Product Owners<a class="headerlink" href="#gestores-product-owners" title="Permanent link">&para;</a></h3>
+<p><strong>Leitura recomendada:</strong>
+1. <a href="#visão-geral">Visão Geral</a> (acima)
+2. <a href="../STATUS-PROJETO/">Status do Projeto</a>
+3. <a href="#roadmap">Roadmap</a> (acima)</p>
+<p><strong>Perguntas comuns:</strong>
+- ❓ <strong>O que está pronto?</strong> → <a href="#status-de-implementação">Status de Implementação</a>
+- ❓ <strong>Quando teremos dashboards?</strong> → <a href="#roadmap">Roadmap - Fase 2</a>
+- ❓ <strong>Quais são os riscos?</strong> → <a href="../STATUS-PROJETO/#problemas-conhecidos">Problemas Conhecidos</a></p>
+<hr />
+<h3 id="desenvolvedores-backend">👨‍💻 Desenvolvedores Backend<a class="headerlink" href="#desenvolvedores-backend" title="Permanent link">&para;</a></h3>
+<p><strong>Leitura recomendada:</strong>
+1. <a href="../development/setup/">Setup Local</a>
+2. <a href="../architecture/principios-core/">Princípios Core</a>
+3. <a href="../api/endpoints/">API Endpoints</a>
+4. <a href="../REFERENCIA-TECNICA/">Referência Técnica</a></p>
+<p><strong>Tarefas comuns:</strong>
+- 🔨 <strong>Adicionar novo endpoint</strong> → Ver padrão em <a href="../api/endpoints/">API Endpoints</a>
+- 🔨 <strong>Criar nova tabela</strong> → Ver schema em <a href="../STATUS-PROJETO/#modelagem-de-dados">Modelagem de Dados</a>
+- 🔨 <strong>Implementar cálculo</strong> → Ver exemplo em <a href="../REFERENCIA-TECNICA/">Projeções RF</a></p>
+<hr />
+<h3 id="desenvolvedores-frontend">👨‍💻 Desenvolvedores Frontend<a class="headerlink" href="#desenvolvedores-frontend" title="Permanent link">&para;</a></h3>
+<p><strong>Leitura recomendada:</strong>
+1. <a href="../development/setup/">Setup Local</a>
+2. <a href="../api/endpoints/">API Endpoints</a>
+3. <a href="../guides/crud-implementation/">Guia CRUD</a></p>
+<p><strong>Tarefas comuns:</strong>
+- 🔨 <strong>Criar nova página</strong> → Ver padrão em Portfolio.tsx
+- 🔨 <strong>Consumir API</strong> → Ver client.ts
+- 🔨 <strong>Adicionar formulário</strong> → Ver OperationForm.tsx</p>
+<hr />
+<h3 id="qa-testadores">👨‍🔬 QA / Testadores<a class="headerlink" href="#qa-testadores" title="Permanent link">&para;</a></h3>
+<p><strong>Leitura recomendada:</strong>
+1. <a href="../STATUS-PROJETO/">Status do Projeto</a>
+2. <a href="../guides/consolidacao-mercados/">Guia de Consolidação</a></p>
+<p><strong>Cenários de teste:</strong>
+- ✅ <strong>Import B3</strong> → Arquivo sample em <code>samples/</code>
+- ✅ <strong>Consolidação</strong> → Script em <code>tests/test_consolidacao_mercados.py</code>
+- ✅ <strong>Renda Fixa</strong> → Testar CDB, LCI, Tesouro</p>
+<hr />
+<h2 id="suporte-e-contribuicao">🆘 Suporte e Contribuição<a class="headerlink" href="#suporte-e-contribuicao" title="Permanent link">&para;</a></h2>
+<h3 id="reportar-bugs">Reportar Bugs<a class="headerlink" href="#reportar-bugs" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Verifique se já não existe issue aberta</li>
+<li>Use o template em <a href="./COMO-CRIAR-ISSUES.md">COMO-CRIAR-ISSUES.md</a></li>
+<li>Inclua logs e prints quando possível</li>
+</ol>
+<h3 id="contribuir-com-codigo">Contribuir com Código<a class="headerlink" href="#contribuir-com-codigo" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Fork o repositório</li>
+<li>Crie branch: <code>feature/nome-da-feature</code></li>
+<li>Siga os <a href="../architecture/principios-core/">Princípios Core</a></li>
+<li>Abra Pull Request com descrição clara</li>
+</ol>
+<h3 id="melhorar-documentacao">Melhorar Documentação<a class="headerlink" href="#melhorar-documentacao" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Documentação está em <code>docs/</code></li>
+<li>Formato: Markdown</li>
+<li>Siga estrutura existente</li>
+</ul>
+<hr />
+<h2 id="links-importantes">📞 Links Importantes<a class="headerlink" href="#links-importantes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Recurso</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repositório</strong></td>
+<td><a href="https://github.com/carlosdoliveira/portfolio-manager">github.com/carlosdoliveira/portfolio-manager</a></td>
+</tr>
+<tr>
+<td><strong>Issues</strong></td>
+<td><a href="https://github.com/carlosdoliveira/portfolio-manager/issues">GitHub Issues</a></td>
+</tr>
+<tr>
+<td><strong>Changelog</strong></td>
+<td><a href="../CHANGELOG.md">CHANGELOG.md</a></td>
+</tr>
+<tr>
+<td><strong>License</strong></td>
+<td>MIT</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="conquistas-recentes">🏆 Conquistas Recentes<a class="headerlink" href="#conquistas-recentes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>✅ <strong>Jan/2026</strong> — Consolidação de mercados implementada</li>
+<li>✅ <strong>Jan/2026</strong> — Renda Fixa completa com projeções</li>
+<li>✅ <strong>Jan/2026</strong> — Import B3 com deduplicação</li>
+<li>✅ <strong>Dez/2025</strong> — MVP funcional</li>
+</ul>
+<hr />
+<h2 id="convencoes-de-documentacao">📝 Convenções de Documentação<a class="headerlink" href="#convencoes-de-documentacao" title="Permanent link">&para;</a></h2>
+<ul>
+<li>📖 <strong>Guias práticos</strong> → <code>docs/guides/</code></li>
+<li>🏗️ <strong>Decisões de arquitetura</strong> → <code>docs/architecture/</code></li>
+<li>🔌 <strong>Documentação de API</strong> → <code>docs/api/</code></li>
+<li>🛠️ <strong>Setup e desenvolvimento</strong> → <code>docs/development/</code></li>
+</ul>
+<hr />
+<p><strong>Mantido por:</strong> Equipe Portfolio Manager v2<br />
+<strong>Última revisão:</strong> 03/01/2026</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.tabs.link"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

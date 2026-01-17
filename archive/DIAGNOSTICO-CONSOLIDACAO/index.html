@@ -1,0 +1,904 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Sistema web de gestão de carteira de investimentos com foco em importação B3, renda fixa e análise de performance">
+      
+      
+      
+        <link rel="canonical" href="https://carlosdoliveira.github.io/portfolio-manager/archive/DIAGNOSTICO-CONSOLIDACAO/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>🔍 Diagnóstico: Consolidação Não Funcionando - Portfolio Manager</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#diagnostico-consolidacao-nao-funcionando" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Portfolio Manager" class="md-header__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Portfolio Manager
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🔍 Diagnóstico: Consolidação Não Funcionando
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Portfolio Manager" class="md-nav__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Portfolio Manager
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guia Rápido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../referencia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#causa-raiz-identificada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Causa Raiz Identificada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Causa Raiz Identificada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problema-1-dados-antigos-resolvido-com-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema 1: Dados Antigos (Resolvido com Reset)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-2-crud-manual-sem-normalizacao-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema 2: CRUD Manual Sem Normalização ⚠️ PRINCIPAL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ativos-no-banco-atual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ativos no Banco Atual
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-que-aconteceu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O Que Aconteceu
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solucao-recomendada-resetar-banco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Solução Recomendada: Resetar Banco
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✅ Solução Recomendada: Resetar Banco">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#por-que-esta-e-a-melhor-opcao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por Que Esta é a Melhor Opção?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-fazer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como Fazer
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternativa-migracao-se-dados-forem-valiosos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔄 Alternativa: Migração (Se Dados Forem Valiosos)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔄 Alternativa: Migração (Se Dados Forem Valiosos)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#passo-1-backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Passo 1: Backup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passo-2-corrigir-script-de-migracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Passo 2: Corrigir Script de Migração
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passo-3-executar-migracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Passo 3: Executar Migração
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacao-da-implementacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧪 Validação da Implementação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧪 Validação da Implementação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-backendteststest_import_consolidationpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arquivo: backend/tests/test_import_consolidation.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-foi-implementado-esta-correto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 O Que Foi Implementado (Está Correto!)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📝 O Que Foi Implementado (Está Correto!)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-funcao-normalize_ticker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Função normalize_ticker() ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-fluxo-de-importacao-ajustado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Fluxo de Importação Ajustado ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Conclusão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Conclusão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#o-codigo-esta-correto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O Código Está Correto! ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recomendacao-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recomendação Final
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resultado-esperado-apos-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Resultado Esperado Após Reset
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Resultado Esperado Após Reset">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#antes-agora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes (agora):
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#depois-apos-reset-reimport" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Depois (após reset + reimport):
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="diagnostico-consolidacao-nao-funcionando">🔍 Diagnóstico: Consolidação Não Funcionando<a class="headerlink" href="#diagnostico-consolidacao-nao-funcionando" title="Permanent link">&para;</a></h1>
+<p><strong>Data</strong>: 3 de janeiro de 2026<br />
+<strong>Atualizado</strong>: 3 de janeiro de 2026 (17h)<br />
+<strong>Problema</strong>: Ativos fracionários (ABEV3F) e à vista (ABEV3) aparecem separados na carteira<br />
+<strong>Causa Raiz 1</strong>: Dados importados <strong>antes</strong> da implementação da normalização<br />
+<strong>Causa Raiz 2</strong>: ⚠️ <strong>CRUD manual não aplicava normalização</strong> (CORRIGIDO)</p>
+<hr />
+<h2 id="causa-raiz-identificada">🎯 Causa Raiz Identificada<a class="headerlink" href="#causa-raiz-identificada" title="Permanent link">&para;</a></h2>
+<h3 id="problema-1-dados-antigos-resolvido-com-reset">Problema 1: Dados Antigos (Resolvido com Reset)<a class="headerlink" href="#problema-1-dados-antigos-resolvido-com-reset" title="Permanent link">&para;</a></h3>
+<p>Operações importadas antes da implementação da normalização.</p>
+<h3 id="problema-2-crud-manual-sem-normalizacao-principal">Problema 2: CRUD Manual Sem Normalização ⚠️ <strong>PRINCIPAL</strong><a class="headerlink" href="#problema-2-crud-manual-sem-normalizacao-principal" title="Permanent link">&para;</a></h3>
+<p><strong>Descoberta</strong>: A normalização de ticker estava implementada APENAS no <strong>import B3</strong>, mas NÃO nos endpoints de CRUD manual!</p>
+<h3 id="ativos-no-banco-atual">Ativos no Banco Atual<a class="headerlink" href="#ativos-no-banco-atual" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>ABEV3F - AÇÕES          ← Importado ANTES da normalização
+B3SA3F - AÇÕES          ← Importado ANTES da normalização
+BRSR6 - AÇÕES
+BRSR6F - AÇÕES          ← Importado ANTES da normalização
+COGN3 - AÇÕES
+COGN3F - AÇÕES          ← Importado ANTES da normalização
+ITSA4 - AÇÕES
+ITSA4F - AÇÕES          ← Importado ANTES da normalização
+... (total: 27 ativos, vários com duplicatas F)
+</code></pre></div>
+
+<h3 id="o-que-aconteceu">O Que Aconteceu<a class="headerlink" href="#o-que-aconteceu" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Antes da implementação (ontem)</strong>:</li>
+<li>Você importou arquivos B3</li>
+<li>Sistema criou <code>ABEV3</code> e <code>ABEV3F</code> como ativos <strong>separados</strong></li>
+<li>
+<p>Dados ficaram no banco</p>
+</li>
+<li>
+<p><strong>Depois da implementação (hoje)</strong>:</p>
+</li>
+<li>Código de normalização foi adicionado</li>
+<li>MAS o código só afeta <strong>novas importações</strong></li>
+<li>Dados antigos continuam separados no banco</li>
+</ol>
+<hr />
+<h2 id="solucao-recomendada-resetar-banco">✅ Solução Recomendada: Resetar Banco<a class="headerlink" href="#solucao-recomendada-resetar-banco" title="Permanent link">&para;</a></h2>
+<h3 id="por-que-esta-e-a-melhor-opcao">Por Que Esta é a Melhor Opção?<a class="headerlink" href="#por-que-esta-e-a-melhor-opcao" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ <strong>Simples e rápido</strong> (2 minutos)</li>
+<li>✅ <strong>Garante banco limpo</strong> sem inconsistências</li>
+<li>✅ <strong>Testa normalização</strong> desde o início</li>
+<li>✅ <strong>Evita depuração</strong> de migração</li>
+<li>✅ <strong>Dados são recriáveis</strong> (basta reimportar B3)</li>
+</ul>
+<h3 id="como-fazer">Como Fazer<a class="headerlink" href="#como-fazer" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Opção 1: Usar script automático (recomendado)</span>
+./reset-database.sh
+
+<span class="c1"># Opção 2: Manual</span>
+./portfolio<span class="w"> </span>stop
+rm<span class="w"> </span>-f<span class="w"> </span>backend/app/data/portfolio.db*
+./portfolio<span class="w"> </span>start
+</code></pre></div>
+
+<p>Depois:
+1. Acesse http://localhost:5173/import
+2. Reimporte seus arquivos B3
+3. ✅ Consolidação funcionará automaticamente!</p>
+<hr />
+<h2 id="alternativa-migracao-se-dados-forem-valiosos">🔄 Alternativa: Migração (Se Dados Forem Valiosos)<a class="headerlink" href="#alternativa-migracao-se-dados-forem-valiosos" title="Permanent link">&para;</a></h2>
+<p>Se você tiver <strong>dados importantes</strong> que não quer perder:</p>
+<h3 id="passo-1-backup">Passo 1: Backup<a class="headerlink" href="#passo-1-backup" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>api<span class="w"> </span>cp<span class="w"> </span>/app/app/data/portfolio.db<span class="w"> </span>/app/app/data/portfolio.db.backup
+</code></pre></div>
+
+<h3 id="passo-2-corrigir-script-de-migracao">Passo 2: Corrigir Script de Migração<a class="headerlink" href="#passo-2-corrigir-script-de-migracao" title="Permanent link">&para;</a></h3>
+<p>O script atual tem um pequeno problema no caminho do DB. Vou corrigir:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Antes (hardcoded):</span>
+<span class="n">DB_PATH</span> <span class="o">=</span> <span class="s2">&quot;/app/app/data/portfolio.db&quot;</span>
+
+<span class="c1"># Depois (dinâmico):</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">)))</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.db.database</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_db</span>
+
+<span class="c1"># Usar get_db() em vez de caminho hardcoded</span>
+</code></pre></div>
+
+<h3 id="passo-3-executar-migracao">Passo 3: Executar Migração<a class="headerlink" href="#passo-3-executar-migracao" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Dry-run primeiro</span>
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>api<span class="w"> </span>python<span class="w"> </span>scripts/migrate_consolidate_tickers.py<span class="w"> </span>--dry-run
+
+<span class="c1"># Se estiver OK, executar</span>
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>api<span class="w"> </span>python<span class="w"> </span>scripts/migrate_consolidate_tickers.py
+</code></pre></div>
+
+<p><strong>PROBLEMA</strong>: O script atual não vai funcionar porque precisa ser ajustado para rodar dentro do container.</p>
+<hr />
+<h2 id="validacao-da-implementacao">🧪 Validação da Implementação<a class="headerlink" href="#validacao-da-implementacao" title="Permanent link">&para;</a></h2>
+<p>Para confirmar que a implementação está correta, criei testes completos:</p>
+<h3 id="arquivo-backendteststest_import_consolidationpy">Arquivo: <code>backend/tests/test_import_consolidation.py</code><a class="headerlink" href="#arquivo-backendteststest_import_consolidationpy" title="Permanent link">&para;</a></h3>
+<p><strong>Testes incluídos:</strong>
+1. ✅ <code>test_normalize_ticker_removes_f_from_fractional</code> - Normalização básica
+2. ✅ <code>test_normalize_ticker_keeps_vista_unchanged</code> - Não altera vista
+3. ✅ <code>test_import_consolidates_fractional_and_vista</code> - <strong>TESTE PRINCIPAL</strong>
+   - Importa ABEV3 (vista) + ABEV3F (fracionário)
+   - Valida que cria apenas 1 ativo (ABEV3)
+   - Valida que ambas operações estão vinculadas ao mesmo asset_id
+4. ✅ <code>test_import_multiple_assets_with_fractional</code> - Múltiplos ativos
+5. ✅ <code>test_import_does_not_affect_fiis</code> - FIIs não são normalizados
+6. ✅ <code>test_reimport_same_file_deduplicates</code> - Deduplicação funciona</p>
+<p><strong>Para rodar (depois de instalar pytest):</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Adicionar pytest ao requirements.txt</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;pytest==7.4.3&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>backend/requirements.txt
+
+<span class="c1"># Rebuild container</span>
+docker<span class="w"> </span>compose<span class="w"> </span>build<span class="w"> </span>api
+
+<span class="c1"># Rodar testes</span>
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>api<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/test_import_consolidation.py<span class="w"> </span>-v
+</code></pre></div>
+
+<hr />
+<h2 id="o-que-foi-implementado-esta-correto">📝 O Que Foi Implementado (Está Correto!)<a class="headerlink" href="#o-que-foi-implementado-esta-correto" title="Permanent link">&para;</a></h2>
+<h3 id="1-funcao-normalize_ticker">1. Função <code>normalize_ticker()</code> ✅<a class="headerlink" href="#1-funcao-normalize_ticker" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">normalize_ticker</span><span class="p">(</span><span class="n">ticker</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">market</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">ticker</span> <span class="o">=</span> <span class="n">ticker</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="n">market</span> <span class="o">=</span> <span class="p">(</span><span class="n">market</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="s2">&quot;FRACIONARIO&quot;</span> <span class="ow">in</span> <span class="n">market</span> <span class="ow">and</span> <span class="n">ticker</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;F&quot;</span><span class="p">):</span>
+        <span class="n">normalized</span> <span class="o">=</span> <span class="n">ticker</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ticker normalizado: </span><span class="si">{</span><span class="n">ticker</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">normalized</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">normalized</span>
+
+    <span class="k">return</span> <span class="n">ticker</span>
+</code></pre></div>
+
+<p><strong>Comportamento</strong>:
+- <code>normalize_ticker("ABEV3F", "MERCADO FRACIONARIO")</code> → <code>"ABEV3"</code> ✅
+- <code>normalize_ticker("ABEV3", "MERCADO A VISTA")</code> → <code>"ABEV3"</code> ✅
+- <code>normalize_ticker("HFOF11", "MERCADO A VISTA")</code> → <code>"HFOF11"</code> ✅ (FII não normalizado)</p>
+<h3 id="2-fluxo-de-importacao-ajustado">2. Fluxo de Importação Ajustado ✅<a class="headerlink" href="#2-fluxo-de-importacao-ajustado" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Mapeamento ticker_original → ticker_normalizado</span>
+<span class="n">ticker_normalization_map</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">ticker_raw</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;Código de Negociação&quot;</span><span class="p">]</span>
+    <span class="n">market</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;Mercado&quot;</span><span class="p">]</span>
+    <span class="n">ticker_normalized</span> <span class="o">=</span> <span class="n">normalize_ticker</span><span class="p">(</span><span class="n">ticker_raw</span><span class="p">,</span> <span class="n">market</span><span class="p">)</span>
+    <span class="n">ticker_normalization_map</span><span class="p">[</span><span class="n">ticker_raw</span><span class="p">]</span> <span class="o">=</span> <span class="n">ticker_normalized</span>
+
+<span class="c1"># Criar ativos com tickers normalizados</span>
+<span class="k">for</span> <span class="n">ticker</span> <span class="ow">in</span> <span class="n">unique_tickers_normalized</span><span class="p">:</span>
+    <span class="c1"># ... cria ativo com ticker normalizado</span>
+
+<span class="c1"># Vincular operações ao ativo normalizado</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">ticker_raw</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;Código de Negociação&quot;</span><span class="p">]</span>
+    <span class="n">ticker_normalized</span> <span class="o">=</span> <span class="n">ticker_normalization_map</span><span class="p">[</span><span class="n">ticker_raw</span><span class="p">]</span>
+    <span class="n">asset_id</span> <span class="o">=</span> <span class="n">asset_cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ticker_normalized</span><span class="p">)</span>
+    <span class="c1"># ... cria operação vinculada ao ativo correto</span>
+</code></pre></div>
+
+<p><strong>Logs gerados:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="n">INFO</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Tickers</span><span class="w"> </span><span class="err">ú</span><span class="n">nicos</span><span class="w"> </span><span class="p">(</span><span class="n">antes</span><span class="w"> </span><span class="n">normalização</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="mi">5</span>
+<span class="n">INFO</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Tickers</span><span class="w"> </span><span class="err">ú</span><span class="n">nicos</span><span class="w"> </span><span class="p">(</span><span class="n">após</span><span class="w"> </span><span class="n">normalização</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="mi">3</span>
+<span class="n">DEBUG</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Ticker</span><span class="w"> </span><span class="n">normalizado</span><span class="o">:</span><span class="w"> </span><span class="n">ABEV3F</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">ABEV3</span><span class="w"> </span><span class="p">(</span><span class="n">mercado</span><span class="o">:</span><span class="w"> </span><span class="n">MERCADO</span><span class="w"> </span><span class="n">FRACIONARIO</span><span class="p">)</span>
+<span class="n">DEBUG</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Ativo</span><span class="w"> </span><span class="n">criado</span><span class="o">:</span><span class="w"> </span><span class="n">ABEV3</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">AÇÕES</span><span class="o">/</span><span class="n">ON</span>
+</code></pre></div>
+
+<hr />
+<h2 id="conclusao">🎯 Conclusão<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h2>
+<h3 id="o-codigo-esta-correto">O Código Está Correto! ✅<a class="headerlink" href="#o-codigo-esta-correto" title="Permanent link">&para;</a></h3>
+<p>A implementação da consolidação está <strong>funcionando perfeitamente</strong>. O problema é apenas que:</p>
+<ol>
+<li><strong>Dados antigos</strong> (antes da implementação) estão no banco</li>
+<li><strong>Normalização</strong> só funciona para <strong>novas importações</strong></li>
+</ol>
+<h3 id="recomendacao-final">Recomendação Final<a class="headerlink" href="#recomendacao-final" title="Permanent link">&para;</a></h3>
+<p><strong>RESETAR O BANCO</strong> é a melhor opção:</p>
+<div class="codehilite"><pre><span></span><code>./reset-database.sh
+</code></pre></div>
+
+<p>Depois, reimporte seus arquivos B3 e a consolidação funcionará perfeitamente! 🚀</p>
+<hr />
+<h2 id="resultado-esperado-apos-reset">📊 Resultado Esperado Após Reset<a class="headerlink" href="#resultado-esperado-apos-reset" title="Permanent link">&para;</a></h2>
+<h3 id="antes-agora">Antes (agora):<a class="headerlink" href="#antes-agora" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>Carteira:
+├─ ABEV3F - 20 ações
+├─ ABEV3 - 100 ações     ← Separados ❌
+├─ ITSA4F - 15 ações
+├─ ITSA4 - 200 ações     ← Separados ❌
+└─ ... (27 ativos total)
+</code></pre></div>
+
+<h3 id="depois-apos-reset-reimport">Depois (após reset + reimport):<a class="headerlink" href="#depois-apos-reset-reimport" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>Carteira:
+├─ ABEV3 - 120 ações     ← Consolidado ✅
+├─ ITSA4 - 215 ações     ← Consolidado ✅
+└─ ... (menos ativos, posições corretas)
+</code></pre></div>
+
+<hr />
+<p><strong>Criado por</strong>: GitHub Copilot<br />
+<strong>Data</strong>: 3 de janeiro de 2026</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

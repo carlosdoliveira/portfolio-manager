@@ -1,0 +1,1661 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Sistema web de gestão de carteira de investimentos com foco em importação B3, renda fixa e análise de performance">
+      
+      
+      
+        <link rel="canonical" href="https://carlosdoliveira.github.io/portfolio-manager/renda-fixa/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Funcionalidade Renda Fixa - Portfolio Manager</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#funcionalidade-renda-fixa" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href=".." title="Portfolio Manager" class="md-header__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Portfolio Manager
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Funcionalidade Renda Fixa
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Portfolio Manager" class="md-nav__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Portfolio Manager
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guia Rápido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../referencia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#visao-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visão Geral
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acesso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acesso
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funcionalidades-principais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funcionalidades Principais
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funcionalidades Principais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-dashboard-de-estatisticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Dashboard de Estatísticas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-tabela-de-investimentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Tabela de Investimentos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-criar-novo-investimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Criar Novo Investimento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Criar Novo Investimento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#campos-obrigatorios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Campos Obrigatórios:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#campo-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Campo Opcional:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-editar-investimento-existente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Editar Investimento Existente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-registrar-operacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Registrar Operações
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Registrar Operações">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de Operação:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-projecao-de-rendimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Projeção de Rendimento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Projeção de Rendimento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#informacoes-do-ativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Informações do Ativo:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valores-projetados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valores Projetados:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo-de-calculo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de Cálculo:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-deletar-investimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Deletar Investimento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formulas-de-calculo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fórmulas de Cálculo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fórmulas de Cálculo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-rendimento-cdi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Rendimento CDI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-rendimento-ipca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Rendimento IPCA+
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-rendimento-pre-fixado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Rendimento Pré-fixado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-rendimento-selic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Rendimento Selic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-calculo-de-ir-regressivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Cálculo de IR Regressivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-taxa-de-custodia-tesouro-direto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Taxa de Custódia (Tesouro Direto)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend-fastapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend (FastAPI)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backend (FastAPI)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-criar-ativo-de-renda-fixa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Criar Ativo de Renda Fixa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-listar-ativos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Listar Ativos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-buscar-ativo-especifico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Buscar Ativo Específico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-deletar-ativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Deletar Ativo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-criar-operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Criar Operação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-listar-operacoes-de-um-ativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Listar Operações de um Ativo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-calcular-projecao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Calcular Projeção
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frontend-react-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend (React + TypeScript)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Frontend (React + TypeScript)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arquivos-criados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arquivos Criados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rotas-adicionadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rotas Adicionadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacoes-e-regras-de-negocio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validações e Regras de Negócio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Validações e Regras de Negócio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-validacao-de-datas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Validação de Datas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-validacao-de-valores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Validação de Valores
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-regras-de-ir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Regras de IR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-regras-de-custodia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Regras de Custódia
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-calculo-de-saldo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Cálculo de Saldo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testes-realizados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes Realizados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testes Realizados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-teste-backend-cdb-110-cdi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Teste Backend - CDB 110% CDI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-teste-backend-operacao-aplicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Teste Backend - Operação Aplicação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-teste-backend-projecao-cdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Teste Backend - Projeção CDB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-teste-backend-tesouro-selic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Teste Backend - Tesouro Selic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-teste-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Teste Frontend
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proximos-passos-melhorias-futuras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Próximos Passos (Melhorias Futuras)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tecnologias-utilizadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tecnologias Utilizadas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tecnologias Utilizadas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#devops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DevOps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estrutura-de-arquivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estrutura de Arquivos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#commit-e-documentacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Commit e Documentação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Commit e Documentação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#checklist-de-conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist de Conclusão:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivos-criadosmodificados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arquivos Criados/Modificados:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contato-e-suporte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contato e Suporte
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="funcionalidade-renda-fixa">Funcionalidade Renda Fixa<a class="headerlink" href="#funcionalidade-renda-fixa" title="Permanent link">&para;</a></h1>
+<h2 id="visao-geral">Visão Geral<a class="headerlink" href="#visao-geral" title="Permanent link">&para;</a></h2>
+<p>A funcionalidade de Renda Fixa permite gerenciar investimentos em produtos de renda fixa, incluindo CDB, LCI, LCA e Tesouro Direto. O sistema calcula automaticamente projeções de rendimento, imposto de renda (IR) e taxas de custódia.</p>
+<h2 id="acesso">Acesso<a class="headerlink" href="#acesso" title="Permanent link">&para;</a></h2>
+<p>A funcionalidade está disponível através do menu lateral <strong>"Renda Fixa"</strong> ou pela URL <code>/fixed-income</code>.</p>
+<hr />
+<h2 id="funcionalidades-principais">Funcionalidades Principais<a class="headerlink" href="#funcionalidades-principais" title="Permanent link">&para;</a></h2>
+<h3 id="1-dashboard-de-estatisticas">1. Dashboard de Estatísticas<a class="headerlink" href="#1-dashboard-de-estatisticas" title="Permanent link">&para;</a></h3>
+<p>Na parte superior da página, são exibidos 4 cards com métricas consolidadas:</p>
+<ul>
+<li><strong>Total de Ativos</strong>: Número de investimentos cadastrados</li>
+<li><strong>Total Investido</strong>: Soma de todas as aplicações realizadas</li>
+<li><strong>Total Resgatado</strong>: Soma de todos os resgates efetuados</li>
+<li><strong>Saldo Atual</strong>: Diferença entre investido e resgatado</li>
+</ul>
+<h3 id="2-tabela-de-investimentos">2. Tabela de Investimentos<a class="headerlink" href="#2-tabela-de-investimentos" title="Permanent link">&para;</a></h3>
+<p>Exibe todos os investimentos de Renda Fixa cadastrados com as seguintes informações:</p>
+<ul>
+<li><strong>Produto</strong>: Código (ticker) e nome do investimento</li>
+<li><strong>Emissor</strong>: Instituição emissora (banco, governo, etc.)</li>
+<li><strong>Indexador</strong>: CDI, IPCA, PRE ou SELIC com taxa contratada</li>
+<li><strong>Taxa</strong>: Percentual contratado (ex: 110% do CDI)</li>
+<li><strong>Vencimento</strong>: Data de vencimento com indicador visual:</li>
+<li>🟡 <strong>Próximo de vencer</strong>: Menos de 30 dias para vencimento (amarelo)</li>
+<li>🔴 <strong>Vencido</strong>: Data já passou (vermelho)</li>
+<li>⚪ <strong>Normal</strong>: Acima de 30 dias (padrão)</li>
+<li><strong>Saldo Atual</strong>: Valor atualmente aplicado</li>
+<li><strong>Ações</strong>: Botões para visualizar projeção, criar operação e deletar</li>
+</ul>
+<h3 id="3-criar-novo-investimento">3. Criar Novo Investimento<a class="headerlink" href="#3-criar-novo-investimento" title="Permanent link">&para;</a></h3>
+<p>Clicando no botão <strong>"+ Novo Investimento"</strong>, abre-se um modal com formulário completo:</p>
+<h4 id="campos-obrigatorios">Campos Obrigatórios:<a class="headerlink" href="#campos-obrigatorios" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>Código/Identificador</strong> (ticker)</li>
+<li>Exemplo: <code>CDB_BANCO_XYZ_2026</code></li>
+<li>
+<p>Usado para identificação única do ativo</p>
+</li>
+<li>
+<p><strong>Nome do Produto</strong></p>
+</li>
+<li>Exemplo: <code>CDB Banco XYZ 110% CDI</code></li>
+<li>
+<p>Nome descritivo do investimento</p>
+</li>
+<li>
+<p><strong>Emissor</strong></p>
+</li>
+<li>Exemplo: <code>Banco XYZ</code></li>
+<li>
+<p>Instituição que emitiu o título</p>
+</li>
+<li>
+<p><strong>Tipo de Produto</strong></p>
+</li>
+<li>Opções: CDB, LCI, LCA, Tesouro Selic, Tesouro IPCA+, Tesouro Prefixado</li>
+<li>
+<p><strong>Nota</strong>: LCI e LCA são automaticamente isentos de IR</p>
+</li>
+<li>
+<p><strong>Indexador</strong></p>
+</li>
+<li>Opções: CDI, IPCA, PRE (pré-fixado), SELIC</li>
+<li>
+<p>Define como o rendimento é calculado</p>
+</li>
+<li>
+<p><strong>Taxa Contratada (%)</strong></p>
+</li>
+<li>Para CDI: Ex: 110 = 110% do CDI</li>
+<li>Para IPCA+: Taxa fixa acima da inflação (ex: 5.5)</li>
+<li>Para Pré-fixado: Taxa anual fixa</li>
+<li>
+<p>Para Selic: Geralmente 100% da Selic</p>
+</li>
+<li>
+<p><strong>Data de Emissão</strong></p>
+</li>
+<li>
+<p>Data em que o título foi emitido</p>
+</li>
+<li>
+<p><strong>Data de Vencimento</strong></p>
+</li>
+<li>Data final do investimento</li>
+</ol>
+<h4 id="campo-opcional">Campo Opcional:<a class="headerlink" href="#campo-opcional" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>Taxa de Custódia Anual (%)</strong></li>
+<li>Apenas para Tesouro Direto: 0.20% (exceto Selic até R$ 10.000)</li>
+<li>Para outros produtos: 0%</li>
+</ol>
+<h3 id="4-editar-investimento-existente">4. Editar Investimento Existente<a class="headerlink" href="#4-editar-investimento-existente" title="Permanent link">&para;</a></h3>
+<p>Cada linha da tabela possui o ícone ✏️. Ao clicar, abre-se um modal para revisar e ajustar as informações principais do ativo sem precisar removê-lo:</p>
+<ul>
+<li><strong>Nome do Produto</strong>: Atualize a descrição exibida na carteira</li>
+<li><strong>Emissor</strong>: Ajuste o banco ou instituição emissora</li>
+<li><strong>Tipo de Produto</strong>: Converta entre CDB, LCI, LCA, Tesouro, etc.</li>
+<li><strong>Indexador</strong>: Alterne entre CDI, IPCA, Pré ou Selic</li>
+<li><strong>Taxa Contratada</strong>: Informe a nova taxa/tabela válida</li>
+<li><strong>Datas</strong>: Corrija emissão ou vencimento em caso de erro</li>
+<li><strong>Taxa de Custódia</strong>: Atualize o percentual anual</li>
+</ul>
+<p>Toda alteração atualiza tanto a tabela de Renda Fixa quanto o cadastro base do ativo, mantendo relatórios e projeções consistentes.</p>
+<h3 id="5-registrar-operacoes">5. Registrar Operações<a class="headerlink" href="#5-registrar-operacoes" title="Permanent link">&para;</a></h3>
+<p>Clicando no botão 💰 de operações, abre-se um modal para registrar:</p>
+<h4 id="tipos-de-operacao">Tipos de Operação:<a class="headerlink" href="#tipos-de-operacao" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>APLICAÇÃO</strong></li>
+<li>Novo aporte no investimento</li>
+<li>
+<p>Campos: Valor Bruto, Data da Operação</p>
+</li>
+<li>
+<p><strong>RESGATE</strong></p>
+</li>
+<li>Retirada parcial ou total</li>
+<li>
+<p>Campos adicionais: Valor Líquido (após IR), IR Retido</p>
+</li>
+<li>
+<p><strong>VENCIMENTO</strong></p>
+</li>
+<li>Liquidação do investimento no vencimento</li>
+<li>Campos adicionais: Valor Líquido (após IR), IR Retido</li>
+</ol>
+<h3 id="6-projecao-de-rendimento">6. Projeção de Rendimento<a class="headerlink" href="#6-projecao-de-rendimento" title="Permanent link">&para;</a></h3>
+<p>Clicando no botão 📊 de projeção, o sistema calcula:</p>
+<h4 id="informacoes-do-ativo">Informações do Ativo:<a class="headerlink" href="#informacoes-do-ativo" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Tipo de produto</li>
+<li>Indexador e taxa contratada</li>
+<li>Data de vencimento e dias restantes</li>
+<li>Taxa anual usada no cálculo (CDI ou IPCA atual)</li>
+</ul>
+<h4 id="valores-projetados">Valores Projetados:<a class="headerlink" href="#valores-projetados" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>Saldo Atual</strong></li>
+<li>
+<p>Valor atualmente aplicado</p>
+</li>
+<li>
+<p><strong>Projeção Bruta (no vencimento)</strong></p>
+</li>
+<li>Valor total sem descontos</li>
+<li>
+<p>Ganho bruto em verde</p>
+</li>
+<li>
+<p><strong>IR (Imposto de Renda)</strong></p>
+</li>
+<li>Taxa regressiva baseada no tempo:<ul>
+<li>Até 180 dias: 22.5%</li>
+<li>181 a 360 dias: 20%</li>
+<li>361 a 720 dias: 17.5%</li>
+<li>Acima de 720 dias: 15%</li>
+</ul>
+</li>
+<li>
+<p><strong>LCI/LCA são isentos</strong></p>
+</li>
+<li>
+<p><strong>Taxa de Custódia</strong> (apenas Tesouro)</p>
+</li>
+<li>0.20% ao ano sobre o valor aplicado</li>
+<li>
+<p>Isento até R$ 10.000 no Tesouro Selic</p>
+</li>
+<li>
+<p><strong>Valor Líquido Projetado</strong> (DESTAQUE)</p>
+</li>
+<li>Valor final após todos os descontos</li>
+<li>Ganho líquido</li>
+<li>Percentual de rendimento sobre o saldo atual</li>
+</ol>
+<h4 id="exemplo-de-calculo">Exemplo de Cálculo:<a class="headerlink" href="#exemplo-de-calculo" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="n">Investimento</span><span class="o">:</span><span class="w"> </span><span class="n">CDB</span><span class="w"> </span><span class="mi">110</span><span class="o">%</span><span class="w"> </span><span class="n">CDI</span>
+<span class="n">Saldo</span><span class="w"> </span><span class="n">Atual</span><span class="o">:</span><span class="w"> </span><span class="n">R$</span><span class="w"> </span><span class="mf">10.000</span><span class="o">,</span><span class="mi">00</span>
+<span class="n">Dias</span><span class="w"> </span><span class="n">até</span><span class="w"> </span><span class="n">vencimento</span><span class="o">:</span><span class="w"> </span><span class="mi">362</span><span class="w"> </span><span class="n">dias</span>
+<span class="n">CDI</span><span class="w"> </span><span class="n">atual</span><span class="o">:</span><span class="w"> </span><span class="mf">13.75</span><span class="o">%</span>
+<span class="n">Taxa</span><span class="w"> </span><span class="n">IR</span><span class="o">:</span><span class="w"> </span><span class="mf">17.5</span><span class="o">%</span><span class="w"> </span><span class="o">(</span><span class="n">entre</span><span class="w"> </span><span class="mi">361</span><span class="o">-</span><span class="mi">720</span><span class="w"> </span><span class="n">dias</span><span class="o">)</span>
+
+<span class="n">Cálculo</span><span class="o">:</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Taxa</span><span class="w"> </span><span class="n">anualizada</span><span class="o">:</span><span class="w"> </span><span class="mf">13.75</span><span class="o">%</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="mi">110</span><span class="o">%</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">15.125</span><span class="o">%</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Rendimento</span><span class="w"> </span><span class="n">bruto</span><span class="o">:</span><span class="w"> </span><span class="n">R$</span><span class="w"> </span><span class="mf">10.000</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="o">(</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.15125</span><span class="o">)^(</span><span class="mi">362</span><span class="o">/</span><span class="mi">365</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R$</span><span class="w"> </span><span class="mf">11.498</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Ganho</span><span class="w"> </span><span class="n">bruto</span><span class="o">:</span><span class="w"> </span><span class="n">R$</span><span class="w"> </span><span class="mf">1.498</span>
+<span class="o">-</span><span class="w"> </span><span class="n">IR</span><span class="o">:</span><span class="w"> </span><span class="n">R$</span><span class="w"> </span><span class="mf">1.498</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="mf">17.5</span><span class="o">%</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R$</span><span class="w"> </span><span class="mi">262</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Valor</span><span class="w"> </span><span class="n">líquido</span><span class="o">:</span><span class="w"> </span><span class="n">R$</span><span class="w"> </span><span class="mf">11.498</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">R$</span><span class="w"> </span><span class="mi">262</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R$</span><span class="w"> </span><span class="mf">11.236</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Ganho</span><span class="w"> </span><span class="n">líquido</span><span class="o">:</span><span class="w"> </span><span class="n">R$</span><span class="w"> </span><span class="mf">1.236</span><span class="w"> </span><span class="o">(+</span><span class="mf">12.36</span><span class="o">%)</span>
+</code></pre></div>
+
+<h3 id="6-deletar-investimento">6. Deletar Investimento<a class="headerlink" href="#6-deletar-investimento" title="Permanent link">&para;</a></h3>
+<p>Clicando no botão 🗑️, o sistema solicita confirmação e remove o ativo do banco de dados.</p>
+<p><strong>⚠️ ATENÇÃO</strong>: Esta ação é irreversível e remove todas as operações relacionadas.</p>
+<hr />
+<h2 id="formulas-de-calculo">Fórmulas de Cálculo<a class="headerlink" href="#formulas-de-calculo" title="Permanent link">&para;</a></h2>
+<h3 id="1-rendimento-cdi">1. Rendimento CDI<a class="headerlink" href="#1-rendimento-cdi" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>Taxa_Final = CDI_Atual × (Taxa_Contratada / 100)
+Valor_Final = Saldo_Atual × (1 + Taxa_Final)^(Dias / 365)
+</code></pre></div>
+
+<h3 id="2-rendimento-ipca">2. Rendimento IPCA+<a class="headerlink" href="#2-rendimento-ipca" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>Taxa_Final = IPCA_Atual + Taxa_Contratada
+Valor_Final = Saldo_Atual × (1 + Taxa_Final)^(Dias / 365)
+</code></pre></div>
+
+<h3 id="3-rendimento-pre-fixado">3. Rendimento Pré-fixado<a class="headerlink" href="#3-rendimento-pre-fixado" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>Valor_Final = Saldo_Atual × (1 + Taxa_Contratada)^(Dias / 365)
+</code></pre></div>
+
+<h3 id="4-rendimento-selic">4. Rendimento Selic<a class="headerlink" href="#4-rendimento-selic" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>Taxa_Final = Selic_Atual × (Taxa_Contratada / 100)
+Valor_Final = Saldo_Atual × (1 + Taxa_Final)^(Dias / 365)
+</code></pre></div>
+
+<h3 id="5-calculo-de-ir-regressivo">5. Cálculo de IR Regressivo<a class="headerlink" href="#5-calculo-de-ir-regressivo" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>Dias aplicados:
+<span class="k">-</span> 0-180 dias: IR = 22.5%
+<span class="k">-</span> 181-360 dias: IR = 20.0%
+<span class="k">-</span> 361-720 dias: IR = 17.5%
+<span class="k">-</span> +721 dias: IR = 15.0%
+
+IR_Retido = Ganho_Bruto × Taxa_IR
+</code></pre></div>
+
+<h3 id="6-taxa-de-custodia-tesouro-direto">6. Taxa de Custódia (Tesouro Direto)<a class="headerlink" href="#6-taxa-de-custodia-tesouro-direto" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>Custódia_Anual = 0.20% (apenas Tesouro)
+Custódia_Proporcional = Saldo_Atual × 0.002 × (Dias / 365)
+
+Exceção: Tesouro Selic até R$ 10.000 é isento
+</code></pre></div>
+
+<hr />
+<h2 id="api-endpoints">API Endpoints<a class="headerlink" href="#api-endpoints" title="Permanent link">&para;</a></h2>
+<h3 id="backend-fastapi">Backend (FastAPI)<a class="headerlink" href="#backend-fastapi" title="Permanent link">&para;</a></h3>
+<h4 id="1-criar-ativo-de-renda-fixa">1. Criar Ativo de Renda Fixa<a class="headerlink" href="#1-criar-ativo-de-renda-fixa" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="err">POST /fixed-income/assets</span>
+<span class="err">Content-Type: application/json</span>
+
+<span class="err">{</span>
+<span class="err">  &quot;asset_id&quot;: 3,</span>
+<span class="err">  &quot;issuer&quot;: &quot;Banco XYZ&quot;,</span>
+<span class="err">  &quot;product_type&quot;: &quot;CDB&quot;,</span>
+<span class="err">  &quot;indexer&quot;: &quot;CDI&quot;,</span>
+<span class="err">  &quot;rate&quot;: 110.0,</span>
+<span class="err">  &quot;maturity_date&quot;: &quot;2026-12-31&quot;,</span>
+<span class="err">  &quot;issue_date&quot;: &quot;2026-01-01&quot;,</span>
+<span class="err">  &quot;custody_fee&quot;: 0.0</span>
+<span class="err">}</span>
+</code></pre></div>
+
+<h4 id="2-listar-ativos">2. Listar Ativos<a class="headerlink" href="#2-listar-ativos" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="err">GET /fixed-income/assets</span>
+
+<span class="err">Resposta: Array de FixedIncomeAsset com totais agregados</span>
+</code></pre></div>
+
+<h4 id="3-buscar-ativo-especifico">3. Buscar Ativo Específico<a class="headerlink" href="#3-buscar-ativo-especifico" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="err">GET /fixed-income/assets/{id}</span>
+
+<span class="err">Resposta: Objeto FixedIncomeAsset</span>
+</code></pre></div>
+
+<h4 id="4-deletar-ativo">4. Deletar Ativo<a class="headerlink" href="#4-deletar-ativo" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="err">DELETE /fixed-income/assets/{id}</span>
+
+<span class="err">Resposta: {&quot;success&quot;: true}</span>
+</code></pre></div>
+
+<h4 id="5-criar-operacao">5. Criar Operação<a class="headerlink" href="#5-criar-operacao" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="err">POST /fixed-income/operations</span>
+<span class="err">Content-Type: application/json</span>
+
+<span class="err">{</span>
+<span class="err">  &quot;asset_id&quot;: 3,</span>
+<span class="err">  &quot;operation_type&quot;: &quot;APLICACAO&quot;,</span>
+<span class="err">  &quot;amount&quot;: 10000.0,</span>
+<span class="err">  &quot;trade_date&quot;: &quot;2026-01-01&quot;,</span>
+<span class="err">  &quot;net_amount&quot;: null,</span>
+<span class="err">  &quot;ir_amount&quot;: 0</span>
+<span class="err">}</span>
+</code></pre></div>
+
+<h4 id="6-listar-operacoes-de-um-ativo">6. Listar Operações de um Ativo<a class="headerlink" href="#6-listar-operacoes-de-um-ativo" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="err">GET /fixed-income/operations/{asset_id}</span>
+
+<span class="err">Resposta: Array de FixedIncomeOperation</span>
+</code></pre></div>
+
+<h4 id="7-calcular-projecao">7. Calcular Projeção<a class="headerlink" href="#7-calcular-projecao" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="err">GET /fixed-income/projection/{asset_id}?cdi_rate=13.75&amp;ipca_rate=4.5</span>
+
+<span class="err">Resposta: Objeto FixedIncomeProjection com todos os cálculos</span>
+</code></pre></div>
+
+<hr />
+<h2 id="frontend-react-typescript">Frontend (React + TypeScript)<a class="headerlink" href="#frontend-react-typescript" title="Permanent link">&para;</a></h2>
+<h3 id="arquivos-criados">Arquivos Criados<a class="headerlink" href="#arquivos-criados" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>frontend/src/pages/FixedIncome.tsx</strong></li>
+<li>Componente principal com toda a lógica</li>
+<li>Gerencia estado, modais e formulários</li>
+<li>
+<p>600+ linhas de código React/TypeScript</p>
+</li>
+<li>
+<p><strong>frontend/src/pages/FixedIncome.css</strong></p>
+</li>
+<li>Estilos completos com tema consistente</li>
+<li>Animações e transições suaves</li>
+<li>
+<p>Responsividade para mobile</p>
+</li>
+<li>
+<p><strong>frontend/src/api/client.ts</strong> (atualizado)</p>
+</li>
+<li>5 novas interfaces TypeScript</li>
+<li>7 novas funções de API</li>
+<li>Type-safe com Promise<T></li>
+</ol>
+<h3 id="rotas-adicionadas">Rotas Adicionadas<a class="headerlink" href="#rotas-adicionadas" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>/fixed-income</code> - Página principal de Renda Fixa</li>
+<li>Menu lateral atualizado com link "Renda Fixa"</li>
+</ul>
+<hr />
+<h2 id="validacoes-e-regras-de-negocio">Validações e Regras de Negócio<a class="headerlink" href="#validacoes-e-regras-de-negocio" title="Permanent link">&para;</a></h2>
+<h3 id="1-validacao-de-datas">1. Validação de Datas<a class="headerlink" href="#1-validacao-de-datas" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Data de vencimento deve ser posterior à data de emissão</li>
+<li>Data de operação não pode ser futura (exceto para testes)</li>
+</ul>
+<h3 id="2-validacao-de-valores">2. Validação de Valores<a class="headerlink" href="#2-validacao-de-valores" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Todos os valores monetários devem ser positivos</li>
+<li>Taxas devem ser expressas em percentual (ex: 110 para 110%)</li>
+</ul>
+<h3 id="3-regras-de-ir">3. Regras de IR<a class="headerlink" href="#3-regras-de-ir" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>LCI e LCA são SEMPRE isentos</strong>, independente do prazo</li>
+<li>CDB, Tesouro e demais produtos seguem tabela regressiva</li>
+<li>IR incide apenas sobre o ganho, não sobre o principal</li>
+</ul>
+<h3 id="4-regras-de-custodia">4. Regras de Custódia<a class="headerlink" href="#4-regras-de-custodia" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Apenas Tesouro Direto tem taxa de custódia (0.20% a.a.)</li>
+<li>Tesouro Selic até R$ 10.000 é isento de custódia</li>
+<li>Taxa incide sobre o saldo total, não apenas sobre o ganho</li>
+</ul>
+<h3 id="5-calculo-de-saldo">5. Cálculo de Saldo<a class="headerlink" href="#5-calculo-de-saldo" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>Saldo_Atual = Total_Investido - Total_Resgatado
+</code></pre></div>
+
+<hr />
+<h2 id="testes-realizados">Testes Realizados<a class="headerlink" href="#testes-realizados" title="Permanent link">&para;</a></h2>
+<h3 id="1-teste-backend-cdb-110-cdi">1. Teste Backend - CDB 110% CDI<a class="headerlink" href="#1-teste-backend-cdb-110-cdi" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/fixed-income/assets<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">    &quot;asset_id&quot;: 3,</span>
+<span class="s1">    &quot;issuer&quot;: &quot;Banco XYZ&quot;,</span>
+<span class="s1">    &quot;product_type&quot;: &quot;CDB&quot;,</span>
+<span class="s1">    &quot;indexer&quot;: &quot;CDI&quot;,</span>
+<span class="s1">    &quot;rate&quot;: 110.0,</span>
+<span class="s1">    &quot;maturity_date&quot;: &quot;2026-12-31&quot;,</span>
+<span class="s1">    &quot;issue_date&quot;: &quot;2026-01-01&quot;,</span>
+<span class="s1">    &quot;custody_fee&quot;: 0.0</span>
+<span class="s1">  }&#39;</span>
+
+Resultado:<span class="w"> </span>✅<span class="w"> </span>Asset<span class="w"> </span>criado<span class="w"> </span>com<span class="w"> </span>ID<span class="w"> </span><span class="m">1</span>
+</code></pre></div>
+
+<h3 id="2-teste-backend-operacao-aplicacao">2. Teste Backend - Operação Aplicação<a class="headerlink" href="#2-teste-backend-operacao-aplicacao" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/fixed-income/operations<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">    &quot;asset_id&quot;: 3,</span>
+<span class="s1">    &quot;operation_type&quot;: &quot;APLICACAO&quot;,</span>
+<span class="s1">    &quot;amount&quot;: 10000.0,</span>
+<span class="s1">    &quot;trade_date&quot;: &quot;2026-01-01&quot;</span>
+<span class="s1">  }&#39;</span>
+
+Resultado:<span class="w"> </span>✅<span class="w"> </span>Operação<span class="w"> </span>registrada
+</code></pre></div>
+
+<h3 id="3-teste-backend-projecao-cdb">3. Teste Backend - Projeção CDB<a class="headerlink" href="#3-teste-backend-projecao-cdb" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>http://localhost:8000/fixed-income/projection/3?cdi_rate<span class="o">=</span><span class="m">13</span>.75
+
+Resultado:
+<span class="o">{</span>
+<span class="w">  </span><span class="s2">&quot;current_balance&quot;</span>:<span class="w"> </span><span class="m">10000</span>.0,
+<span class="w">  </span><span class="s2">&quot;gross_projection&quot;</span>:<span class="w"> </span><span class="m">11498</span>.0,
+<span class="w">  </span><span class="s2">&quot;gross_gain&quot;</span>:<span class="w"> </span><span class="m">1498</span>.0,
+<span class="w">  </span><span class="s2">&quot;ir_rate&quot;</span>:<span class="w"> </span><span class="m">17</span>.5,
+<span class="w">  </span><span class="s2">&quot;ir_amount&quot;</span>:<span class="w"> </span><span class="m">262</span>.15,
+<span class="w">  </span><span class="s2">&quot;custody_fee_amount&quot;</span>:<span class="w"> </span><span class="m">0</span>.0,
+<span class="w">  </span><span class="s2">&quot;net_projection&quot;</span>:<span class="w"> </span><span class="m">11235</span>.85,
+<span class="w">  </span><span class="s2">&quot;net_gain&quot;</span>:<span class="w"> </span><span class="m">1235</span>.85,
+<span class="w">  </span><span class="s2">&quot;days_to_maturity&quot;</span>:<span class="w"> </span><span class="m">362</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<h3 id="4-teste-backend-tesouro-selic">4. Teste Backend - Tesouro Selic<a class="headerlink" href="#4-teste-backend-tesouro-selic" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Asset criado com custody_fee: 0.20</span>
+<span class="c1"># Aplicação de R$ 5.000</span>
+<span class="c1"># Projeção para 1.153 dias</span>
+
+Resultado:
+<span class="o">{</span>
+<span class="w">  </span><span class="s2">&quot;current_balance&quot;</span>:<span class="w"> </span><span class="m">5000</span>.0,
+<span class="w">  </span><span class="s2">&quot;gross_projection&quot;</span>:<span class="w"> </span><span class="m">7540</span>.0,
+<span class="w">  </span><span class="s2">&quot;ir_rate&quot;</span>:<span class="w"> </span><span class="m">15</span>.0,
+<span class="w">  </span><span class="s2">&quot;ir_amount&quot;</span>:<span class="w"> </span><span class="m">376</span>.0,
+<span class="w">  </span><span class="s2">&quot;custody_fee_amount&quot;</span>:<span class="w"> </span><span class="m">31</span>.0,
+<span class="w">  </span><span class="s2">&quot;net_projection&quot;</span>:<span class="w"> </span><span class="m">7509</span>.0,
+<span class="w">  </span><span class="s2">&quot;net_gain&quot;</span>:<span class="w"> </span><span class="m">2509</span>.0
+<span class="o">}</span>
+</code></pre></div>
+
+<h3 id="5-teste-frontend">5. Teste Frontend<a class="headerlink" href="#5-teste-frontend" title="Permanent link">&para;</a></h3>
+<p>✅ Página carrega corretamente em http://localhost:5173/fixed-income<br />
+✅ Tabela exibe investimentos com formatação brasileira (R$)<br />
+✅ Cards de estatísticas calculam corretamente<br />
+✅ Modal de criação abre e valida campos<br />
+✅ Modal de projeção calcula e exibe valores<br />
+✅ Alertas de vencimento funcionam (amarelo/vermelho)<br />
+✅ Responsividade mobile funcional  </p>
+<hr />
+<h2 id="proximos-passos-melhorias-futuras">Próximos Passos (Melhorias Futuras)<a class="headerlink" href="#proximos-passos-melhorias-futuras" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Gráficos de Evolução</strong></li>
+<li>Gráfico de linha mostrando crescimento ao longo do tempo</li>
+<li>
+<p>Gráfico de pizza com distribuição por tipo de produto</p>
+</li>
+<li>
+<p><strong>Alertas Automáticos</strong></p>
+</li>
+<li>Notificação por email próximo ao vencimento</li>
+<li>
+<p>Alerta de oportunidades de resgate (melhor momento)</p>
+</li>
+<li>
+<p><strong>Comparação de Produtos</strong></p>
+</li>
+<li>Ferramenta para comparar diferentes investimentos lado a lado</li>
+<li>
+<p>Ranking de rentabilidade líquida</p>
+</li>
+<li>
+<p><strong>Histórico de Taxas</strong></p>
+</li>
+<li>Armazenar histórico de CDI e IPCA</li>
+<li>
+<p>Calcular projeção com variação histórica</p>
+</li>
+<li>
+<p><strong>Simulador de Investimentos</strong></p>
+</li>
+<li>Calcular projeção antes de investir</li>
+<li>
+<p>Comparar cenários (pessimista, realista, otimista)</p>
+</li>
+<li>
+<p><strong>Export de Dados</strong></p>
+</li>
+<li>Exportar relatório em PDF</li>
+<li>
+<p>Exportar dados para Excel</p>
+</li>
+<li>
+<p><strong>Dashboard Consolidado</strong></p>
+</li>
+<li>Integrar estatísticas de RF no dashboard principal</li>
+<li>Comparar RF com outros tipos de investimento</li>
+</ol>
+<hr />
+<h2 id="tecnologias-utilizadas">Tecnologias Utilizadas<a class="headerlink" href="#tecnologias-utilizadas" title="Permanent link">&para;</a></h2>
+<h3 id="backend">Backend<a class="headerlink" href="#backend" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Python 3.11</strong></li>
+<li><strong>FastAPI</strong> - Framework web moderno e rápido</li>
+<li><strong>SQLite</strong> - Banco de dados relacional</li>
+<li><strong>Pydantic</strong> - Validação de dados</li>
+</ul>
+<h3 id="frontend">Frontend<a class="headerlink" href="#frontend" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>React 18</strong> - Biblioteca UI</li>
+<li><strong>TypeScript</strong> - Tipagem estática</li>
+<li><strong>Vite</strong> - Build tool rápido</li>
+<li><strong>React Router</strong> - Roteamento SPA</li>
+<li><strong>CSS Modules</strong> - Estilos isolados</li>
+</ul>
+<h3 id="devops">DevOps<a class="headerlink" href="#devops" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Docker</strong> - Containerização</li>
+<li><strong>Docker Compose</strong> - Orquestração de containers</li>
+<li><strong>Git</strong> - Controle de versão</li>
+</ul>
+<hr />
+<h2 id="estrutura-de-arquivos">Estrutura de Arquivos<a class="headerlink" href="#estrutura-de-arquivos" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code>backend/
+├── app/
+│   ├── main.py                          # Endpoints REST + Pydantic models
+│   ├── db/
+│   │   └── database.py                  # Schema + init_db()
+│   └── repositories/
+│       └── fixed_income_repository.py   # Lógica de negócio + cálculos
+
+frontend/
+├── src/
+│   ├── pages/
+│   │   ├── FixedIncome.tsx              # Componente principal
+│   │   └── FixedIncome.css              # Estilos
+│   ├── api/
+│   │   └── client.ts                    # Interfaces + funções API
+│   ├── components/layout/
+│   │   └── Sidebar.tsx                  # Menu lateral (atualizado)
+│   ├── App.tsx                          # Rotas (atualizado)
+│   └── styles/
+│       └── theme.css                    # Variáveis CSS (atualizado)
+</code></pre></div>
+
+<hr />
+<h2 id="commit-e-documentacao">Commit e Documentação<a class="headerlink" href="#commit-e-documentacao" title="Permanent link">&para;</a></h2>
+<p>Esta implementação completa a <strong>Issue #5 - Suporte a Renda Fixa</strong>.</p>
+<h3 id="checklist-de-conclusao">Checklist de Conclusão:<a class="headerlink" href="#checklist-de-conclusao" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ Backend completo (tabelas + repository + endpoints)</li>
+<li>✅ Frontend completo (página + estilos + integração)</li>
+<li>✅ Testes realizados (backend + frontend)</li>
+<li>✅ Documentação atualizada</li>
+<li>✅ Cálculos validados (IR + projeções + custódia)</li>
+<li>✅ UX/UI consistente com o restante da aplicação</li>
+</ul>
+<h3 id="arquivos-criadosmodificados">Arquivos Criados/Modificados:<a class="headerlink" href="#arquivos-criadosmodificados" title="Permanent link">&para;</a></h3>
+<ol>
+<li><code>backend/app/db/database.py</code> (modificado)</li>
+<li><code>backend/app/repositories/fixed_income_repository.py</code> (novo)</li>
+<li><code>backend/app/main.py</code> (modificado)</li>
+<li><code>frontend/src/api/client.ts</code> (modificado)</li>
+<li><code>frontend/src/pages/FixedIncome.tsx</code> (novo)</li>
+<li><code>frontend/src/pages/FixedIncome.css</code> (novo)</li>
+<li><code>frontend/src/App.tsx</code> (modificado)</li>
+<li><code>frontend/src/components/layout/Sidebar.tsx</code> (modificado)</li>
+<li><code>frontend/src/styles/theme.css</code> (modificado)</li>
+<li><code>docs/renda-fixa.md</code> (novo - este arquivo)</li>
+</ol>
+<hr />
+<h2 id="contato-e-suporte">Contato e Suporte<a class="headerlink" href="#contato-e-suporte" title="Permanent link">&para;</a></h2>
+<p>Para dúvidas ou sugestões sobre esta funcionalidade, abra uma issue no GitHub.</p>
+<hr />
+<p><strong>Desenvolvido com ❤️ para Portfolio Manager v2</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.tabs.link"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1294 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Sistema web de gestão de carteira de investimentos com foco em importação B3, renda fixa e análise de performance">
+      
+      
+      
+        <link rel="canonical" href="https://carlosdoliveira.github.io/portfolio-manager/archive/oportunidades-frontend/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Oportunidades de Melhoria — Frontend - Portfolio Manager</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#oportunidades-de-melhoria-frontend" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Portfolio Manager" class="md-header__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Portfolio Manager
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Oportunidades de Melhoria — Frontend
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Portfolio Manager" class="md-nav__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Portfolio Manager
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guia Rápido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../referencia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#status-atual-2026-01-02" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Status Atual (2026-01-02)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criticas-funcionalidade-e-ux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔴 Críticas (Funcionalidade e UX)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔴 Críticas (Funcionalidade e UX)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-url-da-api-esta-hardcoded-resolvido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. ✅ URL da API está hardcoded — RESOLVIDO
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-falta-de-tratamento-de-erro-detalhado-resolvido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. ✅ Falta de tratamento de erro detalhado — RESOLVIDO
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-paginas-criticas-estao-vazias-dashboard-portfolio-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Páginas críticas estão vazias (Dashboard, Portfolio, Analysis)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-ausencia-de-loading-state-global" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Ausência de loading state global
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#importantes-manutenibilidade-e-qualidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟠 Importantes (Manutenibilidade e Qualidade)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🟠 Importantes (Manutenibilidade e Qualidade)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5-falta-de-gerenciamento-de-estado-global" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Falta de gerenciamento de estado global
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-ausencia-de-tratamento-de-tipos-nas-respostas-da-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Ausência de tratamento de tipos nas respostas da API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-falta-de-testes-unitarios-e-e2e" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Falta de testes (unitários e E2E)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-falta-de-validacao-no-cliente-antes-de-enviar-arquivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Falta de validação no cliente antes de enviar arquivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-css-nao-esta-modular" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. CSS não está modular
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-falta-de-acessibilidade-a11y" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Falta de acessibilidade (a11y)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-sidebar-nao-indica-rota-ativa-corretamente-em-mobile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Sidebar não indica rota ativa corretamente em mobile
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas-nice-to-have" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟡 Boas Práticas (Nice to Have)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🟡 Boas Práticas (Nice to Have)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#12-adicionar-react-query-para-cache-de-requisicoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Adicionar React Query para cache de requisições
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-criar-componente-de-tabela-reutilizavel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Criar componente de tabela reutilizável
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-adicionar-modo-escuro-dark-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Adicionar modo escuro (dark mode)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-implementar-toast-notifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Implementar toast notifications
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-adicionar-lazy-loading-para-rotas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Adicionar lazy loading para rotas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-adicionar-eslint-e-prettier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Adicionar ESLint e Prettier
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18-dockerizacao-melhorada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Dockerização melhorada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19-adicionar-pwa-progressive-web-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Adicionar PWA (Progressive Web App)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-de-prioridades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Checklist de Prioridades
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estatisticas-de-progresso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Estatísticas de Progresso
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="oportunidades-de-melhoria-frontend">Oportunidades de Melhoria — Frontend<a class="headerlink" href="#oportunidades-de-melhoria-frontend" title="Permanent link">&para;</a></h1>
+<p>Este documento descreve as principais oportunidades de melhoria identificadas no frontend do Portfolio Manager v2.</p>
+<hr />
+<h2 id="status-atual-2026-01-02">🎯 Status Atual (2026-01-02)<a class="headerlink" href="#status-atual-2026-01-02" title="Permanent link">&para;</a></h2>
+<p><strong>✅ Críticas Concluídas:</strong>
+- URL da API configurável via variável de ambiente ✓
+- Tratamento de erro detalhado com feedback claro ✓</p>
+<p><strong>⚠️ Próximas Prioridades:</strong>
+- Implementar Dashboard, Portfolio e Analysis (item 3)
+- Adicionar validação de arquivo no cliente (item 8)</p>
+<hr />
+<h2 id="criticas-funcionalidade-e-ux">🔴 Críticas (Funcionalidade e UX)<a class="headerlink" href="#criticas-funcionalidade-e-ux" title="Permanent link">&para;</a></h2>
+<h3 id="1-url-da-api-esta-hardcoded-resolvido">1. ✅ <strong>URL da API está hardcoded</strong> — RESOLVIDO<a class="headerlink" href="#1-url-da-api-esta-hardcoded-resolvido" title="Permanent link">&para;</a></h3>
+<p><strong>Localização:</strong> <code>frontend/src/api/client.ts</code><br />
+<strong>Status:</strong> ✅ Implementado em 2026-01-02</p>
+<p><strong>Solução aplicada:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">API_URL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">VITE_API_URL</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;http://localhost:8000&quot;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">uploadB3File</span><span class="p">(</span><span class="nx">file</span><span class="o">:</span><span class="w"> </span><span class="kt">File</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">formData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">FormData</span><span class="p">();</span>
+<span class="w">  </span><span class="nx">formData</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;file&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">API_URL</span><span class="si">}</span><span class="sb">/import/b3`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;POST&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="kt">formData</span><span class="p">,</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">().</span><span class="k">catch</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">detail</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Erro desconhecido&quot;</span><span class="w"> </span><span class="p">}));</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">detail</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;Erro ao importar arquivo&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Arquivos criados:</strong>
+- <code>.env</code> - Configuração local (git ignored)
+- <code>.env.example</code> - Template de configuração para outros desenvolvedores</p>
+<p>✅ <strong>Resultado:</strong> Funciona em qualquer ambiente, fácil configurar para produção.</p>
+<hr />
+<h3 id="2-falta-de-tratamento-de-erro-detalhado-resolvido">2. ✅ <strong>Falta de tratamento de erro detalhado</strong> — RESOLVIDO<a class="headerlink" href="#2-falta-de-tratamento-de-erro-detalhado-resolvido" title="Permanent link">&para;</a></h3>
+<p><strong>Localização:</strong> <code>frontend/src/components/ImportB3Card.tsx</code><br />
+<strong>Status:</strong> ✅ Implementado em 2026-01-02</p>
+<p><strong>Solução aplicada:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">errorMessage</span><span class="p">,</span><span class="w"> </span><span class="nx">setErrorMessage</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="o">&lt;</span><span class="kt">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="o">&gt;</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">uploadB3File</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">setSummary</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">summary</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">setState</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">setState</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">setErrorMessage</span><span class="p">(</span>
+<span class="w">    </span><span class="nx">error</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="ne">Error</span><span class="w"> </span>
+<span class="w">      </span><span class="o">?</span><span class="w"> </span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="w"> </span>
+<span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Erro desconhecido ao importar arquivo&quot;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// No JSX:</span>
+<span class="p">{</span><span class="nx">state</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;import-status error&quot;</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="nx">strong</span><span class="o">&gt;</span><span class="err">❌</span><span class="w"> </span><span class="nx">Erro</span><span class="w"> </span><span class="nx">ao</span><span class="w"> </span><span class="nx">importar</span><span class="o">:&lt;</span><span class="err">/strong&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">errorMessage</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="nx">button</span><span class="w"> </span><span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* retry logic */</span><span class="w"> </span><span class="p">}}</span><span class="o">&gt;</span>
+<span class="w">      </span><span class="nx">Tentar</span><span class="w"> </span><span class="nx">novamente</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+<span class="w">  </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="p">)}</span>
+</code></pre></div>
+
+<p><strong>Melhorias implementadas:</strong>
+- Mensagem de erro específica do backend
+- Botão "Tentar novamente" para recuperação
+- Estilo visual destacado (background vermelho claro, borda)
+- Feedback claro sobre o que deu errado</p>
+<p>✅ <strong>Resultado:</strong> Usuário sabe exatamente qual o problema e pode tentar novamente.</p>
+<hr />
+<h3 id="3-paginas-criticas-estao-vazias-dashboard-portfolio-analysis">3. <strong>Páginas críticas estão vazias (Dashboard, Portfolio, Analysis)</strong><a class="headerlink" href="#3-paginas-criticas-estao-vazias-dashboard-portfolio-analysis" title="Permanent link">&para;</a></h3>
+<p><strong>Localização:</strong> <code>frontend/src/pages/Dashboard.tsx</code>, <code>Portfolio.tsx</code>, <code>Analysis.tsx</code></p>
+<p><strong>Problema:</strong><br />
+Usuário não consegue visualizar dados importados. A aplicação está incompleta.</p>
+<p><strong>Solução:</strong><br />
+Implementar ao menos visualizações básicas:</p>
+<p><strong>Dashboard:</strong>
+- Total investido
+- Número de ativos
+- Última importação</p>
+<p><strong>Portfolio:</strong>
+- Lista de operações (tabela)
+- Filtros por ticker e data</p>
+<p><strong>Analysis:</strong>
+- Gráfico de distribuição por ativo
+- Performance acumulada (se houver vendas)</p>
+<hr />
+<h3 id="4-ausencia-de-loading-state-global">4. <strong>Ausência de loading state global</strong><a class="headerlink" href="#4-ausencia-de-loading-state-global" title="Permanent link">&para;</a></h3>
+<p><strong>Problema:</strong><br />
+Durante upload de arquivo grande, a UI não indica progresso.</p>
+<p><strong>Solução:</strong><br />
+Adicionar indicador de progresso:</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">uploadProgress</span><span class="p">,</span><span class="w"> </span><span class="nx">setUploadProgress</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
+
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">handleImport</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">file</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+
+<span class="w">  </span><span class="nx">setState</span><span class="p">(</span><span class="s2">&quot;uploading&quot;</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Usar XMLHttpRequest para capturar progresso</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">xhr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">XMLHttpRequest</span><span class="p">();</span>
+
+<span class="w">  </span><span class="nx">xhr</span><span class="p">.</span><span class="nx">upload</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;progress&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">lengthComputable</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">setUploadProgress</span><span class="p">((</span><span class="nx">e</span><span class="p">.</span><span class="nx">loaded</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">total</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">100</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="c1">// ... resto da lógica</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="importantes-manutenibilidade-e-qualidade">🟠 Importantes (Manutenibilidade e Qualidade)<a class="headerlink" href="#importantes-manutenibilidade-e-qualidade" title="Permanent link">&para;</a></h2>
+<h3 id="5-falta-de-gerenciamento-de-estado-global">5. <strong>Falta de gerenciamento de estado global</strong><a class="headerlink" href="#5-falta-de-gerenciamento-de-estado-global" title="Permanent link">&para;</a></h3>
+<p><strong>Problema:</strong><br />
+Não há contexto ou store para compartilhar dados entre páginas (ex: operações carregadas, configurações de usuário).</p>
+<p><strong>Solução:</strong><br />
+Usar Context API ou Zustand:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// src/store/useOperationsStore.ts</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">create</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;zustand&#39;</span><span class="p">;</span>
+
+<span class="kd">interface</span><span class="w"> </span><span class="nx">Operation</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">ticker</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">movement_type</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">quantity</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">price</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">trade_date</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="kd">interface</span><span class="w"> </span><span class="nx">OperationsStore</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">operations</span><span class="o">:</span><span class="w"> </span><span class="kt">Operation</span><span class="p">[];</span>
+<span class="w">  </span><span class="nx">isLoading</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">fetchOperations</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="ow">void</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">useOperationsStore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">create</span><span class="o">&lt;</span><span class="nx">OperationsStore</span><span class="o">&gt;</span><span class="p">((</span><span class="nx">set</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span>
+<span class="w">  </span><span class="nx">operations</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">  </span><span class="nx">isLoading</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">fetchOperations</span><span class="o">:</span><span class="w"> </span><span class="kt">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">set</span><span class="p">({</span><span class="w"> </span><span class="nx">isLoading</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">API_URL</span><span class="si">}</span><span class="sb">/operations`</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">set</span><span class="p">({</span><span class="w"> </span><span class="nx">operations</span><span class="o">:</span><span class="w"> </span><span class="kt">data</span><span class="p">,</span><span class="w"> </span><span class="nx">isLoading</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="w"> </span><span class="p">});</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="p">}));</span>
+</code></pre></div>
+
+<hr />
+<h3 id="6-ausencia-de-tratamento-de-tipos-nas-respostas-da-api">6. <strong>Ausência de tratamento de tipos nas respostas da API</strong><a class="headerlink" href="#6-ausencia-de-tratamento-de-tipos-nas-respostas-da-api" title="Permanent link">&para;</a></h3>
+<p><strong>Localização:</strong> <code>frontend/src/api/client.ts</code>, <code>ImportB3Card.tsx</code></p>
+<p><strong>Problema:</strong><br />
+TypeScript não valida o formato das respostas do backend.</p>
+<p><strong>Solução:</strong><br />
+Criar interfaces e validar com Zod:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">z</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;zod&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">ImportSummarySchema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">z</span><span class="p">.</span><span class="nx">object</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">total_rows</span><span class="o">:</span><span class="w"> </span><span class="kt">z.number</span><span class="p">(),</span>
+<span class="w">  </span><span class="nx">inserted</span><span class="o">:</span><span class="w"> </span><span class="kt">z.number</span><span class="p">(),</span>
+<span class="w">  </span><span class="nx">duplicated</span><span class="o">:</span><span class="w"> </span><span class="kt">z.number</span><span class="p">(),</span>
+<span class="w">  </span><span class="nx">unique_assets</span><span class="o">:</span><span class="w"> </span><span class="kt">z.number</span><span class="p">(),</span>
+<span class="w">  </span><span class="nx">imported_at</span><span class="o">:</span><span class="w"> </span><span class="kt">z.string</span><span class="p">(),</span>
+<span class="p">});</span>
+
+<span class="kr">type</span><span class="w"> </span><span class="nx">ImportSummary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">z</span><span class="p">.</span><span class="nx">infer</span><span class="o">&lt;</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">ImportSummarySchema</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">uploadB3File</span><span class="p">(</span><span class="nx">file</span><span class="o">:</span><span class="w"> </span><span class="kt">File</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">ImportSummary</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">formData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">FormData</span><span class="p">();</span>
+<span class="w">  </span><span class="nx">formData</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;file&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">API_URL</span><span class="si">}</span><span class="sb">/import/b3`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;POST&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="kt">formData</span><span class="p">,</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s2">&quot;Erro ao importar arquivo&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">ImportSummarySchema</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span><span class="w"> </span><span class="c1">// Valida estrutura</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h3 id="7-falta-de-testes-unitarios-e-e2e">7. <strong>Falta de testes (unitários e E2E)</strong><a class="headerlink" href="#7-falta-de-testes-unitarios-e-e2e" title="Permanent link">&para;</a></h3>
+<p><strong>Problema:</strong><br />
+Nenhum teste foi implementado. Mudanças podem quebrar funcionalidades sem perceber.</p>
+<p><strong>Solução:</strong><br />
+Adicionar Vitest + Testing Library:</p>
+<div class="codehilite"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>-D<span class="w"> </span>vitest<span class="w"> </span>@testing-library/react<span class="w"> </span>@testing-library/jest-dom
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="c1">// src/components/ImportB3Card.test.tsx</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">render</span><span class="p">,</span><span class="w"> </span><span class="nx">screen</span><span class="p">,</span><span class="w"> </span><span class="nx">fireEvent</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@testing-library/react&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ImportB3Card</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./ImportB3Card&#39;</span><span class="p">;</span>
+
+<span class="nx">test</span><span class="p">(</span><span class="s1">&#39;exibe mensagem inicial&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">ImportB3Card</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">expect</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByText</span><span class="p">(</span><span class="sr">/Importar relatório da B3/i</span><span class="p">)).</span><span class="nx">toBeInTheDocument</span><span class="p">();</span>
+<span class="p">});</span>
+
+<span class="nx">test</span><span class="p">(</span><span class="s1">&#39;permite arrastar arquivo&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">ImportB3Card</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">dropzone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByText</span><span class="p">(</span><span class="sr">/Arraste o arquivo/i</span><span class="p">).</span><span class="nx">closest</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">);</span>
+
+<span class="w">  </span><span class="nx">fireEvent</span><span class="p">.</span><span class="nx">drop</span><span class="p">(</span><span class="nx">dropzone</span><span class="o">!</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">dataTransfer</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">files</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="ow">new</span><span class="w"> </span><span class="nx">File</span><span class="p">([],</span><span class="w"> </span><span class="s1">&#39;test.xlsx&#39;</span><span class="p">)]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="nx">expect</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">getByText</span><span class="p">(</span><span class="sr">/test.xlsx/i</span><span class="p">)).</span><span class="nx">toBeInTheDocument</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<hr />
+<h3 id="8-falta-de-validacao-no-cliente-antes-de-enviar-arquivo">8. <strong>Falta de validação no cliente antes de enviar arquivo</strong><a class="headerlink" href="#8-falta-de-validacao-no-cliente-antes-de-enviar-arquivo" title="Permanent link">&para;</a></h3>
+<p><strong>Localização:</strong> <code>frontend/src/components/DragAndDropArea.tsx</code></p>
+<p><strong>Problema:</strong><br />
+Aceita arquivos <code>.csv</code> mas o backend só processa <code>.xlsx</code>. Causa erro tarde demais.</p>
+<p><strong>Solução:</strong>  </p>
+<div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">handleFiles</span><span class="p">(</span><span class="nx">files</span><span class="o">:</span><span class="w"> </span><span class="kt">FileList</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">files</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">files</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">files</span><span class="p">[</span><span class="mf">0</span><span class="p">];</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">validExtensions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;.xlsx&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;.xls&#39;</span><span class="p">];</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">extension</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">file</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">().</span><span class="nx">slice</span><span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">));</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">validExtensions</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">extension</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Formato inválido. Envie um arquivo .xlsx&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">size</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">10</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1024</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 10MB</span>
+<span class="w">    </span><span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Arquivo muito grande. Limite: 10MB&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">onFileSelected</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h3 id="9-css-nao-esta-modular">9. <strong>CSS não está modular</strong><a class="headerlink" href="#9-css-nao-esta-modular" title="Permanent link">&para;</a></h3>
+<p><strong>Problema:</strong><br />
+Estilos globais podem causar conflitos. Manutenção difícil em projetos maiores.</p>
+<p><strong>Solução:</strong><br />
+Usar CSS Modules ou Styled Components:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// ImportB3Card.module.css</span>
+<span class="p">.</span><span class="nx">container</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">max</span><span class="o">-</span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="kt">520px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nx">card</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">border</span><span class="o">:</span><span class="w"> </span><span class="kt">1px</span><span class="w"> </span><span class="nx">solid</span><span class="w"> </span><span class="kd">var</span><span class="p">(</span><span class="o">--</span><span class="nx">color</span><span class="o">-</span><span class="nx">border</span><span class="p">);</span>
+<span class="w">  </span><span class="cm">/* ... */</span>
+<span class="p">}</span>
+
+<span class="c1">// ImportB3Card.tsx</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">styles</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./ImportB3Card.module.css&#39;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">ImportB3Card</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">card</span><span class="p">}</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="p">{</span><span class="cm">/* ... */</span><span class="p">}</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h3 id="10-falta-de-acessibilidade-a11y">10. <strong>Falta de acessibilidade (a11y)</strong><a class="headerlink" href="#10-falta-de-acessibilidade-a11y" title="Permanent link">&para;</a></h3>
+<p><strong>Problemas identificados:</strong>
+- Botões sem <code>aria-label</code>
+- Dropzone sem instruções para screen readers
+- Falta de foco visível em elementos interativos</p>
+<p><strong>Solução:</strong>  </p>
+<div class="codehilite"><pre><span></span><code><span class="o">&lt;</span><span class="nx">div</span>
+<span class="w">  </span><span class="nx">role</span><span class="o">=</span><span class="s2">&quot;button&quot;</span>
+<span class="w">  </span><span class="nx">tabIndex</span><span class="o">=</span><span class="p">{</span><span class="mf">0</span><span class="p">}</span>
+<span class="w">  </span><span class="nx">aria</span><span class="o">-</span><span class="nx">label</span><span class="o">=</span><span class="s2">&quot;Área para upload de arquivo. Clique ou arraste um arquivo .xlsx&quot;</span>
+<span class="w">  </span><span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="sb">`dropzone </span><span class="si">${</span><span class="nx">isDragging</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">&quot;dragging&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="si">}</span><span class="sb">`</span><span class="p">}</span>
+<span class="w">  </span><span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">inputRef</span><span class="p">.</span><span class="nx">current</span><span class="o">?</span><span class="p">.</span><span class="nx">click</span><span class="p">()}</span>
+<span class="w">  </span><span class="nx">onKeyDown</span><span class="o">=</span><span class="p">{(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">key</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;Enter&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">key</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">inputRef</span><span class="p">.</span><span class="nx">current</span><span class="o">?</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}}</span>
+<span class="w">  </span><span class="c1">// ...</span>
+<span class="o">&gt;</span>
+</code></pre></div>
+
+<hr />
+<h3 id="11-sidebar-nao-indica-rota-ativa-corretamente-em-mobile">11. <strong>Sidebar não indica rota ativa corretamente em mobile</strong><a class="headerlink" href="#11-sidebar-nao-indica-rota-ativa-corretamente-em-mobile" title="Permanent link">&para;</a></h3>
+<p><strong>Problema:</strong><br />
+Layout não é responsivo. Sidebar ocupa espaço fixo.</p>
+<p><strong>Solução:</strong><br />
+Adicionar breakpoints e menu hamburguer:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">@</span><span class="k">media</span><span class="w"> </span><span class="o">(</span><span class="nt">max-width</span><span class="o">:</span><span class="w"> </span><span class="nt">768px</span><span class="o">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="p">.</span><span class="nc">sidebar</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">fixed</span><span class="p">;</span>
+<span class="w">    </span><span class="k">left</span><span class="p">:</span><span class="w"> </span><span class="mi">-220</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">transition</span><span class="p">:</span><span class="w"> </span><span class="kc">left</span><span class="w"> </span><span class="mf">0.3</span><span class="kt">s</span><span class="w"> </span><span class="kc">ease</span><span class="p">;</span>
+<span class="w">    </span><span class="k">z-index</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="p">.</span><span class="nc">sidebar</span><span class="p">.</span><span class="nc">open</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">left</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="boas-praticas-nice-to-have">🟡 Boas Práticas (Nice to Have)<a class="headerlink" href="#boas-praticas-nice-to-have" title="Permanent link">&para;</a></h2>
+<h3 id="12-adicionar-react-query-para-cache-de-requisicoes">12. <strong>Adicionar React Query para cache de requisições</strong><a class="headerlink" href="#12-adicionar-react-query-para-cache-de-requisicoes" title="Permanent link">&para;</a></h3>
+<p><strong>Objetivo:</strong><br />
+Evitar requisições duplicadas e melhorar performance.</p>
+<p><strong>Solução:</strong>  </p>
+<div class="codehilite"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useQuery</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@tanstack/react-query&#39;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">Portfolio</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">isLoading</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useQuery</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">queryKey</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;operations&#39;</span><span class="p">],</span>
+<span class="w">    </span><span class="nx">queryFn</span><span class="o">:</span><span class="w"> </span><span class="kt">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">API_URL</span><span class="si">}</span><span class="sb">/operations`</span><span class="p">);</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">isLoading</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Carregando</span><span class="p">...</span><span class="o">&lt;</span><span class="err">/p&gt;;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Erro</span><span class="w"> </span><span class="nx">ao</span><span class="w"> </span><span class="nx">carregar</span><span class="w"> </span><span class="nx">operações</span><span class="o">&lt;</span><span class="err">/p&gt;;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Carteira</span><span class="o">&lt;</span><span class="err">/h1&gt;</span>
+<span class="w">      </span><span class="p">{</span><span class="cm">/* Renderizar operações */</span><span class="p">}</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h3 id="13-criar-componente-de-tabela-reutilizavel">13. <strong>Criar componente de tabela reutilizável</strong><a class="headerlink" href="#13-criar-componente-de-tabela-reutilizavel" title="Permanent link">&para;</a></h3>
+<p><strong>Objetivo:</strong><br />
+Evitar duplicação ao listar operações em múltiplas páginas.</p>
+<p><strong>Solução:</strong>  </p>
+<div class="codehilite"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">Column</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">header</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">accessor</span><span class="o">:</span><span class="w"> </span><span class="kt">keyof</span><span class="w"> </span><span class="nx">T</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">((</span><span class="nx">row</span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">React</span><span class="p">.</span><span class="nx">ReactNode</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">interface</span><span class="w"> </span><span class="nx">TableProps</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="p">[];</span>
+<span class="w">  </span><span class="nx">columns</span><span class="o">:</span><span class="w"> </span><span class="kt">Column</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">[];</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">Table</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">({</span><span class="w"> </span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">columns</span><span class="w"> </span><span class="p">}</span><span class="o">:</span><span class="w"> </span><span class="nx">TableProps</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="nx">table</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;data-table&quot;</span><span class="o">&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="nx">thead</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">tr</span><span class="o">&gt;</span>
+<span class="w">          </span><span class="p">{</span><span class="nx">columns</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">col</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">th</span><span class="w"> </span><span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">i</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">col</span><span class="p">.</span><span class="nx">header</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/th&gt;</span>
+<span class="w">          </span><span class="p">))}</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="err">/tr&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="err">/thead&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="nx">tbody</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="p">{</span><span class="nx">data</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">row</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="nx">tr</span><span class="w"> </span><span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">i</span><span class="p">}</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="p">{</span><span class="nx">columns</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">col</span><span class="p">,</span><span class="w"> </span><span class="nx">j</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">              </span><span class="o">&lt;</span><span class="nx">td</span><span class="w"> </span><span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">j</span><span class="p">}</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="p">{</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">col</span><span class="p">.</span><span class="nx">accessor</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;function&#39;</span>
+<span class="w">                  </span><span class="o">?</span><span class="w"> </span><span class="nx">col</span><span class="p">.</span><span class="nx">accessor</span><span class="p">(</span><span class="nx">row</span><span class="p">)</span>
+<span class="w">                  </span><span class="o">:</span><span class="w"> </span><span class="nb">String</span><span class="p">(</span><span class="nx">row</span><span class="p">[</span><span class="nx">col</span><span class="p">.</span><span class="nx">accessor</span><span class="p">])}</span>
+<span class="w">              </span><span class="o">&lt;</span><span class="err">/td&gt;</span>
+<span class="w">            </span><span class="p">))}</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="err">/tr&gt;</span>
+<span class="w">        </span><span class="p">))}</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="err">/tbody&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="err">/table&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h3 id="14-adicionar-modo-escuro-dark-mode">14. <strong>Adicionar modo escuro (dark mode)</strong><a class="headerlink" href="#14-adicionar-modo-escuro-dark-mode" title="Permanent link">&para;</a></h3>
+<p><strong>Objetivo:</strong><br />
+Melhorar UX para usuários que preferem temas escuros.</p>
+<p><strong>Solução:</strong>  </p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Adicionar tokens de tema escuro</span>
+<span class="o">:</span><span class="nx">root</span><span class="p">[</span><span class="nx">data</span><span class="o">-</span><span class="nx">theme</span><span class="o">=</span><span class="s2">&quot;dark&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="o">--</span><span class="nx">color</span><span class="o">-</span><span class="nx">bg</span><span class="o">-</span><span class="nx">main</span><span class="o">:</span><span class="w"> </span><span class="err">#</span><span class="mf">0</span><span class="nx">f172a</span><span class="p">;</span>
+<span class="w">  </span><span class="o">--</span><span class="nx">color</span><span class="o">-</span><span class="nx">bg</span><span class="o">-</span><span class="nx">surface</span><span class="o">:</span><span class="w"> </span><span class="err">#</span><span class="mf">1e293</span><span class="nx">b</span><span class="p">;</span>
+<span class="w">  </span><span class="o">--</span><span class="nx">color</span><span class="o">-</span><span class="nx">text</span><span class="o">-</span><span class="nx">primary</span><span class="o">:</span><span class="w"> </span><span class="n">#f1f5f9</span><span class="p">;</span>
+<span class="w">  </span><span class="o">--</span><span class="nx">color</span><span class="o">-</span><span class="nx">text</span><span class="o">-</span><span class="nx">secondary</span><span class="o">:</span><span class="w"> </span><span class="n">#cbd5e1</span><span class="p">;</span>
+<span class="w">  </span><span class="o">--</span><span class="nx">color</span><span class="o">-</span><span class="nx">border</span><span class="o">:</span><span class="w"> </span><span class="err">#</span><span class="mf">334155</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Toggle no Header</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">Header</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">theme</span><span class="p">,</span><span class="w"> </span><span class="nx">setTheme</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="s1">&#39;light&#39;</span><span class="p">);</span>
+
+<span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;data-theme&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">theme</span><span class="p">);</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">theme</span><span class="p">]);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="nx">header</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;header&quot;</span><span class="o">&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="nx">strong</span><span class="o">&gt;</span><span class="nx">Portfolio</span><span class="w"> </span><span class="nx">Manager</span><span class="o">&lt;</span><span class="err">/strong&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="nx">button</span><span class="w"> </span><span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">setTheme</span><span class="p">(</span><span class="nx">theme</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;light&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;dark&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;light&#39;</span><span class="p">)}</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="p">{</span><span class="nx">theme</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;light&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;🌙&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;☀️&#39;</span><span class="p">}</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="err">/header&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h3 id="15-implementar-toast-notifications">15. <strong>Implementar toast notifications</strong><a class="headerlink" href="#15-implementar-toast-notifications" title="Permanent link">&para;</a></h3>
+<p><strong>Objetivo:</strong><br />
+Feedback visual não-intrusivo para ações (importação bem-sucedida, erros).</p>
+<p><strong>Solução:</strong><br />
+Usar <code>react-hot-toast</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">toast</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Toaster</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react-hot-toast&#39;</span><span class="p">;</span>
+
+<span class="c1">// No App.tsx</span>
+<span class="o">&lt;</span><span class="nx">Toaster</span><span class="w"> </span><span class="nx">position</span><span class="o">=</span><span class="s2">&quot;top-right&quot;</span><span class="w"> </span><span class="o">/&gt;</span>
+
+<span class="c1">// Nos componentes</span>
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">handleImport</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">uploadB3File</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">toast</span><span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">result</span><span class="p">.</span><span class="nx">summary</span><span class="p">.</span><span class="nx">inserted</span><span class="si">}</span><span class="sb"> operações importadas!`</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">toast</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Erro ao importar arquivo&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h3 id="16-adicionar-lazy-loading-para-rotas">16. <strong>Adicionar lazy loading para rotas</strong><a class="headerlink" href="#16-adicionar-lazy-loading-para-rotas" title="Permanent link">&para;</a></h3>
+<p><strong>Objetivo:</strong><br />
+Reduzir tamanho do bundle inicial.</p>
+<p><strong>Solução:</strong>  </p>
+<div class="codehilite"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">lazy</span><span class="p">,</span><span class="w"> </span><span class="nx">Suspense</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">Dashboard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">lazy</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">import</span><span class="p">(</span><span class="s1">&#39;./pages/Dashboard&#39;</span><span class="p">));</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">Import</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">lazy</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">import</span><span class="p">(</span><span class="s1">&#39;./pages/Import&#39;</span><span class="p">));</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">Portfolio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">lazy</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">import</span><span class="p">(</span><span class="s1">&#39;./pages/Portfolio&#39;</span><span class="p">));</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">App</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="nx">BrowserRouter</span><span class="o">&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="nx">Layout</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">Suspense</span><span class="w"> </span><span class="nx">fallback</span><span class="o">=</span><span class="p">{</span><span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="nx">Carregando</span><span class="p">...</span><span class="o">&lt;</span><span class="err">/div&gt;}&gt;</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="nx">Routes</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">Route</span><span class="w"> </span><span class="nx">path</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="w"> </span><span class="nx">element</span><span class="o">=</span><span class="p">{</span><span class="o">&lt;</span><span class="nx">Dashboard</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">Route</span><span class="w"> </span><span class="nx">path</span><span class="o">=</span><span class="s2">&quot;/import&quot;</span><span class="w"> </span><span class="nx">element</span><span class="o">=</span><span class="p">{</span><span class="o">&lt;</span><span class="nx">Import</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">Route</span><span class="w"> </span><span class="nx">path</span><span class="o">=</span><span class="s2">&quot;/portfolio&quot;</span><span class="w"> </span><span class="nx">element</span><span class="o">=</span><span class="p">{</span><span class="o">&lt;</span><span class="nx">Portfolio</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span>
+<span class="w">            </span><span class="p">{</span><span class="cm">/* ... */</span><span class="p">}</span>
+<span class="w">          </span><span class="o">&lt;</span><span class="err">/Routes&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="err">/Suspense&gt;</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="err">/Layout&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="err">/BrowserRouter&gt;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h3 id="17-adicionar-eslint-e-prettier">17. <strong>Adicionar ESLint e Prettier</strong><a class="headerlink" href="#17-adicionar-eslint-e-prettier" title="Permanent link">&para;</a></h3>
+<p><strong>Problema:</strong><br />
+Código pode ter estilos inconsistentes.</p>
+<p><strong>Solução:</strong>  </p>
+<div class="codehilite"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>-D<span class="w"> </span>eslint<span class="w"> </span>@typescript-eslint/eslint-plugin<span class="w"> </span>prettier<span class="w"> </span>eslint-config-prettier
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="c1">// .eslintrc.json</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;extends&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;eslint:recommended&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;plugin:@typescript-eslint/recommended&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;plugin:react-hooks/recommended&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;prettier&quot;</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;rules&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;@typescript-eslint/no-unused-vars&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;warn&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;react-hooks/exhaustive-deps&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;warn&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h3 id="18-dockerizacao-melhorada">18. <strong>Dockerização melhorada</strong><a class="headerlink" href="#18-dockerizacao-melhorada" title="Permanent link">&para;</a></h3>
+<p><strong>Problema:</strong><br />
+Dockerfile do frontend executa <code>npm run build</code> mas depois roda <code>npm run dev</code>, que é inconsistente.</p>
+<p><strong>Solução (Produção):</strong>  </p>
+<div class="codehilite"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">node:20-alpine</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+<span class="k">COPY</span><span class="w"> </span>package.json<span class="w"> </span>package-lock.json<span class="w"> </span>./
+<span class="k">RUN</span><span class="w"> </span>npm<span class="w"> </span>ci
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>npm<span class="w"> </span>run<span class="w"> </span>build
+
+<span class="k">FROM</span><span class="w"> </span><span class="s">nginx:alpine</span>
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/app/dist<span class="w"> </span>/usr/share/nginx/html
+<span class="k">EXPOSE</span><span class="w"> </span><span class="s">80</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;nginx&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;-g&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;daemon off;&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+<p><strong>Solução (Dev):</strong>  </p>
+<div class="codehilite"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">node:20-alpine</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+<span class="k">COPY</span><span class="w"> </span>package.json<span class="w"> </span>package-lock.json<span class="w"> </span>./
+<span class="k">RUN</span><span class="w"> </span>npm<span class="w"> </span>install
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+<span class="k">EXPOSE</span><span class="w"> </span><span class="s">5173</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;npm&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;run&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dev&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--host&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+<hr />
+<h3 id="19-adicionar-pwa-progressive-web-app">19. <strong>Adicionar PWA (Progressive Web App)</strong><a class="headerlink" href="#19-adicionar-pwa-progressive-web-app" title="Permanent link">&para;</a></h3>
+<p><strong>Objetivo:</strong><br />
+Permitir instalação como app nativo, funcionar offline.</p>
+<p><strong>Solução:</strong><br />
+Usar Vite PWA plugin:</p>
+<div class="codehilite"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>-D<span class="w"> </span>vite-plugin-pwa
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="c1">// vite.config.ts</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">VitePWA</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;vite-plugin-pwa&#39;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">defineConfig</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">plugins</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="nx">react</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">VitePWA</span><span class="p">({</span>
+<span class="w">      </span><span class="nx">registerType</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;autoUpdate&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">manifest</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Portfolio Manager&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">short_name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Portfolio&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">theme_color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#6366f1&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">icons</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">src</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;/icon-192.png&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">sizes</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;192x192&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;image/png&#39;</span><span class="p">,</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">    </span><span class="p">}),</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<hr />
+<h2 id="checklist-de-prioridades">📋 Checklist de Prioridades<a class="headerlink" href="#checklist-de-prioridades" title="Permanent link">&para;</a></h2>
+<p><strong>✅ Concluído:</strong>
+- [x] Mover URL da API para variável de ambiente (item 1) — Implementado 2026-01-02
+- [x] Implementar tratamento de erro detalhado (item 2) — Implementado 2026-01-02</p>
+<p><strong>Fazer primeiro:</strong>
+- [ ] Implementar Dashboard com dados reais (item 3)
+- [ ] Adicionar validação de arquivo (item 8)
+- [ ] Implementar Portfolio (lista de operações) (item 3)</p>
+<p><strong>Fazer em seguida:</strong>
+- [ ] Adicionar gerenciamento de estado (item 5)
+- [ ] Criar tipos e validação de API (item 6)
+- [ ] Adicionar loading state global (item 4)
+- [ ] Tornar layout responsivo (item 11)</p>
+<p><strong>Nice to have:</strong>
+- [ ] Adicionar React Query (item 12)
+- [ ] Implementar dark mode (item 14)
+- [ ] Adicionar toast notifications (item 15)
+- [ ] Configurar ESLint/Prettier (item 17)
+- [ ] Adicionar testes (item 7)</p>
+<hr />
+<h2 id="estatisticas-de-progresso">📊 Estatísticas de Progresso<a class="headerlink" href="#estatisticas-de-progresso" title="Permanent link">&para;</a></h2>
+<p><strong>Total de melhorias identificadas:</strong> 19<br />
+<strong>Concluídas:</strong> 2 (10.5%)<br />
+<strong>Críticas pendentes:</strong> 2 (Dashboard/Portfolio + validação)<br />
+<strong>Estimativa de esforço restante:</strong> 2-3 sprints (assumindo 1 sprint = 2 semanas)</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
