@@ -58,6 +58,16 @@ Bem-vindo à documentação completa do Portfolio Manager v2, um sistema de gest
 
 ### 📖 Guias Práticos
 
+- [**Análise de Eventos Corporativos**](./ANALISE-EVENTOS-CORPORATIVOS.md) 🚨 **CRÍTICO**
+  - Bonificações, desdobros, grupamentos não registrados
+  - Mudanças de ticker e reconciliação com B3
+  - 7 tipos de eventos identificados, 235 ocorrências
+  
+- [**Recomendação de Abordagem**](./RECOMENDACAO-EVENTOS-CORPORATIVOS.md) 💡 **IMPORTANTE**
+  - Implementação incremental vs. sistema completo
+  - 3 semanas vs. 8 semanas (trade-offs)
+  - Roadmap pragmático e justificativa técnica
+
 - [**Otimização de Cotações**](./guides/otimizacao-cotacoes.md) 🔥 **RECOMENDADO**
   - Sistema de cache inteligente
   - Carregamento progressivo

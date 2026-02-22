@@ -66,6 +66,16 @@ export interface OperationCreate {
   institution?: string | null;
 }
 
+// ========== INTERFACES DE AJUSTES DE POSIÇÃO ==========
+
+export interface PositionAdjustment {
+  asset_id: number;
+  adjustment_type: "BONIFICACAO" | "DESDOBRO" | "GRUPAMENTO" | "SUBSCRICAO" | "CORRECAO";
+  quantity: number;
+  event_date: string;
+  description: string;
+}
+
 // ========== FUNÇÕES DE IMPORTAÇÃO ==========
 
 export async function uploadB3File(file: File) {
@@ -237,6 +247,62 @@ export async function deleteOperation(id: number): Promise<{ status: string; mes
   if (!response.ok) {
     const error = await response.json().catch(() => ({ detail: "Erro ao deletar operação" }));
     throw new Error(error.detail || "Erro ao deletar operação");
+  }
+
+  return response.json();
+}
+
+// ========== FUNÇÕES DE AJUSTES DE POSIÇÃO ==========
+
+export async function createPositionAdjustment(
+  adjustment: PositionAdjustment
+): Promise<{
+  status: string;
+  message: string;
+  asset: string;
+  adjustment_type: string;
+  new_position: {
+    quantity: number;
+    average_price: number;
+    total_cost: number;
+  };
+}> {
+  const response = await fetch(`${API_URL}/admin/position-adjustment`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(adjustment),
+  });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ detail: "Erro ao registrar ajuste" }));
+    throw new Error(error.detail || "Erro ao registrar ajuste");
+  }
+
+  return response.json();
+}
+
+export async function applyCorporateEvents(
+  events: any[]
+): Promise<{
+  status: string;
+  applied: number;
+  total: number;
+  errors: string[];
+  results: any[];
+}> {
+  const response = await fetch(`${API_URL}/admin/apply-corporate-events`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ events }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ detail: "Erro ao aplicar eventos" }));
+    throw new Error(error.detail || "Erro ao aplicar eventos");
   }
 
   return response.json();

@@ -110,6 +110,20 @@ def init_db():
     except sqlite3.OperationalError:
         logger.debug("Coluna 'asset_id' já existe na tabela operations")
 
+    # Migration: Adicionar coluna operation_subtype para eventos corporativos
+    try:
+        cursor.execute("ALTER TABLE operations ADD COLUMN operation_subtype TEXT")
+        logger.info("Coluna 'operation_subtype' adicionada à tabela operations")
+    except sqlite3.OperationalError:
+        logger.debug("Coluna 'operation_subtype' já existe na tabela operations")
+
+    # Migration: Adicionar coluna notes para descrições de ajustes
+    try:
+        cursor.execute("ALTER TABLE operations ADD COLUMN notes TEXT")
+        logger.info("Coluna 'notes' adicionada à tabela operations")
+    except sqlite3.OperationalError:
+        logger.debug("Coluna 'notes' já existe na tabela operations")
+
     # Tabela de ativos de Renda Fixa
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS fixed_income_assets (
@@ -162,6 +176,26 @@ def init_db():
             updated_at TEXT NOT NULL,
             UNIQUE (ticker)
         )
+    """)
+
+    # Tabela de snapshots de posição (para reconciliação)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS position_snapshots (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            asset_id INTEGER NOT NULL,
+            quantity REAL NOT NULL,
+            snapshot_date TEXT NOT NULL,
+            source TEXT DEFAULT 'B3',
+            notes TEXT,
+            created_at TEXT NOT NULL,
+            FOREIGN KEY (asset_id) REFERENCES assets(id)
+        )
+    """)
+
+    # Índice para buscas rápidas de snapshots
+    cursor.execute("""
+        CREATE INDEX IF NOT EXISTS idx_snapshots_asset_date 
+        ON position_snapshots(asset_id, snapshot_date DESC)
     """)
 
     conn.commit()
