@@ -89,6 +89,5 @@ Como contribuidor, quero regras objetivas de atualização e arquivamento para i
 
 - **SC-001**: 100% dos arquivos em `docs/` possuem classificação registrada no inventário.
 - **SC-002**: 0 links quebrados em `docs/INDEX.md`, `README.md` e `mkdocs.yml` após a limpeza.
-- **SC-003**: Redução mínima de 30% no número de documentos redundantes/obsoletos no diretório ativo de `docs/`.
-- **SC-004**: Tempo para localizar documento canônico principal (API, arquitetura, setup) fica abaixo de 60 segundos em validação manual.
-- **SC-005**: Novas PRs com mudança de feature passam a incluir atualização explícita da documentação canônica correspondente.
+- **SC-003**: Tempo para localizar documento canônico principal (API, arquitetura, setup) fica abaixo de 60 segundos em validação manual.
+- **SC-004**: Novas PRs com mudança de feature passam a incluir atualização explícita da documentação canônica correspondente.
