@@ -1,31 +1,23 @@
-# Implementation Plan: [FEATURE]
+# Implementation Plan: Recomendações de Rebalanceamento de Carteiras
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
-
-**Note**: This template is filled in by the `/speckit.plan` command. See `.specify/templates/plan-template.md` for the execution workflow.
+**Branch**: `001-wallet-rebalancing-recommendations` | **Date**: 2026-02-28 | **Spec**: `/specs/001-wallet-rebalancing-recommendations/spec.md`
+**Input**: Feature specification from `/specs/001-wallet-rebalancing-recommendations/spec.md`
 
 ## Summary
 
-[Extract from feature spec: primary requirement + technical approach from research]
+Implementar módulo de carteiras com CRUD, atribuição N:M de ativos, configuração de alocação-alvo e geração sob demanda de recomendações de rebalanceamento com simulação de custos. A solução preserva arquitetura event-based do projeto: operações seguem imutáveis, valores derivados são calculados em runtime, e recomendações não são persistidas.
 
 ## Technical Context
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
-
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [e.g., library/cli/web-service/mobile-app/compiler/desktop-app or NEEDS CLARIFICATION]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**Language/Version**: Python 3.11 (backend), TypeScript 5.x + React 18 (frontend)  
+**Primary Dependencies**: FastAPI, sqlite3, pandas, openpyxl, yfinance, React, axios, react-router-dom, recharts  
+**Storage**: SQLite (`backend/data/portfolio.db`)  
+**Testing**: pytest (backend), testes manuais de UI/integração frontend, scripts de teste existentes em `tests/` e `backend/tests/`  
+**Target Platform**: Linux com Docker Compose (backend + frontend), navegador desktop/mobile  
+**Project Type**: Aplicação web full-stack (FastAPI + React)  
+**Performance Goals**: gerar recomendação de rebalanceamento em < 3s para carteira com até 20 ativos (SC-002)  
+**Constraints**: interface 100% PT-BR, precisão financeira em 2 casas decimais, sem persistir estado derivado, preservação de imutabilidade e auditabilidade  
+**Scale/Scope**: usuários individuais (micro-SaaS), múltiplas carteiras por usuário, foco MVP com evolução incremental
 
 ## Constitution Check
 
@@ -33,83 +25,90 @@
 
 Verify compliance with [Portfolio Manager v2 Constitution](../.specify/memory/constitution.md):
 
-- [ ] **Principle I: Immutability** — Does this feature preserve operation immutability? No historical data mutation?
-- [ ] **Principle II: Idempotency** — Can operations be safely retried without creating duplicates?
-- [ ] **Principle III: Clarity** — Is the solution explicit and readable? No premature abstractions?
-- [ ] **Principle IV: Event-Based** — Are derived values calculated from operations, not stored as state?
-- [ ] **Principle V: Simplicity** — Is this the simplest solution that solves the problem?
-- [ ] **Code Quality** — Meets backend/frontend standards (explicit typing, error handling, single responsibility)?
-- [ ] **Testing** — Plan includes manual or automated testing verification?
-- [ ] **Documentation** — Will updates be reflected in `docs/` per standards?
+- [x] **Principle I: Immutability** — Feature só cria novas operações para execução de rebalanceamento; sem mutação histórica.
+- [x] **Principle II: Idempotency** — Operações críticas usam constraints e regras explícitas para evitar duplicação em atribuições/configurações.
+- [x] **Principle III: Clarity** — Estrutura explícita em repositórios/serviços/componentes sem abstrações prematuras.
+- [x] **Principle IV: Event-Based** — Métricas de carteira e recomendações derivadas de operações + cotações, sem estado financeiro persistido.
+- [x] **Principle V: Simplicity** — Algoritmo threshold-based e modelo relacional simples no SQLite.
+- [x] **Code Quality** — Tipagem explícita, validações de entrada, tratamento de erros em API e estados de UI.
+- [x] **Testing** — Plano inclui testes de endpoint, cálculo e fluxo frontend.
+- [x] **Documentation** — Entregáveis incluem `research.md`, `data-model.md`, `contracts/` e `quickstart.md`.
 
-**Constitution Compliance**: [✅ Full | ⚠️ Justified Exceptions | ❌ Violations to Resolve]
+**Constitution Compliance**: ✅ Full
 
 ## Project Structure
 
 ### Documentation (this feature)
 
 ```text
-specs/[###-feature]/
-├── plan.md              # This file (/speckit.plan command output)
-├── research.md          # Phase 0 output (/speckit.plan command)
-├── data-model.md        # Phase 1 output (/speckit.plan command)
-├── quickstart.md        # Phase 1 output (/speckit.plan command)
-├── contracts/           # Phase 1 output (/speckit.plan command)
-└── tasks.md             # Phase 2 output (/speckit.tasks command - NOT created by /speckit.plan)
+specs/001-wallet-rebalancing-recommendations/
+├── plan.md
+├── research.md
+├── data-model.md
+├── quickstart.md
+├── contracts/
+│   └── api.md
+└── tasks.md
 ```
 
 ### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
 
 ```text
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
-
-tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
 backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
+├── app/
+│   ├── main.py
+│   ├── db/
+│   ├── repositories/
+│   └── services/
 └── tests/
 
 frontend/
 ├── src/
+│   ├── api/
 │   ├── components/
 │   ├── pages/
-│   └── services/
-└── tests/
+│   └── styles/
+└── package.json
 
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
+docs/
+├── architecture/
+├── api/
+├── guides/
+├── development/
+└── deployment/
 
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+tests/
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+**Structure Decision**: Manter arquitetura web existente (backend + frontend + docs) e evoluir com módulos de carteira/rebalanceamento sem reorganização estrutural ampla.
+
+## Phase 0: Research Output
+
+Pesquisa consolidada em `/specs/001-wallet-rebalancing-recommendations/research.md` cobrindo:
+- design de schema de carteiras e alocação-alvo;
+- abordagem do algoritmo de rebalanceamento;
+- padrão de UX frontend e cobertura PT-BR;
+- estratégia de integração com cálculo de posições existente;
+- modelagem de custos e tratamento de ativos de baixa liquidez.
+
+Todas as decisões possuem rationale e alternativas consideradas.
+
+## Phase 1: Design & Contracts Output
+
+- Modelo de dados detalhado: `/specs/001-wallet-rebalancing-recommendations/data-model.md`
+- Contratos de API: `/specs/001-wallet-rebalancing-recommendations/contracts/api.md`
+- Guia de execução e validação: `/specs/001-wallet-rebalancing-recommendations/quickstart.md`
+
+## Post-Design Constitution Check
+
+- [x] Imutabilidade preservada na execução guiada (operações novas, sem overwrite)
+- [x] Idempotência preservada em vínculos e configurações com constraints/regras
+- [x] Cálculos derivados em runtime (sem persistir métricas financeiras)
+- [x] Solução permanece simples e auditável para MVP
+- [x] Documentação técnica em PT-BR e alinhada à estrutura `docs/`
+
+**Post-Design Compliance**: ✅ Full
 
 ## Complexity Tracking
 
-> **Fill ONLY if Constitution Check has violations that must be justified**
-
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+Sem exceções constitucionais necessárias nesta fase.
