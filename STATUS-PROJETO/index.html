@@ -1,0 +1,1412 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Sistema web de gestão de carteira de investimentos com foco em importação B3, renda fixa e análise de performance">
+      
+      
+      
+        <link rel="canonical" href="https://carlosdoliveira.github.io/portfolio-manager/STATUS-PROJETO/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>📊 Status do Projeto — Portfolio Manager v2 - Portfolio Manager</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#status-do-projeto-portfolio-manager-v2" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href=".." title="Portfolio Manager" class="md-header__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Portfolio Manager
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              📊 Status do Projeto — Portfolio Manager v2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Portfolio Manager" class="md-nav__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Portfolio Manager
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guia Rápido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../referencia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-executivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Resumo Executivo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Resumo Executivo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ultimas-atualizacoes-17-jan-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟢 Últimas Atualizações (17 Jan 2026)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funcionalidades-implementadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Funcionalidades Implementadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#em-progresso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ Em Progresso
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nao-implementado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📅 Não Implementado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Índice
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stack-tecnologica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stack Tecnológica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funcionalidades-implementadas_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funcionalidades Implementadas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funcionalidades Implementadas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend-100-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Backend (100% MVP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend-90-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Frontend (90% MVP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sistema-de-cotacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sistema de Cotações
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sistema de Cotações">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arquitetura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arquitetura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estrutura-da-tabela-quotes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estrutura da Tabela quotes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#endpoints-de-cotacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoints de Cotações
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modelagem-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelagem de Dados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modelagem de Dados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schema-atual-v220" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schema Atual (v2.2.0)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentacao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentação Técnica
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Documentação Técnica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#documentos-principais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Documentos Principais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#guias-tecnicos-atualizados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Guias Técnicos Atualizados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquitetura_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🏗️ Arquitetura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentos-arquivados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📦 Documentos Arquivados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proximos-passos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Próximos Passos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Próximos Passos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prioridade-alta-sprint-atual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Prioridade Alta (Sprint Atual)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backlog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔮 Backlog
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conquistas-recentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎉 Conquistas Recentes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metricas-de-qualidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Métricas de Qualidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="status-do-projeto-portfolio-manager-v2">📊 Status do Projeto — Portfolio Manager v2<a class="headerlink" href="#status-do-projeto-portfolio-manager-v2" title="Permanent link">&para;</a></h1>
+<p><strong>Última atualização</strong>: 17 de Janeiro de 2026<br />
+<strong>Versão</strong>: v2.3.0</p>
+<blockquote>
+<p>📖 <strong>Novo?</strong> Comece pelo <a href="../INDEX/">INDEX.md</a> para uma visão geral completa.</p>
+</blockquote>
+<hr />
+<h2 id="resumo-executivo">🎯 Resumo Executivo<a class="headerlink" href="#resumo-executivo" title="Permanent link">&para;</a></h2>
+<p>O Portfolio Manager v2 é um <strong>sistema completo e otimizado</strong> para gestão de carteira de investimentos com:</p>
+<h3 id="ultimas-atualizacoes-17-jan-2026">🟢 Últimas Atualizações (17 Jan 2026)<a class="headerlink" href="#ultimas-atualizacoes-17-jan-2026" title="Permanent link">&para;</a></h3>
+<p><strong>⚡ OTIMIZAÇÃO MASSIVA DE PERFORMANCE IMPLEMENTADA</strong>
+- Sistema de cache inteligente em 3 camadas (memória → banco → yfinance)
+- Carregamento progressivo: cache instantâneo + refresh em background
+- Performance <strong>15-30x mais rápida</strong> (15-30s → &lt; 1s)
+- Redução de <strong>90%+ nas chamadas ao yfinance</strong>
+- Endpoint <code>/quotes/portfolio/fast</code> com BackgroundTasks
+- Feedback visual progressivo (⏳ → 🔄 → ✅)
+- Cache persistente entre reinicializações</p>
+<p><strong>📚 Documentação Completa</strong>
+- <a href="../guides/otimizacao-cotacoes/">Guia de Otimização</a> — Arquitetura e fluxo
+- <a href="../CHECKPOINT-v2.3.0-otimizacao-cotacoes/">CHECKPOINT v2.3.0</a> — Sumário técnico</p>
+<h3 id="funcionalidades-implementadas">✅ Funcionalidades Implementadas<a class="headerlink" href="#funcionalidades-implementadas" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ Import B3 com deduplicação automática</li>
+<li>✅ CRUD completo de ativos e operações</li>
+<li>✅ Renda Fixa com projeções e cálculo de IR</li>
+<li>✅ Consolidação de operações por mercado (backend + frontend)</li>
+<li>✅ <strong>Sistema de cache inteligente (v2.3.0)</strong> 🔥</li>
+<li>✅ <strong>Carregamento progressivo instantâneo</strong> 🔥</li>
+<li>✅ <strong>Dashboard principal funcional</strong> </li>
+<li>✅ <strong>Página Carteira otimizada</strong> </li>
+<li>✅ <strong>Valores mark-to-market consistentes</strong></li>
+<li>✅ Interface responsiva e profissional</li>
+</ul>
+<h3 id="em-progresso">⚠️ Em Progresso<a class="headerlink" href="#em-progresso" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Página de análises (placeholder)</li>
+<li>Testes automatizados (cobertura básica)</li>
+</ul>
+<h3 id="nao-implementado">📅 Não Implementado<a class="headerlink" href="#nao-implementado" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Proventos e dividendos</li>
+<li>Eventos corporativos</li>
+<li>Relatórios de IR</li>
+<li>Gráficos históricos de variação</li>
+</ul>
+<hr />
+<h2 id="indice">📋 Índice<a class="headerlink" href="#indice" title="Permanent link">&para;</a></h2>
+<ol>
+<li><a href="#stack-tecnológica">Stack Tecnológica</a></li>
+<li><a href="#funcionalidades-implementadas">Funcionalidades Implementadas</a></li>
+<li><a href="#sistema-de-cotações">Sistema de Cotações</a></li>
+<li><a href="#modelagem-de-dados">Modelagem de Dados</a></li>
+<li><a href="#documentação-técnica">Documentação Técnica</a></li>
+<li><a href="#próximos-passos">Próximos Passos</a></li>
+</ol>
+<hr />
+<h2 id="stack-tecnologica">Stack Tecnológica<a class="headerlink" href="#stack-tecnologica" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Camada</th>
+<th>Tecnologia</th>
+<th>Versão</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Backend</td>
+<td>Python + FastAPI</td>
+<td>3.11</td>
+<td>✅ Estável</td>
+</tr>
+<tr>
+<td>Banco de Dados</td>
+<td>SQLite (WAL mode)</td>
+<td>3.x</td>
+<td>✅ Funcional</td>
+</tr>
+<tr>
+<td>Frontend</td>
+<td>React + TypeScript</td>
+<td>18.x</td>
+<td>✅ Estável</td>
+</tr>
+<tr>
+<td>Build Tool</td>
+<td>Vite</td>
+<td>5.4.x</td>
+<td>✅ Funcional</td>
+</tr>
+<tr>
+<td>Containerização</td>
+<td>Docker Compose</td>
+<td>2.x</td>
+<td>✅ Funcional</td>
+</tr>
+<tr>
+<td>Cotações</td>
+<td>yfinance</td>
+<td>0.2.x</td>
+<td>✅ Integrado</td>
+</tr>
+<tr>
+<td>Gráficos</td>
+<td>Recharts</td>
+<td>2.10.x</td>
+<td>✅ Funcional</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="funcionalidades-implementadas_1">Funcionalidades Implementadas<a class="headerlink" href="#funcionalidades-implementadas_1" title="Permanent link">&para;</a></h2>
+<h3 id="backend-100-mvp">✅ Backend (100% MVP)<a class="headerlink" href="#backend-100-mvp" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Módulo</th>
+<th>Endpoints</th>
+<th>Status</th>
+<th>Documentação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ativos</strong></td>
+<td><code>POST/GET/PUT/DELETE /assets</code></td>
+<td>✅ Completo</td>
+<td><a href="../api/endpoints/#ativos">API</a></td>
+</tr>
+<tr>
+<td></td>
+<td><code>GET /assets/{id}/operations</code></td>
+<td>✅ Completo</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Operações</strong></td>
+<td><code>POST/GET/PUT/DELETE /operations</code></td>
+<td>✅ Completo</td>
+<td><a href="../api/endpoints/#operações">API</a></td>
+</tr>
+<tr>
+<td><strong>Dashboard</strong></td>
+<td><code>GET /dashboard/summary</code></td>
+<td>✅ Completo</td>
+<td><a href="../guides/consistencia-calculos/">Guia</a></td>
+</tr>
+<tr>
+<td><strong>Import B3</strong></td>
+<td><code>POST /import/b3</code></td>
+<td>✅ Completo</td>
+<td><a href="../REFERENCIA-TECNICA/#importação-b3">Ref</a></td>
+</tr>
+<tr>
+<td><strong>Renda Fixa</strong></td>
+<td><code>POST/GET/PUT/DELETE /fixed-income/assets</code></td>
+<td>✅ Completo</td>
+<td><a href="../renda-fixa/">Guia</a></td>
+</tr>
+<tr>
+<td></td>
+<td><code>POST /fixed-income/operations</code></td>
+<td>✅ Completo</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>GET /fixed-income/projection/{id}</code></td>
+<td>✅ Completo</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Cotações</strong></td>
+<td><code>GET /quotes/{ticker}</code></td>
+<td>✅ Completo</td>
+<td><a href="./guides/otimizacao-carteira.md">Guia</a></td>
+</tr>
+<tr>
+<td></td>
+<td><code>POST /quotes/update</code></td>
+<td>✅ Completo</td>
+<td><a href="./guides/atualizacao-cotacoes.md">Guia</a></td>
+</tr>
+<tr>
+<td></td>
+<td><code>GET /quotes</code></td>
+<td>✅ Completo</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>GET /quotes/portfolio/current</code></td>
+<td>✅ Completo</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Principais Features:</strong>
+- ✅ Classificação automática de ativos (Ações, FIIs, ETFs, RF)
+- ✅ Deduplicação de operações importadas
+- ✅ Cálculo de IR regressivo para RF
+- ✅ <strong>Sistema de cache de cotações (SQLite)</strong> 🔥
+- ✅ <strong>Atualização automática via cron job</strong> 🔥
+- ✅ <strong>Mark-to-market com cotações reais</strong> 🔥
+- ✅ <strong>Fallback para valor investido</strong> 🔥
+- ✅ Isenção automática para LCI/LCA
+- ✅ Consolidação de operações por mercado
+- ✅ Soft delete (status: ACTIVE/DELETED)</p>
+<hr />
+<h3 id="frontend-90-mvp">✅ Frontend (90% MVP)<a class="headerlink" href="#frontend-90-mvp" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Página</th>
+<th>Rota</th>
+<th>Status</th>
+<th>Funcionalidades</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Dashboard</strong></td>
+<td><code>/</code></td>
+<td>✅ <strong>Completo</strong></td>
+<td>Cards resumo, gráfico pizza, top posições, operações recentes</td>
+</tr>
+<tr>
+<td><strong>Carteira</strong></td>
+<td><code>/portfolio</code></td>
+<td>✅ <strong>Completo</strong></td>
+<td>CRUD ativos, valor mark-to-market, estatísticas otimizadas</td>
+</tr>
+<tr>
+<td><strong>Detalhes</strong></td>
+<td><code>/portfolio/:id</code></td>
+<td>✅ <strong>Completo</strong></td>
+<td>Operações por ativo, resumo por mercado, CRUD operações</td>
+</tr>
+<tr>
+<td><strong>Import</strong></td>
+<td><code>/import</code></td>
+<td>✅ <strong>Completo</strong></td>
+<td>Upload drag-and-drop, validação, feedback detalhado</td>
+</tr>
+<tr>
+<td><strong>Renda Fixa</strong></td>
+<td><code>/fixed-income</code></td>
+<td>✅ <strong>Completo</strong></td>
+<td>CRUD RF, projeções, operações, edição inline</td>
+</tr>
+<tr>
+<td><strong>Análises</strong></td>
+<td><code>/analysis</code></td>
+<td>⚠️ <strong>Placeholder</strong></td>
+<td>Apenas título e descrição</td>
+</tr>
+<tr>
+<td><strong>Config</strong></td>
+<td><code>/settings</code></td>
+<td>⚠️ <strong>Placeholder</strong></td>
+<td>Apenas título e descrição</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Principais Features:</strong>
+- ✅ <strong>Cache de cotações (&lt; 100ms carregamento)</strong> 🔥
+- ✅ <strong>Cálculos consistentes Dashboard/Carteira</strong> 🔥
+- ✅ <strong>Indicadores de loading otimizados</strong> 🔥
+- ✅ <strong>Cores para lucro/prejuízo (verde/vermelho)</strong> 🔥
+- ✅ Drag-and-drop para upload de arquivos
+- ✅ Formulários de CRUD completos com validação
+- ✅ Tabelas com ações inline (editar, deletar)
+- ✅ Confirmação de deleção com modal
+- ✅ Mensagens de erro detalhadas
+- ✅ Feedback de sucesso com toast
+- ✅ Navegação entre páginas
+- ✅ Gráficos interativos (Recharts)</p>
+<hr />
+<h2 id="sistema-de-cotacoes">Sistema de Cotações<a class="headerlink" href="#sistema-de-cotacoes" title="Permanent link">&para;</a></h2>
+<h3 id="arquitetura">Arquitetura<a class="headerlink" href="#arquitetura" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>┌─────────────────────────────────────────────────┐
+│           Fluxo de Cotações                     │
+├─────────────────────────────────────────────────┤
+│                                                 │
+│  ┌──────────┐    Cache?    ┌──────────┐       │
+│  │ Frontend ├─────────────►│ Backend  │       │
+│  └──────────┘    &lt;100ms    └────┬─────┘       │
+│                                  │              │
+│                            ┌─────▼─────┐       │
+│                            │  SQLite   │       │
+│                            │  quotes   │       │
+│                            └─────┬─────┘       │
+│                                  │              │
+│                            Cache Miss?          │
+│                                  │              │
+│                            ┌─────▼─────┐       │
+│                            │ yfinance  │       │
+│                            │ API (~1s) │       │
+│                            └─────┬─────┘       │
+│                                  │              │
+│                            ┌─────▼─────┐       │
+│                            │  Save to  │       │
+│                            │  Cache    │       │
+│                            └───────────┘       │
+│                                                 │
+│  ┌──────────┐                                  │
+│  │ Cron Job │ ──────────────────────────►      │
+│  │ 15 min   │  Atualiza cache em lote          │
+│  └──────────┘                                  │
+└─────────────────────────────────────────────────┘
+</code></pre></div>
+
+<h3 id="performance">Performance<a class="headerlink" href="#performance" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Sem Cache</th>
+<th>Com Cache</th>
+<th>Melhoria</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tempo carregamento Dashboard</td>
+<td>3-5s</td>
+<td>&lt;100ms</td>
+<td><strong>95%</strong></td>
+</tr>
+<tr>
+<td>Tempo carregamento Carteira</td>
+<td>3-5s</td>
+<td>&lt;100ms</td>
+<td><strong>95%</strong></td>
+</tr>
+<tr>
+<td>Chamadas API yfinance</td>
+<td>~20/min</td>
+<td>~1/15min</td>
+<td><strong>99%</strong></td>
+</tr>
+<tr>
+<td>Taxa de cache hit</td>
+<td>-</td>
+<td>95%+</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="estrutura-da-tabela-quotes">Estrutura da Tabela <code>quotes</code><a class="headerlink" href="#estrutura-da-tabela-quotes" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">quotes</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ticker</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">price</span><span class="w"> </span><span class="nb">REAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">change_value</span><span class="w"> </span><span class="nb">REAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">change_percent</span><span class="w"> </span><span class="nb">REAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">volume</span><span class="w"> </span><span class="nb">INTEGER</span><span class="p">,</span>
+<span class="w">    </span><span class="n">open_price</span><span class="w"> </span><span class="nb">REAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">high_price</span><span class="w"> </span><span class="nb">REAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">low_price</span><span class="w"> </span><span class="nb">REAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">previous_close</span><span class="w"> </span><span class="nb">REAL</span><span class="p">,</span>
+<span class="w">    </span><span class="k">source</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;yfinance&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">updated_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span>
+<span class="p">);</span>
+</code></pre></div>
+
+<h3 id="endpoints-de-cotacoes">Endpoints de Cotações<a class="headerlink" href="#endpoints-de-cotacoes" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Atualizar cotações em lote (cron job)</span>
+<span class="n">POST</span> <span class="o">/</span><span class="n">quotes</span><span class="o">/</span><span class="n">update</span>
+<span class="n">Response</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;12 cotações atualizadas&quot;</span><span class="p">,</span> <span class="s2">&quot;total_tickers&quot;</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span> <span class="s2">&quot;updated&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">}</span>
+
+<span class="c1"># Listar todas as cotações em cache</span>
+<span class="n">GET</span> <span class="o">/</span><span class="n">quotes</span>
+<span class="n">Response</span><span class="p">:</span> <span class="p">[{</span><span class="n">ticker</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">change_percent</span><span class="p">,</span> <span class="o">...</span><span class="p">},</span> <span class="o">...</span><span class="p">]</span>
+
+<span class="c1"># Buscar cotação específica</span>
+<span class="n">GET</span> <span class="o">/</span><span class="n">quotes</span><span class="o">/</span><span class="p">{</span><span class="n">ticker</span><span class="p">}</span>
+<span class="n">Response</span><span class="p">:</span> <span class="p">{</span><span class="n">ticker</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">change_percent</span><span class="p">,</span> <span class="n">volume</span><span class="p">,</span> <span class="o">...</span><span class="p">}</span>
+
+<span class="c1"># Cotações do portfólio (com cache)</span>
+<span class="n">GET</span> <span class="o">/</span><span class="n">quotes</span><span class="o">/</span><span class="n">portfolio</span><span class="o">/</span><span class="n">current</span>
+<span class="n">Response</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;ABEV3&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">price</span><span class="p">:</span> <span class="mf">14.11</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="s2">&quot;cache&quot;</span><span class="p">},</span>
+  <span class="s2">&quot;BTHF11&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">price</span><span class="p">:</span> <span class="mf">8.94</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="s2">&quot;yfinance&quot;</span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>📖 <strong>Documentação completa</strong>: <a href="./guides/atualizacao-cotacoes.md">guides/atualizacao-cotacoes.md</a></p>
+<hr />
+<h2 id="modelagem-de-dados">Modelagem de Dados<a class="headerlink" href="#modelagem-de-dados" title="Permanent link">&para;</a></h2>
+<h3 id="schema-atual-v220">Schema Atual (v2.2.0)<a class="headerlink" href="#schema-atual-v220" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Ativos (ações, FIIs, ETFs, RF)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">assets</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ticker</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">asset_class</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">asset_type</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">product_name</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;ACTIVE&#39;</span>
+<span class="p">);</span>
+
+<span class="c1">-- Operações de renda variável</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">operations</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">asset_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">movement_type</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">quantity</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">price</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">value</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">trade_date</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">market</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">institution</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="k">source</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;ACTIVE&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">asset_id</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">assets</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">trade_date</span><span class="p">,</span><span class="w"> </span><span class="n">movement_type</span><span class="p">,</span><span class="w"> </span><span class="n">market</span><span class="p">,</span><span class="w"> </span><span class="n">institution</span><span class="p">,</span><span class="w"> </span><span class="n">asset_id</span><span class="p">,</span><span class="w"> </span><span class="n">quantity</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="p">,</span><span class="w"> </span><span class="k">source</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">-- Cache de cotações (NOVO em v2.2.0)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">quotes</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ticker</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">price</span><span class="w"> </span><span class="nb">REAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">change_value</span><span class="w"> </span><span class="nb">REAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">change_percent</span><span class="w"> </span><span class="nb">REAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">volume</span><span class="w"> </span><span class="nb">INTEGER</span><span class="p">,</span>
+<span class="w">    </span><span class="n">open_price</span><span class="w"> </span><span class="nb">REAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">high_price</span><span class="w"> </span><span class="nb">REAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">low_price</span><span class="w"> </span><span class="nb">REAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">previous_close</span><span class="w"> </span><span class="nb">REAL</span><span class="p">,</span>
+<span class="w">    </span><span class="k">source</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;yfinance&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">updated_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span>
+<span class="p">);</span>
+
+<span class="c1">-- Renda Fixa</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">fixed_income_assets</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">asset_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">issuer</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">product_type</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">indexer</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">rate</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">maturity_date</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">issue_date</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">custody_fee</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;ACTIVE&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">asset_id</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">assets</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
+
+<p>📖 <strong>Princípio:</strong> Estado é derivado, não armazenado (event sourcing)</p>
+<hr />
+<h2 id="documentacao-tecnica">Documentação Técnica<a class="headerlink" href="#documentacao-tecnica" title="Permanent link">&para;</a></h2>
+<h3 id="documentos-principais">📚 Documentos Principais<a class="headerlink" href="#documentos-principais" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Documento</th>
+<th>Descrição</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../INDEX/">INDEX.md</a></td>
+<td>Visão geral e navegação</td>
+<td>✅ Atual</td>
+</tr>
+<tr>
+<td><a href="./">STATUS-PROJETO.md</a></td>
+<td>Este documento</td>
+<td>✅ Atual</td>
+</tr>
+<tr>
+<td><a href="../REFERENCIA-TECNICA/">REFERENCIA-TECNICA.md</a></td>
+<td>Detalhes técnicos</td>
+<td>✅ Atual</td>
+</tr>
+<tr>
+<td><a href="../renda-fixa/">renda-fixa.md</a></td>
+<td>Gestão de RF</td>
+<td>✅ Atual</td>
+</tr>
+</tbody>
+</table>
+<h3 id="guias-tecnicos-atualizados">🎯 Guias Técnicos Atualizados<a class="headerlink" href="#guias-tecnicos-atualizados" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Documento</th>
+<th>Descrição</th>
+<th>Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="./guides/atualizacao-cotacoes.md">atualizacao-cotacoes.md</a></td>
+<td>Sistema de cache e cron job</td>
+<td>16 Jan 2026</td>
+</tr>
+<tr>
+<td><a href="./guides/otimizacao-carteira.md">otimizacao-carteira.md</a></td>
+<td>Performance e cache</td>
+<td>16 Jan 2026</td>
+</tr>
+<tr>
+<td><a href="../guides/consistencia-calculos/">consistencia-calculos.md</a></td>
+<td>Correção de divergências</td>
+<td>16 Jan 2026</td>
+</tr>
+<tr>
+<td><a href="../guides/consolidacao-mercados/">consolidacao-mercados.md</a></td>
+<td>Fracionário vs Vista</td>
+<td>4 Jan 2026</td>
+</tr>
+<tr>
+<td><a href="../guides/integracao-cotacoes/">integracao-cotacoes.md</a></td>
+<td>Integração yfinance</td>
+<td>6 Jan 2026</td>
+</tr>
+<tr>
+<td><a href="../guides/crud-implementation/">crud-implementation.md</a></td>
+<td>Padrões de CRUD</td>
+<td>3 Jan 2026</td>
+</tr>
+</tbody>
+</table>
+<h3 id="arquitetura_1">🏗️ Arquitetura<a class="headerlink" href="#arquitetura_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Documento</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../architecture/principios-core/">principios-core.md</a></td>
+<td>Princípios arquiteturais</td>
+</tr>
+<tr>
+<td><a href="../api/endpoints/">endpoints.md</a></td>
+<td>Referência completa de API</td>
+</tr>
+</tbody>
+</table>
+<h3 id="documentos-arquivados">📦 Documentos Arquivados<a class="headerlink" href="#documentos-arquivados" title="Permanent link">&para;</a></h3>
+<p>Documentos históricos movidos para <a href="./archive/">archive/</a>:
+- CORRECAO-CALCULOS-CARTEIRA.md
+- DIAGNOSTICO-CONSOLIDACAO-FINAL.md
+- PENDENCIAS.md
+- guia.md, referencia.md</p>
+<hr />
+<h2 id="proximos-passos">Próximos Passos<a class="headerlink" href="#proximos-passos" title="Permanent link">&para;</a></h2>
+<h3 id="prioridade-alta-sprint-atual">🎯 Prioridade Alta (Sprint Atual)<a class="headerlink" href="#prioridade-alta-sprint-atual" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Implementar Página de Análises</strong> ⏱️ 6-8 horas</li>
+<li>Gráficos de distribuição e performance</li>
+<li>Evolução temporal do patrimônio</li>
+<li>Top 10 maiores posições</li>
+<li>
+<p>Métricas de performance</p>
+</li>
+<li>
+<p><strong>Adicionar Testes Automatizados</strong> ⏱️ 10 horas</p>
+</li>
+<li>pytest para repositories</li>
+<li>Testes de integração API</li>
+<li>
+<p>React Testing Library</p>
+</li>
+<li>
+<p><strong>Melhorias de UX</strong></p>
+</li>
+<li>Indicador visual para ativos sem cotação</li>
+<li>Tooltip explicativo (investido vs mark-to-market)</li>
+<li>Loading skeleton components</li>
+</ol>
+<h3 id="backlog">🔮 Backlog<a class="headerlink" href="#backlog" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Proventos e dividendos</li>
+<li>Relatórios de IR</li>
+<li>Eventos corporativos</li>
+<li>PWA com offline support</li>
+<li>Dark mode</li>
+<li>Migração PostgreSQL</li>
+</ul>
+<hr />
+<h2 id="conquistas-recentes">🎉 Conquistas Recentes<a class="headerlink" href="#conquistas-recentes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Data</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MVP Funcional</strong></td>
+<td>Dez 2025</td>
+<td>CRUD + Import B3</td>
+</tr>
+<tr>
+<td><strong>Renda Fixa</strong></td>
+<td>3 Jan 2026</td>
+<td>Gestão completa de RF</td>
+</tr>
+<tr>
+<td><strong>Consolidação</strong></td>
+<td>4 Jan 2026</td>
+<td>UI explicativa + docs</td>
+</tr>
+<tr>
+<td><strong>v2.1.0</strong></td>
+<td>9 Jan 2026</td>
+<td>Dashboard + cotações</td>
+</tr>
+<tr>
+<td><strong>v2.2.0</strong></td>
+<td>16 Jan 2026</td>
+<td>Cache + consistência ✅</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="metricas-de-qualidade">📊 Métricas de Qualidade<a class="headerlink" href="#metricas-de-qualidade" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Valor Atual</th>
+<th>Meta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Performance Dashboard</td>
+<td>&lt;100ms ✅</td>
+<td>&lt;200ms</td>
+</tr>
+<tr>
+<td>Performance Carteira</td>
+<td>&lt;100ms ✅</td>
+<td>&lt;200ms</td>
+</tr>
+<tr>
+<td>Taxa de cache hit</td>
+<td>95%+ ✅</td>
+<td>90%+</td>
+</tr>
+<tr>
+<td>Cobertura testes</td>
+<td>~15%</td>
+<td>80%+</td>
+</tr>
+<tr>
+<td>Consistência cálculos</td>
+<td>100% ✅</td>
+<td>100%</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>Próxima Revisão:</strong> 20/01/2026</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.tabs.link"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

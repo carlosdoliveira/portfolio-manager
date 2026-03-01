@@ -1,0 +1,1012 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Sistema web de gestão de carteira de investimentos com foco em importação B3, renda fixa e análise de performance">
+      
+      
+      
+        <link rel="canonical" href="https://carlosdoliveira.github.io/portfolio-manager/ROADMAP-RECONCILIACAO/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>🎯 Roadmap de Reconciliação de Posições - Portfolio Manager</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#roadmap-de-reconciliacao-de-posicoes" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href=".." title="Portfolio Manager" class="md-header__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Portfolio Manager
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🎯 Roadmap de Reconciliação de Posições
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Portfolio Manager" class="md-nav__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Portfolio Manager
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guia Rápido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../referencia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#diagnostico-do-problema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔍 Diagnóstico do Problema
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔍 Diagnóstico do Problema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#situacao-atual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Situação Atual
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#causa-raiz-identificada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Causa Raiz Identificada
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#impacto-nos-ativos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚨 Impacto nos Ativos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solucao-proposta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Solução Proposta
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✅ Solução Proposta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fase-1-correcao-do-importador-urgente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 1: Correção do Importador ⚡ URGENTE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fase 1: Correção do Importador ⚡ URGENTE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-identificar-registros-de-atualizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Identificar Registros de "Atualização"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-separar-eventos-corporativos-de-operacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Separar Eventos Corporativos de Operações
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-2-importacao-do-arquivo-de-posicao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 2: Importação do Arquivo de Posição 📊
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fase 2: Importação do Arquivo de Posição 📊">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-criar-endpoint-importposicao-b3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Criar Endpoint /import/posicao-b3
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-nova-tabela-position_snapshots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Nova Tabela position_snapshots
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-3-sistema-de-reconciliacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 3: Sistema de Reconciliação 🔧
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fase 3: Sistema de Reconciliação 🔧">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-endpoint-de-diagnostico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Endpoint de Diagnóstico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-correcoes-automatizadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Correções Automatizadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-4-interface-de-reconciliacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 4: Interface de Reconciliação 🖥️
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fase 4: Interface de Reconciliação 🖥️">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-pagina-adminreconciliation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Página /admin/reconciliation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cronograma-de-implementacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📅 Cronograma de Implementação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📅 Cronograma de Implementação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sprint-1-imediato-1-dia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sprint 1 (Imediato - 1 dia)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sprint-2-curto-prazo-2-dias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sprint 2 (Curto prazo - 2 dias)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sprint-3-medio-prazo-3-dias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sprint 3 (Médio prazo - 3 dias)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acao-imediata-recomendada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ Ação Imediata Recomendada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criterios-de-sucesso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Critérios de Sucesso
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="roadmap-de-reconciliacao-de-posicoes">🎯 Roadmap de Reconciliação de Posições<a class="headerlink" href="#roadmap-de-reconciliacao-de-posicoes" title="Permanent link">&para;</a></h1>
+<p><strong>Data:</strong> 17/01/2026<br />
+<strong>Status:</strong> 🔴 CRÍTICO - Posições com erro de +2.925%</p>
+<hr />
+<h2 id="diagnostico-do-problema">🔍 Diagnóstico do Problema<a class="headerlink" href="#diagnostico-do-problema" title="Permanent link">&para;</a></h2>
+<h3 id="situacao-atual">Situação Atual<a class="headerlink" href="#situacao-atual" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Posição Real (B3):</strong> 4.558,14 ações</li>
+<li><strong>Posição Sistema:</strong> 137.876,00 ações</li>
+<li><strong>Diferença:</strong> +133.317,86 ações <strong>(2.925% acima!)</strong></li>
+<li><strong>Tickers com erro:</strong> 11 de 11 (100%)</li>
+</ul>
+<h3 id="causa-raiz-identificada">Causa Raiz Identificada<a class="headerlink" href="#causa-raiz-identificada" title="Permanent link">&para;</a></h3>
+<p>O <strong>arquivo de movimentação B3</strong> (<code>movimentacao-*.xlsx</code>) contém registros de "Atualização" que NÃO são operações reais de compra/venda, mas sim <strong>snapshots de posição</strong> gerados após eventos corporativos:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">Exemplo</span><span class="w"> </span><span class="nl">ITSA4:</span>
+<span class="o">-</span><span class="w"> </span><span class="mh">2021</span><span class="o">-</span><span class="mh">08</span><span class="o">-</span><span class="mh">26</span><span class="o">:</span><span class="w"> </span><span class="mh">7</span><span class="w"> </span><span class="n">registros</span><span class="w"> </span><span class="s">&quot;Atualização&quot;</span><span class="w"> </span><span class="p">(</span><span class="n">saldo</span><span class="w"> </span><span class="n">após</span><span class="w"> </span><span class="n">bonificação</span><span class="p">)</span>
+<span class="o">-</span><span class="w"> </span><span class="mh">2023</span><span class="o">-</span><span class="mh">10</span><span class="o">-</span><span class="mh">02</span><span class="o">:</span><span class="w"> </span><span class="mh">6</span><span class="w"> </span><span class="n">registros</span><span class="w"> </span><span class="s">&quot;Atualização&quot;</span><span class="w"> </span><span class="p">(</span><span class="n">saldo</span><span class="w"> </span><span class="n">após</span><span class="w"> </span><span class="n">dividendos</span><span class="p">)</span>
+<span class="o">-</span><span class="w"> </span><span class="mh">2024</span><span class="o">-</span><span class="mh">03</span><span class="o">-</span><span class="mh">08</span><span class="o">:</span><span class="w"> </span><span class="mh">5</span><span class="w"> </span><span class="n">registros</span><span class="w"> </span><span class="s">&quot;Atualização&quot;</span><span class="w"> </span><span class="p">(</span><span class="n">saldo</span><span class="w"> </span><span class="n">após</span><span class="w"> </span><span class="n">split</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>O sistema está importando TODAS como compras</strong>, multiplicando a posição real!</p>
+<hr />
+<h2 id="impacto-nos-ativos">🚨 Impacto nos Ativos<a class="headerlink" href="#impacto-nos-ativos" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Ticker</th>
+<th>Posição B3</th>
+<th>Posição Sistema</th>
+<th>Erro (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ITSA4</td>
+<td>1.248,48</td>
+<td>56.254,00</td>
+<td>+4.406%</td>
+</tr>
+<tr>
+<td>ITSA3</td>
+<td>140,76</td>
+<td>7.380,00</td>
+<td>+5.143%</td>
+</tr>
+<tr>
+<td>JHSF3</td>
+<td>207,00</td>
+<td>8.466,00</td>
+<td>+3.989%</td>
+</tr>
+<tr>
+<td>BRSR6</td>
+<td>380,00</td>
+<td>8.270,00</td>
+<td>+2.076%</td>
+</tr>
+<tr>
+<td>KOGN3</td>
+<td>968,00</td>
+<td>7.708,00</td>
+<td>+696%</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="solucao-proposta">✅ Solução Proposta<a class="headerlink" href="#solucao-proposta" title="Permanent link">&para;</a></h2>
+<h3 id="fase-1-correcao-do-importador-urgente">Fase 1: Correção do Importador ⚡ <strong>URGENTE</strong><a class="headerlink" href="#fase-1-correcao-do-importador-urgente" title="Permanent link">&para;</a></h3>
+<h4 id="11-identificar-registros-de-atualizacao">1.1. Identificar Registros de "Atualização"<a class="headerlink" href="#11-identificar-registros-de-atualizacao" title="Permanent link">&para;</a></h4>
+<p>No arquivo de movimentação, a coluna <code>Movimentação</code> contém:
+- ✅ <strong>Operações reais</strong>: "Compra", "Venda", "Transferência"
+- ❌ <strong>Não-operações</strong>: "Atualização", "Rendimento" (sem valor de operação)</p>
+<p><strong>Ação:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Em importer.py, ao processar movimentação:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_real_operation</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retorna True apenas para operações que movimentam posição real.</span>
+<span class="sd">    Filtra snapshots de saldo e rendimentos.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">movimentacao</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Movimentação&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Atualização de saldo = snapshot, não é operação real</span>
+    <span class="k">if</span> <span class="s1">&#39;Atualização&#39;</span> <span class="ow">in</span> <span class="n">movimentacao</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># Rendimento sem operação (dividendos, JCP)</span>
+    <span class="k">if</span> <span class="s1">&#39;Rendimento&#39;</span> <span class="ow">in</span> <span class="n">movimentacao</span> <span class="ow">and</span> <span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Quantidade&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># Bonificação com quantidade &gt; 0 É operação real (adiciona ações)</span>
+    <span class="k">if</span> <span class="s1">&#39;Bonificação&#39;</span> <span class="ow">in</span> <span class="n">movimentacao</span> <span class="ow">and</span> <span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Quantidade&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="c1"># Compra/Venda tradicionais</span>
+    <span class="k">if</span> <span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Entrada/Saída&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Credito&#39;</span><span class="p">,</span> <span class="s1">&#39;Debito&#39;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">return</span> <span class="kc">False</span>
+</code></pre></div>
+
+<h4 id="12-separar-eventos-corporativos-de-operacoes">1.2. Separar Eventos Corporativos de Operações<a class="headerlink" href="#12-separar-eventos-corporativos-de-operacoes" title="Permanent link">&para;</a></h4>
+<p><strong>Criar nova lógica:</strong>
+- <strong>Operações reais</strong> → Tabela <code>operations</code>
+- <strong>Eventos informativos</strong> → Tabela <code>corporate_events_log</code> (nova)</p>
+<hr />
+<h3 id="fase-2-importacao-do-arquivo-de-posicao">Fase 2: Importação do Arquivo de Posição 📊<a class="headerlink" href="#fase-2-importacao-do-arquivo-de-posicao" title="Permanent link">&para;</a></h3>
+<h4 id="21-criar-endpoint-importposicao-b3">2.1. Criar Endpoint <code>/import/posicao-b3</code><a class="headerlink" href="#21-criar-endpoint-importposicao-b3" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/import/posicao-b3&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">import_posicao_b3</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="n">UploadFile</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Importa arquivo de posição B3 (posicao-*.xlsx) e usa</span>
+<span class="sd">    como fonte de verdade para reconciliação.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">file</span><span class="p">)</span>
+
+    <span class="c1"># Validar colunas</span>
+    <span class="n">required</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Código de Negociação&#39;</span><span class="p">,</span> <span class="s1">&#39;Quantidade&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">required</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Arquivo inválido&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Criar snapshot de posição</span>
+    <span class="n">snapshot_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="n">ticker</span> <span class="o">=</span> <span class="n">extract_ticker</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Código de Negociação&#39;</span><span class="p">])</span>
+        <span class="n">qty_real</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Quantidade&#39;</span><span class="p">]</span>
+
+        <span class="c1"># Buscar posição calculada no sistema</span>
+        <span class="n">qty_sistema</span> <span class="o">=</span> <span class="n">calculate_position</span><span class="p">(</span><span class="n">ticker</span><span class="p">)</span>
+
+        <span class="c1"># Se diferente, registrar discrepância</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">qty_sistema</span> <span class="o">-</span> <span class="n">qty_real</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.01</span><span class="p">:</span>
+            <span class="n">register_reconciliation_issue</span><span class="p">(</span>
+                <span class="n">ticker</span><span class="o">=</span><span class="n">ticker</span><span class="p">,</span>
+                <span class="n">qty_expected</span><span class="o">=</span><span class="n">qty_real</span><span class="p">,</span>
+                <span class="n">qty_calculated</span><span class="o">=</span><span class="n">qty_sistema</span><span class="p">,</span>
+                <span class="n">snapshot_date</span><span class="o">=</span><span class="n">snapshot_date</span>
+            <span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span> <span class="s2">&quot;issues&quot;</span><span class="p">:</span> <span class="n">get_reconciliation_issues</span><span class="p">()}</span>
+</code></pre></div>
+
+<h4 id="22-nova-tabela-position_snapshots">2.2. Nova Tabela <code>position_snapshots</code><a class="headerlink" href="#22-nova-tabela-position_snapshots" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">position_snapshots</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">asset_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">quantity</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">snapshot_date</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="k">source</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;B3&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">asset_id</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">assets</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
+
+<hr />
+<h3 id="fase-3-sistema-de-reconciliacao">Fase 3: Sistema de Reconciliação 🔧<a class="headerlink" href="#fase-3-sistema-de-reconciliacao" title="Permanent link">&para;</a></h3>
+<h4 id="31-endpoint-de-diagnostico">3.1. Endpoint de Diagnóstico<a class="headerlink" href="#31-endpoint-de-diagnostico" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/admin/reconciliation/diagnosis&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">reconciliation_diagnosis</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compara posição sistema vs último snapshot B3.</span>
+<span class="sd">    Retorna lista de discrepâncias com sugestões de correção.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">issues</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">asset</span> <span class="ow">in</span> <span class="n">get_all_assets</span><span class="p">():</span>
+        <span class="n">qty_sistema</span> <span class="o">=</span> <span class="n">calculate_position</span><span class="p">(</span><span class="n">asset</span><span class="o">.</span><span class="n">ticker</span><span class="p">)</span>
+        <span class="n">qty_snapshot</span> <span class="o">=</span> <span class="n">get_latest_snapshot_position</span><span class="p">(</span><span class="n">asset</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">qty_snapshot</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">qty_sistema</span> <span class="o">-</span> <span class="n">qty_snapshot</span>
+
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.01</span><span class="p">:</span>
+            <span class="c1"># Analisar causa</span>
+            <span class="n">possible_causes</span> <span class="o">=</span> <span class="n">analyze_discrepancy</span><span class="p">(</span><span class="n">asset</span><span class="o">.</span><span class="n">ticker</span><span class="p">,</span> <span class="n">diff</span><span class="p">)</span>
+
+            <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s2">&quot;ticker&quot;</span><span class="p">:</span> <span class="n">asset</span><span class="o">.</span><span class="n">ticker</span><span class="p">,</span>
+                <span class="s2">&quot;qty_expected&quot;</span><span class="p">:</span> <span class="n">qty_snapshot</span><span class="p">,</span>
+                <span class="s2">&quot;qty_calculated&quot;</span><span class="p">:</span> <span class="n">qty_sistema</span><span class="p">,</span>
+                <span class="s2">&quot;difference&quot;</span><span class="p">:</span> <span class="n">diff</span><span class="p">,</span>
+                <span class="s2">&quot;possible_causes&quot;</span><span class="p">:</span> <span class="n">possible_causes</span><span class="p">,</span>
+                <span class="s2">&quot;suggested_actions&quot;</span><span class="p">:</span> <span class="n">suggest_corrections</span><span class="p">(</span><span class="n">asset</span><span class="o">.</span><span class="n">ticker</span><span class="p">,</span> <span class="n">diff</span><span class="p">)</span>
+            <span class="p">})</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;issues&quot;</span><span class="p">:</span> <span class="n">issues</span><span class="p">,</span> <span class="s2">&quot;total_issues&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">issues</span><span class="p">)}</span>
+</code></pre></div>
+
+<h4 id="32-correcoes-automatizadas">3.2. Correções Automatizadas<a class="headerlink" href="#32-correcoes-automatizadas" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/admin/reconciliation/auto-fix&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">auto_fix_positions</span><span class="p">(</span><span class="n">ticker</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Aplica correções automáticas baseadas em regras:</span>
+<span class="sd">    1. Remove operações duplicadas (mesma data, qty, preço)</span>
+<span class="sd">    2. Remove &quot;Atualizações&quot; importadas incorretamente</span>
+<span class="sd">    3. Ajusta posição final para bater com snapshot B3</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">issues_fixed</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Se ticker específico ou todos</span>
+    <span class="n">tickers</span> <span class="o">=</span> <span class="p">[</span><span class="n">ticker</span><span class="p">]</span> <span class="k">if</span> <span class="n">ticker</span> <span class="k">else</span> <span class="n">get_all_tickers</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tickers</span><span class="p">:</span>
+        <span class="c1"># 1. Remover atualizações duplicadas</span>
+        <span class="n">removed</span> <span class="o">=</span> <span class="n">remove_duplicate_updates</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+        <span class="c1"># 2. Recalcular posição</span>
+        <span class="n">new_position</span> <span class="o">=</span> <span class="n">calculate_position</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">target_position</span> <span class="o">=</span> <span class="n">get_latest_snapshot_position_by_ticker</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+        <span class="c1"># 3. Se ainda diferente, criar ajuste manual</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">new_position</span> <span class="o">-</span> <span class="n">target_position</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.01</span><span class="p">:</span>
+            <span class="n">create_manual_adjustment</span><span class="p">(</span>
+                <span class="n">ticker</span><span class="o">=</span><span class="n">t</span><span class="p">,</span>
+                <span class="n">quantity_adjustment</span><span class="o">=</span><span class="n">target_position</span> <span class="o">-</span> <span class="n">new_position</span><span class="p">,</span>
+                <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;Reconciliação automática com posição B3&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">issues_fixed</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s2">&quot;ticker&quot;</span><span class="p">:</span> <span class="n">t</span><span class="p">,</span>
+            <span class="s2">&quot;operations_removed&quot;</span><span class="p">:</span> <span class="n">removed</span><span class="p">,</span>
+            <span class="s2">&quot;final_adjustment&quot;</span><span class="p">:</span> <span class="n">target_position</span> <span class="o">-</span> <span class="n">new_position</span>
+        <span class="p">})</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;fixed&quot;</span><span class="p">:</span> <span class="n">issues_fixed</span><span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h3 id="fase-4-interface-de-reconciliacao">Fase 4: Interface de Reconciliação 🖥️<a class="headerlink" href="#fase-4-interface-de-reconciliacao" title="Permanent link">&para;</a></h3>
+<h4 id="41-pagina-adminreconciliation">4.1. Página <code>/admin/reconciliation</code><a class="headerlink" href="#41-pagina-adminreconciliation" title="Permanent link">&para;</a></h4>
+<p><strong>Componentes:</strong>
+1. <strong>Upload de Posição B3</strong>
+   - Drag &amp; drop do arquivo <code>posicao-*.xlsx</code>
+   - Validação e preview antes de importar</p>
+<ol>
+<li>
+<p><strong>Dashboard de Discrepâncias</strong>
+   <code>┌─────────────────────────────────────────┐
+   │ 📊 Status de Reconciliação              │
+   ├─────────────────────────────────────────┤
+   │ ✗ 11 ativos com diferença               │
+   │ ✓ 0 ativos reconciliados                │
+   │ ⚠️ Diferença total: +133.317,86 ações   │
+   └─────────────────────────────────────────┘</code></p>
+</li>
+<li>
+<p><strong>Lista de Problemas</strong></p>
+</li>
+<li>Tabela com ticker, posição B3, posição sistema, diferença</li>
+<li>
+<p>Ações: "Ver Detalhes", "Ajustar Automaticamente", "Ajustar Manualmente"</p>
+</li>
+<li>
+<p><strong>Wizard de Correção</strong></p>
+</li>
+<li>Passo 1: Analisar causas</li>
+<li>Passo 2: Revisar operações suspeitas</li>
+<li>Passo 3: Aprovar correções</li>
+<li>Passo 4: Aplicar e validar</li>
+</ol>
+<hr />
+<h2 id="cronograma-de-implementacao">📅 Cronograma de Implementação<a class="headerlink" href="#cronograma-de-implementacao" title="Permanent link">&para;</a></h2>
+<h3 id="sprint-1-imediato-1-dia">Sprint 1 (Imediato - 1 dia)<a class="headerlink" href="#sprint-1-imediato-1-dia" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Corrigir importador para <strong>filtrar "Atualizações"</strong></li>
+<li>[ ] Resetar banco e reimportar sem duplicatas</li>
+<li>[ ] Validar posições contra arquivo B3</li>
+</ul>
+<h3 id="sprint-2-curto-prazo-2-dias">Sprint 2 (Curto prazo - 2 dias)<a class="headerlink" href="#sprint-2-curto-prazo-2-dias" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Criar tabela <code>position_snapshots</code></li>
+<li>[ ] Implementar endpoint <code>/import/posicao-b3</code></li>
+<li>[ ] Criar endpoint de diagnóstico</li>
+</ul>
+<h3 id="sprint-3-medio-prazo-3-dias">Sprint 3 (Médio prazo - 3 dias)<a class="headerlink" href="#sprint-3-medio-prazo-3-dias" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Sistema de correção automática</li>
+<li>[ ] Interface de reconciliação</li>
+<li>[ ] Testes end-to-end</li>
+</ul>
+<hr />
+<h2 id="acao-imediata-recomendada">⚠️ Ação Imediata Recomendada<a class="headerlink" href="#acao-imediata-recomendada" title="Permanent link">&para;</a></h2>
+<p><strong>ANTES DE CONTINUAR O DESENVOLVIMENTO:</strong></p>
+<ol>
+<li><strong>Parar importações</strong> até corrigir o importador</li>
+<li><strong>Resetar banco de dados</strong></li>
+<li><strong>Aplicar fix no <code>importer.py</code></strong> (Fase 1.1)</li>
+<li><strong>Reimportar arquivo de movimentação</strong></li>
+<li><strong>Validar contra <code>posicao-2026-01-17-17-06-15.xlsx</code></strong></li>
+</ol>
+<hr />
+<h2 id="criterios-de-sucesso">🎯 Critérios de Sucesso<a class="headerlink" href="#criterios-de-sucesso" title="Permanent link">&para;</a></h2>
+<p>✅ <strong>Posições reconciliadas:</strong>
+- Diferença máxima: ±0,01 ação por ticker
+- 100% dos tickers do arquivo B3 validados</p>
+<p>✅ <strong>Sistema confiável:</strong>
+- Import idempotente (mesma posição em múltiplas importações)
+- Dashboard mostra posições corretas
+- Reconciliação automática funcional</p>
+<hr />
+<h2 id="referencias">📚 Referências<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Arquivo de posição: <code>samples/posicao-2026-01-17-17-06-15.xlsx</code></li>
+<li>Arquivo de movimentação: <code>samples/movimentacao-2026-01-17-15-40-04.xlsx</code></li>
+<li>Documentação B3: https://www.b3.com.br/data/files/8F/99/52/81/B7AF081066FF818E9B2BA2A8/Manual-de-Importacao-de-Dados.pdf</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.tabs.link"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

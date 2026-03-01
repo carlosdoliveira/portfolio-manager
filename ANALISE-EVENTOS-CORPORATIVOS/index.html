@@ -1,0 +1,2633 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Sistema web de gestão de carteira de investimentos com foco em importação B3, renda fixa e análise de performance">
+      
+      
+      
+        <link rel="canonical" href="https://carlosdoliveira.github.io/portfolio-manager/ANALISE-EVENTOS-CORPORATIVOS/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>📊 Análise de Eventos Corporativos — Portfolio Manager v2 - Portfolio Manager</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#analise-de-eventos-corporativos-portfolio-manager-v2" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href=".." title="Portfolio Manager" class="md-header__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Portfolio Manager
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              📊 Análise de Eventos Corporativos — Portfolio Manager v2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Portfolio Manager" class="md-nav__button md-logo" aria-label="Portfolio Manager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Portfolio Manager
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/carlosdoliveira/portfolio-manager" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    carlosdoliveira/portfolio-manager
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guia Rápido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../referencia.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sumario-executivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Sumário Executivo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Sumário Executivo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#impacto-critico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚨 Impacto Crítico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Índice
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-eventos-identificados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔍 Tipos de Eventos Identificados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔍 Tipos de Eventos Identificados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#distribuicao-de-eventos-corporativos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Distribuição de Eventos Corporativos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analise-detalhada-por-evento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Análise Detalhada por Evento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Análise Detalhada por Evento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-bonificacao-em-ativos-15-ocorrencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 🎁 Bonificação em Ativos (15 ocorrências)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 🎁 Bonificação em Ativos (15 ocorrências)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#casos-encontrados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Casos Encontrados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Casos Encontrados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#itsa-itausa-9-bonificacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ITSA (Itaúsa) — 9 bonificações
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cogn3-cogna-educacao-1-bonificacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        COGN3 (Cogna Educação) — 1 bonificação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#klbn4-klabin-2-bonificacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        KLBN4 (Klabin) — 2 bonificações
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-atual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ Problema Atual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-desdobramento-3-ocorrencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 🔀 Desdobramento (3 ocorrências)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 🔀 Desdobramento (3 ocorrências)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#casos-encontrados_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Casos Encontrados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Casos Encontrados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bcff11-btg-pactual-fundo-de-fundos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BCFF11 (BTG Pactual Fundo de Fundos)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vino11-vinci-offices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VINO11 (Vinci Offices)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b3sa3-b3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B3SA3 (B3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-atual_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ Problema Atual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-direito-de-subscricao-35-ocorrencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 📜 Direito de Subscrição (35 ocorrências)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 📜 Direito de Subscrição (35 ocorrências)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#casos-mais-recentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Casos Mais Recentes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fluxo-completo-exemplo-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fluxo Completo (exemplo real)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-atual_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ Problema Atual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-atualizacao-de-saldo-14-ocorrencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 🔢 Atualização de Saldo (14 ocorrências)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 🔢 Atualização de Saldo (14 ocorrências)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#casos-encontrados_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Casos Encontrados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Casos Encontrados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cogn3-multiplas-atualizacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        COGN3 (múltiplas atualizações)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outros-ativos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outros ativos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-atual_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ Problema Atual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-transferencia-liquidacao-143-ocorrencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 🔄 Transferência - Liquidação (143 ocorrências)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 🔄 Transferência - Liquidação (143 ocorrências)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#padrao-identificado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Padrão Identificado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-atual_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ Problema Atual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-mudancas-de-nometicker-24-produtos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 🏷️ Mudanças de Nome/Ticker (24 produtos)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 🏷️ Mudanças de Nome/Ticker (24 produtos)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#casos-criticos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Casos Críticos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Casos Críticos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hgru11-mudanca-de-gestora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HGRU11 — Mudança de gestora
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trpl4-isae4-mudanca-de-ticker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TRPL4 → ISAE4 — Mudança de ticker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizs3-wizc3-mudanca-de-ticker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WIZS3 → WIZC3 — Mudança de ticker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vvar3-mudanca-de-nome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VVAR3 — Mudança de nome
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recr11rect11-mudanca-de-gestora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RECR11/RECT11 — Mudança de gestora
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-atual_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ Problema Atual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-leilao-de-fracao-10-ocorrencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 🎯 Leilão de Fração (10 ocorrências)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 🎯 Leilão de Fração (10 ocorrências)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#casos-encontrados_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Casos Encontrados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-atual_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ Problema Atual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#casos-criticos-encontrados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚨 Casos Críticos Encontrados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚨 Casos Críticos Encontrados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caso-1-cogn3-multiplas-atualizacoes-nao-explicadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso 1: COGN3 — Múltiplas Atualizações Não Explicadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caso-2-trpl4-isae4-migracao-de-ticker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso 2: TRPL4 → ISAE4 — Migração de Ticker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caso-3-itsa-bonificacoes-anuais-subscricoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso 3: ITSA — Bonificações Anuais + Subscrições
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#impacto-na-integridade-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💥 Impacto na Integridade de Dados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="💥 Impacto na Integridade de Dados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-posicao-incorreta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Posição Incorreta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-preco-medio-distorcido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Preço Médio Distorcido
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-reconciliacao-impossivel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Reconciliação Impossível
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-dashboard-enganoso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Dashboard Enganoso
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recomendacoes-de-implementacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Recomendações de Implementação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Recomendações de Implementação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fase-1-fundacao-sprint-1-2-critico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 1: Fundação (Sprint 1-2) — CRÍTICO
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fase 1: Fundação (Sprint 1-2) — CRÍTICO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-nova-tabela-corporate_events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Nova Tabela: corporate_events
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-nova-tabela-asset_aliases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Nova Tabela: asset_aliases
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-atualizar-operations-adicionar-tipo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Atualizar operations — Adicionar tipo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-servico-corporateeventsservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Serviço: CorporateEventsService
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-2-import-inteligente-sprint-3-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 2: Import Inteligente (Sprint 3-4)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fase 2: Import Inteligente (Sprint 3-4)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-atualizar-b3importer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Atualizar B3Importer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-endpoint-post-importb3with-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Endpoint: POST /import/b3/with-events
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-3-reconciliacao-e-auditoria-sprint-5-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 3: Reconciliação e Auditoria (Sprint 5-6)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fase 3: Reconciliação e Auditoria (Sprint 5-6)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-ferramenta-de-reconciliacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Ferramenta de Reconciliação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-endpoint-post-reconciliationcheck" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Endpoint: POST /reconciliation/check
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-4-interface-de-usuario-sprint-7-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 4: Interface de Usuário (Sprint 7-8)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fase 4: Interface de Usuário (Sprint 7-8)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-pagina-corporate-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Página: /corporate-events
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-modal-registro-manual-de-evento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Modal: Registro Manual de Evento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-dashboard-alertas-de-inconsistencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. Dashboard: Alertas de Inconsistência
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priorizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📅 Priorização
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📅 Priorização">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prioridade-critica-sprint-1-2-2-semanas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔥 Prioridade CRÍTICA (Sprint 1-2) — 2 semanas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prioridade-alta-sprint-3-4-2-semanas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚨 Prioridade ALTA (Sprint 3-4) — 2 semanas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prioridade-media-sprint-5-6-3-semanas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ Prioridade MÉDIA (Sprint 5-6) — 3 semanas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prioridade-baixa-sprint-7-continuo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔷 Prioridade BAIXA (Sprint 7+) — Contínuo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arquitetura-proposta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🏗️ Arquitetura Proposta
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🏗️ Arquitetura Proposta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fluxo-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fluxo de Dados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo-de-calculo-com-eventos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de Cálculo com Eventos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metricas-de-sucesso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Métricas de Sucesso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Métricas de Sucesso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kpis-tecnicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        KPIs Técnicos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kpis-de-negocio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        KPIs de Negócio
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#garantias-de-integridade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔐 Garantias de Integridade
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔐 Garantias de Integridade">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-auditoria-completa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Auditoria Completa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-validacao-de-consistencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Validação de Consistência
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-snapshot-periodico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Snapshot Periódico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-de-implementacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Notas de Implementação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📝 Notas de Implementação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#desafios-tecnicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Desafios Técnicos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#casos-de-teste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Casos de Teste
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Conclusão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Conclusão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#riscos-imediatos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Riscos Imediatos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficios-da-implementacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Benefícios da Implementação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esforco-estimado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esforço Estimado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="analise-de-eventos-corporativos-portfolio-manager-v2">📊 Análise de Eventos Corporativos — Portfolio Manager v2<a class="headerlink" href="#analise-de-eventos-corporativos-portfolio-manager-v2" title="Permanent link">&para;</a></h1>
+<p><strong>Data da Análise:</strong> 17 de Janeiro de 2026<br />
+<strong>Arquivo Analisado:</strong> <code>movimentacao-2026-01-17-15-40-04.xlsx</code><br />
+<strong>Total de Registros:</strong> 1,399 movimentações<br />
+<strong>Período:</strong> 2019 a 2026</p>
+<hr />
+<h2 id="sumario-executivo">🎯 Sumário Executivo<a class="headerlink" href="#sumario-executivo" title="Permanent link">&para;</a></h2>
+<p>Esta análise identificou <strong>7 tipos críticos de eventos corporativos</strong> que atualmente <strong>não são tratados adequadamente</strong> pelo sistema Portfolio Manager v2. Estes eventos podem causar <strong>inconsistências graves</strong> nas posições, cálculos de preço médio e P&amp;L se não forem implementados.</p>
+<h3 id="impacto-critico">🚨 Impacto Crítico<a class="headerlink" href="#impacto-critico" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>15 bonificações</strong> de ações (ITSA, COGN3, KLBN4) não registradas</li>
+<li><strong>3 desdobramentos</strong> (BCFF11, VINO11, B3SA3) ignorados</li>
+<li><strong>35 direitos de subscrição</strong> exercidos sem rastreamento</li>
+<li><strong>10 leilões de fração</strong> não consolidados</li>
+<li><strong>14 atualizações</strong> de saldo por eventos externos</li>
+<li><strong>24 produtos com múltiplos nomes</strong> causando fragmentação</li>
+<li><strong>143 transferências de custódia</strong> não conciliadas</li>
+</ul>
+<hr />
+<h2 id="indice">📋 Índice<a class="headerlink" href="#indice" title="Permanent link">&para;</a></h2>
+<ol>
+<li><a href="#tipos-de-eventos-identificados">Tipos de Eventos Identificados</a></li>
+<li><a href="#análise-detalhada-por-evento">Análise Detalhada por Evento</a></li>
+<li><a href="#casos-críticos-encontrados">Casos Críticos Encontrados</a></li>
+<li><a href="#impacto-na-integridade-de-dados">Impacto na Integridade de Dados</a></li>
+<li><a href="#recomendações-de-implementação">Recomendações de Implementação</a></li>
+<li><a href="#priorização">Priorização</a></li>
+<li><a href="#arquitetura-proposta">Arquitetura Proposta</a></li>
+</ol>
+<hr />
+<h2 id="tipos-de-eventos-identificados">🔍 Tipos de Eventos Identificados<a class="headerlink" href="#tipos-de-eventos-identificados" title="Permanent link">&para;</a></h2>
+<h3 id="distribuicao-de-eventos-corporativos">Distribuição de Eventos Corporativos<a class="headerlink" href="#distribuicao-de-eventos-corporativos" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tipo de Evento</th>
+<th>Ocorrências</th>
+<th>Status Atual</th>
+<th>Impacto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Rendimento</strong> (Dividendos/JCP de FIIs)</td>
+<td>476</td>
+<td>⚠️ Não rastreado</td>
+<td>Médio</td>
+</tr>
+<tr>
+<td><strong>Juros Sobre Capital Próprio</strong></td>
+<td>246</td>
+<td>⚠️ Não rastreado</td>
+<td>Alto</td>
+</tr>
+<tr>
+<td><strong>Dividendo</strong></td>
+<td>171</td>
+<td>⚠️ Não rastreado</td>
+<td>Alto</td>
+</tr>
+<tr>
+<td><strong>Transferência - Liquidação</strong></td>
+<td>143</td>
+<td>❌ Ignorado</td>
+<td>Crítico</td>
+</tr>
+<tr>
+<td><strong>Direito de Subscrição</strong></td>
+<td>35</td>
+<td>❌ Ignorado</td>
+<td>Crítico</td>
+</tr>
+<tr>
+<td><strong>Bonificação em Ativos</strong></td>
+<td>15</td>
+<td>❌ <strong>CRÍTICO</strong></td>
+<td><strong>Crítico</strong></td>
+</tr>
+<tr>
+<td><strong>Atualização</strong></td>
+<td>14</td>
+<td>❌ Ignorado</td>
+<td>Alto</td>
+</tr>
+<tr>
+<td><strong>Desdobro</strong></td>
+<td>3</td>
+<td>❌ <strong>CRÍTICO</strong></td>
+<td><strong>Crítico</strong></td>
+</tr>
+<tr>
+<td><strong>Leilão de Fração</strong></td>
+<td>10</td>
+<td>⚠️ Parcial</td>
+<td>Médio</td>
+</tr>
+<tr>
+<td><strong>Fração em Ativos</strong></td>
+<td>10</td>
+<td>⚠️ Parcial</td>
+<td>Médio</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="analise-detalhada-por-evento">📊 Análise Detalhada por Evento<a class="headerlink" href="#analise-detalhada-por-evento" title="Permanent link">&para;</a></h2>
+<h3 id="1-bonificacao-em-ativos-15-ocorrencias">1. 🎁 Bonificação em Ativos (15 ocorrências)<a class="headerlink" href="#1-bonificacao-em-ativos-15-ocorrencias" title="Permanent link">&para;</a></h3>
+<p><strong>Descrição:</strong> A empresa distribui novas ações gratuitamente aos acionistas proporcionalmente à sua participação.</p>
+<h4 id="casos-encontrados">Casos Encontrados<a class="headerlink" href="#casos-encontrados" title="Permanent link">&para;</a></h4>
+<h5 id="itsa-itausa-9-bonificacoes">ITSA (Itaúsa) — 9 bonificações<a class="headerlink" href="#itsa-itausa-9-bonificacoes" title="Permanent link">&para;</a></h5>
+<div class="codehilite"><pre><span></span><code>📅 22/12/2025: +2.76 ITSA3 + +24.48 ITSA4
+📅 04/12/2024: +6.60 ITSA3 + +58.30 ITSA4
+📅 29/11/2023: +6.30 ITSA3 + +55.55 ITSA4
+📅 14/11/2022: +11.50 ITSA3 + +82.90 ITSA4
+📅 22/12/2021: +5.50 ITSA3 + +38.05 ITSA4
+</code></pre></div>
+
+<p><strong>Proporção:</strong> Aproximadamente 10% ao ano (bonificação de 1:10)</p>
+<h5 id="cogn3-cogna-educacao-1-bonificacao">COGN3 (Cogna Educação) — 1 bonificação<a class="headerlink" href="#cogn3-cogna-educacao-1-bonificacao" title="Permanent link">&para;</a></h5>
+<div class="codehilite"><pre><span></span><code>📅 29/12/2025: +88.0 COGN3
+</code></pre></div>
+
+<h5 id="klbn4-klabin-2-bonificacoes">KLBN4 (Klabin) — 2 bonificações<a class="headerlink" href="#klbn4-klabin-2-bonificacoes" title="Permanent link">&para;</a></h5>
+<div class="codehilite"><pre><span></span><code>📅 19/12/2025: +9.9 KLBN4
+📅 08/05/2024: +90.0 KLBN4
+</code></pre></div>
+
+<h4 id="problema-atual">⚠️ Problema Atual<a class="headerlink" href="#problema-atual" title="Permanent link">&para;</a></h4>
+<p>No sistema atual:
+1. ✅ Import detecta operação de bonificação
+2. ❌ <strong>Quantidade não é creditada na posição</strong>
+3. ❌ <strong>Preço médio não é recalculado</strong>
+4. ❌ <strong>Histórico de eventos não é armazenado</strong></p>
+<p><strong>Exemplo de impacto:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="n">Situação</span><span class="w"> </span><span class="nl">Real:</span>
+<span class="w">  </span><span class="n">Posição</span><span class="w"> </span><span class="nl">inicial:</span><span class="w"> </span><span class="mh">100</span><span class="w"> </span><span class="n">ITSA4</span><span class="w"> </span><span class="p">@</span><span class="w"> </span><span class="n">R</span><span class="err">$</span><span class="w"> </span><span class="mh">10</span><span class="p">,</span><span class="mh">00</span><span class="w"> </span><span class="p">(</span><span class="nl">custo:</span><span class="w"> </span><span class="n">R</span><span class="err">$</span><span class="w"> </span><span class="mf">1.000</span><span class="p">)</span>
+<span class="w">  </span><span class="nl">Bonificação:</span><span class="w"> </span><span class="o">+</span><span class="mh">10</span><span class="w"> </span><span class="n">ITSA4</span><span class="w"> </span><span class="p">@</span><span class="w"> </span><span class="n">R</span><span class="err">$</span><span class="w"> </span><span class="mh">0</span><span class="p">,</span><span class="mh">00</span>
+<span class="w">  </span><span class="n">Posição</span><span class="w"> </span><span class="nl">correta:</span><span class="w"> </span><span class="mh">110</span><span class="w"> </span><span class="n">ITSA4</span><span class="w"> </span><span class="p">@</span><span class="w"> </span><span class="n">R</span><span class="err">$</span><span class="w"> </span><span class="mh">9</span><span class="p">,</span><span class="mh">09</span><span class="w"> </span><span class="p">(</span><span class="nl">custo:</span><span class="w"> </span><span class="n">R</span><span class="err">$</span><span class="w"> </span><span class="mf">1.000</span><span class="p">)</span>
+
+<span class="n">Sistema</span><span class="w"> </span><span class="nl">Atual:</span>
+<span class="w">  </span><span class="n">Posição</span><span class="w"> </span><span class="nl">registrada:</span><span class="w"> </span><span class="mh">100</span><span class="w"> </span><span class="n">ITSA4</span><span class="w"> </span><span class="p">@</span><span class="w"> </span><span class="n">R</span><span class="err">$</span><span class="w"> </span><span class="mh">10</span><span class="p">,</span><span class="mh">00</span><span class="w"> </span><span class="err">❌</span>
+<span class="w">  </span><span class="n">Posição</span><span class="w"> </span><span class="kt">real</span><span class="w"> </span><span class="n">na</span><span class="w"> </span><span class="nl">B3:</span><span class="w"> </span><span class="mh">110</span><span class="w"> </span><span class="n">ITSA4</span>
+<span class="w">  </span><span class="nl">DESCASAMENTO:</span><span class="w"> </span><span class="o">-</span><span class="mh">10</span><span class="w"> </span><span class="n">ações</span>
+</code></pre></div>
+
+<hr />
+<h3 id="2-desdobramento-3-ocorrencias">2. 🔀 Desdobramento (3 ocorrências)<a class="headerlink" href="#2-desdobramento-3-ocorrencias" title="Permanent link">&para;</a></h3>
+<p><strong>Descrição:</strong> A empresa divide cada ação em múltiplas ações, reduzindo o preço proporcionalmente.</p>
+<h4 id="casos-encontrados_1">Casos Encontrados<a class="headerlink" href="#casos-encontrados_1" title="Permanent link">&para;</a></h4>
+<h5 id="bcff11-btg-pactual-fundo-de-fundos">BCFF11 (BTG Pactual Fundo de Fundos)<a class="headerlink" href="#bcff11-btg-pactual-fundo-de-fundos" title="Permanent link">&para;</a></h5>
+<div class="codehilite"><pre><span></span><code>📅 30/11/2023: +147 cotas (desdobro 1:2 → cada cota virou 2)
+</code></pre></div>
+
+<h5 id="vino11-vinci-offices">VINO11 (Vinci Offices)<a class="headerlink" href="#vino11-vinci-offices" title="Permanent link">&para;</a></h5>
+<div class="codehilite"><pre><span></span><code>📅 08/08/2023: +244 cotas (desdobro 1:2 → cada cota virou 2)
+</code></pre></div>
+
+<h5 id="b3sa3-b3">B3SA3 (B3)<a class="headerlink" href="#b3sa3-b3" title="Permanent link">&para;</a></h5>
+<div class="codehilite"><pre><span></span><code>📅 18/05/2021: +62 ações (desdobro 1:2 → cada ação virou 2)
+</code></pre></div>
+
+<h4 id="problema-atual_1">⚠️ Problema Atual<a class="headerlink" href="#problema-atual_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="n">Situação</span><span class="w"> </span><span class="nl">Real:</span>
+<span class="w">  </span><span class="n">Posição</span><span class="w"> </span><span class="nl">antes:</span><span class="w"> </span><span class="mh">100</span><span class="w"> </span><span class="n">VINO11</span><span class="w"> </span><span class="p">@</span><span class="w"> </span><span class="n">R</span><span class="err">$</span><span class="w"> </span><span class="mh">100</span><span class="p">,</span><span class="mh">00</span><span class="w"> </span><span class="p">(</span><span class="nl">custo:</span><span class="w"> </span><span class="n">R</span><span class="err">$</span><span class="w"> </span><span class="mf">10.000</span><span class="p">)</span>
+<span class="w">  </span><span class="n">Desdobro</span><span class="w"> </span><span class="mh">1</span><span class="o">:</span><span class="mh">2</span><span class="o">:</span><span class="w"> </span><span class="o">+</span><span class="mh">100</span><span class="w"> </span><span class="n">VINO11</span>
+<span class="w">  </span><span class="n">Posição</span><span class="w"> </span><span class="nl">depois:</span><span class="w"> </span><span class="mh">200</span><span class="w"> </span><span class="n">VINO11</span><span class="w"> </span><span class="p">@</span><span class="w"> </span><span class="n">R</span><span class="err">$</span><span class="w"> </span><span class="mh">50</span><span class="p">,</span><span class="mh">00</span><span class="w"> </span><span class="p">(</span><span class="nl">custo:</span><span class="w"> </span><span class="n">R</span><span class="err">$</span><span class="w"> </span><span class="mf">10.000</span><span class="p">)</span>
+
+<span class="n">Sistema</span><span class="w"> </span><span class="nl">Atual:</span>
+<span class="w">  </span><span class="n">Posição</span><span class="w"> </span><span class="nl">registrada:</span><span class="w"> </span><span class="mh">100</span><span class="w"> </span><span class="n">VINO11</span><span class="w"> </span><span class="p">@</span><span class="w"> </span><span class="n">R</span><span class="err">$</span><span class="w"> </span><span class="mh">100</span><span class="p">,</span><span class="mh">00</span><span class="w"> </span><span class="err">❌</span>
+<span class="w">  </span><span class="n">Preço</span><span class="w"> </span><span class="nl">mercado:</span><span class="w"> </span><span class="n">R</span><span class="err">$</span><span class="w"> </span><span class="mh">50</span><span class="p">,</span><span class="mh">00</span><span class="w"> </span><span class="p">(</span><span class="n">pós</span><span class="o">-</span><span class="n">desdobro</span><span class="p">)</span>
+<span class="w">  </span><span class="n">Cálculo</span><span class="w"> </span><span class="n">P</span><span class="o">&amp;</span><span class="nl">L:</span><span class="w"> </span><span class="n">Prejuízo</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="mh">50</span><span class="o">%</span><span class="w"> </span><span class="n">INCORRETO</span><span class="w"> </span><span class="err">❌</span>
+</code></pre></div>
+
+<hr />
+<h3 id="3-direito-de-subscricao-35-ocorrencias">3. 📜 Direito de Subscrição (35 ocorrências)<a class="headerlink" href="#3-direito-de-subscricao-35-ocorrencias" title="Permanent link">&para;</a></h3>
+<p><strong>Descrição:</strong> A empresa oferece aos acionistas o direito de comprar novas ações a preço especial.</p>
+<h4 id="casos-mais-recentes">Casos Mais Recentes<a class="headerlink" href="#casos-mais-recentes" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>📅 10/11/2025: RECR12 (+15) e RECT12 (+26)
+📅 06/10/2025: TRXF12 (+12)
+📅 30/09/2025: XPML12 (+2)
+📅 09/05/2025: TRXF12 (+9)
+📅 19/02/2025: ITSA1 (+1) e ITSA2 (+16)
+</code></pre></div>
+
+<h4 id="fluxo-completo-exemplo-real">Fluxo Completo (exemplo real)<a class="headerlink" href="#fluxo-completo-exemplo-real" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">Crédito</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">Direitos</span><span class="p">:</span>
+<span class="w">   </span><span class="err">📅</span><span class="w"> </span><span class="mf">19</span><span class="o">/</span><span class="mf">02</span><span class="o">/</span><span class="mf">2025</span><span class="p">:</span><span class="w"> </span><span class="o">+</span><span class="mf">1</span><span class="w"> </span><span class="n">ITSA1</span><span class="w"> </span><span class="p">(</span><span class="n">direito</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">subscrição</span><span class="p">)</span>
+<span class="w">   </span><span class="err">📅</span><span class="w"> </span><span class="mf">19</span><span class="o">/</span><span class="mf">02</span><span class="o">/</span><span class="mf">2025</span><span class="p">:</span><span class="w"> </span><span class="o">+</span><span class="mf">16</span><span class="w"> </span><span class="n">ITSA2</span><span class="w"> </span><span class="p">(</span><span class="n">direito</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">subscrição</span><span class="p">)</span>
+
+<span class="mf">2.</span><span class="w"> </span><span class="n">Exercício</span><span class="p">:</span>
+<span class="w">   </span><span class="err">[</span><span class="n">Não</span><span class="w"> </span><span class="n">registrado</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">extrato</span><span class="w"> </span><span class="err">—</span><span class="w"> </span><span class="n">operação</span><span class="w"> </span><span class="n">manual</span><span class="w"> </span><span class="n">ou</span><span class="w"> </span><span class="n">automática</span><span class="err">]</span>
+
+<span class="mf">3.</span><span class="w"> </span><span class="n">Leilão</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">Fração</span><span class="p">:</span>
+<span class="w">   </span><span class="err">📅</span><span class="w"> </span><span class="mf">28</span><span class="o">/</span><span class="mf">01</span><span class="o">/</span><span class="mf">2025</span><span class="p">:</span><span class="w"> </span><span class="o">-</span><span class="mf">0.6</span><span class="w"> </span><span class="n">ITSA3</span><span class="w"> </span><span class="n">vendida</span><span class="w"> </span><span class="n">por</span><span class="w"> </span><span class="n">R$</span><span class="w"> </span><span class="mf">5.49</span>
+<span class="w">   </span><span class="err">📅</span><span class="w"> </span><span class="mf">28</span><span class="o">/</span><span class="mf">01</span><span class="o">/</span><span class="mf">2025</span><span class="p">:</span><span class="w"> </span><span class="o">-</span><span class="mf">0.3</span><span class="w"> </span><span class="n">ITSA4</span><span class="w"> </span><span class="n">vendida</span><span class="w"> </span><span class="n">por</span><span class="w"> </span><span class="n">R$</span><span class="w"> </span><span class="mf">2.71</span>
+</code></pre></div>
+
+<h4 id="problema-atual_2">⚠️ Problema Atual<a class="headerlink" href="#problema-atual_2" title="Permanent link">&para;</a></h4>
+<ol>
+<li>❌ <strong>Direitos não são rastreados como ativos temporários</strong></li>
+<li>❌ <strong>Exercício não é registrado como operação de compra</strong></li>
+<li>❌ <strong>Frações vendidas não conciliam com direitos recebidos</strong></li>
+</ol>
+<hr />
+<h3 id="4-atualizacao-de-saldo-14-ocorrencias">4. 🔢 Atualização de Saldo (14 ocorrências)<a class="headerlink" href="#4-atualizacao-de-saldo-14-ocorrencias" title="Permanent link">&para;</a></h3>
+<p><strong>Descrição:</strong> A B3 ajusta o saldo por diversos motivos (consolidação, correção, migração).</p>
+<h4 id="casos-encontrados_2">Casos Encontrados<a class="headerlink" href="#casos-encontrados_2" title="Permanent link">&para;</a></h4>
+<h5 id="cogn3-multiplas-atualizacoes">COGN3 (múltiplas atualizações)<a class="headerlink" href="#cogn3-multiplas-atualizacoes" title="Permanent link">&para;</a></h5>
+<div class="codehilite"><pre><span></span><code>📅 16/09/2025: +880 COGN3
+📅 31/03/2025: +880 COGN3
+📅 20/08/2024: +880 COGN3
+📅 24/11/2023: +880 COGN3
+📅 19/07/2022: +880 COGN3
+📅 27/04/2021: +680 COGN3 (quantidade diferente!)
+</code></pre></div>
+
+<p><strong>Interpretação:</strong> Provavelmente <strong>grupamento</strong> ou <strong>desdobro</strong> que gerou essas atualizações periódicas.</p>
+<h5 id="outros-ativos">Outros ativos<a class="headerlink" href="#outros-ativos" title="Permanent link">&para;</a></h5>
+<div class="codehilite"><pre><span></span><code>📅 18/12/2025: +160 ABEV3
+📅 09/09/2025: +93 B3SA3
+📅 19/11/2024: +101 ISAE4 (TRPL4 → ISAE4 mudança de ticker!)
+📅 10/02/2023: +200 WIZS3 → WIZC3 (mudança de ticker!)
+</code></pre></div>
+
+<h4 id="problema-atual_3">⚠️ Problema Atual<a class="headerlink" href="#problema-atual_3" title="Permanent link">&para;</a></h4>
+<p>Atualizações são <strong>eventos externos</strong> que o sistema não consegue distinguir de:
+- Compras manuais
+- Transferências de custódia
+- Bonificações
+- Desdobros</p>
+<p><strong>Resultado:</strong> Histórico confuso e impossibilidade de auditoria.</p>
+<hr />
+<h3 id="5-transferencia-liquidacao-143-ocorrencias">5. 🔄 Transferência - Liquidação (143 ocorrências)<a class="headerlink" href="#5-transferencia-liquidacao-143-ocorrencias" title="Permanent link">&para;</a></h3>
+<p><strong>Descrição:</strong> Transferência de ativos entre corretoras.</p>
+<h4 id="padrao-identificado">Padrão Identificado<a class="headerlink" href="#padrao-identificado" title="Permanent link">&para;</a></h4>
+<p>Todas as 143 transferências ocorreram em <strong>2019-2020</strong>, provavelmente migração de corretora.</p>
+<div class="codehilite"><pre><span></span><code>Exemplo:
+📅 02/09/2020: +5 VINO11 (R$ 291.80) → CLEAR CORRETORA
+📅 24/08/2020: +50 COGN3 (R$ 333.50) → CLEAR CORRETORA
+📅 24/08/2020: +50 ITSA4 (R$ 480.50) → CLEAR CORRETORA
+</code></pre></div>
+
+<h4 id="problema-atual_4">⚠️ Problema Atual<a class="headerlink" href="#problema-atual_4" title="Permanent link">&para;</a></h4>
+<ol>
+<li>❌ <strong>Transferências não são importadas no sistema</strong></li>
+<li>❌ <strong>Posição inicial da carteira está incorreta</strong></li>
+<li>❌ <strong>Preço médio calculado sem considerar saldo inicial</strong></li>
+</ol>
+<p><strong>Impacto Crítico:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="n">Se</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="n">usuário</span><span class="w"> </span><span class="n">tinha</span><span class="w"> </span><span class="mh">500</span><span class="w"> </span><span class="n">ITSA4</span><span class="w"> </span><span class="n">antes</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="mh">2020</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="n">só</span><span class="w"> </span><span class="n">importou</span>
+<span class="n">operações</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="mh">2020</span><span class="w"> </span><span class="n">em</span><span class="w"> </span><span class="n">diante</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="n">sistema</span><span class="w"> </span><span class="n">pode</span><span class="w"> </span><span class="nl">mostrar:</span>
+
+<span class="w">  </span><span class="n">Posição</span><span class="w"> </span><span class="nl">incorreta:</span><span class="w"> </span><span class="mh">200</span><span class="w"> </span><span class="n">ITSA4</span>
+<span class="w">  </span><span class="n">Posição</span><span class="w"> </span><span class="kt">real</span><span class="o">:</span><span class="w"> </span><span class="mh">700</span><span class="w"> </span><span class="n">ITSA4</span>
+<span class="w">  </span><span class="nl">ERRO:</span><span class="w"> </span><span class="mh">71</span><span class="o">%</span><span class="w"> </span><span class="n">da</span><span class="w"> </span><span class="n">posição</span><span class="w"> </span><span class="n">não</span><span class="w"> </span><span class="n">está</span><span class="w"> </span><span class="n">registrada</span><span class="o">!</span>
+</code></pre></div>
+
+<hr />
+<h3 id="6-mudancas-de-nometicker-24-produtos">6. 🏷️ Mudanças de Nome/Ticker (24 produtos)<a class="headerlink" href="#6-mudancas-de-nometicker-24-produtos" title="Permanent link">&para;</a></h3>
+<p><strong>Descrição:</strong> A empresa muda o nome comercial, mas o ticker permanece (ou vice-versa).</p>
+<h4 id="casos-criticos">Casos Críticos<a class="headerlink" href="#casos-criticos" title="Permanent link">&para;</a></h4>
+<h5 id="hgru11-mudanca-de-gestora">HGRU11 — Mudança de gestora<a class="headerlink" href="#hgru11-mudanca-de-gestora" title="Permanent link">&para;</a></h5>
+<div class="codehilite"><pre><span></span><code><span class="n">Antes</span><span class="w"> </span><span class="p">(</span><span class="mh">2022</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">CSHG</span><span class="w"> </span><span class="n">RENDA</span><span class="w"> </span><span class="n">URBANA</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">FII</span><span class="w"> </span><span class="p">(</span><span class="mh">14</span><span class="w"> </span><span class="n">registros</span><span class="p">)</span>
+<span class="n">Depois</span><span class="w"> </span><span class="p">(</span><span class="mh">2023</span><span class="o">-</span><span class="mh">2024</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">PATRIA</span><span class="w"> </span><span class="n">RENDA</span><span class="w"> </span><span class="n">URBANA</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">FII</span><span class="w"> </span><span class="p">(</span><span class="mh">19</span><span class="w"> </span><span class="n">registros</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Motivo:</strong> Aquisição da CSHG pela Pátria Investimentos</p>
+<h5 id="trpl4-isae4-mudanca-de-ticker">TRPL4 → ISAE4 — Mudança de ticker<a class="headerlink" href="#trpl4-isae4-mudanca-de-ticker" title="Permanent link">&para;</a></h5>
+<div class="codehilite"><pre><span></span><code><span class="n">Histórico</span><span class="w"> </span><span class="p">(</span><span class="mh">2019</span><span class="o">-</span><span class="mh">2024</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">TRPL4</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">CTEEP</span><span class="w"> </span><span class="p">(</span><span class="mh">24</span><span class="w"> </span><span class="n">registros</span><span class="p">)</span>
+<span class="n">Atual</span><span class="w"> </span><span class="p">(</span><span class="mh">2024</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">ISAE4</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ISA</span><span class="w"> </span><span class="n">ENERGIA</span><span class="w"> </span><span class="n">BRASIL</span><span class="w"> </span><span class="n">S</span><span class="p">.</span><span class="n">A</span><span class="p">.</span><span class="w"> </span><span class="p">(</span><span class="mh">7</span><span class="w"> </span><span class="n">registros</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Motivo:</strong> Mudança de razão social e ticker</p>
+<h5 id="wizs3-wizc3-mudanca-de-ticker">WIZS3 → WIZC3 — Mudança de ticker<a class="headerlink" href="#wizs3-wizc3-mudanca-de-ticker" title="Permanent link">&para;</a></h5>
+<div class="codehilite"><pre><span></span><code><span class="n">Antes</span><span class="w"> </span><span class="p">(</span><span class="mh">2019</span><span class="o">-</span><span class="mh">2022</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">WIZS3</span><span class="w"> </span><span class="p">(</span><span class="mh">200</span><span class="w"> </span><span class="n">registros</span><span class="p">)</span>
+<span class="n">Depois</span><span class="w"> </span><span class="p">(</span><span class="mh">2023</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">WIZC3</span><span class="w"> </span><span class="p">(</span><span class="mh">10</span><span class="w"> </span><span class="n">registros</span><span class="p">)</span>
+</code></pre></div>
+
+<h5 id="vvar3-mudanca-de-nome">VVAR3 — Mudança de nome<a class="headerlink" href="#vvar3-mudanca-de-nome" title="Permanent link">&para;</a></h5>
+<div class="codehilite"><pre><span></span><code>VVAR3 - VIA VAREJO S.A. (2020)
+VVAR3 - VIA S.A (2021+)
+</code></pre></div>
+
+<p><strong>Motivo:</strong> Rebrand da empresa</p>
+<h5 id="recr11rect11-mudanca-de-gestora">RECR11/RECT11 — Mudança de gestora<a class="headerlink" href="#recr11rect11-mudanca-de-gestora" title="Permanent link">&para;</a></h5>
+<div class="codehilite"><pre><span></span><code><span class="n">Antes</span><span class="o">:</span><span class="w"> </span><span class="n">FII</span><span class="w"> </span><span class="n">UBS</span><span class="w"> </span><span class="o">(</span><span class="n">BR</span><span class="o">)</span><span class="w"> </span><span class="n">RECEB</span><span class="w"> </span><span class="n">IMOB</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">OFFICE</span>
+<span class="n">Depois</span><span class="o">:</span><span class="w"> </span><span class="n">FII</span><span class="w"> </span><span class="n">REC</span><span class="w"> </span><span class="n">RECEBIVEIS</span><span class="w"> </span><span class="n">IMOBILIARIOS</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">RENDA</span><span class="w"> </span><span class="n">IMOBILIARIA</span>
+</code></pre></div>
+
+<h4 id="problema-atual_5">⚠️ Problema Atual<a class="headerlink" href="#problema-atual_5" title="Permanent link">&para;</a></h4>
+<ol>
+<li>❌ <strong>Sistema trata como ativos diferentes</strong></li>
+<li>❌ <strong>Posição fragmentada em múltiplos registros</strong></li>
+<li>❌ <strong>Impossível consolidar histórico completo</strong></li>
+<li>❌ <strong>Cotações podem falhar para ticker antigo</strong></li>
+</ol>
+<hr />
+<h3 id="7-leilao-de-fracao-10-ocorrencias">7. 🎯 Leilão de Fração (10 ocorrências)<a class="headerlink" href="#7-leilao-de-fracao-10-ocorrencias" title="Permanent link">&para;</a></h3>
+<p><strong>Descrição:</strong> Venda automática de frações de ações após bonificação/subscrição.</p>
+<h4 id="casos-encontrados_3">Casos Encontrados<a class="headerlink" href="#casos-encontrados_3" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>ITSA (após bonificações):
+📅 28/01/2025: -0.6 ITSA3 por R$ 5.49
+📅 28/01/2025: -0.3 ITSA4 por R$ 2.71
+📅 05/02/2024: -0.3 ITSA3 por R$ 2.98
+📅 05/02/2024: -0.55 ITSA4 por R$ 5.51
+📅 06/01/2023: -0.5 ITSA3 por R$ 4.46
+📅 06/01/2023: -0.9 ITSA4 por R$ 7.70
+
+BTHF11:
+📅 21/01/2025: -0.41 BTHF11 por R$ 3.08
+</code></pre></div>
+
+<h4 id="problema-atual_6">⚠️ Problema Atual<a class="headerlink" href="#problema-atual_6" title="Permanent link">&para;</a></h4>
+<ol>
+<li>✅ Sistema já permite operações com frações (VENDA de 0.41)</li>
+<li>⚠️ <strong>Não vincula leilão à bonificação original</strong></li>
+<li>⚠️ <strong>Valor do leilão não é somado ao resultado da bonificação</strong></li>
+</ol>
+<hr />
+<h2 id="casos-criticos-encontrados">🚨 Casos Críticos Encontrados<a class="headerlink" href="#casos-criticos-encontrados" title="Permanent link">&para;</a></h2>
+<h3 id="caso-1-cogn3-multiplas-atualizacoes-nao-explicadas">Caso 1: COGN3 — Múltiplas Atualizações Não Explicadas<a class="headerlink" href="#caso-1-cogn3-multiplas-atualizacoes-nao-explicadas" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="mf">27</span><span class="o">/</span><span class="mf">04</span><span class="o">/</span><span class="mf">2021</span><span class="p">:</span><span class="w"> </span><span class="n">Atualização</span><span class="w"> </span><span class="o">+</span><span class="mf">680</span><span class="w"> </span><span class="n">COGN3</span>
+<span class="mf">19</span><span class="o">/</span><span class="mf">07</span><span class="o">/</span><span class="mf">2022</span><span class="p">:</span><span class="w"> </span><span class="n">Atualização</span><span class="w"> </span><span class="o">+</span><span class="mf">880</span><span class="w"> </span><span class="n">COGN3</span><span class="w"> </span><span class="p">(</span><span class="n">aumento</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="mf">200</span><span class="err">!</span><span class="p">)</span>
+<span class="mf">24</span><span class="o">/</span><span class="mf">11</span><span class="o">/</span><span class="mf">2023</span><span class="p">:</span><span class="w"> </span><span class="n">Atualização</span><span class="w"> </span><span class="o">+</span><span class="mf">880</span><span class="w"> </span><span class="n">COGN3</span>
+<span class="mf">20</span><span class="o">/</span><span class="mf">08</span><span class="o">/</span><span class="mf">2024</span><span class="p">:</span><span class="w"> </span><span class="n">Atualização</span><span class="w"> </span><span class="o">+</span><span class="mf">880</span><span class="w"> </span><span class="n">COGN3</span>
+<span class="mf">31</span><span class="o">/</span><span class="mf">03</span><span class="o">/</span><span class="mf">2025</span><span class="p">:</span><span class="w"> </span><span class="n">Atualização</span><span class="w"> </span><span class="o">+</span><span class="mf">880</span><span class="w"> </span><span class="n">COGN3</span>
+<span class="mf">16</span><span class="o">/</span><span class="mf">09</span><span class="o">/</span><span class="mf">2025</span><span class="p">:</span><span class="w"> </span><span class="n">Atualização</span><span class="w"> </span><span class="o">+</span><span class="mf">880</span><span class="w"> </span><span class="n">COGN3</span>
+<span class="mf">29</span><span class="o">/</span><span class="mf">12</span><span class="o">/</span><span class="mf">2025</span><span class="p">:</span><span class="w"> </span><span class="n">Bonificação</span><span class="w"> </span><span class="o">+</span><span class="mf">88</span><span class="w"> </span><span class="n">COGN3</span>
+</code></pre></div>
+
+<p><strong>Análise:</strong>
+- Possível <strong>desdobro 1:10</strong> em 2022 (680 → 880 = +200 ações)
+- <strong>5 atualizações periódicas</strong> da mesma quantidade (880) sugerem ajustes de custódia
+- Bonificação de 88 ações = ~10% de 880</p>
+<p><strong>Impacto:</strong> Impossível calcular posição real sem entender esses eventos.</p>
+<hr />
+<h3 id="caso-2-trpl4-isae4-migracao-de-ticker">Caso 2: TRPL4 → ISAE4 — Migração de Ticker<a class="headerlink" href="#caso-2-trpl4-isae4-migracao-de-ticker" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>Histórico completo de TRPL4:
+  - 24 operações de 2019 a 2024
+  - Última: 20/08/2024
+
+Primeira operação ISAE4:
+  - 19/11/2024: Atualização +101 ISAE4
+
+Status atual:
+  - TRPL4 não existe mais
+  - ISAE4 é o ticker ativo
+</code></pre></div>
+
+<p><strong>Problema:</strong>
+1. Sistema mantém TRPL4 como ativo separado
+2. Cotação de TRPL4 não funciona mais
+3. Histórico fragmentado em dois ativos</p>
+<p><strong>Solução necessária:</strong> Relacionamento entre tickers (alias).</p>
+<hr />
+<h3 id="caso-3-itsa-bonificacoes-anuais-subscricoes">Caso 3: ITSA — Bonificações Anuais + Subscrições<a class="headerlink" href="#caso-3-itsa-bonificacoes-anuais-subscricoes" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>Fluxo completo (exemplo 2025):
+1. Direito de Subscrição (19/02/2025):
+   +1 ITSA1 (direito ON)
+   +16 ITSA2 (direito PN)
+
+2. Bonificação (22/12/2025):
+   +2.76 ITSA3 (ON)
+   +24.48 ITSA4 (PN)
+
+3. Leilão de Fração (28/01/2025):
+   -0.6 ITSA3 vendida por R$ 5.49
+   -0.3 ITSA4 vendida por R$ 2.71
+</code></pre></div>
+
+<p><strong>Complexidade:</strong> 3 eventos encadeados que devem ser rastreados em conjunto.</p>
+<hr />
+<h2 id="impacto-na-integridade-de-dados">💥 Impacto na Integridade de Dados<a class="headerlink" href="#impacto-na-integridade-de-dados" title="Permanent link">&para;</a></h2>
+<h3 id="1-posicao-incorreta">1. Posição Incorreta<a class="headerlink" href="#1-posicao-incorreta" title="Permanent link">&para;</a></h3>
+<p><strong>Sem registro de eventos corporativos:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Ativo</th>
+<th>Posição Calculada</th>
+<th>Posição Real (estimada)</th>
+<th>Erro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ITSA4</td>
+<td>583</td>
+<td>~650 (c/ bonificações)</td>
+<td><strong>-10%</strong></td>
+</tr>
+<tr>
+<td>COGN3</td>
+<td>?</td>
+<td>? (múltiplas atualizações)</td>
+<td><strong>Desconhecido</strong></td>
+</tr>
+<tr>
+<td>VINO11</td>
+<td>122</td>
+<td>244 (desdobro 1:2)</td>
+<td><strong>-50%</strong></td>
+</tr>
+<tr>
+<td>BCFF11</td>
+<td>147</td>
+<td>294 (desdobro 1:2)</td>
+<td><strong>-50%</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-preco-medio-distorcido">2. Preço Médio Distorcido<a class="headerlink" href="#2-preco-medio-distorcido" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">Exemplo</span><span class="w"> </span><span class="n">VINO11</span><span class="w"> </span><span class="p">(</span><span class="n">desdobro</span><span class="w"> </span><span class="mh">1</span><span class="o">:</span><span class="mh">2</span><span class="w"> </span><span class="n">não</span><span class="w"> </span><span class="n">registrado</span><span class="p">)</span><span class="o">:</span>
+
+<span class="n">Cálculo</span><span class="w"> </span><span class="nl">Atual:</span>
+<span class="w">  </span><span class="nl">Compras:</span><span class="w"> </span><span class="mh">122</span><span class="w"> </span><span class="p">@</span><span class="w"> </span><span class="n">R</span><span class="err">$</span><span class="w"> </span><span class="mh">60</span><span class="p">,</span><span class="mh">00</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R</span><span class="err">$</span><span class="w"> </span><span class="mf">7.320</span>
+<span class="w">  </span><span class="n">Preço</span><span class="w"> </span><span class="nl">médio:</span><span class="w"> </span><span class="n">R</span><span class="err">$</span><span class="w"> </span><span class="mh">60</span><span class="p">,</span><span class="mh">00</span>
+<span class="w">  </span><span class="n">Cotação</span><span class="w"> </span><span class="nl">mercado:</span><span class="w"> </span><span class="n">R</span><span class="err">$</span><span class="w"> </span><span class="mh">30</span><span class="p">,</span><span class="mh">00</span><span class="w"> </span><span class="p">(</span><span class="n">pós</span><span class="o">-</span><span class="n">desdobro</span><span class="p">)</span>
+<span class="w">  </span><span class="n">P</span><span class="o">&amp;</span><span class="n">L</span><span class="w"> </span><span class="nl">aparente:</span><span class="w"> </span><span class="o">-</span><span class="mh">50</span><span class="o">%</span><span class="w"> </span><span class="err">❌</span><span class="w"> </span><span class="n">INCORRETO</span>
+
+<span class="n">Cálculo</span><span class="w"> </span><span class="nl">Correto:</span>
+<span class="w">  </span><span class="n">Posição</span><span class="w"> </span><span class="kt">real</span><span class="o">:</span><span class="w"> </span><span class="mh">244</span><span class="w"> </span><span class="p">@</span><span class="w"> </span><span class="n">R</span><span class="err">$</span><span class="w"> </span><span class="mh">30</span><span class="p">,</span><span class="mh">00</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R</span><span class="err">$</span><span class="w"> </span><span class="mf">7.320</span>
+<span class="w">  </span><span class="n">Preço</span><span class="w"> </span><span class="n">médio</span><span class="w"> </span><span class="nl">ajustado:</span><span class="w"> </span><span class="n">R</span><span class="err">$</span><span class="w"> </span><span class="mh">30</span><span class="p">,</span><span class="mh">00</span>
+<span class="w">  </span><span class="n">Cotação</span><span class="w"> </span><span class="nl">mercado:</span><span class="w"> </span><span class="n">R</span><span class="err">$</span><span class="w"> </span><span class="mh">30</span><span class="p">,</span><span class="mh">00</span>
+<span class="w">  </span><span class="n">P</span><span class="o">&amp;</span><span class="n">L</span><span class="w"> </span><span class="kt">real</span><span class="o">:</span><span class="w"> </span><span class="mh">0</span><span class="o">%</span><span class="w"> </span><span class="err">✅</span>
+</code></pre></div>
+
+<h3 id="3-reconciliacao-impossivel">3. Reconciliação Impossível<a class="headerlink" href="#3-reconciliacao-impossivel" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>Importar novo extrato B3 hoje resultaria em:
+
+Sistema mostra: 122 VINO11
+Extrato mostra: 244 VINO11
+Diferença: 122 cotas
+
+Usuário não sabe se:
+- Faltou importar operações?
+- Houve desdobro?
+- Erro de sistema?
+</code></pre></div>
+
+<h3 id="4-dashboard-enganoso">4. Dashboard Enganoso<a class="headerlink" href="#4-dashboard-enganoso" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>Dashboard atual pode mostrar:
+  💰 Patrimônio: R$ 50.000
+  📈 Lucro: +15%
+
+Dashboard correto (com eventos):
+  💰 Patrimônio: R$ 65.000
+  📈 Lucro: +8%
+
+DIFERENÇA: R$ 15.000 e 7 pontos percentuais!
+</code></pre></div>
+
+<hr />
+<h2 id="recomendacoes-de-implementacao">🎯 Recomendações de Implementação<a class="headerlink" href="#recomendacoes-de-implementacao" title="Permanent link">&para;</a></h2>
+<h3 id="fase-1-fundacao-sprint-1-2-critico">Fase 1: Fundação (Sprint 1-2) — CRÍTICO<a class="headerlink" href="#fase-1-fundacao-sprint-1-2-critico" title="Permanent link">&para;</a></h3>
+<h4 id="11-nova-tabela-corporate_events">1.1. Nova Tabela: <code>corporate_events</code><a class="headerlink" href="#11-nova-tabela-corporate_events" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">corporate_events</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">asset_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">event_type</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="c1">-- &#39;BONIFICACAO&#39;, &#39;DESDOBRO&#39;, &#39;GRUPAMENTO&#39;, etc</span>
+<span class="w">    </span><span class="n">event_date</span><span class="w"> </span><span class="nb">DATE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">quantity_before</span><span class="w"> </span><span class="nb">REAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">quantity_after</span><span class="w"> </span><span class="nb">REAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">quantity_change</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">price_adjustment_factor</span><span class="w"> </span><span class="nb">REAL</span><span class="p">,</span><span class="w"> </span><span class="c1">-- Para desdobros/grupamentos</span>
+<span class="w">    </span><span class="n">description</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="k">source</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;B3&#39;</span><span class="p">,</span><span class="w"> </span><span class="c1">-- &#39;B3&#39;, &#39;MANUAL&#39;</span>
+<span class="w">    </span><span class="n">metadata</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span><span class="w"> </span><span class="c1">-- JSON com detalhes extras</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">asset_id</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">assets</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
+
+<h4 id="12-nova-tabela-asset_aliases">1.2. Nova Tabela: <code>asset_aliases</code><a class="headerlink" href="#12-nova-tabela-asset_aliases" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">asset_aliases</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">asset_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">old_ticker</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">new_ticker</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">effective_date</span><span class="w"> </span><span class="nb">DATE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">reason</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span><span class="w"> </span><span class="c1">-- &#39;MUDANCA_TICKER&#39;, &#39;MUDANCA_NOME&#39;, &#39;INCORPORACAO&#39;</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">asset_id</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">assets</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">old_ticker</span><span class="p">,</span><span class="w"> </span><span class="n">effective_date</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
+
+<h4 id="13-atualizar-operations-adicionar-tipo">1.3. Atualizar <code>operations</code> — Adicionar tipo<a class="headerlink" href="#13-atualizar-operations-adicionar-tipo" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">operations</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">operation_subtype</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">;</span>
+<span class="c1">-- Valores: &#39;COMPRA_NORMAL&#39;, &#39;BONIFICACAO&#39;, &#39;DESDOBRO&#39;, &#39;TRANSFERENCIA&#39;, etc</span>
+</code></pre></div>
+
+<h4 id="14-servico-corporateeventsservice">1.4. Serviço: <code>CorporateEventsService</code><a class="headerlink" href="#14-servico-corporateeventsservice" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">CorporateEventsService</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Gerencia eventos corporativos e ajustes de posição&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">register_bonificacao</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> 
+        <span class="n">asset_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> 
+        <span class="n">event_date</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span> 
+        <span class="n">quantity</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">source</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;B3&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Registra bonificação e cria operação de crédito</span>
+
+<span class="sd">        1. Cria registro em corporate_events</span>
+<span class="sd">        2. Cria operation com movement_type=&#39;COMPRA&#39;, price=0</span>
+<span class="sd">        3. Recalcula preço médio considerando custo zero</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">register_desdobro</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">asset_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">event_date</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span>
+        <span class="n">ratio</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>  <span class="c1"># Ex: 2.0 para desdobro 1:2</span>
+        <span class="n">source</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;B3&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Registra desdobro e ajusta todas operações anteriores</span>
+
+<span class="sd">        1. Cria registro em corporate_events</span>
+<span class="sd">        2. Ajusta quantity e price de todas operations anteriores</span>
+<span class="sd">        3. Recalcula preço médio proporcional</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">register_ticker_change</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">asset_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">old_ticker</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">new_ticker</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">effective_date</span><span class="p">:</span> <span class="n">date</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Registra mudança de ticker</span>
+
+<span class="sd">        1. Cria registro em asset_aliases</span>
+<span class="sd">        2. Atualiza ticker em assets</span>
+<span class="sd">        3. Mantém histórico de operações com ticker antigo</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_position_with_events</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">asset_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">as_of_date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">date</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calcula posição considerando todos eventos corporativos</span>
+
+<span class="sd">        Retorna:</span>
+<span class="sd">        {</span>
+<span class="sd">            &quot;quantity&quot;: 244.0,</span>
+<span class="sd">            &quot;avg_price&quot;: 30.00,</span>
+<span class="sd">            &quot;total_cost&quot;: 7320.00,</span>
+<span class="sd">            &quot;events_applied&quot;: [</span>
+<span class="sd">                {&quot;type&quot;: &quot;DESDOBRO&quot;, &quot;date&quot;: &quot;2023-08-08&quot;, &quot;ratio&quot;: 2.0}</span>
+<span class="sd">            ]</span>
+<span class="sd">        }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</code></pre></div>
+
+<hr />
+<h3 id="fase-2-import-inteligente-sprint-3-4">Fase 2: Import Inteligente (Sprint 3-4)<a class="headerlink" href="#fase-2-import-inteligente-sprint-3-4" title="Permanent link">&para;</a></h3>
+<h4 id="21-atualizar-b3importer">2.1. Atualizar <code>B3Importer</code><a class="headerlink" href="#21-atualizar-b3importer" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">B3Importer</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Importador atualizado com detecção de eventos&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">parse_movimentacao</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Detecta tipos de movimentação:</span>
+<span class="sd">        - Bonificação em Ativos → register_bonificacao()</span>
+<span class="sd">        - Desdobro → register_desdobro()</span>
+<span class="sd">        - Atualização → flag para revisão manual</span>
+<span class="sd">        - Transferência - Liquidação → operation especial</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">detect_corporate_events</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Analisa DataFrame e identifica padrões de eventos:</span>
+<span class="sd">        - Operações com preço = 0 e quantidade grande</span>
+<span class="sd">        - Atualizações seguidas do mesmo ativo</span>
+<span class="sd">        - Mudanças no nome do produto</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</code></pre></div>
+
+<h4 id="22-endpoint-post-importb3with-events">2.2. Endpoint: <code>POST /import/b3/with-events</code><a class="headerlink" href="#22-endpoint-post-importb3with-events" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/import/b3/with-events&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">import_b3_with_events</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="n">UploadFile</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Import inteligente que detecta e processa eventos</span>
+
+<span class="sd">    Response:</span>
+<span class="sd">    {</span>
+<span class="sd">        &quot;operations_imported&quot;: 150,</span>
+<span class="sd">        &quot;corporate_events_detected&quot;: [</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;type&quot;: &quot;BONIFICACAO&quot;,</span>
+<span class="sd">                &quot;asset&quot;: &quot;ITSA4&quot;,</span>
+<span class="sd">                &quot;quantity&quot;: 24.48,</span>
+<span class="sd">                &quot;date&quot;: &quot;2025-12-22&quot;,</span>
+<span class="sd">                &quot;action_required&quot;: false</span>
+<span class="sd">            },</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;type&quot;: &quot;ATUALIZAÇÃO&quot;,</span>
+<span class="sd">                &quot;asset&quot;: &quot;COGN3&quot;,</span>
+<span class="sd">                &quot;quantity&quot;: 880,</span>
+<span class="sd">                &quot;date&quot;: &quot;2025-09-16&quot;,</span>
+<span class="sd">                &quot;action_required&quot;: true,  # Requer confirmação manual</span>
+<span class="sd">                &quot;reason&quot;: &quot;Motivo não identificado automaticamente&quot;</span>
+<span class="sd">            }</span>
+<span class="sd">        ],</span>
+<span class="sd">        &quot;warnings&quot;: [</span>
+<span class="sd">            &quot;TRPL4: Ticker pode ter mudado para ISAE4&quot;</span>
+<span class="sd">        ]</span>
+<span class="sd">    }</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</code></pre></div>
+
+<hr />
+<h3 id="fase-3-reconciliacao-e-auditoria-sprint-5-6">Fase 3: Reconciliação e Auditoria (Sprint 5-6)<a class="headerlink" href="#fase-3-reconciliacao-e-auditoria-sprint-5-6" title="Permanent link">&para;</a></h3>
+<h4 id="31-ferramenta-de-reconciliacao">3.1. Ferramenta de Reconciliação<a class="headerlink" href="#31-ferramenta-de-reconciliacao" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ReconciliationService</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compara posição calculada vs posição real na B3&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">reconcile_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ticker</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Verifica consistência da posição</span>
+
+<span class="sd">        Retorna:</span>
+<span class="sd">        {</span>
+<span class="sd">            &quot;ticker&quot;: &quot;VINO11&quot;,</span>
+<span class="sd">            &quot;calculated_quantity&quot;: 122,</span>
+<span class="sd">            &quot;b3_current_quantity&quot;: 244,</span>
+<span class="sd">            &quot;difference&quot;: 122,</span>
+<span class="sd">            &quot;possible_causes&quot;: [</span>
+<span class="sd">                {</span>
+<span class="sd">                    &quot;type&quot;: &quot;DESDOBRO_NAO_REGISTRADO&quot;,</span>
+<span class="sd">                    &quot;date_estimate&quot;: &quot;2023-08-08&quot;,</span>
+<span class="sd">                    &quot;ratio&quot;: 2.0,</span>
+<span class="sd">                    &quot;confidence&quot;: 0.95</span>
+<span class="sd">                }</span>
+<span class="sd">            ],</span>
+<span class="sd">            &quot;suggested_action&quot;: &quot;register_desdobro&quot;</span>
+<span class="sd">        }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</code></pre></div>
+
+<h4 id="32-endpoint-post-reconciliationcheck">3.2. Endpoint: <code>POST /reconciliation/check</code><a class="headerlink" href="#32-endpoint-post-reconciliationcheck" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/reconciliation/check&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">check_reconciliation</span><span class="p">(</span><span class="n">ticker</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">expected_quantity</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Usuário informa quanto deveria ter segundo a B3</span>
+<span class="sd">    Sistema identifica diferenças e sugere correções</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</code></pre></div>
+
+<hr />
+<h3 id="fase-4-interface-de-usuario-sprint-7-8">Fase 4: Interface de Usuário (Sprint 7-8)<a class="headerlink" href="#fase-4-interface-de-usuario-sprint-7-8" title="Permanent link">&para;</a></h3>
+<h4 id="41-pagina-corporate-events">4.1. Página: <code>/corporate-events</code><a class="headerlink" href="#41-pagina-corporate-events" title="Permanent link">&para;</a></h4>
+<p><strong>Funcionalidades:</strong>
+- Lista de todos eventos corporativos registrados
+- Filtros por tipo, ativo, data
+- Detalhamento do impacto de cada evento
+- Botão "Registrar Evento Manual"</p>
+<h4 id="42-modal-registro-manual-de-evento">4.2. Modal: Registro Manual de Evento<a class="headerlink" href="#42-modal-registro-manual-de-evento" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">CorporateEventForm</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">asset_id</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">event_type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;BONIFICACAO&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;DESDOBRO&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;GRUPAMENTO&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;MUDANCA_TICKER&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">event_date</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">quantity_change?</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span><span class="w">  </span><span class="c1">// Para bonificação</span>
+<span class="w">  </span><span class="nx">ratio?</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span><span class="w">  </span><span class="c1">// Para desdobro/grupamento</span>
+<span class="w">  </span><span class="nx">old_ticker?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w">  </span><span class="c1">// Para mudança de ticker</span>
+<span class="w">  </span><span class="nx">new_ticker?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">description?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4 id="43-dashboard-alertas-de-inconsistencia">4.3. Dashboard: Alertas de Inconsistência<a class="headerlink" href="#43-dashboard-alertas-de-inconsistencia" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Exibir na página Portfolio</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">ReconciliationAlert</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">ticker</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">severity</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;warning&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;error&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">action</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">route</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="p">};</span>
+<span class="p">}</span>
+
+<span class="c1">// Exemplo:</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="nx">ticker</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;VINO11&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Posição calculada (122) difere da esperada (244). Possível desdobro não registrado.&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">severity</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">action</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Revisar Eventos&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">route</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;/corporate-events?ticker=VINO11&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="priorizacao">📅 Priorização<a class="headerlink" href="#priorizacao" title="Permanent link">&para;</a></h2>
+<h3 id="prioridade-critica-sprint-1-2-2-semanas">🔥 Prioridade CRÍTICA (Sprint 1-2) — 2 semanas<a class="headerlink" href="#prioridade-critica-sprint-1-2-2-semanas" title="Permanent link">&para;</a></h3>
+<p><strong>Objetivo:</strong> Evitar corrupção de dados imediata</p>
+<ol>
+<li>✅ Criar tabela <code>corporate_events</code></li>
+<li>✅ Criar <code>CorporateEventsService</code> básico</li>
+<li>✅ Implementar <code>register_bonificacao()</code></li>
+<li>✅ Implementar <code>register_desdobro()</code></li>
+<li>✅ Atualizar cálculo de posição para considerar eventos</li>
+</ol>
+<p><strong>Critério de sucesso:</strong>
+- Importar bonificação de ITSA4 e posição ficar correta
+- Registrar desdobro de VINO11 e preço médio ajustar</p>
+<hr />
+<h3 id="prioridade-alta-sprint-3-4-2-semanas">🚨 Prioridade ALTA (Sprint 3-4) — 2 semanas<a class="headerlink" href="#prioridade-alta-sprint-3-4-2-semanas" title="Permanent link">&para;</a></h3>
+<p><strong>Objetivo:</strong> Detecção automática de eventos</p>
+<ol>
+<li>✅ Atualizar <code>B3Importer</code> para detectar eventos</li>
+<li>✅ Criar endpoint <code>/import/b3/with-events</code></li>
+<li>✅ Implementar detecção de mudança de ticker</li>
+<li>✅ Criar tabela <code>asset_aliases</code></li>
+</ol>
+<p><strong>Critério de sucesso:</strong>
+- Import automático detecta bonificação e registra
+- Sistema alerta sobre possível desdobro não registrado</p>
+<hr />
+<h3 id="prioridade-media-sprint-5-6-3-semanas">⚠️ Prioridade MÉDIA (Sprint 5-6) — 3 semanas<a class="headerlink" href="#prioridade-media-sprint-5-6-3-semanas" title="Permanent link">&para;</a></h3>
+<p><strong>Objetivo:</strong> Reconciliação e correção</p>
+<ol>
+<li>✅ Criar <code>ReconciliationService</code></li>
+<li>✅ Implementar <code>/reconciliation/check</code></li>
+<li>✅ Criar ferramenta de correção retroativa</li>
+<li>✅ Documentar processo de auditoria</li>
+</ol>
+<p><strong>Critério de sucesso:</strong>
+- Usuário consegue identificar inconsistências
+- Sistema sugere correções automaticamente</p>
+<hr />
+<h3 id="prioridade-baixa-sprint-7-continuo">🔷 Prioridade BAIXA (Sprint 7+) — Contínuo<a class="headerlink" href="#prioridade-baixa-sprint-7-continuo" title="Permanent link">&para;</a></h3>
+<p><strong>Objetivo:</strong> Experiência do usuário</p>
+<ol>
+<li>✅ Criar página <code>/corporate-events</code></li>
+<li>✅ Implementar registro manual de eventos</li>
+<li>✅ Adicionar alertas no Dashboard</li>
+<li>✅ Criar relatório de auditoria completo</li>
+</ol>
+<hr />
+<h2 id="arquitetura-proposta">🏗️ Arquitetura Proposta<a class="headerlink" href="#arquitetura-proposta" title="Permanent link">&para;</a></h2>
+<h3 id="fluxo-de-dados">Fluxo de Dados<a class="headerlink" href="#fluxo-de-dados" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>┌─────────────────────────────────────────────────────────────┐
+│                   IMPORT DE EXTRATO B3                      │
+└───────────────────────┬─────────────────────────────────────┘
+                        │
+                        ▼
+         ┌──────────────────────────────┐
+         │   B3Importer (atualizado)    │
+         │  - parse_movimentacao()      │
+         │  - detect_corporate_events() │
+         └──────────┬───────────────────┘
+                    │
+          ┌─────────┴──────────┐
+          │                    │
+          ▼                    ▼
+┌──────────────────┐  ┌──────────────────┐
+│  OperationsRepo  │  │ CorporateEvents  │
+│                  │  │     Service      │
+│ - Compra/Venda   │  │                  │
+│ - Dividendos     │  │ - Bonificação    │
+│ - JCP            │  │ - Desdobro       │
+└──────────────────┘  │ - Grupamento     │
+                      │ - Mudança Ticker │
+                      └──────────┬───────┘
+                                 │
+                    ┌────────────┴────────────┐
+                    │                         │
+                    ▼                         ▼
+         ┌────────────────────┐    ┌──────────────────┐
+         │ corporate_events   │    │ asset_aliases    │
+         │      (tabela)      │    │    (tabela)      │
+         └────────────────────┘    └──────────────────┘
+                    │
+                    ▼
+         ┌────────────────────┐
+         │  PositionService   │
+         │  (atualizado)      │
+         │                    │
+         │ get_position():    │
+         │  1. operations     │
+         │  2. + events       │
+         │  3. = posição real │
+         └────────────────────┘
+                    │
+                    ▼
+         ┌────────────────────┐
+         │   Dashboard API    │
+         │  (posição correta) │
+         └────────────────────┘
+</code></pre></div>
+
+<hr />
+<h3 id="exemplo-de-calculo-com-eventos">Exemplo de Cálculo com Eventos<a class="headerlink" href="#exemplo-de-calculo-com-eventos" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calculate_position_with_events</span><span class="p">(</span><span class="n">asset_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calcula posição considerando eventos corporativos</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># 1. Buscar todas operações</span>
+    <span class="n">operations</span> <span class="o">=</span> <span class="n">get_operations</span><span class="p">(</span><span class="n">asset_id</span><span class="p">)</span>
+
+    <span class="c1"># 2. Buscar eventos corporativos</span>
+    <span class="n">events</span> <span class="o">=</span> <span class="n">get_corporate_events</span><span class="p">(</span><span class="n">asset_id</span><span class="p">,</span> <span class="n">order_by</span><span class="o">=</span><span class="s2">&quot;event_date ASC&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 3. Processar cronologicamente</span>
+    <span class="n">position</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">total_cost</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">operations</span> <span class="o">+</span> <span class="n">events</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">date</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">Operation</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">movement_type</span> <span class="o">==</span> <span class="s2">&quot;COMPRA&quot;</span><span class="p">:</span>
+                <span class="n">position</span> <span class="o">+=</span> <span class="n">event</span><span class="o">.</span><span class="n">quantity</span>
+                <span class="n">total_cost</span> <span class="o">+=</span> <span class="n">event</span><span class="o">.</span><span class="n">value</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">position</span> <span class="o">-=</span> <span class="n">event</span><span class="o">.</span><span class="n">quantity</span>
+                <span class="c1"># Reduzir custo proporcionalmente</span>
+                <span class="n">avg_price</span> <span class="o">=</span> <span class="n">total_cost</span> <span class="o">/</span> <span class="n">position</span> <span class="k">if</span> <span class="n">position</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+                <span class="n">total_cost</span> <span class="o">-=</span> <span class="n">event</span><span class="o">.</span><span class="n">quantity</span> <span class="o">*</span> <span class="n">avg_price</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">CorporateEvent</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">event_type</span> <span class="o">==</span> <span class="s2">&quot;BONIFICACAO&quot;</span><span class="p">:</span>
+                <span class="c1"># Aumenta quantidade sem aumentar custo</span>
+                <span class="n">position</span> <span class="o">+=</span> <span class="n">event</span><span class="o">.</span><span class="n">quantity_change</span>
+
+            <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">event_type</span> <span class="o">==</span> <span class="s2">&quot;DESDOBRO&quot;</span><span class="p">:</span>
+                <span class="c1"># Multiplica quantidade, divide preço</span>
+                <span class="n">ratio</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">price_adjustment_factor</span>
+                <span class="n">position</span> <span class="o">*=</span> <span class="n">ratio</span>
+                <span class="c1"># Custo total permanece o mesmo</span>
+
+    <span class="n">avg_price</span> <span class="o">=</span> <span class="n">total_cost</span> <span class="o">/</span> <span class="n">position</span> <span class="k">if</span> <span class="n">position</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;quantity&quot;</span><span class="p">:</span> <span class="n">position</span><span class="p">,</span>
+        <span class="s2">&quot;avg_price&quot;</span><span class="p">:</span> <span class="n">avg_price</span><span class="p">,</span>
+        <span class="s2">&quot;total_cost&quot;</span><span class="p">:</span> <span class="n">total_cost</span>
+    <span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="metricas-de-sucesso">📊 Métricas de Sucesso<a class="headerlink" href="#metricas-de-sucesso" title="Permanent link">&para;</a></h2>
+<h3 id="kpis-tecnicos">KPIs Técnicos<a class="headerlink" href="#kpis-tecnicos" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Baseline</th>
+<th>Meta Sprint 4</th>
+<th>Meta Sprint 8</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Posições corretas</strong></td>
+<td>~60%</td>
+<td>90%</td>
+<td>99%</td>
+</tr>
+<tr>
+<td><strong>Eventos detectados automaticamente</strong></td>
+<td>0%</td>
+<td>70%</td>
+<td>95%</td>
+</tr>
+<tr>
+<td><strong>Reconciliação com B3</strong></td>
+<td>Impossível</td>
+<td>Manual</td>
+<td>Automática</td>
+</tr>
+<tr>
+<td><strong>Confiança nos cálculos</strong></td>
+<td>Baixa</td>
+<td>Média</td>
+<td>Alta</td>
+</tr>
+</tbody>
+</table>
+<h3 id="kpis-de-negocio">KPIs de Negócio<a class="headerlink" href="#kpis-de-negocio" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Impacto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Precisão do Patrimônio</strong></td>
+<td>±30% → ±2%</td>
+</tr>
+<tr>
+<td><strong>Confiabilidade do P&amp;L</strong></td>
+<td>Baixa → Alta</td>
+</tr>
+<tr>
+<td><strong>Tempo de reconciliação</strong></td>
+<td>Impossível → &lt;5 min</td>
+</tr>
+<tr>
+<td><strong>Suporte a casos complexos</strong></td>
+<td>0% → 95%</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="garantias-de-integridade">🔐 Garantias de Integridade<a class="headerlink" href="#garantias-de-integridade" title="Permanent link">&para;</a></h2>
+<h3 id="1-auditoria-completa">1. Auditoria Completa<a class="headerlink" href="#1-auditoria-completa" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- View: Histórico completo de um ativo</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">asset_full_history</span><span class="w"> </span><span class="k">AS</span>
+<span class="k">SELECT</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;OPERATION&#39;</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">type</span><span class="p">,</span>
+<span class="w">    </span><span class="n">o</span><span class="p">.</span><span class="n">trade_date</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">date</span><span class="p">,</span>
+<span class="w">    </span><span class="n">o</span><span class="p">.</span><span class="n">movement_type</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">action</span><span class="p">,</span>
+<span class="w">    </span><span class="n">o</span><span class="p">.</span><span class="n">quantity</span><span class="p">,</span>
+<span class="w">    </span><span class="n">o</span><span class="p">.</span><span class="n">price</span><span class="p">,</span>
+<span class="w">    </span><span class="n">o</span><span class="p">.</span><span class="n">value</span><span class="p">,</span>
+<span class="w">    </span><span class="k">NULL</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">event_type</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">operations</span><span class="w"> </span><span class="n">o</span>
+<span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
+<span class="k">SELECT</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;EVENT&#39;</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">type</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ce</span><span class="p">.</span><span class="n">event_date</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">date</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;CORPORATE_EVENT&#39;</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">action</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ce</span><span class="p">.</span><span class="n">quantity_change</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">quantity</span><span class="p">,</span>
+<span class="w">    </span><span class="k">NULL</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">price</span><span class="p">,</span>
+<span class="w">    </span><span class="k">NULL</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">value</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ce</span><span class="p">.</span><span class="n">event_type</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">corporate_events</span><span class="w"> </span><span class="n">ce</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="nb">date</span><span class="w"> </span><span class="k">ASC</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="2-validacao-de-consistencia">2. Validação de Consistência<a class="headerlink" href="#2-validacao-de-consistencia" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">validate_position_consistency</span><span class="p">(</span><span class="n">asset_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Valida se a posição calculada é consistente</span>
+
+<span class="sd">    Retorna lista de warnings/errors:</span>
+<span class="sd">    - Desdobro sem quantidade exata</span>
+<span class="sd">    - Bonificação desproporcional</span>
+<span class="sd">    - Preço médio negativo</span>
+<span class="sd">    - Quantidade negativa</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</code></pre></div>
+
+<h3 id="3-snapshot-periodico">3. Snapshot Periódico<a class="headerlink" href="#3-snapshot-periodico" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">position_snapshots</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">asset_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">snapshot_date</span><span class="w"> </span><span class="nb">DATE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">quantity</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">avg_price</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">total_cost</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="k">source</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span><span class="w"> </span><span class="c1">-- &#39;CALCULATED&#39;, &#39;B3_REPORT&#39;, &#39;MANUAL&#39;</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">asset_id</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">assets</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">asset_id</span><span class="p">,</span><span class="w"> </span><span class="n">snapshot_date</span><span class="p">,</span><span class="w"> </span><span class="k">source</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
+
+<p><strong>Uso:</strong> Comparar posição calculada com snapshots reais da B3.</p>
+<hr />
+<h2 id="notas-de-implementacao">📝 Notas de Implementação<a class="headerlink" href="#notas-de-implementacao" title="Permanent link">&para;</a></h2>
+<h3 id="desafios-tecnicos">Desafios Técnicos<a class="headerlink" href="#desafios-tecnicos" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Retroatividade:</strong> Eventos afetam operações passadas</li>
+<li>
+<p>Solução: Recalcular posição completa ao registrar evento</p>
+</li>
+<li>
+<p><strong>Múltiplos eventos no mesmo dia:</strong> Ordem importa</p>
+</li>
+<li>
+<p>Solução: Adicionar campo <code>event_sequence</code> na tabela</p>
+</li>
+<li>
+<p><strong>Eventos encadeados:</strong> Bonificação → Fração → Leilão</p>
+</li>
+<li>
+<p>Solução: Campo <code>related_event_id</code> para vincular eventos</p>
+</li>
+<li>
+<p><strong>Correção de erros:</strong> Deletar evento corporativo</p>
+</li>
+<li>Solução: Soft delete + trigger para recalcular posições</li>
+</ol>
+<h3 id="casos-de-teste">Casos de Teste<a class="headerlink" href="#casos-de-teste" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">test_bonificacao</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Teste: Bonificação de 10%</span>
+
+<span class="sd">    Setup:</span>
+<span class="sd">      - 100 ITSA4 @ R$ 10,00 (custo: R$ 1.000)</span>
+
+<span class="sd">    Event:</span>
+<span class="sd">      - Bonificação de 10 ITSA4 @ R$ 0,00</span>
+
+<span class="sd">    Assert:</span>
+<span class="sd">      - quantity = 110</span>
+<span class="sd">      - avg_price = 9,09</span>
+<span class="sd">      - total_cost = 1.000</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_desdobro</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Teste: Desdobro 1:2</span>
+
+<span class="sd">    Setup:</span>
+<span class="sd">      - 100 VINO11 @ R$ 60,00 (custo: R$ 6.000)</span>
+
+<span class="sd">    Event:</span>
+<span class="sd">      - Desdobro 1:2 (cada cota vira 2)</span>
+
+<span class="sd">    Assert:</span>
+<span class="sd">      - quantity = 200</span>
+<span class="sd">      - avg_price = 30,00</span>
+<span class="sd">      - total_cost = 6.000</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_mudanca_ticker</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Teste: Mudança de ticker TRPL4 → ISAE4</span>
+
+<span class="sd">    Setup:</span>
+<span class="sd">      - 100 TRPL4 @ R$ 20,00</span>
+
+<span class="sd">    Event:</span>
+<span class="sd">      - Mudança TRPL4 → ISAE4 em 19/11/2024</span>
+
+<span class="sd">    Assert:</span>
+<span class="sd">      - asset.ticker = &#39;ISAE4&#39;</span>
+<span class="sd">      - alias: TRPL4 → ISAE4</span>
+<span class="sd">      - operations mantém ticker original</span>
+<span class="sd">      - cotação busca por ISAE4</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</code></pre></div>
+
+<hr />
+<h2 id="conclusao">🎯 Conclusão<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h2>
+<p>A análise identificou <strong>7 tipos críticos de eventos corporativos</strong> que comprometem a integridade dos dados do Portfolio Manager v2. Sem a implementação adequada desses eventos:</p>
+<h3 id="riscos-imediatos">Riscos Imediatos<a class="headerlink" href="#riscos-imediatos" title="Permanent link">&para;</a></h3>
+<ul>
+<li>❌ Posições incorretas (erro de até 50%)</li>
+<li>❌ Preço médio distorcido</li>
+<li>❌ P&amp;L completamente errado</li>
+<li>❌ Impossibilidade de reconciliação com B3</li>
+<li>❌ Perda de confiança do usuário</li>
+</ul>
+<h3 id="beneficios-da-implementacao">Benefícios da Implementação<a class="headerlink" href="#beneficios-da-implementacao" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ <strong>100% de precisão</strong> nas posições</li>
+<li>✅ <strong>Auditoria completa</strong> de todos eventos</li>
+<li>✅ <strong>Reconciliação automática</strong> com B3</li>
+<li>✅ <strong>Confiança total</strong> nos cálculos de P&amp;L</li>
+<li>✅ <strong>Suporte a casos complexos</strong> reais do mercado</li>
+</ul>
+<h3 id="esforco-estimado">Esforço Estimado<a class="headerlink" href="#esforco-estimado" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Sprint 1-2 (Crítico):</strong> 2 semanas — Fundação básica</li>
+<li><strong>Sprint 3-4 (Alto):</strong> 2 semanas — Detecção automática</li>
+<li><strong>Sprint 5-6 (Médio):</strong> 3 semanas — Reconciliação</li>
+<li><strong>Sprint 7+ (Baixo):</strong> Contínuo — UX e melhorias</li>
+</ul>
+<p><strong>Total:</strong> ~7-8 semanas para implementação completa</p>
+<hr />
+<p><strong>Próximo Passo:</strong> Iniciar Sprint 1 com criação de <code>corporate_events</code> e <code>CorporateEventsService</code>.</p>
+<hr />
+<p><strong>Documento gerado em:</strong> 17 de Janeiro de 2026<br />
+<strong>Versão:</strong> 1.0<br />
+<strong>Autor:</strong> GitHub Copilot<br />
+<strong>Revisão:</strong> Pendente</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.tabs.link"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
