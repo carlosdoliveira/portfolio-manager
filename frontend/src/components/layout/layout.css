@@ -42,6 +42,12 @@
   font-weight: 500;
 }
 
+.nav-divider {
+  height: 1px;
+  background-color: var(--color-border);
+  margin: var(--space-md) 0;
+}
+
 .layout-body {
   display: flex;
   flex: 1;

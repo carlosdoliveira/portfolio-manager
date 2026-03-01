@@ -41,42 +41,37 @@ def get_dashboard_summary() -> dict:
         total_bought_value = row[1] if row else 0
         total_sold_value = row[2] if row else 0
         total_invested = total_bought_value - total_sold_value
-        
-        # 2. Top 5 posições por valor investido
+
+        # 2. Top posições via engine
         cursor.execute("""
-            SELECT 
-                a.id,
-                a.ticker,
-                a.asset_class,
-                a.product_name,
-                COALESCE(SUM(CASE WHEN UPPER(o.movement_type) = 'COMPRA' THEN o.quantity ELSE 0 END), 0) as total_bought,
-                COALESCE(SUM(CASE WHEN UPPER(o.movement_type) = 'VENDA' THEN o.quantity ELSE 0 END), 0) as total_sold,
-                COALESCE(SUM(CASE WHEN UPPER(o.movement_type) = 'COMPRA' THEN o.value ELSE 0 END), 0) as bought_value,
-                COALESCE(SUM(CASE WHEN UPPER(o.movement_type) = 'VENDA' THEN o.value ELSE 0 END), 0) as sold_value
+            SELECT a.id, a.ticker, a.asset_class, a.product_name
             FROM assets a
-            LEFT JOIN operations o ON a.id = o.asset_id AND o.status = 'ACTIVE'
             WHERE a.status = 'ACTIVE'
-            GROUP BY a.id, a.ticker, a.asset_class, a.product_name
-            HAVING (total_bought - total_sold) > 0
-            ORDER BY (bought_value - sold_value) DESC
-            LIMIT 5
         """)
-        
+        assets = cursor.fetchall()
+
+        from app.services.position_engine import compute_asset_position
         top_positions = []
-        for row in cursor.fetchall():
-            current_position = row[4] - row[5]
-            net_value = row[6] - row[7]
-            average_price = net_value / current_position if current_position > 0 else 0
-            
+        for row in assets:
+            a_id, a_ticker, a_class, a_name = row
+            try:
+                pos = compute_asset_position(a_id)
+            except Exception:
+                continue
+            if pos["quantity"] <= 0:
+                continue
             top_positions.append({
-                "id": row[0],
-                "ticker": row[1],
-                "asset_class": row[2],
-                "product_name": row[3],
-                "quantity": current_position,
-                "invested_value": net_value,
-                "average_price": average_price
+                "id": a_id,
+                "ticker": a_ticker,
+                "asset_class": a_class,
+                "product_name": a_name,
+                "quantity": pos["quantity"],
+                "invested_value": pos["invested_value"],
+                "average_price": pos["average_price"],
             })
+        # ordenar por investido
+        top_positions.sort(key=lambda x: x["invested_value"], reverse=True)
+        top_positions = top_positions[:5]
         
         # 3. Operações recentes (últimas 10)
         cursor.execute("""
@@ -218,7 +213,7 @@ def get_dashboard_summary() -> dict:
             "current_value": current_value,
             "total_bought_value": total_bought_value,
             "total_sold_value": total_sold_value,
-            "top_positions": top_positions,
+            "positions": top_positions,
             "recent_operations": recent_operations,
             "asset_allocation": asset_allocation,
             "daily_change": variation,

@@ -24,6 +24,12 @@ export function Sidebar() {
           Análises
         </NavLink>
 
+        <div className="nav-divider"></div>
+
+        <NavLink to="/admin/reconciliation" className="nav-item">
+          🔍 Reconciliação
+        </NavLink>
+
         <NavLink to="/settings" className="nav-item">
           Configurações
         </NavLink>

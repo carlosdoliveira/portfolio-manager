@@ -6,6 +6,9 @@ Sistema web de gestão de carteira de investimentos com foco em importação B3,
 **Versão:** v2.3.0 | **Status:** ✅ MVP Otimizado | **Última atualização:** 17/01/2026
 
 > 📚 **[Documentação Completa →](./docs/INDEX.md)**
+> 
+> 🚨 **[ANÁLISE: Eventos Corporativos →](./docs/ANALISE-EVENTOS-CORPORATIVOS.md)** — 7 tipos críticos identificados  
+> 💡 **[RECOMENDAÇÃO: Abordagem Incremental →](./docs/RECOMENDACAO-EVENTOS-CORPORATIVOS.md)** — 3 semanas, pragmática
 
 ---
 

@@ -17,6 +17,11 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 from app.services.importer import import_b3_excel, normalize_ticker
+from app.services.reconciliation import (
+    import_position_snapshot,
+    get_reconciliation_diagnosis,
+    auto_fix_positions
+)
 from app.db.database import init_db
 from app.repositories.operations_repository import (
     create_operation,
@@ -55,6 +60,10 @@ from app.repositories.fixed_income_repository import (
     delete_fixed_income_asset
 )
 from app.services.market_data_service import get_market_data_service
+from app.services.position_engine import (
+    compute_asset_position,
+    compute_asset_position_by_ticker,
+)
 
 
 app = FastAPI(title="Portfolio Manager")
@@ -111,6 +120,17 @@ class FixedIncomeOperationCreate(BaseModel):
     trade_date: date = Field(description="Data da operação")
     net_amount: float | None = Field(default=None, description="Valor líquido após IR")
     ir_amount: float = Field(default=0.0, ge=0, description="Valor do IR retido")
+
+# Modelo Pydantic para ajustes de posição (eventos corporativos)
+class PositionAdjustment(BaseModel):
+    asset_id: int = Field(gt=0, description="ID do ativo")
+    adjustment_type: str = Field(
+        pattern="^(BONIFICACAO|DESDOBRO|GRUPAMENTO|SUBSCRICAO|CORRECAO)$",
+        description="Tipo de ajuste"
+    )
+    quantity: float = Field(description="Quantidade ajustada (positiva ou negativa)")
+    event_date: date = Field(description="Data do evento corporativo")
+    description: str = Field(min_length=1, description="Descrição do ajuste")
 
 @app.on_event("startup")
 def startup():
@@ -340,6 +360,11 @@ async def import_b3(file: UploadFile = File(...)):
     try:
         summary = import_b3_excel(file)
         logger.info(f"Importação bem-sucedida: {summary['inserted']} ops inseridas, {summary['duplicated']} duplicadas")
+        
+        # Alertar sobre eventos corporativos detectados
+        if summary.get("events_detected", 0) > 0:
+            logger.info(f"⚠️  {summary['events_detected']} eventos corporativos detectados")
+        
         return {
             "status": "success",
             "summary": summary
@@ -347,6 +372,202 @@ async def import_b3(file: UploadFile = File(...)):
     except Exception as e:
         logger.error(f"Erro na importação: {str(e)}")
         raise
+
+# Modelo para aplicar eventos em lote
+class ApplyCorporateEventsRequest(BaseModel):
+    events: list[dict] = Field(description="Lista de eventos corporativos a aplicar")
+
+@app.post("/admin/apply-corporate-events")
+async def apply_corporate_events(request: ApplyCorporateEventsRequest):
+    """
+    Aplica eventos corporativos detectados em lote.
+    
+    Cada evento deve ter:
+    - type: BONIFICACAO, DESDOBRO, GRUPAMENTO, SUBSCRICAO, CORRECAO
+    - ticker: Código do ativo
+    - quantity: Quantidade ajustada
+    - date: Data do evento
+    - description: Descrição
+    """
+    logger.info(f"Aplicando {len(request.events)} eventos corporativos em lote")
+    
+    applied = 0
+    errors = []
+    results = []
+    
+    for event in request.events:
+        try:
+            # Pular eventos marcados para skip (leilões de fração)
+            if event.get("skip"):
+                logger.debug(f"Pulando evento: {event.get('description')}")
+                continue
+            
+            # Buscar asset_id pelo ticker
+            ticker = event.get("ticker")
+            with get_db() as conn:
+                cursor = conn.cursor()
+                cursor.execute("SELECT id FROM assets WHERE ticker = ?", (ticker,))
+                result = cursor.fetchone()
+                
+                if not result:
+                    errors.append(f"Ativo {ticker} não encontrado")
+                    continue
+                
+                asset_id = result[0]
+            
+            # Preparar dados do ajuste
+            adjustment = {
+                "asset_id": asset_id,
+                "movement_type": "COMPRA" if event["quantity"] > 0 else "VENDA",
+                "operation_subtype": event["type"],
+                "quantity": abs(event["quantity"]),
+                "price": 0.0,
+                "value": 0.0,
+                "trade_date": event["date"],
+                "source": "AJUSTE_LOTE",
+                "notes": event["description"],
+                "market": None,
+                "institution": None
+            }
+            
+            # Criar operação
+            create_operation(adjustment)
+            applied += 1
+            
+            results.append({
+                "ticker": ticker,
+                "type": event["type"],
+                "quantity": event["quantity"],
+                "status": "success"
+            })
+            
+            logger.debug(f"Evento aplicado: {ticker} - {event['type']} - {event['quantity']}")
+            
+        except Exception as e:
+            error_msg = f"{event.get('ticker')}: {str(e)}"
+            errors.append(error_msg)
+            logger.error(f"Erro ao aplicar evento: {error_msg}")
+            results.append({
+                "ticker": event.get("ticker"),
+                "type": event.get("type"),
+                "status": "error",
+                "error": str(e)
+            })
+    
+    logger.info(f"Eventos aplicados: {applied}/{len(request.events)} - {len(errors)} erros")
+    
+    return {
+        "status": "success" if applied > 0 else "error",
+        "applied": applied,
+        "total": len(request.events),
+        "errors": errors,
+        "results": results
+    }
+
+# ========== ENDPOINTS DE RECONCILIAÇÃO ==========
+
+@app.post("/admin/import-position")
+async def import_position(file: UploadFile = File(...)):
+    """
+    Importa arquivo de posição B3 (posicao-*.xlsx) como fonte de verdade.
+    Cria snapshots das posições e identifica discrepâncias com o calculado.
+    """
+    logger.info(f"Importando posição B3: {file.filename}")
+    try:
+        result = import_position_snapshot(file)
+        logger.info(f"Posição importada: {result['snapshots_created']} ativos, {result['discrepancies_found']} discrepâncias")
+        return {
+            "status": "success",
+            "result": result
+        }
+    except Exception as e:
+        logger.error(f"Erro ao importar posição: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/admin/reconciliation/diagnosis")
+async def reconciliation_diagnosis():
+    """
+    Retorna diagnóstico completo da reconciliação:
+    - Posições conforme snapshots (fonte de verdade B3)
+    - Posições calculadas do sistema
+    - Discrepâncias encontradas
+    - Análise de causas
+    - Sugestões de correção
+    """
+    logger.info("Gerando diagnóstico de reconciliação")
+    try:
+        diagnosis = get_reconciliation_diagnosis()
+        issues_count = len(diagnosis.get('issues', []))
+        logger.info(f"Diagnóstico gerado: {issues_count} discrepâncias")
+        return {
+            "status": "success",
+            "diagnosis": diagnosis
+        }
+    except Exception as e:
+        logger.error(f"Erro ao gerar diagnóstico: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/admin/reconciliation/auto-fix")
+async def reconciliation_auto_fix(ticker: str | None = None):
+    """
+    Aplica correções automáticas criando operações de ajuste.
+    
+    - Se ticker=None: corrige todos os ativos com discrepância
+    - Se ticker informado: corrige apenas aquele ativo
+    
+    Cria operações do tipo AJUSTE_RECONCILIACAO para zerar diferenças.
+    """
+    logger.info(f"Aplicando correções automáticas{' para ' + ticker if ticker else ' para todos os ativos'}")
+    try:
+        result = auto_fix_positions(ticker)
+        fixed_count = result.get('fixed_count', 0)
+        logger.info(f"Correções aplicadas: {fixed_count} ajustes")
+        return {
+            "status": "success",
+            "result": result
+        }
+    except Exception as e:
+        logger.error(f"Erro ao aplicar correções: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# ========== ENDPOINTS DE POSIÇÃO (ENGINE) ==========
+
+@app.get("/assets/{ticker}/position")
+async def get_asset_position(ticker: str):
+    """
+    Retorna posição calculada pelo engine (considera eventos corporativos).
+    """
+    try:
+        result = compute_asset_position_by_ticker(ticker)
+        return {"status": "success", "position": result}
+    except Exception as e:
+        logger.error(f"Erro ao calcular posição de {ticker}: {e}")
+        raise HTTPException(status_code=404, detail=str(e))
+
+@app.get("/positions/recalculate")
+async def recalculate_all_positions():
+    """
+    Recalcula posição de todos os ativos ativos usando o engine.
+    Útil para validação pós-import.
+    """
+    summary = []
+    try:
+        assets = list_assets()
+        for a in assets:
+            try:
+                pos = compute_asset_position(a["id"])
+                summary.append({
+                    "ticker": a["ticker"],
+                    "quantity": pos["quantity"],
+                    "avg_price": pos["average_price"],
+                    "invested_value": pos["invested_value"],
+                })
+            except Exception as e:
+                logger.warning(f"Falha ao calcular {a['ticker']}: {e}")
+        return {"status": "success", "count": len(summary), "positions": summary}
+    except Exception as e:
+        logger.error(f"Erro ao recalcular posições: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/operations")
 def create_manual_operation(operation: OperationCreate):
@@ -443,6 +664,82 @@ def delete_operation_endpoint(operation_id: int):
     except Exception as e:
         logger.error(f"Erro ao deletar operação: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+# ========== ENDPOINTS DE AJUSTES DE POSIÇÃO (EVENTOS CORPORATIVOS) ==========
+
+@app.post("/admin/position-adjustment")
+def adjust_position(adjustment: PositionAdjustment):
+    """
+    Registra ajuste manual de posição (bonificação, desdobro, etc).
+    
+    Cria uma operação especial com price=0 e source=AJUSTE.
+    O preço médio é recalculado automaticamente considerando custo zero.
+    """
+    logger.info(f"Recebida requisição de ajuste de posição: Asset ID {adjustment.asset_id} - {adjustment.adjustment_type}")
+    try:
+        # Verificar se o ativo existe
+        asset = get_asset_by_id(adjustment.asset_id)
+        if not asset:
+            raise HTTPException(status_code=404, detail=f"Ativo {adjustment.asset_id} não encontrado")
+        
+        # Determinar movimento_type baseado na quantidade
+        movement_type = "COMPRA" if adjustment.quantity > 0 else "VENDA"
+        
+        # Criar operação especial de ajuste
+        operation_data = {
+            "asset_id": adjustment.asset_id,
+            "movement_type": movement_type,
+            "operation_subtype": adjustment.adjustment_type,
+            "quantity": abs(adjustment.quantity),
+            "price": 0.0,  # Custo zero para eventos corporativos
+            "value": 0.0,
+            "trade_date": adjustment.event_date.isoformat(),
+            "source": "AJUSTE",
+            "notes": adjustment.description,
+            "market": None,
+            "institution": None
+        }
+        
+        create_operation(operation_data)
+        
+        # Recalcular posição atual
+        operations = list_operations_by_asset(adjustment.asset_id)
+        total_quantity = 0
+        total_cost = 0.0
+        
+        for op in operations:
+            qty = op['quantity']
+            price = op['price']
+            
+            if op['movement_type'] == 'COMPRA':
+                total_quantity += qty
+                total_cost += (qty * price)
+            elif op['movement_type'] == 'VENDA':
+                total_quantity -= qty
+                # Não ajusta custo na venda, mantém proporção
+        
+        # Calcular novo preço médio
+        avg_price = total_cost / total_quantity if total_quantity > 0 else 0.0
+        
+        logger.info(f"Ajuste criado: {adjustment.adjustment_type} de {adjustment.quantity} {asset['ticker']}")
+        logger.info(f"Nova posição: {total_quantity} @ R$ {avg_price:.2f}")
+        
+        return {
+            "status": "success",
+            "message": f"Ajuste de posição registrado com sucesso",
+            "asset": asset['ticker'],
+            "adjustment_type": adjustment.adjustment_type,
+            "new_position": {
+                "quantity": total_quantity,
+                "average_price": round(avg_price, 2),
+                "total_cost": round(total_cost, 2)
+            }
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Erro ao registrar ajuste de posição: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Erro ao registrar ajuste: {str(e)}")
 
 # ========== ENDPOINTS DE RENDA FIXA ==========
 

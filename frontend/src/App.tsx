@@ -7,6 +7,7 @@ import Portfolio from "./pages/Portfolio";
 import AssetDetail from "./pages/AssetDetail";
 import FixedIncome from "./pages/FixedIncome";
 import Analysis from "./pages/Analysis";
+import Reconciliation from "./pages/Reconciliation";
 import Settings from "./pages/Settings";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/portfolio/:id" element={<AssetDetail />} />
           <Route path="/fixed-income" element={<FixedIncome />} />
           <Route path="/analysis" element={<Analysis />} />
+          <Route path="/admin/reconciliation" element={<Reconciliation />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>
       </Layout>

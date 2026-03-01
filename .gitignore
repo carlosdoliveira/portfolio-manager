@@ -80,3 +80,7 @@ site/
 !README.md
 !LICENSE
 samples/**
+
+# avoid sensitive information from .github to be added
+.github/agents
+.github/prompts

@@ -35,7 +35,8 @@
 - [Setup Local](./development/setup.md) — Docker, ambiente
 
 ### Documentação Especializada
-- 💰 [Renda Fixa](./renda-fixa.md) — Guia completo de RF
+- � [**Análise de Eventos Corporativos**](./ANALISE-EVENTOS-CORPORATIVOS.md) — **CRÍTICO**
+- �💰 [Renda Fixa](./renda-fixa.md) — Guia completo de RF
 - 📈 [Integração com Cotações](./guides/integracao-cotacoes.md) — API de mercado
 - ⚡ [Otimização de Carteira](./guides/otimizacao-carteira.md) — Sistema de cache
 - 🕒 [Atualização de Cotações](./guides/atualizacao-cotacoes.md) — Cron job automático
@@ -51,6 +52,7 @@ docs/
 ├── INDEX.md                    # 🏠 PÁGINA INICIAL — comece aqui
 ├── STATUS-PROJETO.md           # 📊 Estado atual e roadmap
 ├── REFERENCIA-TECNICA.md       # 📖 Especificações técnicas
+├── ANALISE-EVENTOS-CORPORATIVOS.md  # 🚨 CRÍTICO — Eventos não tratados
 ├── renda-fixa.md              # 💰 Guia de Renda Fixa
 ├── DIAGNOSTICO-CONSOLIDACAO-FINAL.md  # 🔧 Debug da consolidação
 │

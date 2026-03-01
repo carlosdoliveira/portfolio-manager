@@ -27,19 +27,23 @@ def create_operation(data: dict):
             created_at,
             source,
             market,
-            institution
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            institution,
+            operation_subtype,
+            notes
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
         data["asset_id"],
         data["movement_type"],
         data["quantity"],
         data["price"],
-        data["quantity"] * data["price"],
+        data.get("value", data["quantity"] * data["price"]),
         data["trade_date"],
         datetime.utcnow().isoformat(),
         data["source"],
         data.get("market"),
         data.get("institution"),
+        data.get("operation_subtype"),
+        data.get("notes"),
         ))
         
         operation_id = cursor.lastrowid
@@ -69,7 +73,9 @@ def list_operations():
             o.created_at,
             o.status,
             o.market,
-            o.institution
+            o.institution,
+            o.operation_subtype,
+            o.notes
         FROM operations o
         INNER JOIN assets a ON o.asset_id = a.id
         WHERE o.status = 'ACTIVE'
@@ -94,7 +100,9 @@ def list_operations():
         "created_at",
         "status",
         "market",
-        "institution"
+        "institution",
+        "operation_subtype",
+        "notes"
     ]
 
     operations = [dict(zip(columns, row)) for row in rows]
@@ -126,7 +134,9 @@ def list_operations_by_asset(asset_id: int):
             o.created_at,
             o.status,
             o.market,
-            o.institution
+            o.institution,
+            o.operation_subtype,
+            o.notes
         FROM operations o
         INNER JOIN assets a ON o.asset_id = a.id
         WHERE o.asset_id = ? AND o.status = 'ACTIVE'
@@ -151,7 +161,9 @@ def list_operations_by_asset(asset_id: int):
         "created_at",
         "status",
         "market",
-        "institution"
+        "institution",
+        "operation_subtype",
+        "notes"
     ]
 
     operations = [dict(zip(columns, row)) for row in rows]
@@ -182,7 +194,9 @@ def get_operation_by_id(operation_id: int):
                 o.created_at,
                 o.status,
                 o.market,
-                o.institution
+                o.institution,
+                o.operation_subtype,
+                o.notes
             FROM operations o
             INNER JOIN assets a ON o.asset_id = a.id
             WHERE o.id = ?
@@ -197,7 +211,8 @@ def get_operation_by_id(operation_id: int):
     columns = [
         "id", "asset_id", "ticker", "asset_class", "asset_type", "product_name",
         "movement_type", "quantity", "price", "value", "trade_date",
-        "source", "created_at", "status", "market", "institution"
+        "source", "created_at", "status", "market", "institution",
+        "operation_subtype", "notes"
     ]
     
     operation = dict(zip(columns, row))
